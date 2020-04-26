@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
         _myActions.Right.AddDefaultBinding(InputControlType.DPadRight);
 
         _myActions.Jump.AddDefaultBinding(Key.Z);
-        _myActions.Jump.AddDefaultBinding(InputControlType.DPadX);
+        _myActions.Jump.AddDefaultBinding(InputControlType.Action1);
     }
 
     private void Update()

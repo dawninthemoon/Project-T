@@ -47,10 +47,10 @@ public class TilePrefabBrush : GridBrushBase
 		if (palette == null)
 			return;
 		Vector3Int palettePosition = position.position;
-		Tile tile = palette.GetTile(palettePosition) as Tile;
+		TileBase tile = palette.GetTile(palettePosition);
 		if (tile != null)
 		{
-			selectedSprite = tile.sprite;
+			selectedSprite = ((Tile)tile).sprite;
 		}
 	}
 
@@ -89,17 +89,8 @@ public class TilePrefabBrush : GridBrushBase
 				DestroyImmediate(existObject.gameObject);
 			}
 
-			if (!IsTrigger)
-			{
-				instance.GetComponent<SpriteRenderer>().sprite = selectedSprite;
-				int sortingLayerID = brushTarget.GetComponent<TilemapRenderer>().sortingLayerID;
-				instance.GetComponent<SpriteRenderer>().sortingLayerID = sortingLayerID;
-				int sortingOrder = width * (height - position.y) - (position.x + 1);
-				instance.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder;
-			}
-
-
 			instance.name = name;
+			instance.GetComponent<SpriteRenderer>().sprite = selectedSprite;
 			instance.transform.SetParent(brushTarget.transform);
 			instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(position + m_Anchor));
 		}

@@ -32,5 +32,6 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         _model.SetInputX(_myActions.Move.Value);
+        _model.SetJump(_myActions.Jump.WasPressed);
     }
 }

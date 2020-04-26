@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
 
     private float _inputX;
     private bool _jumpRequested;
+    private bool _attackRequested;
     private float _velocityXSmoothing;
 
     private Vector3 _velocity;
@@ -25,6 +26,8 @@ public class Character : MonoBehaviour
     private Controller2D _controller;
 
     private CharacterRenderer _characterRenderer;
+
+    private CharacterAttack _characterAttack;
 
     private void Start()
     {
@@ -35,6 +38,7 @@ public class Character : MonoBehaviour
     {
         _controller = GetComponent<Controller2D>();
         _characterRenderer = GetComponent<CharacterRenderer>();
+        _characterAttack = GetComponent<CharacterAttack>();
 
         _gravity = -(2f * _jumpHeight) / Mathf.Pow(TimeToJumpApex, 2f);
         _jumpVelocity = Mathf.Abs(_gravity) * TimeToJumpApex;
@@ -42,6 +46,14 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _characterAttack.Attack(_attackRequested);
+
+        if (!_characterAttack.IsInAttackProgress) {
+            CalculateMoving();
+        }
+    }
+
+    private void CalculateMoving() {
         var collisions = _controller.Collisions;
         if (collisions.bellow || collisions.above)
             _velocity.y = 0f;
@@ -64,4 +76,5 @@ public class Character : MonoBehaviour
     }
 
     public void SetJump(bool jumpPressed) => _jumpRequested = jumpPressed;
+    public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;
 }

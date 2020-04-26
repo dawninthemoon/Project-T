@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CharacterRenderer : MonoBehaviour
 {
-    private const string DirXStateName = "dirX";
-    private const string DirYStateName = "dirY";
-    private const string RequestJumpStateName = "requestJump";
+    private const string DirXName = "dirX";
+    private const string DirYName = "dirY";
+    private const string RequestJumpName = "requestJump";
+    private const string AttackStateName = "attackState";
 
     private Animator _animator;
 
@@ -21,13 +22,17 @@ public class CharacterRenderer : MonoBehaviour
         else if (velocityY < 0f)
             dirY = -1;
 
-        _animator.SetInteger(DirXStateName, Mathf.RoundToInt(dirX));
-        _animator.SetInteger(DirYStateName, dirY);
-        _animator.SetBool(RequestJumpStateName, requestJump);
+        _animator.SetInteger(DirXName, Mathf.RoundToInt(dirX));
+        _animator.SetInteger(DirYName, dirY);
+        _animator.SetBool(RequestJumpName, requestJump);
 
         if(dirX != 0f) {
             SetDirection(dirX);
         }
+    }
+
+    public void SetAttackState(int state){
+        _animator.SetInteger(AttackStateName, state);
     }
 
     public void SetDirection(float dirX) {

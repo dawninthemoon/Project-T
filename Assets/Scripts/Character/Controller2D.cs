@@ -7,7 +7,7 @@ public class Controller2D : RaycastController
 {
     [SerializeField] private LayerMask _collisionMask;
 
-    public void Move(Vector3 velocity, bool standingOnPlatform = false)
+    public float Move(Vector3 velocity, bool standingOnPlatform = false)
     {
         UpdateRaycastOrigins();
 
@@ -24,6 +24,8 @@ public class Controller2D : RaycastController
         {
             _collisions.bellow = true;
         }
+
+        return velocity.y;
     }
 
     private void HorizontalCollisions(ref Vector3 velocity)

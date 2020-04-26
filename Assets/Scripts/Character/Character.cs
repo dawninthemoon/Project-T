@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _jumpHeight = 5f;
-
+    
     private static readonly float TimeToJumpApex = 0.4f;
     private static readonly float AccelerationTimeAirborne = 0.2f;
     private static readonly float AccelerationTimeGrounded = 0.1f;
@@ -24,6 +24,8 @@ public class Character : MonoBehaviour
 
     private Controller2D _controller;
 
+    private CharacterRenderer _characterRenderer;
+
     private void Start()
     {
         Initalize();
@@ -32,6 +34,7 @@ public class Character : MonoBehaviour
     private void Initalize()
     {
         _controller = GetComponent<Controller2D>();
+        _characterRenderer = GetComponent<CharacterRenderer>();
 
         _gravity = -(2f * _jumpHeight) / Mathf.Pow(TimeToJumpApex, 2f);
         _jumpVelocity = Mathf.Abs(_gravity) * TimeToJumpApex;
@@ -43,6 +46,8 @@ public class Character : MonoBehaviour
         if (collisions.bellow || collisions.above)
             _velocity.y = 0f;
 
+        _characterRenderer.ApplyAnimation(_inputX, _velocity.y, _jumpRequested);
+
         if (_jumpRequested && collisions.bellow)
             _velocity.y = _jumpVelocity;
 
@@ -50,7 +55,7 @@ public class Character : MonoBehaviour
         _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, collisions.bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne);
 
         _velocity.y += _gravity * Time.fixedDeltaTime;
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+        float appliedVelocityY = _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
     public void SetInputX(float horizontal)

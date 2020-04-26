@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour
 {
     private const float InitalInputDelay = 0.15f;
-    private const float InputDelayAfterCombo = 0.25f;
+    private const float InputDelayAfterCombo = 0.2f;
     private float _inputDelay;
 
     private int _maxAttackCount = 3;

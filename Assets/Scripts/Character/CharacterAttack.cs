@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour
 {
-    private const float InitalInputDelay = 0.1f;
-    private const float InputDelayAfterCombo = 0.3f;
+    private const float InitalInputDelay = 0.15f;
+    private const float InputDelayAfterCombo = 0.25f;
     private float _inputDelay;
 
     private int _maxAttackCount = 3;
@@ -43,6 +43,7 @@ public class CharacterAttack : MonoBehaviour
         }
         else {
             _inputDelay = InputDelayAfterCombo;
+            IsInAttackProgress = false;
             _currentAttackState = 0;
             _characterRenderer.SetAttackState(_currentAttackState);
         }

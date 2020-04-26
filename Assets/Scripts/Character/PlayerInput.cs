@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private Character _model = null;
 
-
     private MyPlayerActions _myActions;
 
     private bool _jumpReleased = true;

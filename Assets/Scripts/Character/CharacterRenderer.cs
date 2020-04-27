@@ -36,7 +36,7 @@ public class CharacterRenderer : MonoBehaviour
     }
 
     public void SetDirection(float dirX) {
-        Vector3 scaleVector = new Vector3(dirX, 1f, 1f);
+        Vector3 scaleVector = new Vector3(Mathf.Sign(dirX), 1f, 1f);
         transform.localScale = scaleVector;
     }
 }

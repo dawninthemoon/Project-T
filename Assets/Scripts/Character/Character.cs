@@ -54,6 +54,7 @@ public class Character : MonoBehaviour
     }
 
     private void CalculateMoving() {
+        
         var collisions = _controller.Collisions;
         if (collisions.bellow || collisions.above)
             _velocity.y = 0f;

@@ -5,41 +5,40 @@ using UnityEngine;
 public class ResourceManager : Singleton<ResourceManager>
 {
     private static readonly Type GameObjectType = typeof(GameObject);
+    private static readonly Type AnimatorControllerType = typeof(RuntimeAnimatorController);
     //private static readonly Type SpritetType = typeof(Sprite);
-    private static readonly string prefabFilePath = "Prefabs/";
+    private static readonly string PrefabFilePath = "Prefabs/";
+    private static readonly string AnimatorControllerFilePath = "AnimatorControllers/";
+
+    private Dictionary<string, RuntimeAnimatorController> _animatorControllers;
+
+    public void Initalize() {
+        _animatorControllers = new Dictionary<string, RuntimeAnimatorController>();
+    }
 
     public GameObject GetPrefab(string fileName)
 	{
-		string path = prefabFilePath + fileName;
+		string path = PrefabFilePath + fileName;
 		GameObject obj = Load(path,GameObjectType) as GameObject;
 
 		return obj;
 	}
-/*
-    public Sprite GetSprite(string fileName)
-	{
-		if(sprite.ContainsKey(fileName))
-			return sprite[fileName];
 
-		string path = spritesFilePath + fileName;
-		
-		if(Load(path, spriteType) != null)
-		{
-			if(Load(path, spriteType) as Sprite == null)
-				Debug.Log("what the fuck");
-		}
+    public RuntimeAnimatorController GetAnimatorController(string fileName) {
+        if (_animatorControllers.ContainsKey(fileName))
+            return _animatorControllers[fileName];
 
-		Sprite obj = Load(path,spriteType) as Sprite;
-		if(obj == null)
-		{
-			Debug.Log("file does not exist : " + path);
-			return null;
-		}
-		sprite.Add(fileName,obj);
+        string path = AnimatorControllerFilePath + fileName;
 
-		return obj;
-	}
-*/
+        RuntimeAnimatorController resource = Load(path, AnimatorControllerType) as RuntimeAnimatorController;
+        if (resource == null) {
+            Debug.LogError("The file does not exist: " + path);
+            return null;
+        }
+
+        _animatorControllers.Add(fileName, resource);
+        return resource;
+    }
 
     public UnityEngine.Object Load(string path, System.Type type)
 	{

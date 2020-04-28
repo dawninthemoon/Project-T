@@ -30,7 +30,11 @@ public class InputControl : MonoBehaviour
         _myActions.Attack.AddDefaultBinding(InputControlType.Action3);
     }
 
-    public void InputKeys() {
+    public void Progress() {
+        InputKeys();
+    }
+
+    private void InputKeys() {
         _model.SetInputX(_myActions.Move.Value);
         _model.SetJump(_myActions.Jump.WasPressed);
         _model.SetAttack(_myActions.Attack.WasPressed);

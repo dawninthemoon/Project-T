@@ -1,18 +1,18 @@
 ﻿public class Singleton<T> where T : new()
 {
-	private static T instance;
+	private static T _instance;
 
 	public static T GetInstance()
 	{
-		if(instance == null)
+		if(_instance == null)
 		{
-			instance = new T();
+			_instance = new T();
 		}
-		return instance;
+		return _instance;
 	}
 
 	public static void DeleteSingleton()
 	{
-		instance = default(T);
+		_instance = default(T);
 	}
 }

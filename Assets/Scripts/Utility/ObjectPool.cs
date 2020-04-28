@@ -33,7 +33,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
     }
 
-    public T Get() {
+    public T GetObject() {
         var numFree = _freeList.Count;
         if (numFree == 0)
             return null;

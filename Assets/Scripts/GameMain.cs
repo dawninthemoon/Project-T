@@ -12,8 +12,6 @@ public class GameMain : MonoBehaviour
     private ObjectManager _objectManager;
 
     private void Awake() {
-        EffectManager.DeleteSingleton();
-
         _effectManager = EffectManager.GetInstance();
         _objectManager = ObjectManager.GetInstance();
 
@@ -32,6 +30,7 @@ public class GameMain : MonoBehaviour
     }
 
     private void Update() {
-        _inputControl.InputKeys();
+        _inputControl.Progress();
+        _effectManager.Progress();
     }
 }

@@ -12,11 +12,13 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     public void Initalize() {
         _resourceManager = ResourceManager.GetInstance();
         _enemyList = new List<EnemyBase>();
+
+        _resourceManager.Initalize();
     }
 
     public Character CreateCharacter(Vector3 pos) {
         if (_player == null) {
-            var prefab = ResourceManager.GetInstance().GetPrefab("Character");
+            var prefab = _resourceManager.GetPrefab("Character");
             _player = Instantiate(prefab, pos, Quaternion.identity).GetComponent<Character>();
         }
         return _player;

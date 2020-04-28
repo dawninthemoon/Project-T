@@ -13,4 +13,11 @@ namespace Aroma
             return xPowA / (xPowA + Mathf.Pow(1 - x, a));
         }
     }
+
+    public static class VectorUtils {
+        public static Vector3 GetScaleVec(float dir) {
+            Vector3 scale = new Vector3(dir, 1f, 1f);
+            return scale;
+        }
+    }
 }

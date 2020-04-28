@@ -61,13 +61,19 @@ public class RaycastController : MonoBehaviour
 
     public struct CollisionInfo
     {
-        public bool above, bellow;
-        public bool left, right;
+        public bool _above, _bellow;
+        public bool _left, _right;
+        public bool _climbingSlope, _descendingSlope;
+        public float _slopeAngle, _slopeAngleOld;
+        public Vector3 _velocityOld;
 
         public void Reset()
         {
-            above = bellow = false;
-            left = right = false;
+            _above = _bellow = false;
+            _left = _right = false;
+            _climbingSlope = false;
+            _descendingSlope = false;
+            _slopeAngle = 0f;
         }
     }
 }

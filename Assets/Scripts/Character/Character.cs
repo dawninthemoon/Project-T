@@ -56,16 +56,16 @@ public class Character : MonoBehaviour
     private void CalculateMoving() {
         
         var collisions = _controller.Collisions;
-        if (collisions.bellow || collisions.above)
+        if (collisions._bellow || collisions._above)
             _velocity.y = 0f;
 
         _characterRenderer.ApplyAnimation(_inputX, _velocity.y, _jumpRequested);
 
-        if (_jumpRequested && collisions.bellow)
+        if (_jumpRequested && collisions._bellow)
             _velocity.y = _jumpVelocity;
 
         float targetVelocityX = _inputX * _moveSpeed;
-        _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, collisions.bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne);
+        _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne);
 
         _velocity.y += _gravity * Time.fixedDeltaTime;
         float appliedVelocityY = _controller.Move(_velocity * Time.fixedDeltaTime);

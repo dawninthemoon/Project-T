@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class RaycastController : MonoBehaviour
 {
-    [SerializeField] protected int _horizontalRayCount = 4;
-    [SerializeField] protected int _verticalRayCount = 4;
+    [SerializeField] protected float _distBetweenRays = 0.25f;
+    protected int _horizontalRayCount = 4;
+    protected int _verticalRayCount = 4;
 
     protected const float _skinWidth = 0.015f;
 
@@ -46,8 +47,11 @@ public class RaycastController : MonoBehaviour
         Bounds bounds = _collider.bounds;
         bounds.Expand(_skinWidth * -2f);
 
-        _horizontalRayCount = Mathf.Max(_horizontalRayCount, 2);
-        _verticalRayCount = Mathf.Max(_verticalRayCount, 2);
+        float boundsWidth = bounds.size.x;
+        float boudnsHeight = bounds.size.y;
+
+        _horizontalRayCount = Mathf.RoundToInt(boudnsHeight / _distBetweenRays);
+        _verticalRayCount = Mathf.RoundToInt(boundsWidth / _distBetweenRays);
 
         _horizontalRaySpacing = bounds.size.y / (_horizontalRayCount - 1);
         _verticalRaySpacing = bounds.size.x / (_verticalRayCount - 1);

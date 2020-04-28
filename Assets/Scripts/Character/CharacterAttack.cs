@@ -16,7 +16,7 @@ public class CharacterAttack : MonoBehaviour
 
     private CharacterRenderer _characterRenderer;
 
-    private void Start() {
+    public void Initalize() {
         _characterRenderer = GetComponent<CharacterRenderer>();
     }
 

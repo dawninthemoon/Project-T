@@ -11,7 +11,7 @@ public class CharacterRenderer : MonoBehaviour
 
     private Animator _animator;
 
-    private void Start() {
+    public void Initalize() {
         _animator = GetComponent<Animator>();
     }
 

@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using InControl;
 
-public class PlayerInput : MonoBehaviour
+public class InputControl : MonoBehaviour
 {
-    [SerializeField] private Character _model = null;
+    private Character _model;
 
     private MyPlayerActions _myActions;
 
-    private void Start()
+    public void Initalize(Character character)
     {
-        Initalize();
-    }
+        _model = character;
 
-    private void Initalize()
-    {
         _myActions = new MyPlayerActions();
 
         _myActions.Left.AddDefaultBinding(Key.LeftArrow);
@@ -33,12 +30,7 @@ public class PlayerInput : MonoBehaviour
         _myActions.Attack.AddDefaultBinding(InputControlType.Action3);
     }
 
-    private void Update()
-    {
-        InputKeys();
-    }
-
-    private void InputKeys() {
+    public void InputKeys() {
         _model.SetInputX(_myActions.Move.Value);
         _model.SetJump(_myActions.Jump.WasPressed);
         _model.SetAttack(_myActions.Attack.WasPressed);

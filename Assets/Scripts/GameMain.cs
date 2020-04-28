@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class GameMain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private InputControl _inputControl;
+
+    private Character _character;
+    
+    private EffectManager _effectManager;
+    private ObjectManager _objectManager;
+
+    private void Awake() {
+        EffectManager.DeleteSingleton();
+
+        _effectManager = EffectManager.GetInstance();
+        _objectManager = ObjectManager.GetInstance();
+
+        _inputControl = GetComponent<InputControl>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Start() {
+        _objectManager.Initalize();
+        _effectManager.Initalize();
+
+        Vector3 initalPos = new Vector3(0f, -1f);
+        _character = _objectManager.CreateCharacter(initalPos);
+        _character.Initalize();
+
+        _inputControl.Initalize(_character);
+    }
+
+    private void Update() {
+        _inputControl.InputKeys();
     }
 }

@@ -20,12 +20,7 @@ public class RaycastController : MonoBehaviour
     protected float _horizontalRaySpacing;
     protected float _verticalRaySpacing;
 
-    protected virtual void Start()
-    {
-        Initalize();
-    }
-
-    private void Initalize()
+    public virtual void Initalize()
     {
         _collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();

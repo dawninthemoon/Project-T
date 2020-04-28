@@ -22,9 +22,10 @@ public class PlatformController : RaycastController
     private List<PassengerMovement> _passengerMovement;
     private Dictionary<Transform, Controller2D> _passengerDictionary;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
+        Initalize();
+
         _movePassengers = new HashSet<Transform>();
         _passengerMovement = new List<PassengerMovement>();
         _passengerDictionary = new Dictionary<Transform, Controller2D>();

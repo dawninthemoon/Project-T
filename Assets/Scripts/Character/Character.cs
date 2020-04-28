@@ -30,16 +30,15 @@ public class Character : MonoBehaviour
 
     private CharacterAttack _characterAttack;
 
-    private void Start()
-    {
-        Initalize();
-    }
-
-    private void Initalize()
+    public void Initalize()
     {
         _controller = GetComponent<Controller2D>();
         _characterRenderer = GetComponent<CharacterRenderer>();
         _characterAttack = GetComponent<CharacterAttack>();
+
+        _characterAttack.Initalize();
+        _characterRenderer.Initalize();
+        _controller.Initalize();
 
         _gravity = -(2f * _jumpHeight) / Mathf.Pow(TimeToJumpApex, 2f);
         _jumpVelocity = Mathf.Abs(_gravity) * TimeToJumpApex;

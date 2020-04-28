@@ -68,15 +68,19 @@ public class RaycastController : MonoBehaviour
         public bool _above, _bellow;
         public bool _left, _right;
         public bool _climbingSlope, _descendingSlope;
+        public bool _slidingDownMaxSlope;
         public float _slopeAngle, _slopeAngleOld;
         public Vector3 _velocityOld;
+        public Vector2 _slopeNormal;
 
         public void Reset()
         {
             _above = _bellow = false;
             _left = _right = false;
             _climbingSlope = false;
+            _slopeNormal = Vector2.zero;
             _descendingSlope = false;
+            _slidingDownMaxSlope = false;
             _slopeAngle = 0f;
         }
     }

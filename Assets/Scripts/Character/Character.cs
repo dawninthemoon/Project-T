@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     private bool _jumpRequested;
     private bool _attackRequested;
     private float _velocityXSmoothing;
+    private bool _bellowAtPreviousFrame;
 
     private Vector3 _velocity;
 
@@ -54,21 +55,32 @@ public class Character : MonoBehaviour
     }
 
     private void CalculateMoving() {
-        
+        CalculateVelocity();
+
+        _controller.Move(_velocity * Time.fixedDeltaTime);
+
         var collisions = _controller.Collisions;
-        if (collisions._bellow || collisions._above)
-            _velocity.y = 0f;
+        if (collisions._bellow || collisions._above) {
+            if (collisions._slidingDownMaxSlope) {
+                _velocity.y += _controller.Collisions._slopeNormal.y * -_gravity * Time.fixedDeltaTime;
+            }
+            else {
+                _velocity.y = 0f;
+            }
+        }
 
         _characterRenderer.ApplyAnimation(_inputX, _velocity.y, _jumpRequested);
 
-        if (_jumpRequested && collisions._bellow)
-            _velocity.y = _jumpVelocity;
+        _bellowAtPreviousFrame = collisions._bellow;
+        _jumpRequested = false;
+    }
 
+    private void CalculateVelocity() {
         float targetVelocityX = _inputX * _moveSpeed;
-        _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne);
+        float smoothTime = _controller.Collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne;
 
+        _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, smoothTime);
         _velocity.y += _gravity * Time.fixedDeltaTime;
-        float appliedVelocityY = _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
     public void SetInputX(float horizontal)
@@ -76,6 +88,11 @@ public class Character : MonoBehaviour
         _inputX = horizontal;
     }
 
-    public void SetJump(bool jumpPressed) => _jumpRequested = jumpPressed;
+    public void SetJump(bool jumpPressed) {
+        if (jumpPressed && _bellowAtPreviousFrame) {
+            _jumpRequested = true;
+            _velocity.y = _jumpVelocity;
+        }
+    }
     public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;
 }

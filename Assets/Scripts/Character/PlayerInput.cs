@@ -9,9 +9,6 @@ public class PlayerInput : MonoBehaviour
 
     private MyPlayerActions _myActions;
 
-    private bool _jumpReleased = true;
-    private bool _attackReleased = true;
-
     private void Start()
     {
         Initalize();

@@ -33,4 +33,8 @@ public class GameMain : MonoBehaviour
         _inputControl.Progress();
         _effectManager.Progress();
     }
+
+    private void FixedUpdate() {
+        _character.FixedProgress();
+    }
 }

@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
         _jumpVelocity = Mathf.Abs(_gravity) * TimeToJumpApex;
     }
 
-    private void FixedUpdate()
+    public void FixedProgress()
     {
         _characterAttack.Attack(_attackRequested);
 

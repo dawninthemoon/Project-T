@@ -135,7 +135,8 @@ GameObject:
   - component: {fileID: 275250461}
   - component: {fileID: 275250464}
   - component: {fileID: 275250465}
-  m_Layer: 0
+  - component: {fileID: 275250467}
+  m_Layer: 11
   m_Name: Enemy_Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 4
+  _enemyName: Dummy
+  _maxHp: 20
 --- !u!95 &275250464
 Animator:
   serializedVersion: 3
@@ -285,6 +288,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.77}
   m_EdgeRadius: 0
+--- !u!114 &275250467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275250460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e2a0c63ef281b44a823365c3d5bffcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +357,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.13358848, g: 0.302399, b: 0.3584906, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1309,7 +1324,7 @@ Animator:
   m_GameObject: {fileID: 541430950}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7bc885838474ff840a83e876e5691bb2, type: 2}
+  m_Controller: {fileID: 9100000, guid: fa725a7de9221f24697777b8b189a96a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -14,10 +14,23 @@ namespace Aroma
         }
     }
 
-    public static class VectorUtils {
+    public static class VectorUtility {
         public static Vector3 GetScaleVec(float dir) {
             Vector3 scale = new Vector3(dir, 1f, 1f);
             return scale;
+        }
+    }
+
+    public static class GameObjectExtensions
+    {
+        static List<Component> _componentCache = new List<Component>();
+
+        public static T GetComponentNoAlloc<T>(this GameObject obj) where T : Component
+        {
+            obj.GetComponents(typeof(T), _componentCache);
+            var component = _componentCache.Count > 0 ? _componentCache[0] : null;
+            _componentCache.Clear();
+            return component as T;
         }
     }
 }

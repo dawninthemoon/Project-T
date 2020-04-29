@@ -25,7 +25,7 @@ public class EffectBase : MonoBehaviour
 
     public void SetEffectInfo(Vector3 pos, RuntimeAnimatorController controller, float dir, System.Action callback) {
         transform.position = pos;
-        transform.localScale = Aroma.VectorUtils.GetScaleVec(dir);
+        transform.localScale = Aroma.VectorUtility.GetScaleVec(dir);
         _animator.runtimeAnimatorController = controller;
         _onEffectEndCallback = callback;
     }

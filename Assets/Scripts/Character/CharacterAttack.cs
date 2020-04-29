@@ -5,6 +5,11 @@ using System.Text;
 
 public class CharacterAttack : MonoBehaviour
 {
+    [SerializeField] private int _defaultAttackDamage = 10;
+    [SerializeField] private LayerMask _attackableLayers;
+    public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
+    public LayerMask AttackableLayers { get { return _attackableLayers; } }
+
     private static readonly string DefaultAttackName = "PlayerEffect/defaultAttack";
 
     private EffectManager _effectManager;
@@ -37,18 +42,8 @@ public class CharacterAttack : MonoBehaviour
             if(CurrentAttackState <= _maxAttackCount) {
                 _characterRenderer.SetAttackState(CurrentAttackState);
             }
-            
-            if(CurrentAttackState == 1){
-                DoAttack(CurrentAttackState);
-            }
         }
     }
-
-    public void DoAttack(int attackType) {
-        EnableHitbox(attackType);
-        SpawnAttackEffect(attackType);
-    }
-
     public void AttackEnd() {
         _inputDelay = InputDelayAfterCombo;
         IsInAttackProgress = false;
@@ -56,11 +51,11 @@ public class CharacterAttack : MonoBehaviour
         _characterRenderer.SetAttackState(CurrentAttackState);
     }
 
-    private void EnableHitbox(int attackType) {
+    public void EnterAttackProgress() {
         IsInAttackProgress = true;
     }
 
-    private void SpawnAttackEffect(int attackType) {
+    public void SpawnAttackEffect(int attackType) {
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 

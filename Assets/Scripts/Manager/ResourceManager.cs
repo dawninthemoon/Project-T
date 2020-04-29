@@ -19,11 +19,10 @@ public class ResourceManager : Singleton<ResourceManager>
     public GameObject GetPrefab(string fileName)
 	{
 		string path = PrefabFilePath + fileName;
-		GameObject obj = Load(path,GameObjectType) as GameObject;
-
+		GameObject obj = Load(path, GameObjectType) as GameObject;
 		return obj;
 	}
-
+    
     public RuntimeAnimatorController GetAnimatorController(string fileName) {
         if (_animatorControllers.ContainsKey(fileName))
             return _animatorControllers[fileName];

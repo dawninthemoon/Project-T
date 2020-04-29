@@ -40,19 +40,25 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(hitboxPoint, _hitboxSize, 0f, attackableLayers);
 
+
+        bool enemyHit = false;
         for (int i = 0; i < colliders.Length; i++) {
             if (!IsAlreadyExists(colliders[i])) {
                 _alreadyHitColliders.Add(colliders[i]);
-                OnEnemyHit(colliders[i].gameObject.GetComponentNoAlloc<EnemyBase>());
+                enemyHit = OnEnemyHit(colliders[i].gameObject.GetComponentNoAlloc<EnemyBase>());
             }
         }
+        
+        Time.timeScale = enemyHit ? 0f : 1f;
     }
 
-    private void OnEnemyHit(EnemyBase enemy) {
+    private bool OnEnemyHit(EnemyBase enemy) {
         Vector3 enemyPosition = enemy.transform.position;
 
         EffectManager.GetInstance().SpawnAndRemove(enemyPosition, HitEffectName, -DirX);
         enemy.GetDamage(_attackDamage);
+
+        return true;
     }
 
     private bool IsAlreadyExists(Collider2D collider) {

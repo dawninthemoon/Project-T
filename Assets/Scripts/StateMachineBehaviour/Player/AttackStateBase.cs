@@ -40,7 +40,6 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(hitboxPoint, _hitboxSize, 0f, attackableLayers);
 
-
         bool enemyHit = false;
         for (int i = 0; i < colliders.Length; i++) {
             if (!IsAlreadyExists(colliders[i])) {

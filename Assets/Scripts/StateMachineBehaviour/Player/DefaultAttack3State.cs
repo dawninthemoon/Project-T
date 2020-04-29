@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DefaultAttack3State : AttackStateBase
 {
-    private static readonly int ClipCount = 5;
+    private static readonly int ClipCount = 10;
 
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

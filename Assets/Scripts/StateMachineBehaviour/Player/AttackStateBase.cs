@@ -57,6 +57,8 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
         EffectManager.GetInstance().SpawnAndRemove(enemyPosition, HitEffectName, DirX);
         enemy.GetDamage(_attackDamage);
 
+        EffectManager.GetInstance().ShakeCamera(0.2f);
+
         return true;
     }
 

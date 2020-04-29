@@ -7,11 +7,13 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     private ObjectPool<EffectBase> _effectPool;
     private ResourceManager _resourceManager;
     private List<EffectBase> _acitveEffects;
+    private CameraShake _cameraShake;
 
     public void Initialize() {
         _resourceManager = ResourceManager.GetInstance();
         _effectPool = new ObjectPool<EffectBase>(20, CreateEffect);
         _acitveEffects = new List<EffectBase>();
+        _cameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
     public void Progress() {
@@ -21,6 +23,10 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
                 _acitveEffects.RemoveAt(i--);
             }
         }
+    }
+
+    public void ShakeCamera(float duration) {
+        _cameraShake.StartShakeCamera(duration);
     }
 
     private EffectBase CreateEffect() {

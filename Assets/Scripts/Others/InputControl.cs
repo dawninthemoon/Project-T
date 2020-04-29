@@ -5,9 +5,23 @@ using InControl;
 
 public class InputControl : MonoBehaviour
 {
+    private struct ActionBoolPair {
+        public bool WasPressed;
+        public PlayerAction Actions;
+        public ActionBoolPair(PlayerAction action) {
+            WasPressed = false;
+            Actions = action;
+        }
+    }
+
     private Character _model;
 
     private MyPlayerActions _myActions;
+
+    private Dictionary<string, ActionBoolPair> _wasPressedAtLastFrame;
+
+    private static readonly string JumpActionName = "Jump";
+    private static readonly string AttackActionName = "Attack";
 
     public void Initalize(Character character)
     {
@@ -28,6 +42,21 @@ public class InputControl : MonoBehaviour
 
         _myActions.Attack.AddDefaultBinding(Key.X);
         _myActions.Attack.AddDefaultBinding(InputControlType.Action3);
+
+        _wasPressedAtLastFrame = new Dictionary<string, ActionBoolPair>();
+        _wasPressedAtLastFrame.Add(JumpActionName, new ActionBoolPair(_myActions.Jump));
+        _wasPressedAtLastFrame.Add(AttackActionName, new ActionBoolPair(_myActions.Attack));
+    }
+
+    public bool GetKeyDown(string actionName) {
+        ActionBoolPair pair;
+        if (_wasPressedAtLastFrame.TryGetValue(actionName, out pair)) {
+            bool wasPressed = pair.WasPressed;
+            pair.WasPressed = pair.Actions.IsPressed;
+            return (!wasPressed && pair.Actions.IsPressed);
+        }
+
+        return false;
     }
 
     public void Progress() {
@@ -36,7 +65,11 @@ public class InputControl : MonoBehaviour
 
     private void InputKeys() {
         _model.SetInputX(_myActions.Move.Value);
-        _model.SetJump(_myActions.Jump.WasPressed);
-        _model.SetAttack(_myActions.Attack.WasPressed);
+
+        _model.SetJump(GetKeyDown(JumpActionName));
+        _model.SetAttack(GetKeyDown(AttackActionName));
+
+        //_model.SetJump(_myActions.Jump.WasPressed);
+        //_model.SetAttack(_myActions.Attack.WasPressed);
     }
 }

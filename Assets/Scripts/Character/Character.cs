@@ -20,7 +20,6 @@ public class Character : MonoBehaviour
     private bool _jumpRequested;
     private bool _attackRequested;
     private float _velocityXSmoothing;
-    private bool _bellowAtPreviousFrame;
 
     private Vector3 _velocity;
 
@@ -72,7 +71,6 @@ public class Character : MonoBehaviour
 
         _characterRenderer.ApplyAnimation(_inputX, _velocity.y, _jumpRequested);
 
-        _bellowAtPreviousFrame = collisions._bellow;
         _jumpRequested = false;
     }
 
@@ -90,7 +88,7 @@ public class Character : MonoBehaviour
     }
 
     public void SetJump(bool jumpPressed) {
-        if (jumpPressed && _bellowAtPreviousFrame) {
+        if (jumpPressed && _controller.Collisions._bellow) {
             _jumpRequested = true;
             _velocity.y = _jumpVelocity;
         }

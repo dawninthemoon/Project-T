@@ -5,11 +5,11 @@ using InControl;
 
 public class InputControl : MonoBehaviour
 {
-    private struct ActionBoolPair {
-        public bool WasPressed;
+    private class ActionBoolPair {
+        public bool WasReleased;
         public PlayerAction Actions;
         public ActionBoolPair(PlayerAction action) {
-            WasPressed = false;
+            WasReleased = true;
             Actions = action;
         }
     }
@@ -51,9 +51,17 @@ public class InputControl : MonoBehaviour
     public bool GetKeyDown(string actionName) {
         ActionBoolPair pair;
         if (_wasPressedAtLastFrame.TryGetValue(actionName, out pair)) {
-            bool wasPressed = pair.WasPressed;
-            pair.WasPressed = pair.Actions.IsPressed;
-            return (!wasPressed && pair.Actions.IsPressed);
+
+            if (!pair.WasReleased) {
+                pair.WasReleased = pair.Actions.WasReleased;
+            }
+
+            if (pair.Actions.IsPressed) {
+                if (pair.WasReleased) {
+                    pair.WasReleased = false;
+                    return true;
+                }
+            }
         }
 
         return false;

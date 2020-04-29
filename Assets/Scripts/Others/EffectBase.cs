@@ -11,6 +11,7 @@ public class EffectBase : MonoBehaviour
     public void Initalize() {
         _renderer = gameObject.AddComponent<SpriteRenderer>();
         _animator = gameObject.AddComponent<Animator>();
+        _renderer.sortingLayerName = "Effect";
     }
 
     public bool IsEffectEnd() {

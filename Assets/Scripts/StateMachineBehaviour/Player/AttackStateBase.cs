@@ -55,7 +55,7 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
     private bool OnEnemyHit(EnemyBase enemy) {
         Vector3 enemyPosition = enemy.transform.position;
 
-        EffectManager.GetInstance().SpawnAndRemove(enemyPosition, HitEffectName, -DirX);
+        EffectManager.GetInstance().SpawnAndRemove(enemyPosition, HitEffectName, DirX);
         enemy.GetDamage(_attackDamage);
 
         return true;

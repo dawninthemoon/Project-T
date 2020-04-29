@@ -25,7 +25,6 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
     private EffectBase CreateEffect() {
         EffectBase effect = new GameObject("Effect").AddComponent<EffectBase>();
-        effect.gameObject.AddComponent<SpriteRenderer>().sortingLayerName = "Effect";
         effect.Initalize();
         return effect;
     }

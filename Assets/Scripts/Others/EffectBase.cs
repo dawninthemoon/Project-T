@@ -5,10 +5,11 @@ using UnityEngine;
 public class EffectBase : MonoBehaviour
 {
     private System.Action _onEffectEndCallback;
-
     private Animator _animator;
+    private SpriteRenderer _renderer;    
 
     public void Initalize() {
+        _renderer = gameObject.AddComponent<SpriteRenderer>();
         _animator = gameObject.AddComponent<Animator>();
     }
 

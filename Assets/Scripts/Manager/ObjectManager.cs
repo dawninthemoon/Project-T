@@ -9,11 +9,11 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private Character _player;
     private List<EnemyBase> _enemyList;
 
-    public void Initalize() {
+    public void Initialize() {
         _resourceManager = ResourceManager.GetInstance();
         _enemyList = new List<EnemyBase>();
 
-        _resourceManager.Initalize();
+        _resourceManager.Initialize();
     }
 
     public Character CreateCharacter(Vector3 pos) {

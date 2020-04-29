@@ -24,7 +24,7 @@ public class PlatformController : RaycastController
 
     protected void Start()
     {
-        Initalize();
+        Initialize();
 
         _movePassengers = new HashSet<Transform>();
         _passengerMovement = new List<PassengerMovement>();

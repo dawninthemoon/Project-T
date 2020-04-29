@@ -12,7 +12,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
     private Dictionary<string, RuntimeAnimatorController> _animatorControllers;
 
-    public void Initalize() {
+    public void Initialize() {
         _animatorControllers = new Dictionary<string, RuntimeAnimatorController>();
     }
 

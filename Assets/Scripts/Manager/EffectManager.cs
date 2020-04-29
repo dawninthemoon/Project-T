@@ -8,7 +8,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     private ResourceManager _resourceManager;
     private List<EffectBase> _acitveEffects;
 
-    public void Initalize() {
+    public void Initialize() {
         _resourceManager = ResourceManager.GetInstance();
         _effectPool = new ObjectPool<EffectBase>(20, CreateEffect);
         _acitveEffects = new List<EffectBase>();

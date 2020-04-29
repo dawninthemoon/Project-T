@@ -19,12 +19,12 @@ public class GameMain : MonoBehaviour
     }
 
     private void Start() {
-        _objectManager.Initalize();
-        _effectManager.Initalize();
+        _objectManager.Initialize();
+        _effectManager.Initialize();
 
         Vector3 initalPos = new Vector3(0f, -1f);
         _character = _objectManager.CreateCharacter(initalPos);
-        _character.Initalize();
+        _character.Initialize();
 
         _inputControl.Initalize(_character);
     }
@@ -32,6 +32,7 @@ public class GameMain : MonoBehaviour
     private void Update() {
         _inputControl.Progress();
         _effectManager.Progress();
+        _character.Progress();
     }
 
     private void FixedUpdate() {

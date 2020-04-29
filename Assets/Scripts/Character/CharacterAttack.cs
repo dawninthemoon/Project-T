@@ -15,48 +15,45 @@ public class CharacterAttack : MonoBehaviour
 
     private int _maxAttackCount = 3;
 
-    private int _currentAttackState = 0;
+    public int CurrentAttackState { get; private set; }
 
     public bool IsInAttackProgress { get; private set; }
 
     private CharacterRenderer _characterRenderer;
 
-    public void Initalize() {
+    public void Initialize() {
         _characterRenderer = GetComponent<CharacterRenderer>();
         _sb = new StringBuilder();
         _effectManager = EffectManager.GetInstance();
     }
 
-    public void Attack(bool attackRequested) {
-        _inputDelay -= Time.fixedDeltaTime;
+    public void Progress(bool attackRequested) {
+        _inputDelay -= Time.deltaTime;
 
         if (attackRequested && _inputDelay < 0f) {
             _inputDelay = InitalInputDelay;
 
-            _currentAttackState = Mathf.Min(_currentAttackState + 1, _maxAttackCount);
-            if(_currentAttackState <= _maxAttackCount) {
-                _characterRenderer.SetAttackState(_currentAttackState);
+            CurrentAttackState = Mathf.Min(CurrentAttackState + 1, _maxAttackCount);
+            if(CurrentAttackState <= _maxAttackCount) {
+                _characterRenderer.SetAttackState(CurrentAttackState);
             }
             
-            if(_currentAttackState == 1){
-                EnableHitbox(0);
-                SpawnAttackEffect(1);
+            if(CurrentAttackState == 1){
+                DoAttack(CurrentAttackState);
             }
         }
     }
 
-    public void AttackEnd(int state) {
-        if (state < _currentAttackState){
-            int attackType = state + 1;
-            EnableHitbox(attackType);
-            SpawnAttackEffect(attackType);
-        }
-        else {
-            _inputDelay = InputDelayAfterCombo;
-            IsInAttackProgress = false;
-            _currentAttackState = 0;
-            _characterRenderer.SetAttackState(_currentAttackState);
-        }
+    public void DoAttack(int attackType) {
+        EnableHitbox(attackType);
+        SpawnAttackEffect(attackType);
+    }
+
+    public void AttackEnd() {
+        _inputDelay = InputDelayAfterCombo;
+        IsInAttackProgress = false;
+        CurrentAttackState = 0;
+        _characterRenderer.SetAttackState(CurrentAttackState);
     }
 
     private void EnableHitbox(int attackType) {

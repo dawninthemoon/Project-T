@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviour, IPlaceable
 {
     [SerializeField] protected float _moveSpeed = 4f;
     [SerializeField] protected string _enemyName = null;
@@ -26,12 +26,13 @@ public abstract class EnemyBase : MonoBehaviour
         _hp = _maxHp;
     }
 
+    public abstract void Reset(Vector3 initalPos);
+
     public virtual bool RecieveDamage(int damage, float dir) {
         _hp -= damage;
         
         StartKnockback(damage / 30f * dir);
         StartFlash();
-
         _animator.Play("hurt", 0, 0f);
 
         return _hp > 0;

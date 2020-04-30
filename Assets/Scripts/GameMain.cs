@@ -10,17 +10,21 @@ public class GameMain : MonoBehaviour
     
     private EffectManager _effectManager;
     private ObjectManager _objectManager;
+    private RoomManager _roomManager;
 
     private void Awake() {
         _effectManager = EffectManager.GetInstance();
         _objectManager = ObjectManager.GetInstance();
+        _roomManager = RoomManager.GetInstance();
 
         _inputControl = GetComponent<InputControl>();
     }
 
     private void Start() {
+        ResourceManager.GetInstance().Initialize();
         _objectManager.Initialize();
         _effectManager.Initialize();
+        _roomManager.Initalize();
 
         Vector3 initalPos = new Vector3(0f, -1f);
         _character = _objectManager.CreateCharacter(initalPos);

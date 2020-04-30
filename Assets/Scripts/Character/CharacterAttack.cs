@@ -84,11 +84,11 @@ public class CharacterAttack : MonoBehaviour
     private bool OnEnemyHit(EnemyBase enemy, int damage, string hitEffectName) {
         Vector3 enemyPosition = enemy.transform.position;
         float dirX = transform.localScale.x;
-
-        EffectManager.GetInstance().SpawnAndRemove(enemyPosition, hitEffectName, dirX);
         
-        if (enemy.RecieveDamage(damage, dirX))
+        if (enemy.RecieveDamage(damage, dirX)) {
+            EffectManager.GetInstance().SpawnAndRemove(enemyPosition, hitEffectName, dirX);
             EffectManager.GetInstance().ShakeCamera(0.2f);
+        }
 
         return true;
     }

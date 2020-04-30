@@ -33,4 +33,14 @@ namespace Aroma
             return component as T;
         }
     }
+
+    public static class EnemyUtility {
+        public static EnemyTypes NameToEnemy(string name) {
+            return (EnemyTypes)System.Enum.Parse(typeof(EnemyTypes), name);
+        }
+
+        public static EnemyTypes ObjToEnemy(GameObject obj) {
+            return NameToEnemy(obj.name);
+        }
+    }
 }

@@ -26,6 +26,8 @@ public class SingletonWithMonoBehaviour<T> : MonoBehaviour where T : Component
 			return;
 		}
 
+		if (_instance && _instance != this) return; 
+
 		_instance = this as T;
 	}
 }

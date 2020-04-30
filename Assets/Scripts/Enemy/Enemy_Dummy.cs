@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
-using DG.Tweening;
+using Aroma;
 
 public class Enemy_Dummy : EnemyBase
 {
-    private static readonly float MoveDetectRadius = 4f;
-    private static readonly float AttackDetectRadius = 1f;
+    private static readonly float MoveDetectRadius = 5f;
+    private static readonly float AttackDetectRadius = 1.2f;
 
     public enum States { Idle, Move, Attack, Hurt, Die }
     private StateMachine<States> _fsm;
     private float _timeAgo;
     private Transform _playerTransform;
     private float _attackDelay = 0.5f;
-    private void Start() {
-        Initalize();
-    }
 
     public override void Initalize() {
         base.Initalize();
@@ -34,9 +31,21 @@ public class Enemy_Dummy : EnemyBase
 
         return true;
     }
+
+    public override void Reset(Vector3 initalPos) {
+        gameObject.SetActive(true);
+
+        transform.position = initalPos;
+        _hp = _maxHp;
+        _fsm.ChangeState(States.Idle);
+    }
+
     #region Idle
     private void Idle_Enter() {
-        _animator.Play("idle");
+        _timeAgo = 0f;
+
+        if (gameObject.activeSelf)
+            _animator.Play("idle");
     }
 
     private void Idle_Update() {
@@ -61,7 +70,6 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void Move_Update() {
-
         if (DetectPlayer(MoveDetectRadius) == null) {
             _fsm.ChangeState(States.Idle);
             return;
@@ -73,15 +81,19 @@ public class Enemy_Dummy : EnemyBase
         else {
             Vector3 dir = (_playerTransform.position - transform.position);
             dir.x = Mathf.Sign(dir.x); dir.y = 0f;
+
+            transform.localScale = VectorUtility.GetScaleVec(dir.x);
             transform.position += dir * _moveSpeed * Time.deltaTime;
         }
     }
     #endregion
 
     #region Attack
-
     private void Attack_Enter() {
         _animator.Play("attack");
+
+        float dirX = (_playerTransform.position - transform.position).x;
+        transform.localScale = VectorUtility.GetScaleVec(Mathf.Sign(dirX));
     }
 
     private void Attack_Update() {
@@ -89,7 +101,6 @@ public class Enemy_Dummy : EnemyBase
             _fsm.ChangeState(States.Idle);
         }
     }
-
     #endregion
     
     #region Hurt

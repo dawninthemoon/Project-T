@@ -22,6 +22,23 @@ public class ResourceManager : Singleton<ResourceManager>
 		GameObject obj = Load(path, GameObjectType) as GameObject;
 		return obj;
 	}
+
+    public GameObject[] GetAllPrefabs(string directoryName) {
+        string path = PrefabFilePath + directoryName;
+        UnityEngine.Object[] objects = LoadAll(path, GameObjectType);
+
+        if (objects.Length == 0) {
+            Debug.LogError("Prefab does not exists");
+            return null;
+        }
+
+        GameObject[] gameObjects = new GameObject[objects.Length];
+        for (int i = 0; i < objects.Length; i++) {
+            gameObjects[i] = objects[i] as GameObject;
+        }
+        
+        return gameObjects;
+    }
     
     public RuntimeAnimatorController GetAnimatorController(string fileName) {
         if (_animatorControllers.ContainsKey(fileName))
@@ -46,6 +63,6 @@ public class ResourceManager : Singleton<ResourceManager>
 
 	public UnityEngine.Object[] LoadAll(string path, System.Type type)
 	{
-		return Resources.LoadAll(path,type);
+		return Resources.LoadAll(path, type);
 	}
 }

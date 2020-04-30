@@ -8,9 +8,11 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected string _enemyName = null;
     [SerializeField] protected int _maxHp = 20;
     protected Animator _animator;
+    protected SpriteRenderer _renderer;
     protected int _hp;
 
     public virtual void Initalize() {
+        _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         Setup();
     }
@@ -19,5 +21,5 @@ public abstract class EnemyBase : MonoBehaviour
         _hp = _maxHp;
     }
 
-    public abstract void GetDamage(int amount);
+    public abstract void GetDamage(int amount, float dir);
 }

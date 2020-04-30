@@ -16,57 +16,22 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
 
     private float DirX { get { return Transform.localScale.x; } }
 
-    private List<Collider2D> _alreadyHitColliders = new List<Collider2D>();
 
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
         _attackDamage = Context.DefaultAttackDamage;
         _timeAgo = 0f;
         _stateLength = stateInfo.length;
-        _alreadyHitColliders.Clear();
+        Context.AlreadyHitColliders.Clear();
     }
 
     protected void RequestEnableHitbox(int attackType, int clipCount) {
         _timeAgo += Time.deltaTime;
         if (_timeAgo > _stateLength / clipCount * 2f) {
-            EnableHitbox();
+            Vector2 offset = _hitboxOffset * DirX;
+            Vector2 hitboxPoint = (Vector2)Transform.position + offset;
+
+            Context.EnableHitbox(hitboxPoint, _hitboxSize, _attackDamage, HitEffectName);
         }
-    }
-
-    private void EnableHitbox() {
-        Vector2 offset = _hitboxOffset * DirX;
-        Vector2 hitboxPoint = (Vector2)Transform.position + offset;
-        LayerMask attackableLayers = Context.AttackableLayers;
-
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(hitboxPoint, _hitboxSize, 0f, attackableLayers);
-
-        bool enemyHit = false;
-        for (int i = 0; i < colliders.Length; i++) {
-            if (!IsAlreadyExists(colliders[i])) {
-                _alreadyHitColliders.Add(colliders[i]);
-                enemyHit = OnEnemyHit(colliders[i].gameObject.GetComponentNoAlloc<EnemyBase>());
-            }
-        }
-        
-        Time.timeScale = enemyHit ? 0f : 1f;
-    }
-
-    private bool OnEnemyHit(EnemyBase enemy) {
-        Vector3 enemyPosition = enemy.transform.position;
-
-        EffectManager.GetInstance().SpawnAndRemove(enemyPosition, HitEffectName, DirX);
-        enemy.GetDamage(_attackDamage);
-
-        EffectManager.GetInstance().ShakeCamera(0.2f);
-
-        return true;
-    }
-
-    private bool IsAlreadyExists(Collider2D collider) {
-        for (int i = 0; i < _alreadyHitColliders.Count; i++) {
-            if (GameObject.ReferenceEquals(collider, _alreadyHitColliders[i]))
-                return true;
-        }
-        return false;
     }
 }

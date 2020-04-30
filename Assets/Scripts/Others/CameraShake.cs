@@ -7,7 +7,7 @@ public class CameraShake : MonoBehaviour
 {
     [SerializeField] private AnimationCurve _shakeCurve = null;
 
-    [SerializeField] private CinemachineVirtualCamera _virtualCamera;
+    [SerializeField] private CinemachineVirtualCamera _virtualCamera = null;
     private CinemachineBasicMultiChannelPerlin _virtualCameraNoise;
 
     void Start()

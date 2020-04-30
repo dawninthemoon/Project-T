@@ -86,9 +86,9 @@ public class CharacterAttack : MonoBehaviour
         float dirX = transform.localScale.x;
 
         EffectManager.GetInstance().SpawnAndRemove(enemyPosition, hitEffectName, dirX);
-        enemy.GetDamage(damage, dirX);
-
-        EffectManager.GetInstance().ShakeCamera(0.2f);
+        
+        if (enemy.RecieveDamage(damage, dirX))
+            EffectManager.GetInstance().ShakeCamera(0.2f);
 
         return true;
     }

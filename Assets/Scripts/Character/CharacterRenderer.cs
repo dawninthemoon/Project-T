@@ -24,7 +24,9 @@ public class CharacterRenderer : MonoBehaviour
 
         _animator.SetInteger(DirXName, Mathf.RoundToInt(dirX));
         _animator.SetInteger(DirYName, dirY);
-        _animator.SetBool(RequestJumpName, requestJump);
+
+        if (requestJump)
+            _animator.SetTrigger(RequestJumpName);
 
         if(dirX != 0f) {
             SetDirection(dirX);

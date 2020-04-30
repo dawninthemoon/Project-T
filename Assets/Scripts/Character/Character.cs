@@ -49,12 +49,11 @@ public class Character : MonoBehaviour
 
     public void FixedProgress()
     {
+        CalculateVelocity();
         CalculateMoving();
     }
 
     private void CalculateMoving() {
-        CalculateVelocity();
-
         _controller.Move(_velocity * Time.fixedDeltaTime);
 
         var collisions = _controller.Collisions;
@@ -68,7 +67,6 @@ public class Character : MonoBehaviour
         }
 
         _characterRenderer.ApplyAnimation(_inputX, _velocity.y, _jumpRequested);
-
         _jumpRequested = false;
     }
 
@@ -78,6 +76,9 @@ public class Character : MonoBehaviour
 
         _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, smoothTime);
         _velocity.y += _gravity * Time.fixedDeltaTime;
+
+        if (_jumpRequested)
+            _velocity.y = _jumpVelocity;
     }
 
     public void SetInputX(float horizontal)
@@ -92,7 +93,6 @@ public class Character : MonoBehaviour
     public void SetJump(bool jumpPressed) {
         if (jumpPressed && _controller.Collisions._bellow) {
             _jumpRequested = true;
-            _velocity.y = _jumpVelocity;
         }
     }
     public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;

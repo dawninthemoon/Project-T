@@ -5,12 +5,13 @@ using UnityEngine;
 public class DefaultMoveAttack1State : AttackStateBase
 {
     private static readonly int ClipCount = 7;
+    private const string AttackEffectName = "defaultAttack1_move";
 
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
         base.OnStateEntered(animator, stateInfo, layerIndex);
         Context.EnterAttackProgress();
-        Context.SpawnAttackEffect(1);
+        Context.SpawnAttackEffect(AttackEffectName);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

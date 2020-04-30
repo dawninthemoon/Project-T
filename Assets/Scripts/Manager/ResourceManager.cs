@@ -6,7 +6,6 @@ public class ResourceManager : Singleton<ResourceManager>
 {
     private static readonly Type GameObjectType = typeof(GameObject);
     private static readonly Type AnimatorControllerType = typeof(RuntimeAnimatorController);
-    //private static readonly Type SpritetType = typeof(Sprite);
     private static readonly string PrefabFilePath = "Prefabs/";
     private static readonly string AnimatorControllerFilePath = "AnimatorControllers/";
 
@@ -51,7 +50,6 @@ public class ResourceManager : Singleton<ResourceManager>
             Debug.LogError("The file does not exist: " + path);
             return null;
         }
-
         _animatorControllers.Add(fileName, resource);
         return resource;
     }

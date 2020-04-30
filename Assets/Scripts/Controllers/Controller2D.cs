@@ -43,7 +43,6 @@ public class Controller2D : RaycastController
                 if (hit.distance == 0f)
                     continue;
 
-                print(hit.collider.gameObject.name);
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if (i == 0 && (slopeAngle <= _maxSlopeAngle)) {
                     if (_collisions._descendingSlope) {

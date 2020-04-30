@@ -1,7 +1,6 @@
 ﻿#pragma warning disable 0649
 using UnityEngine;
 using System.Collections.Generic;
-using System.Text;
 using Aroma;
 
 public class CharacterAttack : MonoBehaviour
@@ -11,10 +10,10 @@ public class CharacterAttack : MonoBehaviour
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
 
-    private static readonly string DefaultAttackName = "PlayerEffect/defaultAttack";
+    private static readonly string EffectDirectory = "PlayerEffect/";
+    private static readonly string DefaultAttackName = "defaultAttack";
 
     private EffectManager _effectManager;
-    private StringBuilder _sb;
     private const float InitalInputDelay = 0.15f;
     private const float InputDelayAfterCombo = 0.15f;
     private float _inputDelay;
@@ -27,7 +26,6 @@ public class CharacterAttack : MonoBehaviour
     public void Initialize() {
         AlreadyHitColliders = new List<Collider2D>();
         _characterRenderer = GetComponent<CharacterRenderer>();
-        _sb = new StringBuilder();
         _effectManager = EffectManager.GetInstance();
     }
 
@@ -74,11 +72,16 @@ public class CharacterAttack : MonoBehaviour
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 
-        _sb.Clear();
-        _sb.Append(DefaultAttackName);
-        _sb.Append(attackType.ToString());
+        string path = EffectDirectory + DefaultAttackName + attackType.ToString();
+        _effectManager.SpawnAndRemove(pos, path, dir);
+    }
 
-        _effectManager.SpawnAndRemove(pos, _sb.ToString(), dir);
+    public void SpawnAttackEffect(string effectName) {
+        Vector3 pos = transform.position;
+        float dir = transform.localScale.x;
+
+        string path = EffectDirectory + effectName;
+        _effectManager.SpawnAndRemove(pos, path, dir);
     }
 
     private bool OnEnemyHit(EnemyBase enemy, int damage, string hitEffectName) {

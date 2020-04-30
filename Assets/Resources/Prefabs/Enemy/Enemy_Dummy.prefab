@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _enemyName: Dummy
-  _maxHp: 20
+  _maxHp: 15
 --- !u!61 &2199656299581450247
 BoxCollider2D:
   m_ObjectHideFlags: 0

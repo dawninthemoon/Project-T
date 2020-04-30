@@ -49,9 +49,7 @@ public class Character : MonoBehaviour
 
     public void FixedProgress()
     {
-        if (!_characterAttack.IsInAttackProgress) {
-            CalculateMoving();
-        }
+        CalculateMoving();
     }
 
     private void CalculateMoving() {
@@ -84,7 +82,11 @@ public class Character : MonoBehaviour
 
     public void SetInputX(float horizontal)
     {
-        _inputX = horizontal;
+        if (!_characterAttack.IsInAttackProgress) {
+            _inputX = horizontal;
+            return;
+        }
+        _inputX = 0f;
     }
 
     public void SetJump(bool jumpPressed) {

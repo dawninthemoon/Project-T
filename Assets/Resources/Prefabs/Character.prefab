@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566b13f9f22bce6429b0dbd0c08fff40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultAttackDamage: 10
   _attackableLayers:
     serializedVersion: 2
     m_Bits: 2048
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -492553105
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 602983e28a98e964db807e0e8aa735cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

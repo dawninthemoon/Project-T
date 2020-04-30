@@ -1,9 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Tilemaps;
 using Object = UnityEngine.Object;
+#endif
 
 [CreateAssetMenu(fileName = "Tile Prefab brush", menuName = "Brushes/Tile Prefab brush")]
 [CustomGridBrush(false, true, false, "Tile Prefab Brush")]

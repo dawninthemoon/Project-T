@@ -25,10 +25,10 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
             _rooms[_currentRoomNumber].ResetRoom();
             _currentRoomNumber = targetRoomNumber;
 
+            _rooms[targetRoomNumber].StartRoom();
+
             Vector3 playerPos = _rooms[targetRoomNumber].GetDoorPosition(targetIndex);
             ObjectManager.GetInstance().SetPlayerPos(playerPos);
-
-            _rooms[targetRoomNumber].StartRoom();
         }
         else {
             Debug.LogError("Room does not exists");

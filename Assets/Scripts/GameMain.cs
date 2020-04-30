@@ -26,7 +26,7 @@ public class GameMain : MonoBehaviour
         _effectManager.Initialize();
         _roomManager.Initalize();
 
-        Vector3 initalPos = new Vector3(0f, -1f);
+        Vector3 initalPos = new Vector3(-2f, -1f);
         _character = _objectManager.CreateCharacter(initalPos);
         _character.Initialize();
 

@@ -25,9 +25,9 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
         Context.AlreadyHitColliders.Clear();
     }
 
-    protected void RequestEnableHitbox(int attackType, int clipCount) {
+    protected void RequestEnableHitbox(int attackType, int clipCount, int delayCount) {
         _timeAgo += Time.deltaTime;
-        if (_timeAgo > _stateLength / clipCount * 2f) {
+        if (_timeAgo > _stateLength / clipCount * delayCount) {
             Vector2 offset = _hitboxOffset * DirX;
             Vector2 hitboxPoint = (Vector2)Transform.position + offset;
 

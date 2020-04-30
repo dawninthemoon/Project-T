@@ -38,12 +38,12 @@ public class Controller2D : RaycastController
             Vector2 rayOrigin = (directionX == -1f) ? _raycastOrigins.bottomLeft : _raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (_verticalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, _collisionMask);
-
             if (hit.collider != null)
             {
                 if (hit.distance == 0f)
                     continue;
 
+                print(hit.collider.gameObject.name);
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
                 if (i == 0 && (slopeAngle <= _maxSlopeAngle)) {
                     if (_collisions._descendingSlope) {

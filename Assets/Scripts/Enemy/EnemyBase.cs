@@ -13,10 +13,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected int _hp;
     private Sequence _flashSequence;
     protected float _knockbackTime = 0.5f;
+    protected int _playerMask;
 
     public virtual void Initalize() {
         _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _playerMask = 1 << LayerMask.NameToLayer("Character");
         Setup();
     }
 

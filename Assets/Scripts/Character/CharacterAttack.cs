@@ -44,7 +44,6 @@ public class CharacterAttack : MonoBehaviour
 
     public void EnableHitbox(Vector2 position, Vector2 size, int damage, string hitEffectName) {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(position, size, 0f, _attackableLayers);
-
         bool enemyHit = false;
         for (int i = 0; i < colliders.Length; i++) {
             if (!IsAlreadyExists(colliders[i])) {

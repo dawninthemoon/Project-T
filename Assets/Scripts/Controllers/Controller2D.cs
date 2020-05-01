@@ -124,7 +124,7 @@ public class Controller2D : RaycastController
     private void ClimbSlope(ref Vector3 velocity, float slopeAngle, Vector2 slopeNormal) {
         float moveDistance = Mathf.Abs(velocity.x);
         float climbVelocityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
-
+        
         if (velocity.y <= climbVelocityY) {
             velocity.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(velocity.x);
             velocity.y = climbVelocityY;

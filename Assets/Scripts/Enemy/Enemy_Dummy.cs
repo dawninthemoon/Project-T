@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
-using Aroma;
 
 public class Enemy_Dummy : EnemyBase
 {
@@ -21,10 +20,10 @@ public class Enemy_Dummy : EnemyBase
         _fsm.ChangeState(States.Idle);
     }
 
-    public override bool RecieveDamage(int amount, float dir) {
+    public override bool ReceiveDamage(int amount, float dir) {
         if (_fsm.State == States.Die) return false;
 
-        if (base.RecieveDamage(amount, dir))
+        if (base.ReceiveDamage(amount, dir))
             _fsm.ChangeState(States.Hurt);
         else
             _fsm.ChangeState(States.Die);
@@ -33,10 +32,7 @@ public class Enemy_Dummy : EnemyBase
     }
 
     public override void Reset(Vector3 initalPos) {
-        gameObject.SetActive(true);
-
-        transform.position = initalPos;
-        _hp = _maxHp;
+        base.Reset(initalPos);
         _fsm.ChangeState(States.Idle);
     }
 
@@ -79,11 +75,9 @@ public class Enemy_Dummy : EnemyBase
             _fsm.ChangeState(States.Attack);
         }
         else {
-            Vector3 dir = (_playerTransform.position - transform.position);
-            dir.x = Mathf.Sign(dir.x); dir.y = 0f;
-
-            transform.localScale = VectorUtility.GetScaleVec(dir.x);
-            transform.position += dir * _moveSpeed * Time.deltaTime;
+            float dirX = (_playerTransform.position - transform.position).x;
+            dirX = Mathf.Sign(dirX);
+            _requestX = dirX;
         }
     }
     #endregion
@@ -93,7 +87,7 @@ public class Enemy_Dummy : EnemyBase
         _animator.Play("attack");
 
         float dirX = (_playerTransform.position - transform.position).x;
-        transform.localScale = VectorUtility.GetScaleVec(Mathf.Sign(dirX));
+        transform.localScale = Aroma.VectorUtility.GetScaleVec(Mathf.Sign(dirX));
     }
 
     private void Attack_Update() {

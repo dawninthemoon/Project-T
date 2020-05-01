@@ -76,7 +76,7 @@ public class Character : MonoBehaviour
 
         _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, smoothTime);
         _velocity.y += _gravity * Time.fixedDeltaTime;
-
+        
         if (_jumpRequested)
             _velocity.y = _jumpVelocity;
     }

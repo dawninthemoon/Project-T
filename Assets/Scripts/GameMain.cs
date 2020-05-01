@@ -41,5 +41,6 @@ public class GameMain : MonoBehaviour
 
     private void FixedUpdate() {
         _character.FixedProgress();
+        _objectManager.FixedProgress();
     }
 }

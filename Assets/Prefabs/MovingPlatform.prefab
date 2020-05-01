@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4940663950300357248}
   - component: {fileID: 8066512359513100628}
   m_Layer: 10
-  m_Name: GameObject
+  m_Name: MovingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -492553105
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,15 +96,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b958d8c6676f54db238746f3537c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _horizontalRayCount: 4
-  _verticalRayCount: 4
-  _collisionMask:
-    serializedVersion: 2
-    m_Bits: 0
+  _distBetweenRays: 0.25
   _passengerMask:
     serializedVersion: 2
     m_Bits: 512
-  _moveVector: {x: 0, y: 0, z: 0}
+  _localWayPoints: []
+  _moveSpeed: 0
+  _cyclic: 0
+  _waitTime: 0
+  _easeAmount: 0
 --- !u!50 &-4940663950300357248
 Rigidbody2D:
   serializedVersion: 4

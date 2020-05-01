@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPlaceable
 {
-    void Reset(Vector3 initaliPos);
+    void Reset(Vector3 initalPos);
 }

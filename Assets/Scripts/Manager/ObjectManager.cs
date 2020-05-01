@@ -21,6 +21,12 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         InitalizeObjectPool();
     }
 
+    public void FixedProgress() {
+        for (int i = 0; i < _activeEnemies.Count; i++) {
+            _activeEnemies[i].FixedProgress();
+        }
+    }
+
     public Character CreateCharacter(Vector3 position) {
         if (_player == null) {
             var prefab = _resourceManager.GetPrefab("Character");

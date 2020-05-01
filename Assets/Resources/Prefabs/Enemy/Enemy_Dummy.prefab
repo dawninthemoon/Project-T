@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2199656299581450299}
   - component: {fileID: 2199656299581450298}
+  - component: {fileID: 1545813590934223750}
   - component: {fileID: 2199656299581450247}
   - component: {fileID: 2199656299581450296}
   - component: {fileID: 2199656299581450245}
@@ -17,11 +18,11 @@ GameObject:
   - component: {fileID: 2199656299581450246}
   m_Layer: 11
   m_Name: Enemy_Dummy
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2199656299581450299
 Transform:
   m_ObjectHideFlags: 0
@@ -51,6 +52,24 @@ MonoBehaviour:
   _moveSpeed: 4
   _enemyName: Dummy
   _maxHp: 15
+  _jumpHeight: 5
+--- !u!114 &1545813590934223750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199656299581450297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32d97f3f6f3ca94d93dd47bc6e11bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distBetweenRays: 0.25
+  _maxSlopeAngle: 80
+  _collisionMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!61 &2199656299581450247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -75,7 +94,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.77}
+  m_Size: {x: 1, y: 0.7}
   m_EdgeRadius: 0
 --- !u!212 &2199656299581450296
 SpriteRenderer:

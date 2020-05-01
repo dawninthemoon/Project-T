@@ -49,6 +49,7 @@ public class CharacterAttack : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++) {
             if (!IsAlreadyExists(colliders[i])) {
                 AlreadyHitColliders.Add(colliders[i]);
+                
                 EnemyBase enemy = colliders[i].gameObject.GetComponentNoAlloc<EnemyBase>();
                 enemyHit = OnEnemyHit(enemy, damage, hitEffectName);
             }
@@ -88,7 +89,7 @@ public class CharacterAttack : MonoBehaviour
         Vector3 enemyPosition = enemy.transform.position;
         float dirX = transform.localScale.x;
         
-        if (enemy.RecieveDamage(damage, dirX)) {
+        if (enemy.ReceiveDamage(damage, dirX)) {
             EffectManager.GetInstance().SpawnAndRemove(enemyPosition, hitEffectName, dirX);
             EffectManager.GetInstance().ShakeCamera(0.2f);
         }

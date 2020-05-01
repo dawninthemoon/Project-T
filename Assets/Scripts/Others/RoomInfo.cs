@@ -29,6 +29,7 @@ public class RoomInfo : MonoBehaviour
 
     public void StartRoom() {
         var objManager = ObjectManager.GetInstance();
+        gameObject.SetActive(true);
 
         for (int i = 0; i < _enemies.Length; i++) {
             EnemyTypes type = _enemies[i].RequestEnemy;
@@ -36,8 +37,6 @@ public class RoomInfo : MonoBehaviour
 
             objManager.SpawnEnemy(type, position);
         }
-
-        gameObject.SetActive(true);
     }
 
     public void ResetRoom() {

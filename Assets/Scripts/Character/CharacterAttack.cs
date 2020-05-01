@@ -48,7 +48,6 @@ public class CharacterAttack : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++) {
             if (!IsAlreadyExists(colliders[i])) {
                 AlreadyHitColliders.Add(colliders[i]);
-                
                 EnemyBase enemy = colliders[i].gameObject.GetComponentNoAlloc<EnemyBase>();
                 enemyHit = OnEnemyHit(enemy, damage, hitEffectName);
             }
@@ -76,21 +75,27 @@ public class CharacterAttack : MonoBehaviour
         _effectManager.SpawnAndRemove(pos, path, dir);
     }
 
-    public void SpawnAttackEffect(string effectName) {
+    public void SpawnAttackEffect(string effectName, bool effectTracks = false) {
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 
         string path = EffectDirectory + effectName;
-        _effectManager.SpawnAndRemove(pos, path, dir);
+        if (effectTracks) {
+            _effectManager.SpawnTrackEffectAndRemove(pos, path, transform, dir);
+        }
+        else {
+            _effectManager.SpawnAndRemove(pos, path, dir);
+        }
     }
 
     private bool OnEnemyHit(EnemyBase enemy, int damage, string hitEffectName) {
         Vector3 enemyPosition = enemy.transform.position;
         float dirX = transform.localScale.x;
         
+        var effectManager = EffectManager.GetInstance();
         if (enemy.ReceiveDamage(damage, dirX)) {
-            EffectManager.GetInstance().SpawnAndRemove(enemyPosition, hitEffectName, dirX);
-            EffectManager.GetInstance().ShakeCamera(0.2f);
+            effectManager.SpawnAndRemove(enemyPosition, hitEffectName, dirX);
+            effectManager.ShakeCamera(0.2f);
         }
 
         return true;

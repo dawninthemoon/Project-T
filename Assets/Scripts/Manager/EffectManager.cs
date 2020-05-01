@@ -18,7 +18,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
     public void Progress() {
         for (int i = 0; i < _acitveEffects.Count; i++) {
-            if (_acitveEffects[i].IsEffectEnd()) {
+            if (_acitveEffects[i].OnEffectUpdate()) {
                 _acitveEffects[i].OnEffectEnd();
                 _acitveEffects.RemoveAt(i--);
             }
@@ -41,6 +41,17 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         System.Action callback = () => { _effectPool.ReturnObject(effect);};
         RuntimeAnimatorController controller = _resourceManager.GetAnimatorController(effectName);
         effect.SetEffectInfo(pos, controller, dir, callback);
+
+        _acitveEffects.Add(effect);
+    }
+
+    public void SpawnTrackEffectAndRemove(Vector3 pos, string effectName, Transform target, float dir = 1f) {
+        EffectBase effect = _effectPool.GetObject();
+
+        System.Action onEffectUpdate = () => { effect.transform.position = target.position; };
+        System.Action callback = () => { _effectPool.ReturnObject(effect);};
+        RuntimeAnimatorController controller = _resourceManager.GetAnimatorController(effectName);
+        effect.SetEffectInfo(pos, controller, dir, callback, onEffectUpdate);
 
         _acitveEffects.Add(effect);
     }

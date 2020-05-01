@@ -27,7 +27,8 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
 
     protected void RequestEnableHitbox(int attackType, int clipCount, int delayCount) {
         _timeAgo += Time.deltaTime;
-        if (_timeAgo >= _stateLength / clipCount * delayCount) {
+        if (_timeAgo >= _stateLength / clipCount * delayCount
+            && _timeAgo < _stateLength / clipCount * (delayCount + 1)) {
             Vector2 offset = _hitboxOffset;
             offset.x *= DirX;
             Vector2 hitboxPoint = (Vector2)Transform.position + offset;

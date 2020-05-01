@@ -73,8 +73,8 @@ public class InputControl : MonoBehaviour
 
     private void InputKeys() {
         float horizontal = _myActions.Move.Value;
+        horizontal = (Mathf.Abs(horizontal) > 0.5f) ? horizontal : 0f;
         horizontal = (horizontal == 0f) ? horizontal : Mathf.Sign(horizontal);
-        horizontal = (Mathf.Abs(horizontal) > 0.1f) ? horizontal : 0f;
         _model.SetInputX(horizontal);
 
         _model.SetJump(GetKeyDown(JumpActionName));

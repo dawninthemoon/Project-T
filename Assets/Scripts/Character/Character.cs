@@ -7,17 +7,20 @@ using InControl;
 public class Character : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10f;
-    [SerializeField] private float _jumpHeight = 5f;
+    [SerializeField] private float _maxJumpHeight = 5f;
+    [SerializeField] private float _minJumpHeight = 2f;
     
     private static readonly float TimeToJumpApex = 0.4f;
     private static readonly float AccelerationTimeAirborne = 0.2f;
     private static readonly float AccelerationTimeGrounded = 0.1f;
 
     private float _gravity;
-    private float _jumpVelocity;
+    private float _maxJumpVelocity;
+    private float _minJumpVelocity;
 
-    private float _inputX;
+    private Vector2 _input;
     private bool _jumpRequested;
+    private bool _jumpReleased;
     private bool _attackRequested;
     private float _velocityXSmoothing;
 
@@ -39,8 +42,9 @@ public class Character : MonoBehaviour
         _characterRenderer.Initialize();
         _controller.Initialize();
 
-        _gravity = -(2f * _jumpHeight) / Mathf.Pow(TimeToJumpApex, 2f);
-        _jumpVelocity = Mathf.Abs(_gravity) * TimeToJumpApex;
+        _gravity = -(2f * _maxJumpHeight) / Mathf.Pow(TimeToJumpApex, 2f);
+        _maxJumpVelocity = Mathf.Abs(_gravity) * TimeToJumpApex;
+        _minJumpVelocity = Mathf.Sqrt(2f * Mathf.Abs(_gravity) * _minJumpHeight);
     }
 
     public void Progress() {
@@ -53,8 +57,25 @@ public class Character : MonoBehaviour
         CalculateMoving();
     }
 
+    private void CalculateVelocity() {
+        float targetVelocityX = _input.x * _moveSpeed;
+        float smoothTime = _controller.Collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne;
+
+        _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, smoothTime);
+        _velocity.y += _gravity * Time.fixedDeltaTime;
+
+        if (_jumpRequested)
+            _velocity.y = _maxJumpVelocity;
+        
+        if (_jumpReleased) {
+            if (_velocity.y > _minJumpVelocity) {
+                _velocity.y = _minJumpVelocity;
+            }
+        }
+    }
+
     private void CalculateMoving() {
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+        _controller.Move(_velocity * Time.fixedDeltaTime, _input);
 
         var collisions = _controller.Collisions;
         if (collisions._bellow || collisions._above) {
@@ -66,34 +87,35 @@ public class Character : MonoBehaviour
             }
         }
 
-        _characterRenderer.ApplyAnimation(_inputX, _velocity.y, _jumpRequested);
+        _characterRenderer.ApplyAnimation(_input.x, _velocity.y, _jumpRequested);
         _jumpRequested = false;
+        _jumpReleased = false;
     }
 
-    private void CalculateVelocity() {
-        float targetVelocityX = _inputX * _moveSpeed;
-        float smoothTime = _controller.Collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne;
-
-        _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, smoothTime);
-        _velocity.y += _gravity * Time.fixedDeltaTime;
-        
-        if (_jumpRequested)
-            _velocity.y = _jumpVelocity;
-    }
 
     public void SetInputX(float horizontal)
     {
         if (!_characterAttack.IsInAttackProgress) {
-            _inputX = horizontal;
+            _input.x = horizontal;
             return;
         }
-        _inputX = 0f;
+        _input.x = 0f;
+    }
+    public void SetInputY(float vertical) {
+        _input.y = vertical;
     }
 
     public void SetJump(bool jumpPressed) {
-        if (jumpPressed && _controller.Collisions._bellow) {
+        if (!_characterAttack.IsInAttackProgress && jumpPressed && _controller.Collisions._bellow) {
             _jumpRequested = true;
         }
     }
+
+    public void SetJumpEnd(bool isNotPressed, bool pressedAtLastFrame) {
+        if (!_characterAttack.IsInAttackProgress && isNotPressed && pressedAtLastFrame) {
+            _jumpReleased = true;
+        }
+    }
+
     public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;
 }

@@ -7,13 +7,24 @@ public class Controller2D : RaycastController
 {
     [SerializeField] private float _maxSlopeAngle = 80f;
     [SerializeField] private LayerMask _collisionMask;
+    private Vector2 _requestedInput;
+    private static readonly string ThroughPlatformTag = "Through";
 
-    public void Move(Vector3 velocity, bool standingOnPlatform = false)
+    private CollisionInfo _collisions;
+    public CollisionInfo Collisions { get { return _collisions; } }
+
+    public void Move(Vector3 velocity, bool standingOnPlatform) {
+        Move(velocity, Vector2.zero, standingOnPlatform);
+    }
+
+    public void Move(Vector3 velocity, Vector2 input, bool standingOnPlatform = false)
     {
         UpdateRaycastOrigins();
         
         _collisions.Reset();
         _collisions._velocityOld = velocity;
+
+        _requestedInput = input;
 
         if (velocity.x < 0f)
             DescendSlope(ref velocity);
@@ -89,6 +100,17 @@ public class Controller2D : RaycastController
 
             if (hit.collider != null)
             {
+                if (hit.collider.CompareTag(ThroughPlatformTag)) {
+                    if (directionY > 0f || hit.distance == 0f) continue;
+                    if (_collisions._fallingThroughPlatform) continue;
+
+                    if (_requestedInput.y < 0f) {
+                        _collisions._fallingThroughPlatform = true;
+                        Invoke("ResetFallingThroughPlatform", 0.5f);
+                        continue;
+                    }
+                }
+
                 velocity.y = (hit.distance - _skinWidth) * directionY;
                 rayLength = hit.distance;
 
@@ -182,6 +204,33 @@ public class Controller2D : RaycastController
                 _collisions._slidingDownMaxSlope = true;
                 _collisions._slopeNormal = hit.normal;
             }
+        }
+    }
+
+    private void ResetFallingThroughPlatform() {
+        _collisions._fallingThroughPlatform = false;
+    }
+
+    public struct CollisionInfo
+    {
+        public bool _above, _bellow;
+        public bool _left, _right;
+        public bool _climbingSlope, _descendingSlope;
+        public bool _slidingDownMaxSlope;
+        public float _slopeAngle, _slopeAngleOld;
+        public Vector3 _velocityOld;
+        public Vector2 _slopeNormal;
+        public bool _fallingThroughPlatform;
+
+        public void Reset()
+        {
+            _above = _bellow = false;
+            _left = _right = false;
+            _climbingSlope = false;
+            _slopeNormal = Vector2.zero;
+            _descendingSlope = false;
+            _slidingDownMaxSlope = false;
+            _slopeAngle = 0f;
         }
     }
 }

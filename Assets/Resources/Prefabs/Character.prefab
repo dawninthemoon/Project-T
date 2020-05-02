@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _jumpHeight: 1.5
+  _maxJumpHeight: 2.5
+  _minJumpHeight: 0.5
 --- !u!114 &8968027397319763389
 MonoBehaviour:
   m_ObjectHideFlags: 0

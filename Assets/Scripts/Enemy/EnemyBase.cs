@@ -57,7 +57,7 @@ public abstract class EnemyBase : MonoBehaviour, IPlaceable
         if (_requestX != 0f)
             transform.localScale = Aroma.VectorUtility.GetScaleVec(_requestX);
 
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+        _controller.Move(_velocity * Time.fixedDeltaTime, Vector2.zero);
         _requestX = 0f;
 
         var collisions = _controller.Collisions;

@@ -18,7 +18,7 @@ public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
 
 
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {   
+    {
         _attackDamage = Context.DefaultAttackDamage;
         _timeAgo = 0f;
         _stateLength = stateInfo.length;

@@ -19,7 +19,7 @@ public class InputControl : MonoBehaviour
     private MyPlayerActions _myActions;
 
     private Dictionary<string, ActionBoolPair> _wasPressedAtLastFrame;
-
+    private bool _isJumpPressed;
     private static readonly string JumpActionName = "Jump";
     private static readonly string AttackActionName = "Attack";
 
@@ -36,6 +36,14 @@ public class InputControl : MonoBehaviour
         _myActions.Right.AddDefaultBinding(Key.RightArrow);
         _myActions.Right.AddDefaultBinding(InputControlType.DPadRight);
         _myActions.Right.AddDefaultBinding(InputControlType.LeftStickRight);
+
+        _myActions.Up.AddDefaultBinding(Key.UpArrow);
+        _myActions.Up.AddDefaultBinding(InputControlType.DPadUp);
+        _myActions.Up.AddDefaultBinding(InputControlType.LeftStickUp);
+
+        _myActions.Down.AddDefaultBinding(Key.DownArrow);
+        _myActions.Down.AddDefaultBinding(InputControlType.DPadDown);
+        _myActions.Down.AddDefaultBinding(InputControlType.LeftStickDown);
 
         _myActions.Jump.AddDefaultBinding(Key.Z);
         _myActions.Jump.AddDefaultBinding(InputControlType.Action1);
@@ -72,12 +80,22 @@ public class InputControl : MonoBehaviour
     }
 
     private void InputKeys() {
-        float horizontal = _myActions.Move.Value;
-        horizontal = (Mathf.Abs(horizontal) > 0.5f) ? horizontal : 0f;
-        horizontal = (horizontal == 0f) ? horizontal : Mathf.Sign(horizontal);
+        float horizontal = IgnoreSmallValue(_myActions.Horizontal.Value);
+        float vertical = IgnoreSmallValue(_myActions.Vertical.Value);
+        
         _model.SetInputX(horizontal);
+        _model.SetInputY(vertical);
 
         _model.SetJump(GetKeyDown(JumpActionName));
+        _model.SetJumpEnd(!_myActions.Jump.IsPressed, _isJumpPressed);
         _model.SetAttack(GetKeyDown(AttackActionName));
+
+        _isJumpPressed = _myActions.Jump.IsPressed;
+    }
+
+    private float IgnoreSmallValue(float value) {
+        value = (Mathf.Abs(value) > 0.5f) ? value : 0f;
+        value = (value == 0f) ? value : Mathf.Sign(value);
+        return value;
     }
 }

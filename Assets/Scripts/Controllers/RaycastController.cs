@@ -14,9 +14,6 @@ public class RaycastController : MonoBehaviour
     protected BoxCollider2D _collider;
     protected RaycastOrigins _raycastOrigins;
 
-    protected CollisionInfo _collisions;
-    public CollisionInfo Collisions { get { return _collisions; } }
-
     protected float _horizontalRaySpacing;
     protected float _verticalRaySpacing;
 
@@ -56,27 +53,5 @@ public class RaycastController : MonoBehaviour
     {
         public Vector2 topLeft, topRight;
         public Vector2 bottomLeft, bottomRight;
-    }
-
-    public struct CollisionInfo
-    {
-        public bool _above, _bellow;
-        public bool _left, _right;
-        public bool _climbingSlope, _descendingSlope;
-        public bool _slidingDownMaxSlope;
-        public float _slopeAngle, _slopeAngleOld;
-        public Vector3 _velocityOld;
-        public Vector2 _slopeNormal;
-
-        public void Reset()
-        {
-            _above = _bellow = false;
-            _left = _right = false;
-            _climbingSlope = false;
-            _slopeNormal = Vector2.zero;
-            _descendingSlope = false;
-            _slidingDownMaxSlope = false;
-            _slopeAngle = 0f;
-        }
     }
 }

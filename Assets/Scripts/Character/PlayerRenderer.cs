@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterRenderer : MonoBehaviour
+public class PlayerRenderer : MonoBehaviour
 {
     private const string DirXName = "dirX";
     private const string DirYName = "dirY";

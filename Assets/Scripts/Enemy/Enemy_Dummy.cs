@@ -13,9 +13,11 @@ public class Enemy_Dummy : EnemyBase
     private float _timeAgo;
     private Transform _playerTransform;
     private float _attackDelay = 0.5f;
+    private int _playerMask;
 
-    public override void Initalize() {
-        base.Initalize();
+    public override void Initialize() {
+        base.Initialize();
+        _playerMask = 1 << LayerMask.NameToLayer("Player");
         _fsm = GetComponent<StateMachineRunner>().Initialize<States>(this);
         _fsm.ChangeState(States.Idle);
     }
@@ -38,6 +40,7 @@ public class Enemy_Dummy : EnemyBase
 
     #region Idle
     private void Idle_Enter() {
+        _input = Vector2.zero;
         _timeAgo = 0f;
 
         if (gameObject.activeSelf)
@@ -77,7 +80,7 @@ public class Enemy_Dummy : EnemyBase
         else {
             float dirX = (_playerTransform.position - transform.position).x;
             dirX = Mathf.Sign(dirX);
-            _requestX = dirX;
+            _input.x = dirX;
         }
     }
     #endregion
@@ -99,6 +102,7 @@ public class Enemy_Dummy : EnemyBase
     
     #region Hurt
     private void Hurt_Enter() {
+        _input = Vector2.zero;
         _timeAgo = 0f;
     }
 
@@ -113,6 +117,7 @@ public class Enemy_Dummy : EnemyBase
 
     #region Die
     private void Die_Enter() {
+        _input = Vector2.zero;
         _animator.Play("die");
     }
     #endregion

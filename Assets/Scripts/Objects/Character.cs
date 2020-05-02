@@ -4,7 +4,7 @@ using UnityEngine;
 using InControl;
 
 [RequireComponent(typeof(Controller2D))]
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _maxJumpHeight = 5f;
@@ -18,28 +18,18 @@ public class Character : MonoBehaviour
     private float _maxJumpVelocity;
     private float _minJumpVelocity;
 
-    private Vector2 _input;
-    private bool _jumpRequested;
-    private bool _jumpReleased;
-    private bool _attackRequested;
+    protected Vector2 _input;
+    protected bool _jumpRequested;
+    protected bool _jumpReleased;
     private float _velocityXSmoothing;
 
-    private Vector3 _velocity;
+    protected Vector3 _velocity;
 
-    private Controller2D _controller;
+    protected Controller2D _controller;
 
-    private CharacterRenderer _characterRenderer;
-
-    private CharacterAttack _characterAttack;
-
-    public void Initialize()
+    public virtual void Initialize()
     {
         _controller = GetComponent<Controller2D>();
-        _characterRenderer = GetComponent<CharacterRenderer>();
-        _characterAttack = GetComponent<CharacterAttack>();
-
-        _characterAttack.Initialize();
-        _characterRenderer.Initialize();
         _controller.Initialize();
 
         _gravity = -(2f * _maxJumpHeight) / Mathf.Pow(TimeToJumpApex, 2f);
@@ -47,17 +37,14 @@ public class Character : MonoBehaviour
         _minJumpVelocity = Mathf.Sqrt(2f * Mathf.Abs(_gravity) * _minJumpHeight);
     }
 
-    public void Progress() {
-        _characterAttack.Progress(_attackRequested);
-    }
-
     public void FixedProgress()
     {
         CalculateVelocity();
         CalculateMoving();
+        Reset();
     }
 
-    private void CalculateVelocity() {
+    protected virtual void CalculateVelocity() {
         float targetVelocityX = _input.x * _moveSpeed;
         float smoothTime = _controller.Collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne;
 
@@ -74,7 +61,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void CalculateMoving() {
+    protected virtual void CalculateMoving() {
         _controller.Move(_velocity * Time.fixedDeltaTime, _input);
 
         var collisions = _controller.Collisions;
@@ -86,36 +73,22 @@ public class Character : MonoBehaviour
                 _velocity.y = 0f;
             }
         }
-
-        _characterRenderer.ApplyAnimation(_input.x, _velocity.y, _jumpRequested);
-        _jumpRequested = false;
-        _jumpReleased = false;
     }
 
-
-    public void SetInputX(float horizontal)
-    {
-        if (!_characterAttack.IsInAttackProgress) {
-            _input.x = horizontal;
-            return;
-        }
-        _input.x = 0f;
-    }
-    public void SetInputY(float vertical) {
-        _input.y = vertical;
-    }
-
-    public void SetJump(bool jumpPressed) {
-        if (!_characterAttack.IsInAttackProgress && jumpPressed && _controller.Collisions._bellow) {
+    public virtual void SetJump(bool jumpPressed) {
+        if (jumpPressed && _controller.Collisions._bellow) {
             _jumpRequested = true;
         }
     }
 
-    public void SetJumpEnd(bool isNotPressed, bool pressedAtLastFrame) {
-        if (!_characterAttack.IsInAttackProgress && isNotPressed && pressedAtLastFrame) {
+    public virtual void SetJumpEnd(bool isNotPressed, bool pressedAtLastFrame) {
+        if (isNotPressed && pressedAtLastFrame) {
             _jumpReleased = true;
         }
     }
 
-    public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;
+    protected virtual void Reset() {
+        _jumpRequested = false;
+        _jumpReleased = false;
+    }
 }

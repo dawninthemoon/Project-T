@@ -14,7 +14,7 @@ public class InputControl : MonoBehaviour
         }
     }
 
-    private Character _model;
+    private Player _model;
 
     private MyPlayerActions _myActions;
 
@@ -23,7 +23,7 @@ public class InputControl : MonoBehaviour
     private static readonly string JumpActionName = "Jump";
     private static readonly string AttackActionName = "Attack";
 
-    public void Initalize(Character character)
+    public void Initalize(Player character)
     {
         _model = character;
 

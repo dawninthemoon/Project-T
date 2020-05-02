@@ -6,7 +6,7 @@ public class GameMain : MonoBehaviour
 {
     private InputControl _inputControl;
 
-    private Character _character;
+    private Player _character;
     
     private EffectManager _effectManager;
     private ObjectManager _objectManager;
@@ -27,7 +27,7 @@ public class GameMain : MonoBehaviour
         _roomManager.Initalize();
 
         Vector3 initalPos = new Vector3(-2f, -1f);
-        _character = _objectManager.CreateCharacter(initalPos);
+        _character = _objectManager.CreatePlayer(initalPos);
         _character.Initialize();
 
         _inputControl.Initalize(_character);

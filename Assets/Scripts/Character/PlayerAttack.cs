@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Aroma;
 
-public class CharacterAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private int _defaultAttackDamage = 10;
     [SerializeField] private LayerMask _attackableLayers;
@@ -20,14 +20,14 @@ public class CharacterAttack : MonoBehaviour
     private int _maxAttackCount = 3;
     public int CurrentAttackState { get; private set; }
     public bool IsInAttackProgress { get; private set; }
-    private CharacterRenderer _characterRenderer;
+    private PlayerRenderer _characterRenderer;
     private Character _model;
     public List<Collider2D> AlreadyHitColliders { get; private set; }
 
     public void Initialize() {
         AlreadyHitColliders = new List<Collider2D>();
         _model = GetComponent<Character>();
-        _characterRenderer = GetComponent<CharacterRenderer>();
+        _characterRenderer = GetComponent<PlayerRenderer>();
         _effectManager = EffectManager.GetInstance();
     }
 

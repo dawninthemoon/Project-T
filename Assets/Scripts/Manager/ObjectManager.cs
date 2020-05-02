@@ -9,7 +9,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 
     private ResourceManager _resourceManager;
 
-    private Character _player;
+    private Player _player;
     private List<EnemyBase> _activeEnemies;
     private ObjectPool<EnemyBase>[] _enemyObjectPoolArr;
     private Dictionary<EnemyTypes, int>  _enemyObjectPoolOrder;
@@ -27,10 +27,10 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         }
     }
 
-    public Character CreateCharacter(Vector3 position) {
+    public Player CreatePlayer(Vector3 position) {
         if (_player == null) {
-            var prefab = _resourceManager.GetPrefab("Character");
-            _player = Instantiate(prefab, position, Quaternion.identity).GetComponent<Character>();
+            var prefab = _resourceManager.GetPrefab("Player");
+            _player = Instantiate(prefab, position, Quaternion.identity).GetComponent<Player>();
         }
         return _player;
     }
@@ -76,7 +76,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 () => { 
                     EnemyBase enemy = Instantiate(enemyPrefabs[i]).GetComponent<EnemyBase>(); 
                     enemy.name = enemyPrefabs[i].name;
-                    enemy.Initalize();
+                    enemy.Initialize();
                     return enemy;
                 }
             );

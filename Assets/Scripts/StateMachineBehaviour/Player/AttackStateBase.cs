@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Aroma;
 
-public class AttackStateBase : StateMachineBehaviour<CharacterAttack>
+public class AttackStateBase : StateMachineBehaviour<PlayerAttack>
 {
     protected float _timeAgo = 0f;
     protected float _stateLength = 0f;

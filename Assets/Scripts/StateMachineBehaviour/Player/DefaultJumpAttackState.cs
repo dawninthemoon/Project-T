@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultJumpAttackState : StateMachineBehaviour<CharacterAttack>
+public class DefaultJumpAttackState : StateMachineBehaviour<PlayerAttack>
 {
     private static readonly int ClipCount = 7;
 
     private const string HitEffectName = "PlayerEffect/meleeAttack_hit";
     private const string AttackEffectname = "jumpAttack";
-    private static readonly Vector2 _hitboxOffset = new Vector2(0.65f, 0.95f);
-    private static readonly Vector2 _hitboxSize = new Vector2(3f, 1.9f);
+    private static readonly Vector2 _hitboxOffset = new Vector2(0.65f, 0.75f);
+    private static readonly Vector2 _hitboxSize = new Vector2(3f, 2.1f);
     private int _attackDamage;
     private float _timeAgo = 0f;
     private float _stateLength;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
 {
+    private const string RoomPrefabsPath = "Room";
     private int _currentRoomNumber = 0;
     private RoomInfo[] _rooms;
     
     public void Initalize() {
-        _rooms = GetComponentsInChildren<RoomInfo>(true);
-
+        MakeAllRooms();
         for (int i = 0; i < _rooms.Length; i++) {
             _rooms[i].Initalize();
         }
@@ -32,6 +32,16 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
         }
         else {
             Debug.LogError("Room does not exists");
+        }
+    }
+
+    private void MakeAllRooms() {
+        GameObject[] prefabs = ResourceManager.GetInstance().GetAllPrefabs(RoomPrefabsPath);
+        int numOfRooms = prefabs.Length;
+        _rooms = new RoomInfo[numOfRooms];
+
+        for (int i = 0; i < numOfRooms; i++) {
+            _rooms[i] = Instantiate(prefabs[i]).GetComponent<RoomInfo>();
         }
     }
 }

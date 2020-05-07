@@ -24,8 +24,6 @@ public class Player : Character
 
     protected override void CalculateVelocity() {
         base.CalculateVelocity();
-        if (_attackRequested && _velocity.y > 0f) 
-            _velocity.y = 0f;
     }
 
     protected override void CalculateMoving() {

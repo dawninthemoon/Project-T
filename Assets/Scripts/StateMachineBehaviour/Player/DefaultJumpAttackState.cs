@@ -7,7 +7,7 @@ public class DefaultJumpAttackState : StateMachineBehaviour<PlayerAttack>
     private static readonly int ClipCount = 7;
 
     private const string HitEffectName = "PlayerEffect/meleeAttack_hit";
-    private const string AttackEffectname = "jumpAttack";
+    private const string AttackEffectName = "jumpAttack";
     private static readonly Vector2 _hitboxOffset = new Vector2(0.65f, 0.75f);
     private static readonly Vector2 _hitboxSize = new Vector2(3f, 2.1f);
     private int _attackDamage;
@@ -22,7 +22,7 @@ public class DefaultJumpAttackState : StateMachineBehaviour<PlayerAttack>
         _stateLength = stateInfo.length;
         Context.AlreadyHitColliders.Clear();
         Context.EnterAttackProgress();
-        Context.SpawnAttackEffect(AttackEffectname, true);
+        Context.SpawnAttackEffect(AttackEffectName, true);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

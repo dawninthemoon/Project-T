@@ -80,8 +80,13 @@ public class Enemy_Dummy : EnemyBase
         else {
             float dirX = (_playerTransform.position - transform.position).x;
             dirX = Mathf.Sign(dirX);
+            transform.localScale = Aroma.VectorUtility.GetScaleVec(dirX);
             _input.x = dirX;
         }
+    }
+
+    private void Move_Exit() {
+        _input.x = 0f;
     }
     #endregion
 

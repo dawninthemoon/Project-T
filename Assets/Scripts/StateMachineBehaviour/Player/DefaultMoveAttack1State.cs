@@ -11,7 +11,7 @@ public class DefaultMoveAttack1State : AttackStateBase
     {   
         base.OnStateEntered(animator, stateInfo, layerIndex);
         Context.EnterAttackProgress();
-        Context.SpawnAttackEffect(AttackEffectName);
+        Context.SpawnAttackEffect(AttackEffectName, true);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -46,6 +46,8 @@ public class Player : Character
     public override void SetJump(bool jumpPressed) {
         if (!_playerAttack.IsInAttackProgress)
             base.SetJump(jumpPressed);
+        else
+            base.SetJumpEnd(true, true);   
     }
 
     public override void SetJumpEnd(bool isNotPressed, bool pressedAtLastFrame) {

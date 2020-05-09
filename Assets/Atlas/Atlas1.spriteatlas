@@ -44,7 +44,7 @@ SpriteAtlas:
     packables:
     - {fileID: 102900000, guid: 0ede9b53dcf0951439860562cb027609, type: 3}
     - {fileID: 102900000, guid: 1202d14ba7d37ce409ebc38a0e57ddaf, type: 3}
-    totalSpriteSurfaceArea: 780800
+    totalSpriteSurfaceArea: 763136
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -69,7 +69,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 61d21b228370ea24dbc993fe815497b6, type: 3}
   - {fileID: 21300000, guid: 96b99b527a9e44b4eb4a0db949487273, type: 3}
   - {fileID: 21300000, guid: 770b9e5230a6a314ab47f8c22e29d14e, type: 3}
-  - {fileID: 21300000, guid: 9043bd82ebb48f4498f9fdf3678d5e91, type: 3}
   - {fileID: 21300000, guid: 0f3b7ac25f6f0ad43acaa4fb57f14f7d, type: 3}
   - {fileID: 21300000, guid: c7e53ed20c02313499463d36bc6fffca, type: 3}
   - {fileID: 21300000, guid: 602983e28a98e964db807e0e8aa735cd, type: 3}
@@ -80,7 +79,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a4763b63eac75a942ad6b5835e7f0d5a, type: 3}
   - {fileID: 21300000, guid: e4172b83d2ae2084b8ff762e42e3b70b, type: 3}
   - {fileID: 21300000, guid: 2a77659330a645443880d4f2c6cf2911, type: 3}
-  - {fileID: 21300000, guid: 3486beb38ab4bcc478d84de16d7d8650, type: 3}
   - {fileID: 21300000, guid: 1f7eb8c365d9628429942c48e412dd7b, type: 3}
   - {fileID: 21300000, guid: 623ef0e379561d2448e06bfc8663017c, type: 3}
   - {fileID: 21300000, guid: d94bcc24b378de64d8c41d06a3341d3b, type: 3}
@@ -108,7 +106,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 03f3c666498f50f4eaac67446f7dbf48, type: 3}
   - {fileID: 21300000, guid: 4f83fa664db3ba243a37c8885aa4d140, type: 3}
   - {fileID: 21300000, guid: 695bb396d5c5a404581821322014ce14, type: 3}
-  - {fileID: 21300000, guid: c03140a6cda84244081133b4e08cee72, type: 3}
   - {fileID: 21300000, guid: fe8698e622ad72347bdeacaf8d678923, type: 3}
   - {fileID: 21300000, guid: 5e86c5f67df37364abb7255a890b34f0, type: 3}
   - {fileID: 21300000, guid: 0afd8af69a7509c41b8e4d35d5d66fdd, type: 3}
@@ -158,7 +155,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4459643b5971bf04a953f91a0c454ff7, type: 3}
   - {fileID: 21300000, guid: 71c2305b83d73454480d0cf7153df8d1, type: 3}
   - {fileID: 21300000, guid: 3552348bc7273c8428295e3226691492, type: 3}
-  - {fileID: 21300000, guid: 4411a0cb94f0ef34cb2641ffc0d55665, type: 3}
   - {fileID: 21300000, guid: 40f69bcba21e1984fb042df320c6c8c9, type: 3}
   - {fileID: 21300000, guid: d3639c1c548f4d2498a54e4108c46b92, type: 3}
   - {fileID: 21300000, guid: 0b1d803c266262041b859e76d2b99ee3, type: 3}
@@ -186,12 +182,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 03b5113e69a4b4b479e6b39a9c3b4a62, type: 3}
   - {fileID: 21300000, guid: 9680a94e7e6ea9f4db6118bb1dbaacc2, type: 3}
   - {fileID: 21300000, guid: e2d9d17e54bcdf54a867657c5f76b876, type: 3}
-  - {fileID: 21300000, guid: 993145ced1d704841b7b0b419cb5c20b, type: 3}
   - {fileID: 21300000, guid: 7231bade11d5450428e29338bb1d0eae, type: 3}
   - {fileID: 21300000, guid: d1e546ee017ca44499bcfbf705cf4576, type: 3}
   - {fileID: 21300000, guid: 0e61826f9bc4c1547abc0e171f3b4f9e, type: 3}
   - {fileID: 21300000, guid: 885de86f1e1285143bc4c430e0d12604, type: 3}
-  - {fileID: 21300000, guid: e699df7f6ae983543924cba649d8143b, type: 3}
   - {fileID: 21300000, guid: 38df028f6dd8f124f9c6fa48a266865d, type: 3}
   - {fileID: 21300000, guid: 3eea758f7b47f1f4c84517b9c05dfff3, type: 3}
   - {fileID: 21300000, guid: 6a0300afea0615e4b872d175bbe43701, type: 3}
@@ -221,7 +215,6 @@ SpriteAtlas:
   - spr_pc_move_in2
   - spr_pc_fall5
   - spr_pc_attack3_eff1
-  - spr_pc_attack_midair_eff6
   - spr_enm_dummy_move4
   - spr_pc_attack3_4
   - spr_pc_idle1
@@ -232,7 +225,6 @@ SpriteAtlas:
   - spr_pc_attack3_7
   - spr_enm_dummy_move6
   - spr_pc_attack1_move7
-  - spr_pc_move_in3
   - spr_enm_dummy_attack1
   - spr_pc_attack3_eff4
   - spr_pc_attack_midair_eff4
@@ -260,7 +252,6 @@ SpriteAtlas:
   - spr_enm_dummy_die2
   - spr_pc_attack_midair_eff3
   - spr_enm_dummy_idle8
-  - spr_pc_attack_midair7
   - spr_enm_dummy_attack2
   - spr_enm_dummy_die10
   - spr_enm_dummy_attack5
@@ -310,7 +301,6 @@ SpriteAtlas:
   - spr_pc_attack_midair2
   - spr_enm_dummy_idle5
   - spr_pc_idle5
-  - spr_pc_fall6
   - spr_pc_attack3_eff6
   - spr_pc_attack3_eff8
   - spr_pc_move4
@@ -338,12 +328,10 @@ SpriteAtlas:
   - spr_pc_move2
   - spr_enm_dummy_attack4
   - spr_enm_dummy_idle2
-  - spr_pc_attack_midair6
   - spr_enm_dummy_idle6
   - spr_pc_attack2_eff1
   - spr_pc_fall2
   - spr_pc_attack1_move_eff6
-  - spr_pc_attack_midair_eff7
   - spr_pc_idle4
   - spr_pc_attack3_2
   - spr_pc_attack1_1

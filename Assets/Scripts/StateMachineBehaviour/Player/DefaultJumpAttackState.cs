@@ -27,7 +27,7 @@ public class DefaultJumpAttackState : StateMachineBehaviour<PlayerAttack>
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RequestEnableHitbox(2);
+        RequestEnableHitbox(1);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

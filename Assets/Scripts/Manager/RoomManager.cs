@@ -20,6 +20,10 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
         _rooms[_currentRoomNumber].StartRoom();
     }
 
+    public void FixedProgress() {
+        _rooms[_currentRoomNumber].FixedProgress();
+    }
+
     public void MoveRoom(int targetRoomNumber, int targetIndex) {
         if (targetRoomNumber < _rooms.Length) {
             _rooms[_currentRoomNumber].ResetRoom();

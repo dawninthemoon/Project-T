@@ -24,6 +24,7 @@ public class RoomInfo : MonoBehaviour
 
         for (int i = 0; i < _doors.Length; i++) {
             _doors[i].GetComponent<SpriteRenderer>().enabled = false;
+            _doors[i].Initalize();
         }
     }
 
@@ -44,9 +45,10 @@ public class RoomInfo : MonoBehaviour
         ObjectManager.GetInstance().ReturnAllEnemies();
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Q)) ResetRoom();
-        if(Input.GetKeyDown(KeyCode.W)) StartRoom();
+    public void FixedProgress() {
+        for (int i=0;i<_doors.Length;i++) {
+            _doors[i].FixedProgress();
+        }
     }
 
     public Vector3 GetDoorPosition(int index) {

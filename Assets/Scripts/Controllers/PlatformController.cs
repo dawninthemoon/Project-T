@@ -47,6 +47,7 @@ public class PlatformController : RaycastController
 
         MovePassengers(true);
         transform.Translate(velocity);
+        Physics2D.SyncTransforms();
         MovePassengers(false);
     }
 
@@ -185,7 +186,8 @@ public class PlatformController : RaycastController
 
     private void OnDrawGizmos()
     {
-        if (_localWayPoints != null)
+        if (Application.isPlaying) return;
+        if (_localWayPoints != null && _globalWayPoints != null)
         {
             Gizmos.color = Color.red;
             float size = 0.3f;

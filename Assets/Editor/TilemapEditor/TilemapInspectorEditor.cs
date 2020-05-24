@@ -19,11 +19,42 @@ public class TilemapInspectorEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Door Prefab for Editor");
+        _context.playerPointPrefab = EditorGUILayout.ObjectField(_context.playerPointPrefab, typeof(PlayerSpawnPosition), false) as PlayerSpawnPosition;
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space(2f);
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Enemy Prefab for Editor");
+        _context.enemyPointPrefab = EditorGUILayout.ObjectField(_context.enemyPointPrefab, typeof(EnemySpawnPosition), false) as EnemySpawnPosition;
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space(2f);
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("MovingPlatform Prefab for Editor");
+        _context.movingPlatformPrefab = EditorGUILayout.ObjectField(_context.movingPlatformPrefab, typeof(PlatformController), false) as PlatformController;
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space(20f);
+
+        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Current Room Number");
         _roomNumber = EditorGUILayout.IntField(_roomNumber);
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space(2f);
 
+        if (GUILayout.Button("Import")) {
+            string path = EditorUtility.OpenFilePanelWithFilters("Select RoomBase File", "Assets", new string[] { "ScriptableObject", "asset" });
+				if(path != string.Empty) {
+					int cutoffFrom = path.IndexOf("Assets");
+					path = path.Substring(cutoffFrom);
+					Debug.Log(path);
+					RoomBase roomBase = AssetDatabase.LoadAssetAtPath<RoomBase>(path) as RoomBase;
+					if (EditorUtility.DisplayDialog("Are you sure?", "Importing this room will overlap the current one without saving it.", "Okay", "Cancel"))
+					{
+                        _context.Import(roomBase);
+					}	
+				}
+        }
         if (GUILayout.Button("Export")) {
             if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
                 var asset = _context.RequestExport();

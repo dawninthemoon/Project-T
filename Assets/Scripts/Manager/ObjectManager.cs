@@ -44,10 +44,10 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     }
 
     public void SetPlayerPos(Vector3 position) {
-        if (position.y == PlayerSpawnPosition.Impossible)
+        if (position.y == PlayerPoint.Impossible)
             position.y = _player.transform.position.y;
             
-        if (position.x == PlayerSpawnPosition.Impossible)
+        if (position.x == PlayerPoint.Impossible)
             position.x = _player.transform.position.x;
 
         _player.transform.position = position;

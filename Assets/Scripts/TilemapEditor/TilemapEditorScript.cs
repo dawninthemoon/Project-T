@@ -6,6 +6,10 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class TilemapEditorScript : MonoBehaviour
 {
+    public EnemySpawnPosition enemyPointPrefab = null;
+    public PlayerSpawnPosition playerPointPrefab = null;
+    public PlatformController movingPlatformPrefab = null;
+
     public void ClearAll() {
         ClearAllTilemaps();
         ClearAllObjects();
@@ -109,5 +113,38 @@ public class TilemapEditorScript : MonoBehaviour
             );
         }
         return points;
+    }
+
+    public void Import(RoomBase roomBase) {
+        ClearAll();
+
+        Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();
+        Tilemap throughTilemap = transform.Find("Through").GetComponent<Tilemap>();
+        Transform objectTilemap = transform.Find("Objects");
+
+        collisionTilemap.SetTiles(roomBase.collisionPair.positions, roomBase.collisionPair.tileBases);
+        throughTilemap.SetTiles(roomBase.throughPair.positions, roomBase.throughPair.tileBases);
+
+        foreach (var enemy in roomBase.enemyPoints) {
+            var obj = Instantiate(enemyPointPrefab, objectTilemap);
+            obj.transform.position = enemy.position;
+            obj._requestEnemy = enemy.requestEnemy;
+        }
+        
+        foreach (var point in roomBase.playerPoints) {
+            var obj = Instantiate(playerPointPrefab, objectTilemap);
+            obj.transform.position = point._position;
+            obj._index = point.Index;
+            obj._targetIndex = point._targetIndex;
+            obj._targetRoomNumber = point._targetRoomNumber;
+            obj._spawnPos = point._spawnPos;
+            obj._collider = obj.GetComponent<BoxCollider2D>();
+        }
+
+        foreach (var point in roomBase.movingPlatformPoints) {
+            var obj = Instantiate(movingPlatformPrefab, objectTilemap);
+            obj.Initialize();
+            obj.Setup(point);
+        }
     }
 }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[System.Serializable]
 public struct TilemapPair {
-    Vector3Int[] positions;
-    TileBase[] tileBases;
+    public Vector3Int[] positions;
+    public TileBase[] tileBases;
 
     public TilemapPair(Vector3Int[] pos, TileBase[] tile) {
         positions = pos;
@@ -13,10 +14,12 @@ public struct TilemapPair {
     } 
 }
 
+[System.Serializable]
 public class RoomBase : ScriptableObject
 {
     public int roomNumber;
-    public TilemapPair tilemapPair;
-    public PlayerSpawnPosition[] playerSpawnPositions;
-    public EnemySpawnPosition[] enemySpawnPositions;
+    public TilemapPair collisionPair;
+    public TilemapPair throughPair;
+    public PlayerPoint[] playerPoints;
+    public EnemyPoint[] enemyPoints;
 }

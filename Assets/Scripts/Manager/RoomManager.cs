@@ -5,14 +5,15 @@ using UnityEngine.Tilemaps;
 
 public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
 {
-    private const string RoomPrefabsPath = "Room";
     private int _currentRoomNumber = 0;
     private RoomInfo[] _rooms;
     private Tilemap _currentTilemap;
     
     public void Initalize() {
         _currentTilemap = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
+        
         MakeAllRooms();
+
         System.Array.Sort(
             _rooms,
              (RoomInfo val1, RoomInfo val2) => val1.RoomNumber.CompareTo(val2.RoomNumber));
@@ -40,14 +41,13 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
     }
 
     private void MakeAllRooms() {
-        GameObject[] prefabs = ResourceManager.GetInstance().GetAllPrefabs(RoomPrefabsPath);
-        int numOfRooms = prefabs.Length;
+        RoomBase[] roomBases = ResourceManager.GetInstance().GetAllRoomBases();
+        int numOfRooms = roomBases.Length;
         _rooms = new RoomInfo[numOfRooms];
 
         for (int i = 0; i < numOfRooms; i++) {
-            _rooms[i] = prefabs[i].GetComponent<RoomInfo>();
+            _rooms[i] = new RoomInfo(roomBases[i]);
             //_rooms[i] = Instantiate(prefabs[i]).GetComponent<RoomInfo>();
-            _rooms[i].Initalize();
         }
     }
 }

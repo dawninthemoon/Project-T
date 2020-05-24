@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary> Only For Editor </summary> ///
 public class PlayerSpawnPosition : SpawnPosition
 {
     public static readonly float Impossible = -987654321f;
-    [SerializeField] private int _index = 0;
-    [SerializeField] private int _targetRoomNumber = 0;
-    [SerializeField] private int _targetIndex = 0;
-    [SerializeField] private Vector2 _spawnPos = Vector2.zero;
-    private BoxCollider2D _collider;
+    public int _index = 0;
+    public int _targetRoomNumber = 0;
+    public int _targetIndex = 0;
+    public Vector2 _spawnPos = Vector2.zero;
+    public BoxCollider2D _collider;
     private int _playerMask;
 
     public Vector3 SpawnPos { 

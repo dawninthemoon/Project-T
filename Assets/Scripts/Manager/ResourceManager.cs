@@ -6,14 +6,33 @@ using Aroma;
 public class ResourceManager : Singleton<ResourceManager>
 {
     private static readonly Type GameObjectType = typeof(GameObject);
+    private static readonly Type RoomBaseType = typeof(RoomBase);
     private static readonly Type AnimatorControllerType = typeof(RuntimeAnimatorController);
     private static readonly string PrefabFilePath = "Prefabs/";
+    private static readonly string RoomFilePath = "Rooms/";
     private static readonly string AnimatorControllerFilePath = "AnimatorControllers/";
 
     private Dictionary<string, RuntimeAnimatorController> _animatorControllers;
 
     public void Initialize() {
         _animatorControllers = new Dictionary<string, RuntimeAnimatorController>();
+    }
+
+    public RoomBase[] GetAllRoomBases() {
+        string path = RoomFilePath;
+        UnityEngine.Object[] objects = LoadAll(path, RoomBaseType);
+
+        if (objects.Length == 0) {
+            Debug.LogError("RoomBase does not exists");
+            return null;
+        }
+
+        RoomBase[] roomBases = new RoomBase[objects.Length];
+        for (int i = 0; i < objects.Length; i++) {
+            roomBases[i] = objects[i] as RoomBase;
+        }
+        
+        return roomBases;
     }
 
     public GameObject GetPrefab(string fileName)

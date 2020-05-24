@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Aroma;
 
 public class ResourceManager : Singleton<ResourceManager>
 {
@@ -17,13 +18,13 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public GameObject GetPrefab(string fileName)
 	{
-		string path = PrefabFilePath + fileName;
+        string path = StringUtils.MergeStrings(PrefabFilePath, fileName);
 		GameObject obj = Load(path, GameObjectType) as GameObject;
 		return obj;
 	}
 
     public GameObject[] GetAllPrefabs(string directoryName) {
-        string path = PrefabFilePath + directoryName;
+        string path = StringUtils.MergeStrings(PrefabFilePath, directoryName);
         UnityEngine.Object[] objects = LoadAll(path, GameObjectType);
 
         if (objects.Length == 0) {
@@ -43,7 +44,7 @@ public class ResourceManager : Singleton<ResourceManager>
         if (_animatorControllers.ContainsKey(fileName))
             return _animatorControllers[fileName];
 
-        string path = AnimatorControllerFilePath + fileName;
+        string path = StringUtils.MergeStrings(AnimatorControllerFilePath, fileName);
 
         RuntimeAnimatorController resource = Load(path, AnimatorControllerType) as RuntimeAnimatorController;
         if (resource == null) {

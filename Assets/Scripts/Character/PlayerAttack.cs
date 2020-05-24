@@ -73,7 +73,7 @@ public class PlayerAttack : MonoBehaviour
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 
-        string path = EffectDirectory + DefaultAttackName + attackType.ToString();
+        string path = StringUtils.MergeStrings(EffectDirectory, DefaultAttackName, attackType.ToString());
         _effectManager.SpawnAndRemove(pos, path, dir);
     }
 
@@ -81,7 +81,7 @@ public class PlayerAttack : MonoBehaviour
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 
-        string path = EffectDirectory + effectName;
+        string path = StringUtils.MergeStrings(EffectDirectory, effectName);
         if (effectTracks) {
             _effectManager.SpawnTrackEffectAndRemove(pos, path, transform, dir);
         }

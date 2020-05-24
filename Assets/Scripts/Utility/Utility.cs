@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 namespace Aroma
 {
@@ -41,6 +42,17 @@ namespace Aroma
 
         public static EnemyTypes ObjToEnemy(GameObject obj) {
             return NameToEnemy(obj.name);
+        }
+    }
+
+    public static class StringUtils {
+        private static StringBuilder _stringBuilder = new StringBuilder(64);
+        public static string MergeStrings(params string[] strList) {
+            _stringBuilder.Clear();
+            foreach (string str in strList) {
+                _stringBuilder.Append(str);
+            }
+            return _stringBuilder.ToString();
         }
     }
 }

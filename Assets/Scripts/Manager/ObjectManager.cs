@@ -6,17 +6,21 @@ using Aroma;
 public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 {
     private static readonly string EnemyPrefabDirectory = "Enemy/";
+    private static readonly string MovingPlatformName = "MovingPlatform";
 
     private ResourceManager _resourceManager;
 
     private Player _player;
     private List<EnemyBase> _activeEnemies;
+    private List<PlatformController> _activePlatforms;
     private ObjectPool<EnemyBase>[] _enemyObjectPoolArr;
+    private ObjectPool<PlatformController> _movingPlatformPool;
     private Dictionary<EnemyTypes, int>  _enemyObjectPoolOrder;
 
     public void Initialize() {
         _resourceManager = ResourceManager.GetInstance();
         _activeEnemies = new List<EnemyBase>();
+        _activePlatforms = new List<PlatformController>();
         _enemyObjectPoolOrder = new Dictionary<EnemyTypes, int>();
         InitalizeObjectPool();
     }
@@ -24,6 +28,10 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     public void FixedProgress() {
         for (int i = 0; i < _activeEnemies.Count; i++) {
             _activeEnemies[i].FixedProgress();
+        }
+
+        for (int i = 0; i < _activePlatforms.Count; i++) {
+            _activePlatforms[i].FixedProgress();
         }
     }
 
@@ -57,7 +65,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     }
 
     public void SpawnEnemy(EnemyTypes type, Vector3 position) {
-        string fileName = EnemyPrefabDirectory + type.ToString();
+        string fileName = StringUtils.MergeStrings(EnemyPrefabDirectory, type.ToString());
         
         int index = -1;
         _enemyObjectPoolOrder.TryGetValue(type, out index);
@@ -68,6 +76,12 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 
             _activeEnemies.Add(enemy);
         }
+    }
+
+    public void CreateMovingPlatform(MovingPlatformPoint info) {
+        var controller = _movingPlatformPool.GetObject();
+        controller.Setup(info);
+        _activePlatforms.Add(controller);
     }
 
     private void InitalizeObjectPool() {
@@ -90,5 +104,15 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
             EnemyTypes type = EnemyUtility.ObjToEnemy(enemyPrefabs[i]);
             _enemyObjectPoolOrder.Add(type, i);
         }
+
+        _movingPlatformPool = new ObjectPool<PlatformController>(
+            5,
+            () => {
+                GameObject prefab = _resourceManager.GetPrefab(MovingPlatformName);
+                PlatformController controller = Instantiate(prefab).GetComponent<PlatformController>();
+                controller.Initialize();
+                return controller;
+            }
+        );
     }
 }

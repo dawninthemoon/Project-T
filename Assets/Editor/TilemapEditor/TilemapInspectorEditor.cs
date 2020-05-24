@@ -30,5 +30,23 @@ public class TilemapInspectorEditor : Editor
                 AssetDatabase.SaveAssets();
             }
         }
+
+        if (GUILayout.Button("Clear All")) {
+            if (EditorUtility.DisplayDialog("Warning", "Are you sure?", "Clear", "Do Not Clear")) {
+                _context.ClearAll();
+            }
+        }
+
+        if (GUILayout.Button("Clear Tilemaps")) {
+            if (EditorUtility.DisplayDialog("Warning", "Are you sure?", "Clear", "Do Not Clear")) {
+                _context.ClearAllTilemaps();
+            }
+        }
+
+        if (GUILayout.Button("Clear Objects")) {
+            if (EditorUtility.DisplayDialog("Warning", "Are you sure?", "Clear", "Do Not Clear")) {
+                _context.ClearAllObjects();
+            }
+        }
     }
 }

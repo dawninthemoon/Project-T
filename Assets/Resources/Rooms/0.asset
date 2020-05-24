@@ -148,8 +148,35 @@ MonoBehaviour:
     positions: []
     tileBases: []
   playerPoints: []
-  enemyPoints:
-  - requestEnemy: 0
-    position: {x: -6.5, y: -1, z: 0}
-  - requestEnemy: 0
-    position: {x: -1.5, y: -1, z: 0}
+  enemyPoints: []
+  movingPlatformPoints:
+  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
+      type: 3}
+    position: {x: -2.5, y: 1.5, z: 0}
+    localWayPoints:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    moveSpeed: 1
+    cyclic: 0
+    waitTime: 0
+    easeAmount: 0
+  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
+      type: 3}
+    position: {x: -1.5, y: 1.5, z: 0}
+    localWayPoints:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    moveSpeed: 1
+    cyclic: 0
+    waitTime: 0
+    easeAmount: 0
+  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
+      type: 3}
+    position: {x: -0.5, y: 1.5, z: 0}
+    localWayPoints:
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 1, z: 0}
+    moveSpeed: 1
+    cyclic: 0
+    waitTime: 0
+    easeAmount: 0

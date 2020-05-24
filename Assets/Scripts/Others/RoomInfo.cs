@@ -23,6 +23,11 @@ public class RoomInfo
             objManager.SpawnEnemy(type, position);
         }
 
+        var movingPlatforms = _roomBase.movingPlatformPoints;
+        for (int i = 0; i < movingPlatforms.Length; i++) {
+            objManager.CreateMovingPlatform(movingPlatforms[i]);
+        }
+
         tilemap.ClearAllTiles();
         tilemap.SetTiles(_roomBase.collisionPair.positions, _roomBase.collisionPair.tileBases);
     }

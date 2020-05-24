@@ -22,4 +22,5 @@ public class RoomBase : ScriptableObject
     public TilemapPair throughPair;
     public PlayerPoint[] playerPoints;
     public EnemyPoint[] enemyPoints;
+    public MovingPlatformPoint[] movingPlatformPoints;
 }

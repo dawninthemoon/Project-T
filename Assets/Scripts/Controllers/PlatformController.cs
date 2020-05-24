@@ -6,12 +6,17 @@ using Aroma;
 
 public class PlatformController : RaycastController
 {
-    [SerializeField] private LayerMask _passengerMask;
+    private LayerMask _passengerMask;
     [SerializeField] private Vector3[] _localWayPoints;
+    public Vector3[] LocalWayPoints { get { return _localWayPoints; } }
     [SerializeField] private float _moveSpeed;
+    public float MoveSpeed { get { return _moveSpeed; } }
     [SerializeField] private bool _cyclic;
+    public bool Cyclic { get { return _cyclic; }}
     [SerializeField] private float _waitTime;
+    public float WaitTime { get { return _waitTime; } }
     [SerializeField, Range(0f, 2f)] private float _easeAmount;
+    public float EaseAmount { get { return _easeAmount; } }
 
     private Vector3[] _globalWayPoints;
     private int _fromWaypointIndex;
@@ -22,22 +27,37 @@ public class PlatformController : RaycastController
     private List<PassengerMovement> _passengerMovement;
     private Dictionary<Transform, Controller2D> _passengerDictionary;
 
-    protected void Start()
-    {
-        Initialize();
+    // Have to alter because this is controller
+    private SpriteRenderer _renderer;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _passengerMask = LayerMask.NameToLayer("Player");
+
+        _renderer = GetComponent<SpriteRenderer>();
         _movePassengers = new HashSet<Transform>();
         _passengerMovement = new List<PassengerMovement>();
         _passengerDictionary = new Dictionary<Transform, Controller2D>();
+    }
+
+    public void Setup(MovingPlatformPoint info) {
+        transform.position = info.position;
+        _localWayPoints = info.localWayPoints;
+        _moveSpeed = info.moveSpeed;
+        _cyclic = info.cyclic;
+        _waitTime = info.waitTime;
+        _easeAmount = info.easeAmount;
+        _renderer.sprite = info.sprite;
 
         _globalWayPoints = new Vector3[_localWayPoints.Length];
-        for (int i = 0; i < _globalWayPoints.Length; i++)
-        {
+        for (int i = 0; i < _globalWayPoints.Length; i++) {
             _globalWayPoints[i] = transform.position + _localWayPoints[i];
         }
     }
 
-    private void FixedUpdate()
+    public void FixedProgress()
     {
         UpdateRaycastOrigins();
 
@@ -187,7 +207,7 @@ public class PlatformController : RaycastController
     private void OnDrawGizmos()
     {
         if (Application.isPlaying) return;
-        if (_localWayPoints != null && _globalWayPoints != null)
+        if (_localWayPoints != null)
         {
             Gizmos.color = Color.red;
             float size = 0.3f;

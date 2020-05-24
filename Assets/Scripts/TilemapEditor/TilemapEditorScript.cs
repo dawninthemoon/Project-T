@@ -6,13 +6,41 @@ using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
 public class TilemapEditorScript : MonoBehaviour
 {
+    public void ClearAll() {
+        ClearAllTilemaps();
+        ClearAllObjects();
+    }
+
+    public void ClearAllTilemaps() {
+        Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();
+        Tilemap throughTilemap = transform.Find("Through").GetComponent<Tilemap>();
+
+        collisionTilemap.ClearAllTiles();
+        throughTilemap.ClearAllTiles();
+    }
+
+    public void ClearAllObjects() {
+        Transform objectTilemap = transform.Find("Objects");
+        var tempArray = new GameObject[objectTilemap.childCount];
+
+        for (int i = 0; i < objectTilemap.childCount; i++) {
+            tempArray[i] = objectTilemap.GetChild(i).gameObject;
+        }
+
+        foreach(var child in tempArray)
+        {
+            DestroyImmediate(child);
+        }
+    }
+
     public RoomBase RequestExport() {
         Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();
-        Tilemap throughTilemap = transform.Find("Through").GetComponent<Tilemap>();;
+        Tilemap throughTilemap = transform.Find("Through").GetComponent<Tilemap>();
         Transform objectTilemap = transform.Find("Objects");
 
         var enemies = objectTilemap.GetComponentsInChildren<EnemySpawnPosition>(true);
         var playerPoints =  objectTilemap.GetComponentsInChildren<PlayerSpawnPosition>(true);
+        var movingPlatforms = objectTilemap.GetComponentsInChildren<PlatformController>(true);
 
         RoomBase asset = ScriptableObject.CreateInstance<RoomBase>();
 
@@ -20,6 +48,7 @@ public class TilemapEditorScript : MonoBehaviour
         asset.throughPair = LoadTileInfo(throughTilemap);
         asset.enemyPoints = LoadEnemyPoints(enemies);
         asset.playerPoints = LoadPlayerPoints(playerPoints);
+        asset.movingPlatformPoints = LoadMovingPlatformPoints(movingPlatforms);
 
         return asset;
     }
@@ -40,7 +69,7 @@ public class TilemapEditorScript : MonoBehaviour
 
     public EnemyPoint[] LoadEnemyPoints(EnemySpawnPosition[] info) {
         EnemyPoint[] enemyPoint = new EnemyPoint[info.Length];
-        for (int i=0; i < info.Length; i++) {
+        for (int i = 0; i < info.Length; i++) {
             enemyPoint[i] = new EnemyPoint(info[i].transform.position, info[i].RequestEnemy);
         }
         return enemyPoint;
@@ -62,6 +91,23 @@ public class TilemapEditorScript : MonoBehaviour
             );
         }
 
+        return points;
+    }
+
+    public MovingPlatformPoint[] LoadMovingPlatformPoints(PlatformController[] info) {
+        MovingPlatformPoint[] points = new MovingPlatformPoint[info.Length];
+        for (int i = 0; i < info.Length; i++) {
+            Sprite spr = info[i].GetComponent<SpriteRenderer>().sprite;
+            points[i] = new MovingPlatformPoint(
+                info[i].transform.position,
+                spr,
+                info[i].LocalWayPoints,
+                info[i].MoveSpeed,
+                info[i].Cyclic,
+                info[i].WaitTime,
+                info[i].EaseAmount
+            );
+        }
         return points;
     }
 }

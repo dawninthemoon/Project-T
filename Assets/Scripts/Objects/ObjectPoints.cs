@@ -14,6 +14,28 @@ public class EnemyPoint {
 }
 
 [System.Serializable]
+public class MovingPlatformPoint
+{
+    public Sprite sprite;
+    public Vector3 position;
+    public Vector3[] localWayPoints;
+    public float moveSpeed;
+    public bool cyclic;
+    public float waitTime;
+    public float easeAmount;
+    public MovingPlatformPoint(Vector3 pos, Sprite spr, Vector3[] points, float speed, bool cycle, float time, float ease) {
+        position = pos;
+        sprite = spr;
+        localWayPoints = points;
+        moveSpeed = speed;
+        cyclic = cycle;
+        waitTime = time;
+        easeAmount = ease;
+    }
+}
+
+
+[System.Serializable]
 public class PlayerPoint {
     public static readonly float Impossible = -987654321f;
     private int _index = 0;

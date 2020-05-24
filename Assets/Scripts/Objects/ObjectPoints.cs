@@ -38,14 +38,14 @@ public class MovingPlatformPoint
 [System.Serializable]
 public class PlayerPoint {
     public static readonly float Impossible = -987654321f;
-    private int _index = 0;
-    private int _targetRoomNumber = 0;
-    private int _targetIndex = 0;
-    private Vector2 _spawnPos;
-    private Vector2 _size;
-    private Vector2 _offset;
-    private Vector2 _position;
-    private int _playerMask;
+    public int _index = 0;
+    public int _targetRoomNumber = 0;
+    public int _targetIndex = 0;
+    public Vector2 _spawnPos;
+    public Vector2 _size;
+    public Vector2 _offset;
+    public Vector2 _position;
+    public int _playerMask;
 
     public PlayerPoint(Vector2 pos, Vector2 size, Vector2 offset, Vector2 spawnPos, int index, int targetRoom, int targetIndex) {
         _position = pos;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Aroma;
 
-public class PlatformController : RaycastController
+public class PlatformController : RaycastController, IPlaceable
 {
     private LayerMask _passengerMask;
     [SerializeField] private Vector3[] _localWayPoints;
@@ -43,7 +43,8 @@ public class PlatformController : RaycastController
     }
 
     public void Setup(MovingPlatformPoint info) {
-        transform.position = info.position;
+        Reset(info.position);
+        
         _localWayPoints = info.localWayPoints;
         _moveSpeed = info.moveSpeed;
         _cyclic = info.cyclic;
@@ -55,6 +56,13 @@ public class PlatformController : RaycastController
         for (int i = 0; i < _globalWayPoints.Length; i++) {
             _globalWayPoints[i] = transform.position + _localWayPoints[i];
         }
+    }
+
+    public void Reset(Vector3 initalPos) {
+        transform.position = initalPos;
+        _nextMoveTime = 0f;
+        _fromWaypointIndex = 0;
+        _percentBetweenWaypoints = 0f;
     }
 
     public void FixedProgress()

@@ -64,6 +64,13 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         _activeEnemies.Clear();
     }
 
+    public void ReturnAllPlatforms() {
+        for (int i = 0; i < _activePlatforms.Count; i++) {
+            _movingPlatformPool.ReturnObject(_activePlatforms[i]);
+        }
+        _activePlatforms.Clear();
+    }
+
     public void SpawnEnemy(EnemyTypes type, Vector3 position) {
         string fileName = StringUtils.MergeStrings(EnemyPrefabDirectory, type.ToString());
         

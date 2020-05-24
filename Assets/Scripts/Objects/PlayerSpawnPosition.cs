@@ -10,7 +10,7 @@ public class PlayerSpawnPosition : SpawnPosition
     public int _targetRoomNumber = 0;
     public int _targetIndex = 0;
     public Vector2 _spawnPos = Vector2.zero;
-    public BoxCollider2D _collider;
+    [HideInInspector] public BoxCollider2D _collider;
     private int _playerMask;
 
     public Vector3 SpawnPos { 

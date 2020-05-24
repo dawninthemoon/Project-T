@@ -9,13 +9,15 @@ using UnityEditor;
 public class TilemapInspectorEditor : Editor
 {
     private TilemapEditorScript _context;
-    private int _roomNumber;
+    private static int _roomNumber;
 
     private void OnEnable() {
         _context = (TilemapEditorScript)target;
     }
 
     public override void OnInspectorGUI() {
+        serializedObject.Update();
+
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Current Room Number");
         _roomNumber = EditorGUILayout.IntField(_roomNumber);
@@ -27,7 +29,9 @@ public class TilemapInspectorEditor : Editor
                 var asset = _context.RequestExport();
                 asset.roomNumber = _roomNumber;
                 AssetDatabase.CreateAsset(asset, "Assets/Resources/Rooms/" + _roomNumber + ".asset");
+
                 AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
         }
 
@@ -48,5 +52,7 @@ public class TilemapInspectorEditor : Editor
                 _context.ClearAllObjects();
             }
         }
+
+        serializedObject.ApplyModifiedProperties();
     }
 }

@@ -47,7 +47,6 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
 
         for (int i = 0; i < numOfRooms; i++) {
             _rooms[i] = new RoomInfo(roomBases[i]);
-            //_rooms[i] = Instantiate(prefabs[i]).GetComponent<RoomInfo>();
         }
     }
 }

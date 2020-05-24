@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 254efecd47332974dbc7213c399d33f1, type: 3}
-  m_Name: 0
+  m_Name: 1
   m_EditorClassIdentifier: 
-  roomNumber: 0
+  roomNumber: 1
   collisionPair:
     positions:
     - {x: -10, y: -5, z: 0}
@@ -79,10 +79,6 @@ MonoBehaviour:
     - {x: 3, y: -2, z: 0}
     - {x: 4, y: -2, z: 0}
     - {x: 5, y: -2, z: 0}
-    - {x: -8, y: -1, z: 0}
-    - {x: -7, y: -1, z: 0}
-    - {x: -6, y: -1, z: 0}
-    - {x: -5, y: -1, z: 0}
     tileBases:
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
@@ -148,21 +144,17 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
   throughPair:
     positions: []
     tileBases: []
   playerPoints:
   - _index: 0
-    _targetRoomNumber: 1
+    _targetRoomNumber: 0
     _targetIndex: 0
-    _spawnPos: {x: -1, y: 0}
+    _spawnPos: {x: 1, y: 0}
     _size: {x: 0.8, y: 0.8}
     _offset: {x: 0, y: 0.5}
-    _position: {x: 6.5, y: -1}
+    _position: {x: -10.5, y: -1}
     _playerMask: 512
   enemyPoints: []
   movingPlatformPoints:
@@ -170,7 +162,7 @@ MonoBehaviour:
       type: 3}
     position: {x: -2.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 0, z: 0}
+    - {x: 2, y: 0, z: 0}
     - {x: 0, y: 2, z: 0}
     - {x: -5, y: 1, z: 0}
     moveSpeed: 1
@@ -181,7 +173,7 @@ MonoBehaviour:
       type: 3}
     position: {x: -1.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 0, z: 0}
+    - {x: 2, y: 0, z: 0}
     - {x: 0, y: 2, z: 0}
     - {x: -5, y: 1, z: 0}
     moveSpeed: 1
@@ -192,7 +184,7 @@ MonoBehaviour:
       type: 3}
     position: {x: -0.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 0, z: 0}
+    - {x: 2, y: 0, z: 0}
     - {x: 0, y: 2, z: 0}
     - {x: -5, y: 1, z: 0}
     moveSpeed: 1

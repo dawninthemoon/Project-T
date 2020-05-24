@@ -34,6 +34,7 @@ public class RoomInfo
 
     public void ResetRoom() {
         ObjectManager.GetInstance().ReturnAllEnemies();
+        ObjectManager.GetInstance().ReturnAllPlatforms();
     }
 
     public void FixedProgress() {

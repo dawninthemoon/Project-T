@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4972902363182034551
 Transform:
   m_ObjectHideFlags: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectTilemap: {fileID: 4972902364314632717}
+  _collisionTilemap: {fileID: 4972902363515964658}
   _roomNumber: 1
 --- !u!1 &4972902363515964668
 GameObject:
@@ -909,33 +910,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 4972902363515964656}
-    m_ColliderPaths:
-    - - X: 70000000
-        Y: -49333332
-      - X: 70000000
-        Y: -10000000
-      - X: -70000000
-        Y: -10000000
-      - X: -70000000
-        Y: -49333332
-      - X: -69333336
-        Y: -50000000
-      - X: 69333336
-        Y: -50000000
-    - - X: -90000000
-        Y: -49333332
-      - X: -90000000
-        Y: -10000000
-      - X: -110000000
-        Y: -10000000
-      - X: -110000000
-        Y: -49333332
-      - X: -109333336
-        Y: -50000000
-      - X: -90666664
-        Y: -50000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 6.9333234, y: -5}
@@ -1290,6 +1265,11 @@ PrefabInstance:
       propertyPath: _targetRoomNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
       propertyPath: m_Name
@@ -1382,6 +1362,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawnPosition
       objectReference: {fileID: 0}
+    - target: {fileID: 3640396199924430694, guid: a52d399f23fa40d478aae1a6161b7c57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430695, guid: a52d399f23fa40d478aae1a6161b7c57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1466,7 +1451,7 @@ PrefabInstance:
     - target: {fileID: 3640396199924430694, guid: a52d399f23fa40d478aae1a6161b7c57,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430695, guid: a52d399f23fa40d478aae1a6161b7c57,
         type: 3}
@@ -1552,6 +1537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _targetIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
@@ -1648,6 +1638,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
@@ -1746,6 +1741,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawnPosition
       objectReference: {fileID: 0}
+    - target: {fileID: 3640396199924430694, guid: a52d399f23fa40d478aae1a6161b7c57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430695, guid: a52d399f23fa40d478aae1a6161b7c57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1830,6 +1830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}

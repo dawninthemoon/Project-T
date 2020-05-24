@@ -1,23 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
 {
     private const string RoomPrefabsPath = "Room";
     private int _currentRoomNumber = 0;
     private RoomInfo[] _rooms;
+    private Tilemap _currentTilemap;
     
     public void Initalize() {
+        _currentTilemap = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
         MakeAllRooms();
-        for (int i = 0; i < _rooms.Length; i++) {
-            _rooms[i].Initalize();
-        }
         System.Array.Sort(
             _rooms,
              (RoomInfo val1, RoomInfo val2) => val1.RoomNumber.CompareTo(val2.RoomNumber));
 
-        _rooms[_currentRoomNumber].StartRoom();
+        _rooms[_currentRoomNumber].StartRoom(_currentTilemap);
     }
 
     public void FixedProgress() {
@@ -29,7 +29,7 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
             _rooms[_currentRoomNumber].ResetRoom();
             _currentRoomNumber = targetRoomNumber;
 
-            _rooms[targetRoomNumber].StartRoom();
+            _rooms[targetRoomNumber].StartRoom(_currentTilemap);
 
             Vector3 playerPos = _rooms[targetRoomNumber].GetDoorPosition(targetIndex);
             ObjectManager.GetInstance().SetPlayerPos(playerPos);
@@ -45,7 +45,9 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
         _rooms = new RoomInfo[numOfRooms];
 
         for (int i = 0; i < numOfRooms; i++) {
-            _rooms[i] = Instantiate(prefabs[i]).GetComponent<RoomInfo>();
+            _rooms[i] = prefabs[i].GetComponent<RoomInfo>();
+            //_rooms[i] = Instantiate(prefabs[i]).GetComponent<RoomInfo>();
+            _rooms[i].Initalize();
         }
     }
 }

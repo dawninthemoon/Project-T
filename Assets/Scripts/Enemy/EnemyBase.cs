@@ -9,7 +9,6 @@ public abstract class EnemyBase : Character, IPlaceable
 {
     [SerializeField] protected string _enemyName = null;
     [SerializeField] protected int _maxHp = 20;
-    [SerializeField]  private float _jumpHeight = 5f;
 
     protected Animator _animator;
     protected SpriteRenderer _renderer;

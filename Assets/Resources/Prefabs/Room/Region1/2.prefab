@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectTilemap: {fileID: 2462044221255267199}
+  _collisionTilemap: {fileID: 2462044221685149893}
   _roomNumber: 2
 --- !u!1 &2462044220753043537
 GameObject:
@@ -1279,6 +1280,11 @@ PrefabInstance:
       propertyPath: _index
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
       propertyPath: m_Name
@@ -1359,6 +1365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _spawnPos.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}

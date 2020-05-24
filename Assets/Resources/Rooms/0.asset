@@ -79,10 +79,6 @@ MonoBehaviour:
     - {x: 3, y: -2, z: 0}
     - {x: 4, y: -2, z: 0}
     - {x: 5, y: -2, z: 0}
-    - {x: -8, y: -1, z: 0}
-    - {x: -7, y: -1, z: 0}
-    - {x: -6, y: -1, z: 0}
-    - {x: -5, y: -1, z: 0}
     tileBases:
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
@@ -148,10 +144,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
   throughPair:
     positions: []
     tileBases: []
@@ -160,8 +152,8 @@ MonoBehaviour:
     _targetRoomNumber: 1
     _targetIndex: 0
     _spawnPos: {x: -1, y: 0}
-    _size: {x: 0.8, y: 0.8}
-    _offset: {x: 0, y: 0.5}
+    _size: {x: 0.8, y: 5.4275036}
+    _offset: {x: 0, y: 2.8137517}
     _position: {x: 6.5, y: -1}
     _playerMask: 512
   enemyPoints: []
@@ -170,8 +162,8 @@ MonoBehaviour:
       type: 3}
     position: {x: -2.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 0, z: 0}
     - {x: 0, y: 2, z: 0}
+    - {x: 2, y: 2, z: 0}
     - {x: -5, y: 1, z: 0}
     moveSpeed: 1
     cyclic: 0
@@ -181,8 +173,8 @@ MonoBehaviour:
       type: 3}
     position: {x: -1.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 0, z: 0}
     - {x: 0, y: 2, z: 0}
+    - {x: 2, y: 2, z: 0}
     - {x: -5, y: 1, z: 0}
     moveSpeed: 1
     cyclic: 0
@@ -192,8 +184,8 @@ MonoBehaviour:
       type: 3}
     position: {x: -0.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 0, z: 0}
     - {x: 0, y: 2, z: 0}
+    - {x: 2, y: 2, z: 0}
     - {x: -5, y: 1, z: 0}
     moveSpeed: 1
     cyclic: 0

@@ -71,6 +71,7 @@ public class PlayerPoint {
 
     public void FixedProgress() {
         Vector2 position = _position + _offset;
+
         if (Physics2D.OverlapBox(position, _size, 0f, _playerMask)) {
             OnCollisionWithPlayer();
         }

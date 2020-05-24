@@ -211,11 +211,16 @@ PrefabInstance:
     - target: {fileID: 2340653369681299677, guid: ab0bf01462ad8c441acce68bf66989b1,
         type: 3}
       propertyPath: _localWayPoints.Array.data[0].y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2340653369681299677, guid: ab0bf01462ad8c441acce68bf66989b1,
         type: 3}
       propertyPath: _localWayPoints.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340653369681299677, guid: ab0bf01462ad8c441acce68bf66989b1,
+        type: 3}
+      propertyPath: _localWayPoints.Array.data[1].x
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2340653369681299679, guid: ab0bf01462ad8c441acce68bf66989b1,
@@ -434,11 +439,16 @@ PrefabInstance:
     - target: {fileID: 2340653369681299677, guid: ab0bf01462ad8c441acce68bf66989b1,
         type: 3}
       propertyPath: _localWayPoints.Array.data[0].y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2340653369681299677, guid: ab0bf01462ad8c441acce68bf66989b1,
         type: 3}
       propertyPath: _localWayPoints.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340653369681299677, guid: ab0bf01462ad8c441acce68bf66989b1,
+        type: 3}
+      propertyPath: _localWayPoints.Array.data[1].x
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2340653369681299679, guid: ab0bf01462ad8c441acce68bf66989b1,
@@ -741,12 +751,27 @@ PrefabInstance:
     - target: {fileID: -7599628937618421185, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
       propertyPath: _targetRoomNumber
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7599628937618421185, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
       propertyPath: _spawnPos.x
-      value: 1
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6079396620351767429, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 2.8137517
+      objectReference: {fileID: 0}
+    - target: {fileID: -6079396620351767429, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5.4275036
+      objectReference: {fileID: 0}
+    - target: {fileID: -4351127233028307178, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430694, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
@@ -756,7 +781,7 @@ PrefabInstance:
     - target: {fileID: 3640396199924430695, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.5
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 3640396199924430695, guid: 4d81ec34c8566cd4ba5907cdf880f502,
         type: 3}
@@ -807,6 +832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3640396199924430695, guid: 4d81ec34c8566cd4ba5907cdf880f502,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d81ec34c8566cd4ba5907cdf880f502, type: 3}
@@ -1010,11 +1040,16 @@ PrefabInstance:
     - target: {fileID: 530875914718665605, guid: ccb6ab789a37d8441886cfaac261302c,
         type: 3}
       propertyPath: _localWayPoints.Array.data[0].y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 530875914718665605, guid: ccb6ab789a37d8441886cfaac261302c,
         type: 3}
       propertyPath: _localWayPoints.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530875914718665605, guid: ccb6ab789a37d8441886cfaac261302c,
+        type: 3}
+      propertyPath: _localWayPoints.Array.data[1].x
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 530875914718665607, guid: ccb6ab789a37d8441886cfaac261302c,

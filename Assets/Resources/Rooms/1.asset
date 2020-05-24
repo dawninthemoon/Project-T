@@ -156,7 +156,9 @@ MonoBehaviour:
     _offset: {x: 0, y: 0.5}
     _position: {x: -10.5, y: -1}
     _playerMask: 512
-  enemyPoints: []
+  enemyPoints:
+  - requestEnemy: 0
+    position: {x: 4.5, y: -1, z: 0}
   movingPlatformPoints:
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}

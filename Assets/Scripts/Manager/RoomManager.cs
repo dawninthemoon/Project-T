@@ -17,8 +17,6 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
         System.Array.Sort(
             _rooms,
              (RoomInfo val1, RoomInfo val2) => val1.RoomNumber.CompareTo(val2.RoomNumber));
-
-        _rooms[_currentRoomNumber].StartRoom(_currentTilemap);
     }
 
     public void FixedProgress() {

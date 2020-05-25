@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameMain : MonoBehaviour
 {
+    [SerializeField] private int _startRoomNumber = 0;
+    [SerializeField] private int _targetDoorIndex = 0;
+
     private InputControl _inputControl;
 
     private Player _character;
@@ -26,9 +29,10 @@ public class GameMain : MonoBehaviour
         _effectManager.Initialize();
         _roomManager.Initalize();
 
-        Vector3 initalPos = new Vector3(-2f, -1f);
-        _character = _objectManager.CreatePlayer(initalPos);
+        _character = _objectManager.CreatePlayer(Vector2.zero);
         _character.Initialize();
+
+        _roomManager.MoveRoom(_startRoomNumber, _targetDoorIndex);
 
         _inputControl.Initalize(_character);
     }

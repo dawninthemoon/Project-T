@@ -620,6 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a7332165edf9140a237d5cb784bf09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startRoomNumber: 0
+  _targetDoorIndex: 0
 --- !u!1 &960427387
 GameObject:
   m_ObjectHideFlags: 0

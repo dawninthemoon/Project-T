@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startRoomNumber: 0
-  _targetDoorIndex: 0
+  _targetDoorIndex: 1
 --- !u!1 &960427387
 GameObject:
   m_ObjectHideFlags: 0

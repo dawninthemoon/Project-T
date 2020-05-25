@@ -63,26 +63,20 @@ MonoBehaviour:
     - {x: 3, y: -3, z: 0}
     - {x: 4, y: -3, z: 0}
     - {x: 5, y: -3, z: 0}
-    - {x: -10, y: -2, z: 0}
-    - {x: -9, y: -2, z: 0}
-    - {x: -8, y: -2, z: 0}
     - {x: -7, y: -2, z: 0}
     - {x: -6, y: -2, z: 0}
     - {x: -5, y: -2, z: 0}
     - {x: -4, y: -2, z: 0}
     - {x: -3, y: -2, z: 0}
-    - {x: -2, y: -2, z: 0}
-    - {x: -1, y: -2, z: 0}
-    - {x: 0, y: -2, z: 0}
-    - {x: 1, y: -2, z: 0}
-    - {x: 2, y: -2, z: 0}
-    - {x: 3, y: -2, z: 0}
-    - {x: 4, y: -2, z: 0}
-    - {x: 5, y: -2, z: 0}
+    - {x: -5, y: -1, z: 0}
+    - {x: -4, y: -1, z: 0}
+    - {x: -10, y: 1, z: 0}
+    - {x: 5, y: 2, z: 0}
+    - {x: -9, y: 3, z: 0}
+    - {x: -4, y: 3, z: 0}
+    - {x: 0, y: 3, z: 0}
+    - {x: 3, y: 3, z: 0}
     tileBases:
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
@@ -151,43 +145,53 @@ MonoBehaviour:
   - _index: 0
     _targetRoomNumber: 1
     _targetIndex: 0
-    _spawnPos: {x: -1, y: 0}
-    _size: {x: 0.8, y: 5.4275036}
-    _offset: {x: 0, y: 2.8137517}
-    _position: {x: 6.5, y: -1}
+    _spawnPos: {x: -1, y: 2}
+    _size: {x: 0.8, y: 0.8}
+    _offset: {x: 0, y: 0.5}
+    _position: {x: 6.5, y: -2}
     _playerMask: 512
-  enemyPoints: []
+  - _index: 1
+    _targetRoomNumber: 0
+    _targetIndex: 1
+    _spawnPos: {x: 1, y: 0}
+    _size: {x: 0.8, y: 0.8}
+    _offset: {x: 0, y: 0.5}
+    _position: {x: -8.5, y: -2}
+    _playerMask: 512
+  enemyPoints:
+  - requestEnemy: 0
+    position: {x: 4.5, y: -2, z: 0}
   movingPlatformPoints:
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}
     position: {x: -2.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 2, z: 0}
-    - {x: 2, y: 2, z: 0}
-    - {x: -5, y: 1, z: 0}
-    moveSpeed: 1
+    - {x: 0, y: 0, z: 0}
+    - {x: 3, y: -1, z: 0}
+    - {x: 6, y: 0, z: 0}
+    moveSpeed: 1.5
     cyclic: 0
-    waitTime: 0
-    easeAmount: 0
+    waitTime: 1
+    easeAmount: 1
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}
     position: {x: -1.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 2, z: 0}
-    - {x: 2, y: 2, z: 0}
-    - {x: -5, y: 1, z: 0}
-    moveSpeed: 1
+    - {x: 0, y: 0, z: 0}
+    - {x: 3, y: -1, z: 0}
+    - {x: 6, y: 0, z: 0}
+    moveSpeed: 1.5
     cyclic: 0
-    waitTime: 0
-    easeAmount: 0
+    waitTime: 1
+    easeAmount: 1
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}
     position: {x: -0.5, y: 1.5, z: 0}
     localWayPoints:
-    - {x: 0, y: 2, z: 0}
-    - {x: 2, y: 2, z: 0}
-    - {x: -5, y: 1, z: 0}
-    moveSpeed: 1
+    - {x: 0, y: 0, z: 0}
+    - {x: 3, y: -1, z: 0}
+    - {x: 6, y: 0, z: 0}
+    moveSpeed: 1.5
     cyclic: 0
-    waitTime: 0
-    easeAmount: 0
+    waitTime: 1
+    easeAmount: 1

@@ -151,9 +151,9 @@ MonoBehaviour:
   - _index: 0
     _targetRoomNumber: 0
     _targetIndex: 0
-    _spawnPos: {x: 1, y: 0}
-    _size: {x: 0.8, y: 5.443934}
-    _offset: {x: 0, y: 2.821967}
+    _spawnPos: {x: 1, y: 1}
+    _size: {x: 0.8, y: 0.8}
+    _offset: {x: 0, y: 0.5}
     _position: {x: -10.5, y: -1}
     _playerMask: 512
   enemyPoints:

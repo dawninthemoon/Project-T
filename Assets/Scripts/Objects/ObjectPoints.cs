@@ -37,7 +37,6 @@ public class MovingPlatformPoint
 
 [System.Serializable]
 public class PlayerPoint {
-    public static readonly float Impossible = -987654321f;
     public int _index = 0;
     public int _targetRoomNumber = 0;
     public int _targetIndex = 0;
@@ -61,8 +60,6 @@ public class PlayerPoint {
     public Vector3 SpawnPos { 
         get {
             Vector3 pos = _position + _spawnPos; 
-            if (_spawnPos.y == 0f) pos.y = Impossible;
-            if (_spawnPos.x == 0f) pos.x = Impossible;
             return pos;
         }
     }
@@ -71,13 +68,16 @@ public class PlayerPoint {
 
     public void FixedProgress() {
         Vector2 position = _position + _offset;
-
-        if (Physics2D.OverlapBox(position, _size, 0f, _playerMask)) {
-            OnCollisionWithPlayer();
+        
+        var collider = Physics2D.OverlapBox(position, _size, 0f, _playerMask);
+        if (collider) {
+            OnCollisionWithPlayer(collider.transform.position);
         }
     }
 
-    private void OnCollisionWithPlayer() {
-        RoomManager.GetInstance().MoveRoom(_targetRoomNumber, _targetIndex);
+    private void OnCollisionWithPlayer(Vector3 playerPos) {
+        Vector3 diff = playerPos - (Vector3)_position;
+        diff.x = 0f;
+        RoomManager.GetInstance().MoveRoom(diff, _targetRoomNumber, _targetIndex);
     }
 }

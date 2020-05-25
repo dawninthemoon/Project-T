@@ -32,7 +32,7 @@ public class GameMain : MonoBehaviour
         _character = _objectManager.CreatePlayer(Vector2.zero);
         _character.Initialize();
 
-        _roomManager.MoveRoom(_startRoomNumber, _targetDoorIndex);
+        _roomManager.MoveRoom(Vector2.zero, _startRoomNumber, _targetDoorIndex);
 
         _inputControl.Initalize(_character);
     }

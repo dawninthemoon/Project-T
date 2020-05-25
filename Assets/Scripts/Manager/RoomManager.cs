@@ -23,14 +23,14 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
         _rooms[_currentRoomNumber].FixedProgress();
     }
 
-    public void MoveRoom(int targetRoomNumber, int targetIndex) {
+    public void MoveRoom(Vector3 offset, int targetRoomNumber, int targetIndex) {
         if (targetRoomNumber < _rooms.Length) {
             _rooms[_currentRoomNumber].ResetRoom();
             _currentRoomNumber = targetRoomNumber;
 
             _rooms[targetRoomNumber].StartRoom(_currentTilemap);
 
-            Vector3 playerPos = _rooms[targetRoomNumber].GetDoorPosition(targetIndex);
+            Vector3 playerPos = _rooms[targetRoomNumber].GetDoorPosition(targetIndex) + offset;
             ObjectManager.GetInstance().SetPlayerPos(playerPos);
         }
         else {

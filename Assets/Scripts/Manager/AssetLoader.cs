@@ -12,7 +12,7 @@ public class AssetLoader : SingletonWithMonoBehaviour<AssetLoader>
     private static readonly string AssetBundleName = "assetbundle_0";
 
     public void Initalize() {
-        _assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.dataPath + AssetBundlePath, AssetBundleName));
+        _assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath + AssetBundlePath, AssetBundleName));
 
         if (_assetBundle == null) {
             Debug.LogError("Failed to load AssetBundle");

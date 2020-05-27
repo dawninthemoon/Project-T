@@ -10,7 +10,6 @@ public class PlayerAttack : MonoBehaviour
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
 
-    private static readonly string EffectDirectory = "PlayerEffect/";
     private static readonly string DefaultAttackName = "defaultAttack";
 
     private EffectManager _effectManager;
@@ -73,7 +72,7 @@ public class PlayerAttack : MonoBehaviour
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 
-        string path = StringUtils.MergeStrings(EffectDirectory, DefaultAttackName, attackType.ToString());
+        string path = StringUtils.MergeStrings(DefaultAttackName, attackType.ToString());
         _effectManager.SpawnAndRemove(pos, path, dir);
     }
 
@@ -81,12 +80,11 @@ public class PlayerAttack : MonoBehaviour
         Vector3 pos = transform.position;
         float dir = transform.localScale.x;
 
-        string path = StringUtils.MergeStrings(EffectDirectory, effectName);
         if (effectTracks) {
-            _effectManager.SpawnTrackEffectAndRemove(pos, path, transform, dir);
+            _effectManager.SpawnTrackEffectAndRemove(pos, effectName, transform, dir);
         }
         else {
-            _effectManager.SpawnAndRemove(pos, path, dir);
+            _effectManager.SpawnAndRemove(pos, effectName, dir);
         }
     }
 

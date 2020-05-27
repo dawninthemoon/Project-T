@@ -8,7 +8,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private static readonly string EnemyPrefabDirectory = "Enemy/";
     private static readonly string MovingPlatformName = "MovingPlatform";
 
-    private ResourceManager _resourceManager;
+    private AssetLoader _assetLoader;
 
     private Player _player;
     private List<EnemyBase> _activeEnemies;
@@ -18,7 +18,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private Dictionary<EnemyTypes, int>  _enemyObjectPoolOrder;
 
     public void Initialize() {
-        _resourceManager = ResourceManager.GetInstance();
+        _assetLoader = AssetLoader.GetInstance();
         _activeEnemies = new List<EnemyBase>();
         _activePlatforms = new List<PlatformController>();
         _enemyObjectPoolOrder = new Dictionary<EnemyTypes, int>();
@@ -37,7 +37,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 
     public Player CreatePlayer(Vector3 position) {
         if (_player == null) {
-            var prefab = _resourceManager.GetPrefab("Player");
+            var prefab = _assetLoader.GetPrefab("Player");
             _player = Instantiate(prefab, position, Quaternion.identity).GetComponent<Player>();
         }
         return _player;
@@ -86,7 +86,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     }
 
     private void InitalizeObjectPool() {
-        GameObject[] enemyPrefabs = _resourceManager.GetAllPrefabs(EnemyPrefabDirectory);
+        EnemyBase[] enemyPrefabs = _assetLoader.GetAllEnemies();
 
         int len = enemyPrefabs.Length;
         _enemyObjectPoolArr = new ObjectPool<EnemyBase>[len];
@@ -102,14 +102,14 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 }
             );
 
-            EnemyTypes type = EnemyUtility.ObjToEnemy(enemyPrefabs[i]);
+            EnemyTypes type = EnemyUtility.ObjToEnemy(enemyPrefabs[i].gameObject);
             _enemyObjectPoolOrder.Add(type, i);
         }
 
         _movingPlatformPool = new ObjectPool<PlatformController>(
             5,
             () => {
-                GameObject prefab = _resourceManager.GetPrefab(MovingPlatformName);
+                GameObject prefab = _assetLoader.GetPrefab(MovingPlatformName);
                 PlatformController controller = Instantiate(prefab).GetComponent<PlatformController>();
                 controller.Initialize();
                 return controller;

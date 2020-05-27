@@ -8,7 +8,7 @@ public class AttackStateBase : StateMachineBehaviour<PlayerAttack>
     protected float _timeAgo = 0f;
     protected float _stateLength = 0f;
 
-    private const string HitEffectName = "PlayerEffect/meleeAttack_hit";
+    private const string HitEffectName = "meleeAttack_hit";
     private static readonly Vector2 _hitboxOffset = new Vector2(0.4f, 0.75f);
     private static readonly Vector2 _hitboxSize = new Vector2(3f, 1.5f);
 

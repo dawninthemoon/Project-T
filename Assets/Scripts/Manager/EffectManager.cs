@@ -5,12 +5,12 @@ using UnityEngine;
 public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 {
     private ObjectPool<EffectBase> _effectPool;
-    private ResourceManager _resourceManager;
+    private AssetLoader _assetLoader;
     private List<EffectBase> _acitveEffects;
     private CameraShake _cameraShake;
 
     public void Initialize() {
-        _resourceManager = ResourceManager.GetInstance();
+        _assetLoader = AssetLoader.GetInstance();
         _effectPool = new ObjectPool<EffectBase>(20, CreateEffect);
         _acitveEffects = new List<EffectBase>();
         _cameraShake = Camera.main.GetComponent<CameraShake>();
@@ -39,7 +39,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         EffectBase effect = _effectPool.GetObject();
 
         System.Action callback = () => { _effectPool.ReturnObject(effect);};
-        RuntimeAnimatorController controller = _resourceManager.GetAnimatorController(effectName);
+        RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
         effect.SetEffectInfo(pos, controller, dir, callback);
 
         _acitveEffects.Add(effect);
@@ -49,7 +49,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         EffectBase effect = _effectPool.GetObject();
         System.Action onEffectUpdate = () => { effect.transform.position = target.position; };
         System.Action callback = () => { _effectPool.ReturnObject(effect);};
-        RuntimeAnimatorController controller = _resourceManager.GetAnimatorController(effectName);
+        RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
         effect.SetEffectInfo(pos, controller, dir, callback, onEffectUpdate);
     
         _acitveEffects.Add(effect);
@@ -57,7 +57,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
     public void SpawnEffect(Vector3 pos, string effectName, System.Action onEffectEnd, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();
-        RuntimeAnimatorController controller = _resourceManager.GetAnimatorController(effectName);
+        RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
         effect.SetEffectInfo(pos, controller, dir, onEffectEnd);
 
         _acitveEffects.Add(effect);

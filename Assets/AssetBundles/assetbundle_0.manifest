@@ -1,0 +1,78 @@
+ManifestFileVersion: 0
+CRC: 1838337172
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1d267eaa9433d6b42d54e8a4fc85871f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a4e3d5159ceb07f4494e8ab7b59c20f5
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: b342e5100dd0ddb4d857f8689fddf8a8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fdac8ce000a3dc546aa3a40625fe39ca, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 99067df16864f634b903ec9333daba6c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dedf8ba2974059a4683a5dbaafa949a8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5e2a0c63ef281b44a823365c3d5bffcd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7576bc83665c4604499ad5822d1b929f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c32d97f3f6f3ca94d93dd47bc6e11bf8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 418bdcd5552cff34b9bf74b6bbdff272, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 422926b7ad3403d4996d9aa43b12baec, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b5b958d8c6676f54db238746f3537c3b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b21c842c474f3bd4e97c5b90dca061dd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6172d31d6a6e5984189085d73e24fc87, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 254efecd47332974dbc7213c399d33f1, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/Player.prefab
+- Assets/AnimatorControllers/PlayerEffect/defaultAttack2.controller
+- Assets/ScriptableObjects/Rooms/Region1/1.asset
+- Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
+- Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
+- Assets/Prefabs/MovingPlatform.prefab
+- Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
+- Assets/AnimatorControllers/PlayerEffect/defaultAttack3.controller
+- Assets/Prefabs/Enemy/Enemy_Dummy.prefab
+- Assets/AnimatorControllers/PlayerEffect/meleeAttack_hit.controller
+- Assets/ScriptableObjects/Rooms/Region1/0.asset
+Dependencies: []

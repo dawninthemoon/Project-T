@@ -24,7 +24,7 @@ public class GameMain : MonoBehaviour
     }
 
     private void Start() {
-        ResourceManager.GetInstance().Initialize();
+        AssetLoader.GetInstance().Initalize();
         _objectManager.Initialize();
         _effectManager.Initialize();
         _roomManager.Initalize();

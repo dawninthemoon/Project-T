@@ -59,7 +59,12 @@ namespace LevelEditor {
                 if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
                     var asset = _context.RequestExport();
                     asset.roomNumber = _roomNumber;
-                    AssetDatabase.CreateAsset(asset, "Assets/Resources/Rooms/" + _roomNumber + ".asset");
+                    string path = "Assets/ScriptableObjects/Rooms/" + _roomNumber + ".asset";
+                    AssetDatabase.CreateAsset(asset, path);
+                    
+                    AssetImporter assetImporter = AssetImporter.GetAtPath(path);
+                    assetImporter.assetBundleName = "assetbundle_0";
+                    BuildAsssetBundles.BuildAllAssetBundles();
 
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();

@@ -4,8 +4,8 @@ using UnityEditor;
 using System.IO; 
 
 public class BuildAsssetBundles { 
-     [MenuItem("Bundles/Build AssetBundles")] 
-     static void BuildAllAssetBundles() { 
+    [MenuItem("Bundles/Build AssetBundles")] 
+    public static void BuildAllAssetBundles() { 
         string assetBundleDirectory = "Assets/AssetBundles";
         if (!Directory.Exists(assetBundleDirectory))
         {

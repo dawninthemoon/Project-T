@@ -57,15 +57,17 @@ namespace LevelEditor {
             }
             if (GUILayout.Button("Export")) {
                 if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
-                    var asset = _context.RequestExport();
-                    asset.roomNumber = _roomNumber;
-                    string path = "Assets/ScriptableObjects/Rooms/" + _roomNumber + ".asset";
-                    AssetDatabase.CreateAsset(asset, path);
-                    
-                    AssetImporter assetImporter = AssetImporter.GetAtPath(path);
-                    assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
-                    BuildAsssetBundles.BuildAllAssetBundles();
+                    Export();
                         
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                }
+            }
+
+            if (GUILayout.Button("Export And Build AssetBundles")) {
+                if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
+                    Export();
+                    BuildAsssetBundles.BuildAllAssetBundles();
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
                 }
@@ -90,6 +92,16 @@ namespace LevelEditor {
             }
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void Export() {
+            var asset = _context.RequestExport();
+            asset.roomNumber = _roomNumber;
+            string path = "Assets/ScriptableObjects/Rooms/" + _roomNumber + ".asset";
+            AssetDatabase.CreateAsset(asset, path);
+            
+            AssetImporter assetImporter = AssetImporter.GetAtPath(path);
+            assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
         }
     }
 }

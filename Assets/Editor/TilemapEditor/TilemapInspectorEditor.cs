@@ -41,9 +41,21 @@ namespace LevelEditor {
             EditorGUILayout.LabelField("Current Room Number");
             RoomNumber = EditorGUILayout.IntField(RoomNumber);
             EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Space(2f);
-            
-            if (GUILayout.Button("Import")) {
+            EditorGUILayout.Space(5f);
+
+            var defaultColor = GUI.backgroundColor;
+
+            GUI.backgroundColor = Color.red;
+            if (GUILayout.Button("Build AssetBundles", GUILayout.Height(50f))) {
+                if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
+                    BuildAsssetBundles.BuildAllAssetBundles();
+                }
+            }
+
+            EditorGUILayout.Space(5f);
+
+            GUI.backgroundColor = Color.green;
+            if (GUILayout.Button("Import", GUILayout.Height(40f))) {
                 string path = EditorUtility.OpenFilePanelWithFilters("Select RoomBase File", "Assets", new string[] { "ScriptableObject", "asset" });
                     if(path != string.Empty) {
                         int cutoffFrom = path.IndexOf("Assets");
@@ -56,7 +68,8 @@ namespace LevelEditor {
                         }	
                     }
             }
-            if (GUILayout.Button("Export")) {
+
+            if (GUILayout.Button("Export", GUILayout.Height(40f))) {
                 if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
                     Export();
                         
@@ -65,15 +78,9 @@ namespace LevelEditor {
                 }
             }
 
-            if (GUILayout.Button("Export And Build AssetBundles")) {
-                if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
-                    Export();
-                    BuildAsssetBundles.BuildAllAssetBundles();
-                    AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
-                }
-            }
+            EditorGUILayout.Space(5f);
 
+            GUI.backgroundColor = defaultColor;
             if (GUILayout.Button("Clear All")) {
                 if (EditorUtility.DisplayDialog("Warning", "Are you sure?", "Clear", "Do Not Clear")) {
                     _context.ClearAll();

@@ -10,7 +10,7 @@ namespace LevelEditor {
     public class TilemapInspectorEditor : Editor
     {
         private TilemapEditorScript _context;
-        private static int _roomNumber;
+        public static int RoomNumber;
 
         private void OnEnable() {
             _context = (TilemapEditorScript)target;
@@ -39,10 +39,10 @@ namespace LevelEditor {
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Current Room Number");
-            _roomNumber = EditorGUILayout.IntField(_roomNumber);
+            RoomNumber = EditorGUILayout.IntField(RoomNumber);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space(2f);
-
+            
             if (GUILayout.Button("Import")) {
                 string path = EditorUtility.OpenFilePanelWithFilters("Select RoomBase File", "Assets", new string[] { "ScriptableObject", "asset" });
                     if(path != string.Empty) {
@@ -52,6 +52,7 @@ namespace LevelEditor {
                         if (EditorUtility.DisplayDialog("Are you sure?", "Importing this room will overlap the current one without saving it.", "Okay", "Cancel"))
                         {
                             _context.Import(roomBase);
+                            RoomNumber = roomBase.roomNumber;
                         }	
                     }
             }
@@ -96,8 +97,8 @@ namespace LevelEditor {
 
         private void Export() {
             var asset = _context.RequestExport();
-            asset.roomNumber = _roomNumber;
-            string path = "Assets/ScriptableObjects/Rooms/" + _roomNumber + ".asset";
+            asset.roomNumber = RoomNumber;
+            string path = "Assets/ScriptableObjects/Rooms/" + RoomNumber + ".asset";
             AssetDatabase.CreateAsset(asset, path);
             
             AssetImporter assetImporter = AssetImporter.GetAtPath(path);

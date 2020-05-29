@@ -74,7 +74,7 @@ public class TilemapEditorScript : MonoBehaviour
     public EnemyPoint[] LoadEnemyPoints(EnemySpawnPosition[] info) {
         EnemyPoint[] enemyPoint = new EnemyPoint[info.Length];
         for (int i = 0; i < info.Length; i++) {
-            enemyPoint[i] = new EnemyPoint(info[i].transform.position, info[i].RequestEnemy);
+            enemyPoint[i] = new EnemyPoint(info[i].transform.position, info[i].requestEnemy);
         }
         return enemyPoint;
     }
@@ -86,12 +86,12 @@ public class TilemapEditorScript : MonoBehaviour
 
             points[i] = new PlayerPoint(
                 info[i].transform.position,
-                collider.size,
-                collider.offset,
-                info[i]._spawnPos,
-                info[i]._index,
-                info[i]._targetRoomNumber,
-                info[i]._targetIndex
+                info[i].GetColliderSize(),
+                info[i].GetColliderOffset(),
+                info[i].vertical,
+                info[i].index,
+                info[i].targetRoomNumber,
+                info[i].targetIndex
             );
         }
 
@@ -128,17 +128,17 @@ public class TilemapEditorScript : MonoBehaviour
         foreach (var enemy in roomBase.enemyPoints) {
             var obj = Instantiate(enemyPointPrefab, objectTilemap);
             obj.transform.position = enemy.position;
-            obj._requestEnemy = enemy.requestEnemy;
+            obj.requestEnemy = enemy.requestEnemy;
         }
         
         foreach (var point in roomBase.playerPoints) {
             var obj = Instantiate(playerPointPrefab, objectTilemap);
-            obj.transform.position = point._position;
-            obj._index = point.Index;
-            obj._targetIndex = point._targetIndex;
-            obj._targetRoomNumber = point._targetRoomNumber;
-            obj._spawnPos = point._spawnPos;
-            obj._collider = obj.GetComponent<BoxCollider2D>();
+            obj.transform.position = point.position;
+            obj.index = point.index;
+            obj.targetIndex = point.targetIndex;
+            obj.targetRoomNumber = point.targetRoomNumber;
+            obj.vertical = point.vertical;
+            obj.transform.localScale = new Vector3(Mathf.Round(point.size.x), Mathf.Round(point.size.y), 1f);
         }
 
         foreach (var point in roomBase.movingPlatformPoints) {

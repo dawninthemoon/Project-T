@@ -43,11 +43,19 @@ public class RoomInfo
         }
     }
 
+    public bool IsDoorVertical(int index) {
+        if (index >= _roomBase.playerPoints.Length) {
+            Debug.LogError("Door does not exists");
+            return false;
+        }
+        return _roomBase.playerPoints[index].vertical;
+    }
+
     public Vector3 GetDoorPosition(int index) {
         if (index >= _roomBase.playerPoints.Length) {
             Debug.LogError("Door does not exists");
             return Vector3.zero;
         }
-        return _roomBase.playerPoints[index].SpawnPos;
+        return _roomBase.playerPoints[index].position;
     }
 }

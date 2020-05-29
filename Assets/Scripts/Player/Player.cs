@@ -7,6 +7,7 @@ public class Player : Character
     private PlayerRenderer _playerRenderer;
     private PlayerAttack _playerAttack;
     private bool _attackRequested;
+    public Vector2 Velocity { get { return _velocity;} }
 
     public override void Initialize() {
         base.Initialize();

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1838337172
+CRC: 4195623427
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1d267eaa9433d6b42d54e8a4fc85871f
+    Hash: e48f519a9b6e4468a779c5b9cf62613f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a4e3d5159ceb07f4494e8ab7b59c20f5
+    Hash: 3b7d3ec759f322a5b81c3c257bd2de50
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -65,14 +65,14 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Player.prefab
+- Assets/ScriptableObjects/Rooms/0.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack2.controller
-- Assets/ScriptableObjects/Rooms/Region1/1.asset
+- Assets/ScriptableObjects/Rooms/1.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack3.controller
 - Assets/Prefabs/Enemy/Enemy_Dummy.prefab
-- Assets/AnimatorControllers/PlayerEffect/meleeAttack_hit.controller
-- Assets/ScriptableObjects/Rooms/Region1/0.asset
+- Assets/AnimatorControllers/meleeAttack_hit.controller
 Dependencies: []

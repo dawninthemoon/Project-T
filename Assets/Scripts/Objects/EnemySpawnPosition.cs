@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnPosition : SpawnPosition
+public class EnemySpawnPosition : MonoBehaviour
 {
-    [SerializeField] public EnemyTypes _requestEnemy = EnemyTypes.Enemy_Dummy;
-    public EnemyTypes RequestEnemy { get { return _requestEnemy; } }
+    public EnemyTypes requestEnemy = EnemyTypes.Enemy_Dummy;
 }

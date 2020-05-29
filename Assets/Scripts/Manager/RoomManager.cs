@@ -31,7 +31,8 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
             _rooms[targetRoomNumber].StartRoom(_currentTilemap);
 
             Vector3 playerPos = _rooms[targetRoomNumber].GetDoorPosition(targetIndex) + offset;
-            ObjectManager.GetInstance().SetPlayerPos(playerPos);
+            bool vertical = _rooms[targetRoomNumber].IsDoorVertical(targetIndex);
+            ObjectManager.GetInstance().SetPlayerPos(playerPos, vertical);
         }
         else {
             Debug.LogError("Room does not exists");
@@ -40,7 +41,6 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
 
     private void MakeAllRooms() {
         RoomBase[] roomBases = AssetLoader.GetInstance().GetAllRoomBases();
-        //RoomBase[] roomBases = ResourceManager.GetInstance().GetAllRoomBases();
         int numOfRooms = roomBases.Length;
         _rooms = new RoomInfo[numOfRooms];
 

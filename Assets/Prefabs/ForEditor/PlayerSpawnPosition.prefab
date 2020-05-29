@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ebc250e96b85e84085cd8b2cc1350d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _index: 0
-  _targetRoomNumber: 0
-  _targetIndex: 0
-  _spawnPos: {x: 0, y: 0}
+  index: 0
+  targetRoomNumber: 0
+  targetIndex: 0
+  vertical: 0
+  collider: {fileID: 0}
 --- !u!212 &-4351127233028307178
 SpriteRenderer:
   m_ObjectHideFlags: 0

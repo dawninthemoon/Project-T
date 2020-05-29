@@ -63,9 +63,9 @@ namespace LevelEditor {
                     AssetDatabase.CreateAsset(asset, path);
                     
                     AssetImporter assetImporter = AssetImporter.GetAtPath(path);
-                    assetImporter.assetBundleName = "assetbundle_0";
+                    assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
                     BuildAsssetBundles.BuildAllAssetBundles();
-
+                        
                     AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
                 }

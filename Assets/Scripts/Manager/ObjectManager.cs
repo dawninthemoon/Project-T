@@ -43,8 +43,17 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         return _player;
     }
 
-    public void SetPlayerPos(Vector3 position) {
-        _player.transform.position = position;
+    public void SetPlayerPos(Vector3 position, bool vertical = false) {
+        Vector3 extraPos = _player.Velocity;
+        if (vertical) {
+            extraPos.x = 0f;
+            extraPos.y = Mathf.Sign(extraPos.y);
+        }
+        else {
+            extraPos.y = 0f;
+            extraPos.x = Mathf.Sign(extraPos.x);
+        }
+        _player.transform.position = position + extraPos;
     }
 
     public void ReturnAllEnemies() {

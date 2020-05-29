@@ -46,7 +46,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void CalculateVelocity() {
         float targetVelocityX = _input.x * _moveSpeed;
-        float smoothTime = _controller.Collisions._bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne;
+        float smoothTime = _controller.Collisions.bellow ? AccelerationTimeGrounded : AccelerationTimeAirborne;
 
         _velocity.x = Mathf.SmoothDamp(_velocity.x, targetVelocityX, ref _velocityXSmoothing, smoothTime);
         _velocity.y += _gravity * Time.fixedDeltaTime;
@@ -65,9 +65,9 @@ public abstract class Character : MonoBehaviour
         _controller.Move(_velocity * Time.fixedDeltaTime, _input);
 
         var collisions = _controller.Collisions;
-        if (collisions._bellow || collisions._above) {
-            if (collisions._slidingDownMaxSlope) {
-                _velocity.y += _controller.Collisions._slopeNormal.y * -_gravity * Time.fixedDeltaTime;
+        if (collisions.bellow || collisions.above) {
+            if (collisions.slidingDownMaxSlope) {
+                _velocity.y += _controller.Collisions.slopeNormal.y * -_gravity * Time.fixedDeltaTime;
             }
             else {
                 _velocity.y = 0f;
@@ -76,7 +76,7 @@ public abstract class Character : MonoBehaviour
     }
 
     public virtual void SetJump(bool jumpPressed) {
-        if (jumpPressed && _controller.Collisions._bellow) {
+        if (jumpPressed && _controller.Collisions.bellow) {
             _jumpRequested = true;
         }
     }

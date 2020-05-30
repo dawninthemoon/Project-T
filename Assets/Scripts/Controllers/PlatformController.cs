@@ -218,7 +218,7 @@ public class PlatformController : RaycastController, IPlaceable
         if (_localWayPoints != null)
         {
             Gizmos.color = Color.red;
-            float size = 0.3f;
+            float size = 0.2f;
 
             Color defaultColor = Gizmos.color;
 
@@ -234,9 +234,13 @@ public class PlatformController : RaycastController, IPlaceable
                 Vector3 minusPlus = new Vector3(-1f, 1f, 0f);
 
                 Gizmos.color = color;
-                
+
                 Gizmos.DrawLine(globalWayPointPos + minusPlus * size, globalWayPointPos + plusMinus * size);
                 Gizmos.DrawLine(globalWayPointPos + Vector3.one * size, globalWayPointPos - Vector3.one * size);
+
+                if (i < pointsCount - 1) {
+                    Gizmos.DrawLine(_localWayPoints[i] + transform.position, _localWayPoints[i + 1] + transform.position);
+                }
             }
 
             Gizmos.color = defaultColor;

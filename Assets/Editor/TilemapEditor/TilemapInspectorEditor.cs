@@ -4,6 +4,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using System.IO;
 
 namespace LevelEditor {
     [CustomEditor(typeof(TilemapEditorScript)), CanEditMultipleObjects]
@@ -12,30 +13,14 @@ namespace LevelEditor {
         private TilemapEditorScript _context;
         public static int RoomNumber;
 
+        private List<RoomBase> roomBases;
+
         private void OnEnable() {
             _context = (TilemapEditorScript)target;
         }
 
         public override void OnInspectorGUI() {
             serializedObject.Update();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Door Prefab for Editor");
-            _context.playerPointPrefab = EditorGUILayout.ObjectField(_context.playerPointPrefab, typeof(PlayerSpawnPosition), false) as PlayerSpawnPosition;
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Space(2f);
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Enemy Prefab for Editor");
-            _context.enemyPointPrefab = EditorGUILayout.ObjectField(_context.enemyPointPrefab, typeof(EnemySpawnPosition), false) as EnemySpawnPosition;
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Space(2f);
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("MovingPlatform Prefab for Editor");
-            _context.movingPlatformPrefab = EditorGUILayout.ObjectField(_context.movingPlatformPrefab, typeof(PlatformController), false) as PlatformController;
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Space(20f);
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Current Room Number");
@@ -46,27 +31,17 @@ namespace LevelEditor {
             var defaultColor = GUI.backgroundColor;
 
             GUI.backgroundColor = Color.red;
-            if (GUILayout.Button("Build AssetBundles", GUILayout.Height(50f))) {
-                if (EditorUtility.DisplayDialog("Warning", "Are you sure? The RoomBase will be overlaped!", "Export", "Do Not Export")) {
-                    BuildAsssetBundles.BuildAllAssetBundles();
-                }
+            if (GUILayout.Button("Apply Changes", GUILayout.Height(50f))) {
+                BuildAsssetBundles.BuildAllAssetBundles();
             }
 
             EditorGUILayout.Space(5f);
 
             GUI.backgroundColor = Color.green;
             if (GUILayout.Button("Import", GUILayout.Height(40f))) {
-                string path = EditorUtility.OpenFilePanelWithFilters("Select RoomBase File", "Assets", new string[] { "ScriptableObject", "asset" });
-                    if(path != string.Empty) {
-                        int cutoffFrom = path.IndexOf("Assets");
-                        path = path.Substring(cutoffFrom);
-                        RoomBase roomBase = AssetDatabase.LoadAssetAtPath<RoomBase>(path) as RoomBase;
-                        if (EditorUtility.DisplayDialog("Are you sure?", "Importing this room will overlap the current one without saving it.", "Okay", "Cancel"))
-                        {
-                            _context.Import(roomBase);
-                            RoomNumber = roomBase.roomNumber;
-                        }	
-                    }
+                var rooms = GetAllRooms();
+
+                ImportRoomBaseWindow.OpenWindow();
             }
 
             if (GUILayout.Button("Export", GUILayout.Height(40f))) {
@@ -105,11 +80,27 @@ namespace LevelEditor {
         private void Export() {
             var asset = _context.RequestExport();
             asset.roomNumber = RoomNumber;
-            string path = "Assets/ScriptableObjects/Rooms/" + RoomNumber + ".asset";
+            string path = "Assets/ScriptableObjects/Rooms/Room " + RoomNumber + ".asset";
             AssetDatabase.CreateAsset(asset, path);
             
             AssetImporter assetImporter = AssetImporter.GetAtPath(path);
             assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
+        }
+
+        public static List<RoomBase> GetAllRooms() {
+            List<RoomBase> rooms = new List<RoomBase>();
+
+            string[] allRoomBaseFiles = Directory.GetFiles(Application.dataPath, "*.asset", SearchOption.AllDirectories);
+            foreach(string roomFile in allRoomBaseFiles)
+            {
+                string assetPath = "Assets" + roomFile.Replace(Application.dataPath, "").Replace('\\', '/');
+                RoomBase source = AssetDatabase.LoadAssetAtPath(assetPath, typeof(RoomBase)) as RoomBase;
+                if (source) {
+                    rooms.Add(source);
+                }
+            }
+
+            return rooms;
         }
     }
 }

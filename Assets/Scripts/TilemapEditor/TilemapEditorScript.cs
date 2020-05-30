@@ -7,10 +7,6 @@ namespace LevelEditor {
     [ExecuteInEditMode]
     public class TilemapEditorScript : MonoBehaviour
     {
-        public EnemySpawnPosition enemyPointPrefab = null;
-        public PlayerSpawnPosition playerPointPrefab = null;
-        public PlatformController movingPlatformPrefab = null;
-
         public void ClearAll() {
             ClearAllTilemaps();
             ClearAllObjects();
@@ -116,7 +112,7 @@ namespace LevelEditor {
             return points;
         }
 
-        public void Import(RoomBase roomBase) {
+        public void Import(RoomBase roomBase, EnemySpawnPosition enemyPointPrefab, PlayerSpawnPosition playerPointPrefab, PlatformController movingPlatformPrefab) {
             ClearAll();
 
             Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();

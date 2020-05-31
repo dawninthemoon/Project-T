@@ -6,7 +6,7 @@ using Aroma;
 
 public class PlatformController : RaycastController, IPlaceable
 {
-    private LayerMask _passengerMask;
+    private int _passengerMask;
     [SerializeField] private Vector3[] _localWayPoints;
     public Vector3[] LocalWayPoints { get { return _localWayPoints; } }
     [SerializeField] private float _moveSpeed;
@@ -34,7 +34,7 @@ public class PlatformController : RaycastController, IPlaceable
     {
         base.Initialize();
 
-        _passengerMask = LayerMask.NameToLayer("Player");
+        _passengerMask = 1 << LayerMask.NameToLayer("Player");
 
         _renderer = GetComponent<SpriteRenderer>();
         _movePassengers = new HashSet<Transform>();

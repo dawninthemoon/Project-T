@@ -9,10 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask _attackableLayers;
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
-
     private static readonly string DefaultAttackName = "defaultAttack";
-
-    private EffectManager _effectManager;
     private const float InitalInputDelay = 0.15f;
     private const float InputDelayAfterCombo = 0.15f;
     private float _inputDelay;
@@ -27,7 +24,6 @@ public class PlayerAttack : MonoBehaviour
         AlreadyHitColliders = new List<Collider2D>();
         _model = GetComponent<Character>();
         _characterRenderer = GetComponent<PlayerRenderer>();
-        _effectManager = EffectManager.GetInstance();
     }
 
     public void Progress(bool attackRequested) {
@@ -73,7 +69,7 @@ public class PlayerAttack : MonoBehaviour
         float dir = transform.localScale.x;
 
         string path = StringUtils.MergeStrings(DefaultAttackName, attackType.ToString());
-        _effectManager.SpawnAndRemove(pos, path, dir);
+        EffectManager.GetInstance().SpawnAndRemove(pos, path, dir);
     }
 
     public void SpawnAttackEffect(string effectName, bool effectTracks = false) {
@@ -81,10 +77,10 @@ public class PlayerAttack : MonoBehaviour
         float dir = transform.localScale.x;
 
         if (effectTracks) {
-            _effectManager.SpawnTrackEffectAndRemove(pos, effectName, transform, dir);
+            EffectManager.GetInstance().SpawnTrackEffectAndRemove(pos, effectName, transform, dir);
         }
         else {
-            _effectManager.SpawnAndRemove(pos, effectName, dir);
+            EffectManager.GetInstance().SpawnAndRemove(pos, effectName, dir);
         }
     }
 

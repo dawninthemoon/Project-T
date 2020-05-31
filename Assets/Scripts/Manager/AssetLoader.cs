@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using Aroma;
 
-public class AssetLoader : SingletonWithMonoBehaviour<AssetLoader>
+public class AssetLoader : Singleton<AssetLoader>
 {
     private AssetBundle _assetBundle;
 

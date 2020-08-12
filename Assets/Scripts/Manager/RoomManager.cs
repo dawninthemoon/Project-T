@@ -40,7 +40,7 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
     }
 
     private void MakeAllRooms() {
-        RoomBase[] roomBases = AssetLoader.GetInstance().GetAllRoomBases();
+        SORoomBase[] roomBases = AssetLoader.GetInstance().GetAllRoomBases();
         int numOfRooms = roomBases.Length;
         _rooms = new RoomInfo[numOfRooms];
 

@@ -20,11 +20,11 @@ public class AssetLoader : Singleton<AssetLoader>
         }
     }
 
-    public RoomBase[] GetAllRoomBases() {
+    public SORoomBase[] GetAllRoomBases() {
         if (_assetBundle == null)
             Initalize();
 
-        RoomBase[] wholeRooms = _assetBundle.LoadAllAssets<RoomBase>();
+        SORoomBase[] wholeRooms = _assetBundle.LoadAllAssets<SORoomBase>();
         return wholeRooms;
     }
 

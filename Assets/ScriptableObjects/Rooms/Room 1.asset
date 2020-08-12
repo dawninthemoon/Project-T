@@ -63,26 +63,20 @@ MonoBehaviour:
     - {x: 3, y: -3, z: 0}
     - {x: 4, y: -3, z: 0}
     - {x: 5, y: -3, z: 0}
-    - {x: -10, y: -2, z: 0}
-    - {x: -9, y: -2, z: 0}
-    - {x: -8, y: -2, z: 0}
     - {x: -7, y: -2, z: 0}
     - {x: -6, y: -2, z: 0}
     - {x: -5, y: -2, z: 0}
     - {x: -4, y: -2, z: 0}
     - {x: -3, y: -2, z: 0}
-    - {x: -2, y: -2, z: 0}
-    - {x: -1, y: -2, z: 0}
-    - {x: 0, y: -2, z: 0}
-    - {x: 1, y: -2, z: 0}
-    - {x: 2, y: -2, z: 0}
-    - {x: 3, y: -2, z: 0}
-    - {x: 4, y: -2, z: 0}
-    - {x: 5, y: -2, z: 0}
+    - {x: -5, y: -1, z: 0}
+    - {x: -4, y: -1, z: 0}
+    - {x: -10, y: 1, z: 0}
+    - {x: 5, y: 2, z: 0}
+    - {x: -9, y: 3, z: 0}
+    - {x: -4, y: 3, z: 0}
+    - {x: 0, y: 3, z: 0}
+    - {x: 3, y: 3, z: 0}
     tileBases:
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
@@ -152,44 +146,9 @@ MonoBehaviour:
     targetRoomNumber: 0
     targetIndex: 0
     vertical: 0
-    size: {x: 0.8, y: 4.8}
-    offset: {x: 0, y: 3}
-    position: {x: -10.5, y: -1}
+    size: {x: 0.8, y: 2.4}
+    offset: {x: 0, y: 1.5}
+    position: {x: -9.5, y: -2}
     playerMask: 512
-  enemyPoints:
-  - requestEnemy: 0
-    position: {x: 4.5, y: -1, z: 0}
-  movingPlatformPoints:
-  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
-      type: 3}
-    position: {x: -2.5, y: 1.5, z: 0}
-    localWayPoints:
-    - {x: 2, y: 0, z: 0}
-    - {x: 0, y: 2, z: 0}
-    - {x: -5, y: 1, z: 0}
-    moveSpeed: 1
-    cyclic: 0
-    waitTime: 0
-    easeAmount: 0
-  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
-      type: 3}
-    position: {x: -1.5, y: 1.5, z: 0}
-    localWayPoints:
-    - {x: 2, y: 0, z: 0}
-    - {x: 0, y: 2, z: 0}
-    - {x: -5, y: 1, z: 0}
-    moveSpeed: 1
-    cyclic: 0
-    waitTime: 0
-    easeAmount: 0
-  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
-      type: 3}
-    position: {x: -0.5, y: 1.5, z: 0}
-    localWayPoints:
-    - {x: 2, y: 0, z: 0}
-    - {x: 0, y: 2, z: 0}
-    - {x: -5, y: 1, z: 0}
-    moveSpeed: 1
-    cyclic: 0
-    waitTime: 0
-    easeAmount: 0
+  enemyPoints: []
+  movingPlatformPoints: []

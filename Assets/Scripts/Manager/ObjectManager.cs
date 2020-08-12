@@ -7,20 +7,24 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 {
     private static readonly string EnemyPrefabDirectory = "Enemy/";
     private static readonly string MovingPlatformName = "MovingPlatform";
+    private static readonly string WaterName = "Water";
 
     private AssetLoader _assetLoader;
 
     private Player _player;
     private List<EnemyBase> _activeEnemies;
     private List<PlatformController> _activePlatforms;
+    private List<Water> _activeWater;
     private ObjectPool<EnemyBase>[] _enemyObjectPoolArr;
     private ObjectPool<PlatformController> _movingPlatformPool;
+    private ObjectPool<Water> _waterPool;
     private Dictionary<EnemyTypes, int>  _enemyObjectPoolOrder;
 
     public void Initialize() {
         _assetLoader = AssetLoader.GetInstance();
-        _activeEnemies = new List<EnemyBase>();
-        _activePlatforms = new List<PlatformController>();
+        _activeEnemies = new List<EnemyBase>(5);
+        _activePlatforms = new List<PlatformController>(5);
+        _activeWater = new List<Water>(3);
         _enemyObjectPoolOrder = new Dictionary<EnemyTypes, int>();
         InitalizeObjectPool();
     }
@@ -74,6 +78,13 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         _activePlatforms.Clear();
     }
 
+    public void ReturnAllWater() {
+        for (int i=0; i < _activeWater.Count; ++i) {
+            _waterPool.ReturnObject(_activeWater[i]);
+        }
+        _activeWater.Clear();
+    }
+
     public void SpawnEnemy(EnemyTypes type, Vector3 position) {
         string fileName = StringUtils.MergeStrings(EnemyPrefabDirectory, type.ToString());
         
@@ -86,6 +97,13 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 
             _activeEnemies.Add(enemy);
         }
+    }
+
+    public void CreateWater(WaterPoint info) {
+        var water = _waterPool.GetObject();
+        water.transform.localScale = info.scale;
+        water.transform.position = info.position;
+        _activeWater.Add(water);
     }
 
     public void CreateMovingPlatform(MovingPlatformPoint info) {
@@ -122,6 +140,15 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 PlatformController controller = Instantiate(prefab).GetComponent<PlatformController>();
                 controller.Initialize();
                 return controller;
+            }
+        );
+
+        _waterPool = new ObjectPool<Water>(
+            5,
+            () => {
+                GameObject prefab = _assetLoader.GetPrefab(WaterName);
+                Water water = Instantiate(prefab).GetComponent<Water>();
+                return water;
             }
         );
     }

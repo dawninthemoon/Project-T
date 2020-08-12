@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public abstract class EnemyBase : Character, IPlaceable
+public abstract class EnemyBase : GroundMove, IPlaceable
 {
     [SerializeField] protected string _enemyName = null;
     [SerializeField] protected int _maxHp = 20;
@@ -16,8 +16,8 @@ public abstract class EnemyBase : Character, IPlaceable
     private Sequence _flashSequence;
     protected float _knockbackTime = 0.5f;
 
-    public override void Initialize() {
-        base.Initialize();
+    public virtual void Initialize() {
+        base.Initialize(0f, 0f, 0f);
         _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         Setup();

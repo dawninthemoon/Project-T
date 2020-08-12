@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4195623427
+CRC: 33696317
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e48f519a9b6e4468a779c5b9cf62613f
+    Hash: 2ce14d3670ba2418151f6ff090b79f9a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3b7d3ec759f322a5b81c3c257bd2de50
+    Hash: 25c727640fb03803574293112b1f21fd
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -15,11 +15,19 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
 - Class: 61
+  Script: {instanceID: 0}
+- Class: 64
   Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
@@ -27,6 +35,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 95
   Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: b342e5100dd0ddb4d857f8689fddf8a8, type: 3}
 - Class: 114
@@ -46,6 +56,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 418bdcd5552cff34b9bf74b6bbdff272, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 01a5de77a9c524941b0334d261205b9a, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 422926b7ad3403d4996d9aa43b12baec, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b5b958d8c6676f54db238746f3537c3b, type: 3}
@@ -55,6 +67,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 6172d31d6a6e5984189085d73e24fc87, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 254efecd47332974dbc7213c399d33f1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 70951ee815fe28645bc314173ce18dac, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -65,11 +81,13 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Player.prefab
-- Assets/ScriptableObjects/Rooms/0.asset
+- Assets/ScriptableObjects/Rooms/Room 0.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack2.controller
-- Assets/ScriptableObjects/Rooms/1.asset
+- Assets/ScriptableObjects/Rooms/Room 1.asset
+- Assets/ScriptableObjects/Rooms/Room 2.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
+- Assets/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack3.controller

@@ -17,12 +17,10 @@ public class PlayerAttack : MonoBehaviour
     public int CurrentAttackState { get; private set; }
     public bool IsInAttackProgress { get; private set; }
     private PlayerRenderer _characterRenderer;
-    private Character _model;
     public List<Collider2D> AlreadyHitColliders { get; private set; }
 
     public void Initialize() {
         AlreadyHitColliders = new List<Collider2D>();
-        _model = GetComponent<Character>();
         _characterRenderer = GetComponent<PlayerRenderer>();
     }
 

@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class RoomInfo
 {
-    private RoomBase _roomBase;
+    private SORoomBase _roomBase;
     public int RoomNumber { get { return _roomBase.roomNumber; } }
 
-    public RoomInfo(RoomBase roomBase) {
+    public RoomInfo(SORoomBase roomBase) {
         _roomBase = roomBase;
     }
 
@@ -28,6 +28,11 @@ public class RoomInfo
             objManager.CreateMovingPlatform(movingPlatforms[i]);
         }
 
+        var waterPoints = _roomBase.waterPoints;
+        foreach (var waterObj in waterPoints) {
+            objManager.CreateWater(waterObj);
+        }
+
         tilemap.ClearAllTiles();
         tilemap.SetTiles(_roomBase.collisionPair.positions, _roomBase.collisionPair.tileBases);
     }
@@ -35,6 +40,7 @@ public class RoomInfo
     public void ResetRoom() {
         ObjectManager.GetInstance().ReturnAllEnemies();
         ObjectManager.GetInstance().ReturnAllPlatforms();
+        ObjectManager.GetInstance().ReturnAllWater();
     }
 
     public void FixedProgress() {

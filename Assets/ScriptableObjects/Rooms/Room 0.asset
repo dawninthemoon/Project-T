@@ -15,38 +15,6 @@ MonoBehaviour:
   roomNumber: 0
   collisionPair:
     positions:
-    - {x: -10, y: -5, z: 0}
-    - {x: -9, y: -5, z: 0}
-    - {x: -8, y: -5, z: 0}
-    - {x: -7, y: -5, z: 0}
-    - {x: -6, y: -5, z: 0}
-    - {x: -5, y: -5, z: 0}
-    - {x: -4, y: -5, z: 0}
-    - {x: -3, y: -5, z: 0}
-    - {x: -2, y: -5, z: 0}
-    - {x: -1, y: -5, z: 0}
-    - {x: 0, y: -5, z: 0}
-    - {x: 1, y: -5, z: 0}
-    - {x: 2, y: -5, z: 0}
-    - {x: 3, y: -5, z: 0}
-    - {x: 4, y: -5, z: 0}
-    - {x: 5, y: -5, z: 0}
-    - {x: -10, y: -4, z: 0}
-    - {x: -9, y: -4, z: 0}
-    - {x: -8, y: -4, z: 0}
-    - {x: -7, y: -4, z: 0}
-    - {x: -6, y: -4, z: 0}
-    - {x: -5, y: -4, z: 0}
-    - {x: -4, y: -4, z: 0}
-    - {x: -3, y: -4, z: 0}
-    - {x: -2, y: -4, z: 0}
-    - {x: -1, y: -4, z: 0}
-    - {x: 0, y: -4, z: 0}
-    - {x: 1, y: -4, z: 0}
-    - {x: 2, y: -4, z: 0}
-    - {x: 3, y: -4, z: 0}
-    - {x: 4, y: -4, z: 0}
-    - {x: 5, y: -4, z: 0}
     - {x: -10, y: -3, z: 0}
     - {x: -9, y: -3, z: 0}
     - {x: -8, y: -3, z: 0}
@@ -77,54 +45,22 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 0}
     - {x: 3, y: 3, z: 0}
     tileBases:
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
-    - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
+    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
     - {fileID: 11400000, guid: a2ac85c589715c34dac830de1abf84b1, type: 2}
@@ -143,11 +79,11 @@ MonoBehaviour:
     tileBases: []
   playerPoints:
   - index: 0
-    targetRoomNumber: 1
-    targetIndex: 0
+    targetRoomNumber: 2
+    targetIndex: 1
     vertical: 0
-    size: {x: 0.8, y: 5.6}
-    offset: {x: 0, y: 3.5}
+    size: {x: 0.8, y: 2.4}
+    offset: {x: 0, y: 1.5}
     position: {x: 6.5, y: -2}
     playerMask: 512
   - index: 1
@@ -161,6 +97,9 @@ MonoBehaviour:
   enemyPoints:
   - requestEnemy: 0
     position: {x: 4.5, y: -2, z: 0}
+  waterPoints:
+  - position: {x: -2.085, y: -3.75, z: 0}
+    scale: {x: 16.092, y: 1.6948193, z: 1}
   movingPlatformPoints:
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}

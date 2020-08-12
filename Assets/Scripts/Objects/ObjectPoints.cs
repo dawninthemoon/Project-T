@@ -74,3 +74,9 @@ public class PlayerPoint {
         RoomManager.GetInstance().MoveRoom(diff, targetRoomNumber, targetIndex);
     }
 }
+
+[System.Serializable]
+public class WaterPoint {
+    public Vector3 position;
+    public Vector3 scale;
+}

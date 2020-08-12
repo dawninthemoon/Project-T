@@ -34,7 +34,7 @@ namespace LevelEditor {
             }
         }
 
-        public RoomBase RequestExport() {
+        public SORoomBase RequestExport() {
             Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();
             Tilemap throughTilemap = transform.Find("Through").GetComponent<Tilemap>();
             Transform objectTilemap = transform.Find("Objects");
@@ -42,14 +42,16 @@ namespace LevelEditor {
             var enemies = objectTilemap.GetComponentsInChildren<EnemySpawnPosition>(true);
             var playerPoints =  objectTilemap.GetComponentsInChildren<PlayerSpawnPosition>(true);
             var movingPlatforms = objectTilemap.GetComponentsInChildren<PlatformController>(true);
+            var water = objectTilemap.GetComponentsInChildren<Water>(true);
 
-            RoomBase asset = ScriptableObject.CreateInstance<RoomBase>();
+            SORoomBase asset = ScriptableObject.CreateInstance<SORoomBase>();
 
             asset.collisionPair = LoadTileInfo(collisionTilemap);
             asset.throughPair = LoadTileInfo(throughTilemap);
             asset.enemyPoints = LoadEnemyPoints(enemies);
             asset.playerPoints = LoadPlayerPoints(playerPoints);
             asset.movingPlatformPoints = LoadMovingPlatformPoints(movingPlatforms);
+            asset.waterPoints = LoadWaterPoints(water);
 
             return asset;
         }
@@ -68,9 +70,20 @@ namespace LevelEditor {
             return new TilemapPair(positions.ToArray(), tileBases.ToArray());
         }
 
+        public WaterPoint[] LoadWaterPoints(Water[] info) {
+            WaterPoint[] waterPoints = new WaterPoint[info.Length];
+            for (int i=0; i<info.Length; ++i) {
+                waterPoints[i] = new WaterPoint() {
+                    position = info[i].transform.position,
+                    scale = info[i].transform.localScale
+                };
+            }
+            return waterPoints;
+        }
+
         public EnemyPoint[] LoadEnemyPoints(EnemySpawnPosition[] info) {
             EnemyPoint[] enemyPoint = new EnemyPoint[info.Length];
-            for (int i = 0; i < info.Length; i++) {
+            for (int i = 0; i < info.Length; ++i) {
                 enemyPoint[i] = new EnemyPoint(info[i].transform.position, info[i].requestEnemy);
             }
             return enemyPoint;
@@ -112,7 +125,7 @@ namespace LevelEditor {
             return points;
         }
 
-        public void Import(RoomBase roomBase, EnemySpawnPosition enemyPointPrefab, PlayerSpawnPosition playerPointPrefab, PlatformController movingPlatformPrefab) {
+        public void Import(SORoomBase roomBase, EnemySpawnPosition enemyPointPrefab, PlayerSpawnPosition playerPointPrefab, PlatformController movingPlatformPrefab) {
             ClearAll();
 
             Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();

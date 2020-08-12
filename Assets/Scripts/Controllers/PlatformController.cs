@@ -218,28 +218,44 @@ public class PlatformController : RaycastController, IPlaceable
         if (_localWayPoints != null)
         {
             Gizmos.color = Color.red;
-            float size = 0.2f;
+            //float size = 0.1f;
 
             Color defaultColor = Gizmos.color;
 
             int pointsCount = _localWayPoints.Length;
-            Color[] colors = new Color[4]; colors[0] = Color.red; colors[1] = Color.yellow; colors[2] = Color.green; colors[3] = Color.blue;   
+            Gizmos.color = Color.green;
 
             for (int i = 0; i < pointsCount; i++)
             {
-                Color color = colors[i % 4];
                 Vector3 globalWayPointPos = (Application.isPlaying) ? _globalWayPoints[i] : _localWayPoints[i] + transform.position;
                 
                 Vector3 plusMinus = new Vector3(1f, -1f, 0f);
                 Vector3 minusPlus = new Vector3(-1f, 1f, 0f);
 
-                Gizmos.color = color;
-
-                Gizmos.DrawLine(globalWayPointPos + minusPlus * size, globalWayPointPos + plusMinus * size);
-                Gizmos.DrawLine(globalWayPointPos + Vector3.one * size, globalWayPointPos - Vector3.one * size);
+                //Gizmos.DrawLine(globalWayPointPos + minusPlus * size, globalWayPointPos + plusMinus * size);
+                //Gizmos.DrawLine(globalWayPointPos + Vector3.one * size, globalWayPointPos - Vector3.one * size);
 
                 if (i < pointsCount - 1) {
                     Gizmos.DrawLine(_localWayPoints[i] + transform.position, _localWayPoints[i + 1] + transform.position);
+                }
+
+                if (i > 0) {
+                    Vector3 prevPos = _localWayPoints[i - 1] + transform.position;
+
+                    Vector2 diff = globalWayPointPos - prevPos;
+                    float radian = Mathf.Atan2(diff.y, diff.x) + Mathf.PI;
+                    float arrowSize = 0.15f;
+
+                    Vector3 target1 = new Vector3(Mathf.Cos(radian + Mathf.PI / 4f), Mathf.Sin(radian + Mathf.PI / 4f)) * arrowSize;
+                    Vector3 target2 = new Vector3(Mathf.Cos(radian - Mathf.PI / 4f), Mathf.Sin(radian - Mathf.PI / 4f)) * arrowSize;
+
+                    Vector3 startPos = prevPos + (globalWayPointPos - prevPos) / 2f;
+                    Vector3 diffPos = new Vector3(Mathf.Cos(radian), Mathf.Sin(radian)) * 0.05f;
+
+                    Gizmos.DrawLine(startPos - diffPos, startPos - diffPos + target1);
+                    Gizmos.DrawLine(startPos - diffPos, startPos - diffPos + target2);
+                    Gizmos.DrawLine(startPos + diffPos, startPos + diffPos + target1);
+                    Gizmos.DrawLine(startPos + diffPos, startPos + diffPos + target2);
                 }
             }
 

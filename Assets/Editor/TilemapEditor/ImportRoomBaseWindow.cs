@@ -52,7 +52,7 @@ public class ImportRoomBaseWindow : EditorWindow
             {
                 GUILayout.Label("Saved Rooms", (GUIStyle)"OL Title");
 
-                List<RoomBase> roomBases = LevelEditor.TilemapInspectorEditor.GetAllRooms();
+                List<SORoomBase> roomBases = LevelEditor.TilemapInspectorEditor.GetAllRooms();
                 int roomsCount = roomBases.Count;
 
                 for (int i = 0; i < roomsCount; i++)
@@ -75,7 +75,7 @@ public class ImportRoomBaseWindow : EditorWindow
         Repaint();
     }
 
-    private void DrawRoomBaseButton(RoomBase roomBase, Color defColor, out bool nowClicked) {
+    private void DrawRoomBaseButton(SORoomBase roomBase, Color defColor, out bool nowClicked) {
         nowClicked = false;
 
         bool isNowSelectedRoom = (_nowRoomIndex == _selectedRoomIndex);
@@ -141,7 +141,7 @@ public class ImportRoomBaseWindow : EditorWindow
 
     private int _lastClickedScene = -1;
     private float _lastClickTime = 0;
-    private const float DoubleClickDelay = 0.25f;
+    private const float DoubleClickDelay = 0.3f;
     private int _nowRoomIndex = -1;
     private int _selectedRoomIndex;
 

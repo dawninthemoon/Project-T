@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8968027397319763385}
   - component: {fileID: 8968027397319763384}
+  - component: {fileID: 4441701697413993755}
+  - component: {fileID: 8673681518276561329}
   - component: {fileID: 8968027397319763389}
   - component: {fileID: 8968027397319763386}
   - component: {fileID: 8968027397319763364}
@@ -49,9 +51,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99067df16864f634b903ec9333daba6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 6
-  _maxJumpHeight: 2.5
-  _minJumpHeight: 0.5
+--- !u!114 &4441701697413993755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8968027397319763388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a5de77a9c524941b0334d261205b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8673681518276561329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8968027397319763388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70951ee815fe28645bc314173ce18dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEntityChange:
+    m_PersistentCalls:
+      m_Calls: []
+  entityIdString: uTeJvqtCjUe8pmyS2AMypg
+  metaIdString: 
+  initWithFirst: 0
 --- !u!114 &8968027397319763389
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ namespace LevelEditor {
         private TilemapEditorScript _context;
         public static int RoomNumber;
 
-        private List<RoomBase> roomBases;
+        private List<SORoomBase> roomBases;
 
         private void OnEnable() {
             _context = (TilemapEditorScript)target;
@@ -87,14 +87,14 @@ namespace LevelEditor {
             assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
         }
 
-        public static List<RoomBase> GetAllRooms() {
-            List<RoomBase> rooms = new List<RoomBase>();
+        public static List<SORoomBase> GetAllRooms() {
+            List<SORoomBase> rooms = new List<SORoomBase>();
 
             string[] allRoomBaseFiles = Directory.GetFiles(Application.dataPath, "*.asset", SearchOption.AllDirectories);
             foreach(string roomFile in allRoomBaseFiles)
             {
                 string assetPath = "Assets" + roomFile.Replace(Application.dataPath, "").Replace('\\', '/');
-                RoomBase source = AssetDatabase.LoadAssetAtPath(assetPath, typeof(RoomBase)) as RoomBase;
+                SORoomBase source = AssetDatabase.LoadAssetAtPath(assetPath, typeof(SORoomBase)) as SORoomBase;
                 if (source) {
                     rooms.Add(source);
                 }

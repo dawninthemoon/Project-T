@@ -22,7 +22,6 @@ public class AttackStateBase : StateMachineBehaviour<PlayerAttack>
         _attackDamage = Context.DefaultAttackDamage;
         _timeAgo = 0f;
         _stateLength = stateInfo.length;
-        Context.CanInputNextCombo = true;
         Context.AlreadyHitColliders.Clear();
     }
 

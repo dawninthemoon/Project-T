@@ -9,10 +9,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask _attackableLayers;
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
-    private const float InitalInputDelay = 0.15f;
+    private const float InitalInputDelay = 0.2f;
     private float _inputDelay;
     private static readonly int MaxAttackCount = 2;
-    public bool CanInputNextCombo { get; set; } = true;
     public int CurrentAttackState { get; private set; }
     public bool IsInAttackProgress { get; private set; }
     private PlayerRenderer _characterRenderer;
@@ -26,10 +25,9 @@ public class PlayerAttack : MonoBehaviour
     public void Progress(bool attackRequested) {
         _inputDelay -= Time.deltaTime;
         
-        if (attackRequested && _inputDelay < 0f && CanInputNextCombo) {
+        if (attackRequested && _inputDelay < 0f) {
             _inputDelay = InitalInputDelay;
 
-            CanInputNextCombo = false;
             CurrentAttackState = (CurrentAttackState % MaxAttackCount) + 1;
             _characterRenderer.SetAttackState(CurrentAttackState);
         }

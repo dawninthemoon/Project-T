@@ -9,7 +9,6 @@ public class DefaultAttack2State : AttackStateBase
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEntered(animator, stateInfo, layerIndex);
-        Context.SpawnAttackEffect(2);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,7 +18,7 @@ public class DefaultAttack2State : AttackStateBase
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Context.CurrentAttackState <= 2) {
+        if (Context.CurrentAttackState == 2) {
             Context.AttackEnd();
         }
     }

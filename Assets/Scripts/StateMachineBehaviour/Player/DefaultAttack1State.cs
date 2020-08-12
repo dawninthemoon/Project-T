@@ -10,7 +10,6 @@ public class DefaultAttack1State : AttackStateBase
     {   
         base.OnStateEntered(animator, stateInfo, layerIndex);
         Context.EnterAttackProgress();
-        Context.SpawnAttackEffect(1);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,7 +19,7 @@ public class DefaultAttack1State : AttackStateBase
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Context.CurrentAttackState <= 1) {
+        if (Context.CurrentAttackState == 1) {
             Context.AttackEnd();
         }
     }

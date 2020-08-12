@@ -16,11 +16,7 @@ public class PlayerRenderer : MonoBehaviour
     }
 
     public void ApplyAnimation(float dirX, float velocityY, bool requestJump) {
-        int dirY = 0;
-        if (velocityY > 0f)
-            dirY = 1;
-        else if (velocityY < 0f)
-            dirY = -1;
+        int dirY = (velocityY > 0f) ? 1 : ((velocityY < 0f) ? -1 : 0);
 
         _animator.SetInteger(DirXName, Mathf.RoundToInt(dirX));
         _animator.SetInteger(DirYName, dirY);

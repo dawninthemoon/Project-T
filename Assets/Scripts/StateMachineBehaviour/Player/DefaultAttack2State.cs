@@ -18,7 +18,7 @@ public class DefaultAttack2State : AttackStateBase
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Context.CurrentAttackState == 2) {
+        if (Context.RequestedAttackCount == 0) {
             Context.AttackEnd();
         }
     }

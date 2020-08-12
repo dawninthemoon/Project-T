@@ -19,7 +19,7 @@ public class DefaultAttack1State : AttackStateBase
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Context.CurrentAttackState == 1) {
+        if (Context.RequestedAttackCount == 0) {
             Context.AttackEnd();
         }
     }

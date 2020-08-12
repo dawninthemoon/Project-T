@@ -7,7 +7,7 @@ public class PlayerRenderer : MonoBehaviour
     private const string DirXName = "dirX";
     private const string DirYName = "dirY";
     private const string RequestJumpName = "requestJump";
-    private const string AttackStateName = "attackState";
+    private const string RequestedAttackCount = "requestedAttackCount";
 
     private Animator _animator;
 
@@ -29,8 +29,8 @@ public class PlayerRenderer : MonoBehaviour
         }
     }
 
-    public void SetAttackState(int state){
-        _animator.SetInteger(AttackStateName, state);
+    public void RequestAttack(int count){
+        _animator.SetInteger(RequestedAttackCount, count);
     }
 
     public void SetDirection(float dirX) {

@@ -9,10 +9,20 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask _attackableLayers;
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
-    private const float InitalInputDelay = 0.2f;
+    private static readonly float InitalInputDelay = 0.15f;
+    private static readonly float InputDelayAfterCombo = 0.05f;
     private float _inputDelay;
-    private static readonly int MaxAttackCount = 2;
-    public int CurrentAttackState { get; private set; }
+    private static readonly int MaxAttackRequestCount = 1;
+    private int _requestedAttackCount;
+    public int RequestedAttackCount 
+    { 
+        get { return _requestedAttackCount; }
+        set 
+        { 
+            _requestedAttackCount = value;
+            _characterRenderer.RequestAttack(value);
+        }
+    }
     public bool IsInAttackProgress { get; private set; }
     private PlayerRenderer _characterRenderer;
     public List<Collider2D> AlreadyHitColliders { get; private set; }
@@ -26,10 +36,8 @@ public class PlayerAttack : MonoBehaviour
         _inputDelay -= Time.deltaTime;
         
         if (attackRequested && _inputDelay < 0f) {
-            _inputDelay = InitalInputDelay;
-
-            CurrentAttackState = (CurrentAttackState % MaxAttackCount) + 1;
-            _characterRenderer.SetAttackState(CurrentAttackState);
+            _inputDelay = InputDelayAfterCombo;
+            RequestedAttackCount = Mathf.Min(RequestedAttackCount + 1, MaxAttackRequestCount);
         }
     }
 
@@ -50,8 +58,7 @@ public class PlayerAttack : MonoBehaviour
     public void AttackEnd() {
         _inputDelay = InitalInputDelay;
         IsInAttackProgress = false;
-        CurrentAttackState = 0;
-        _characterRenderer.SetAttackState(CurrentAttackState);
+        RequestedAttackCount = 0;
     }
 
     public void EnterAttackProgress() {

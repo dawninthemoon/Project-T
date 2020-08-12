@@ -26,7 +26,7 @@ public class AttackStateBase : StateMachineBehaviour<PlayerAttack>
         Context.AlreadyHitColliders.Clear();
     }
 
-    protected void RequestEnableHitbox(int attackType, int clipCount, int delayCount) {
+    protected void RequestEnableHitbox(int clipCount, int delayCount) {
         _timeAgo += Time.deltaTime;
         if (_timeAgo >= _stateLength / clipCount * delayCount
             && _timeAgo < _stateLength / clipCount * (delayCount + 1)) {

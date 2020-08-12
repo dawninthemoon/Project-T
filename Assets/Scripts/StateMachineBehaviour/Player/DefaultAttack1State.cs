@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DefaultAttack1State : AttackStateBase
 {
-    private static readonly int ClipCount = 5;
+    private static readonly int ClipCount = 6;
 
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
@@ -14,7 +14,7 @@ public class DefaultAttack1State : AttackStateBase
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RequestEnableHitbox(1, ClipCount, 2);
+        RequestEnableHitbox(ClipCount, 0);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

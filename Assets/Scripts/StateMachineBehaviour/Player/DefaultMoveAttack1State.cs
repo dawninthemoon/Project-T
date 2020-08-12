@@ -16,7 +16,7 @@ public class DefaultMoveAttack1State : AttackStateBase
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        RequestEnableHitbox(1, ClipCount, 4);
+        RequestEnableHitbox(ClipCount, 4);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -77,6 +77,28 @@ public partial class TBLPlayerStatus : BGEntityGo
 			_maxJumpHeight[Entity.Index] = value;
 		}
 	}
+	public System.Single throwXPos
+	{
+		get
+		{
+			return _throwXPos[Entity.Index];
+		}
+		set
+		{
+			_throwXPos[Entity.Index] = value;
+		}
+	}
+	public System.Single throwYPos
+	{
+		get
+		{
+			return _throwYPos[Entity.Index];
+		}
+		set
+		{
+			_throwYPos[Entity.Index] = value;
+		}
+	}
 	private static BansheeGz.BGDatabase.BGFieldEntityName __name;
 	public static BansheeGz.BGDatabase.BGFieldEntityName _name
 	{
@@ -111,6 +133,24 @@ public partial class TBLPlayerStatus : BGEntityGo
 		{
 			if(__maxJumpHeight==null || __maxJumpHeight.IsDeleted) __maxJumpHeight=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5089643509535846038,5951098283929571765));
 			return __maxJumpHeight;
+		}
+	}
+	private static BansheeGz.BGDatabase.BGFieldFloat __throwXPos;
+	public static BansheeGz.BGDatabase.BGFieldFloat _throwXPos
+	{
+		get
+		{
+			if(__throwXPos==null || __throwXPos.IsDeleted) __throwXPos=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5450705964323354582,1804559901433629854));
+			return __throwXPos;
+		}
+	}
+	private static BansheeGz.BGDatabase.BGFieldFloat __throwYPos;
+	public static BansheeGz.BGDatabase.BGFieldFloat _throwYPos
+	{
+		get
+		{
+			if(__throwYPos==null || __throwYPos.IsDeleted) __throwYPos=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5666039107175106844,6801613268282021039));
+			return __throwYPos;
 		}
 	}
 }

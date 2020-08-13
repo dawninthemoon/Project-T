@@ -196,7 +196,6 @@ namespace FastSceneChanger
         {
             InitColors();
             InitStyles();
-
             Color defColor = GUI.color;
 
             GUILayout.BeginVertical(topMenuStyle);

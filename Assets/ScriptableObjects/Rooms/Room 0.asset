@@ -103,34 +103,21 @@ MonoBehaviour:
   movingPlatformPoints:
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}
-    position: {x: -2.5, y: 1.5, z: 0}
+    position: {x: 1.5, y: 0.5, z: 0}
     localWayPoints:
     - {x: 0, y: 0, z: 0}
-    - {x: 3, y: -1, z: 0}
-    - {x: 6, y: 0, z: 0}
-    moveSpeed: 1.5
+    - {x: -2, y: 0, z: 0}
+    moveSpeed: 0
     cyclic: 0
-    waitTime: 1
-    easeAmount: 1
+    waitTime: 0
+    easeAmount: 0
   - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
       type: 3}
-    position: {x: -1.5, y: 1.5, z: 0}
+    position: {x: 2.5, y: 0.5, z: 0}
     localWayPoints:
     - {x: 0, y: 0, z: 0}
-    - {x: 3, y: -1, z: 0}
-    - {x: 6, y: 0, z: 0}
-    moveSpeed: 1.5
+    - {x: -2, y: 0, z: 0}
+    moveSpeed: 0
     cyclic: 0
-    waitTime: 1
-    easeAmount: 1
-  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
-      type: 3}
-    position: {x: -0.5, y: 1.5, z: 0}
-    localWayPoints:
-    - {x: 0, y: 0, z: 0}
-    - {x: 3, y: -1, z: 0}
-    - {x: 6, y: 0, z: 0}
-    moveSpeed: 1.5
-    cyclic: 0
-    waitTime: 1
-    easeAmount: 1
+    waitTime: 0
+    easeAmount: 0

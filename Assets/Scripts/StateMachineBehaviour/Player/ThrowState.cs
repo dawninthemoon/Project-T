@@ -8,6 +8,8 @@ public class ThrowState : StateMachineBehaviour<PlayerAttack>
     {
         Context.EnterAttackProgress();
         --Context.RequestedThrowCount;
+        
+        Context.ThrowTalisman();
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -5,6 +5,7 @@ using Aroma;
 
 public class PlayerAttack : MonoBehaviour
 {
+    #region non reference fields
     [SerializeField] private int _defaultAttackDamage = 10;
     [SerializeField] private LayerMask _attackableLayers;
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
@@ -34,12 +35,18 @@ public class PlayerAttack : MonoBehaviour
         }
     }
     public bool IsInAttackProgress { get; private set; }
+    private Vector3 _throwPosition;
+    #endregion
+    
     private PlayerRenderer _characterRenderer;
+    private List<Talisman> _activeTalismans;
     public List<Collider2D> AlreadyHitColliders { get; private set; }
 
-    public void Initialize() {
+    public void Initialize(Vector3 throwPos) {
+        _activeTalismans = new List<Talisman>(5);
         AlreadyHitColliders = new List<Collider2D>();
         _characterRenderer = GetComponent<PlayerRenderer>();
+        _throwPosition = throwPos;
     }
 
     public void Progress(bool attackRequested, bool throwRequested) {
@@ -53,6 +60,12 @@ public class PlayerAttack : MonoBehaviour
         if (throwRequested && _inputDelay < 0f) {
             _inputDelay = InitalInputDelay;
             RequestedThrowCount = Mathf.Min(RequestedThrowCount + 1, MaxRequestCount);
+        }
+    }
+
+    public void FixedProgress() {
+        foreach (var talisman in _activeTalismans) {
+            talisman.FixedProgress();
         }
     }
 
@@ -89,6 +102,17 @@ public class PlayerAttack : MonoBehaviour
         else {
             EffectManager.GetInstance().SpawnAndRemove(pos, effectName, dir);
         }
+    }
+
+    public void ThrowTalisman() {
+        var talisman = ObjectManager.GetInstance().GetTalisman();
+        float dirX = transform.localScale.x;
+
+        talisman.transform.position = transform.position + _throwPosition;
+        var table = TBLTalisman.GetEntity(new BansheeGz.BGDatabase.BGId("44Zgd9sxt0eyEdxw8zsBJQ"));
+
+        talisman.Initalize(dirX, table.moveSpeed);
+        _activeTalismans.Add(talisman);
     }
 
     private bool OnEnemyHit(EnemyBase enemy, int damage, string hitEffectName) {

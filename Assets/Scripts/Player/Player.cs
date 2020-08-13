@@ -18,7 +18,9 @@ public class Player : MonoBehaviour
 
         var status = GetComponent<TBLPlayerStatus>();
         _controller.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
-        _playerAttack.Initialize();
+
+        Vector3 throwPos = new Vector3(status.throwXPos, status.throwYPos);
+        _playerAttack.Initialize(throwPos);
         _playerRenderer.Initialize();
     }
 
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
 
     public void FixedProgress() {
         _controller.FixedProgress();
+        _playerAttack.FixedProgress();
         _playerRenderer.ApplyAnimation(_controller.InputX, Velocity.y, _controller.JumpRequested);
     }
 

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4141261416
+CRC: 3297168129
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f038b60c3ade961963778c5cc3b6d588
+    Hash: 0707a0fb35043b016e45a30b075df3f3
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bff53fc996d7eba74a4792f2951cdfdf
+    Hash: 54b7ba588c845a0bcbf1cdbfe720479b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -69,6 +69,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 21ece826f2a352e4e901a553c9dd8958, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 35c4cb17b9e33694c8d64480d2c75cd9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -88,6 +90,7 @@ Assets:
 - Assets/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
+- Assets/Prefabs/Talisman.prefab
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack3.controller
 - Assets/Prefabs/Enemy/Enemy_Dummy.prefab
 - Assets/AnimatorControllers/meleeAttack_hit.controller

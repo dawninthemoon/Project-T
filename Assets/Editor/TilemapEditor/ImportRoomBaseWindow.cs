@@ -14,7 +14,6 @@ public class ImportRoomBaseWindow : EditorWindow
         Texture icon = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Sprites/Gear.png");
         GUIContent titleContent = new GUIContent("Rooms", icon);
         window.titleContent = titleContent;
-
         window.Show();
     }
 
@@ -99,8 +98,10 @@ public class ImportRoomBaseWindow : EditorWindow
 
         #region when click
         Event e = Event.current;
+        
         if (roomTextRect.Contains(e.mousePosition))
         {
+
             if (e.type == EventType.MouseDown)
             {
                 nowClicked = true;
@@ -108,6 +109,7 @@ public class ImportRoomBaseWindow : EditorWindow
             }
             else if (e.type == EventType.MouseUp)
             {
+
                 if (e.button == 0)
                 {
                     if (_lastClickedScene == _nowRoomIndex && Time.realtimeSinceStartup - _lastClickTime <= DoubleClickDelay) {
@@ -141,7 +143,7 @@ public class ImportRoomBaseWindow : EditorWindow
 
     private int _lastClickedScene = -1;
     private float _lastClickTime = 0;
-    private const float DoubleClickDelay = 0.3f;
+    private const float DoubleClickDelay = 0.25f;
     private int _nowRoomIndex = -1;
     private int _selectedRoomIndex;
 

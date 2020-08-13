@@ -44,11 +44,12 @@ SpriteAtlas:
     packables:
     - {fileID: 102900000, guid: 0ede9b53dcf0951439860562cb027609, type: 3}
     - {fileID: 102900000, guid: 1202d14ba7d37ce409ebc38a0e57ddaf, type: 3}
-    totalSpriteSurfaceArea: 451840
+    totalSpriteSurfaceArea: 468224
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 17caab10fba6c774998a9bd9a59463d1, type: 3}
+  - {fileID: 21300000, guid: d4d4c8906b52eac4699c4d0a551c496b, type: 3}
   - {fileID: 21300000, guid: 2b6496a0378276e40aac0c2d044593be, type: 3}
   - {fileID: 21300000, guid: bf65d0c0c9b0e0e41b3c6918759f31c0, type: 3}
   - {fileID: 21300000, guid: 8f4f6ec07a5ccf449a35cfd3e893caf0, type: 3}
@@ -57,6 +58,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d0162ae0c4e9ce54895049607fd296f4, type: 3}
   - {fileID: 21300000, guid: 97c49111615fad243a249a0a25ae95b4, type: 3}
   - {fileID: 21300000, guid: 2a584961f06f03243917a9da2bd2df50, type: 3}
+  - {fileID: 21300000, guid: b8752fa152b0d68418aa47269783954f, type: 3}
   - {fileID: 21300000, guid: a690dde191e2425489a428f9e11914bb, type: 3}
   - {fileID: 21300000, guid: 96b99b527a9e44b4eb4a0db949487273, type: 3}
   - {fileID: 21300000, guid: af115d62464dc0a4ab8c1f1eac3d6133, type: 3}
@@ -94,6 +96,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0afd8af69a7509c41b8e4d35d5d66fdd, type: 3}
   - {fileID: 21300000, guid: ff7bc11761d40a44fab1a91d5e6d5570, type: 3}
   - {fileID: 21300000, guid: eb03a317cc7904c479eb8f1601599f4f, type: 3}
+  - {fileID: 21300000, guid: f3d1c427b1899924b9d9dbbfbc9a0a72, type: 3}
   - {fileID: 21300000, guid: 4dfdc43749675ed459c02ea475b486c3, type: 3}
   - {fileID: 21300000, guid: 1eef3c3762b160f4a99c082d4a1485db, type: 3}
   - {fileID: 21300000, guid: 8e1974572a208a14f9c4db710e455b1c, type: 3}
@@ -101,6 +104,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 543c3177ba795ee408715052c538b4a0, type: 3}
   - {fileID: 21300000, guid: 685abf77423afa449929d095affe9b76, type: 3}
   - {fileID: 21300000, guid: faa3cfa721ff3d0499902b554064d8e9, type: 3}
+  - {fileID: 21300000, guid: 80309ed786adda041be906dcc68cce70, type: 3}
   - {fileID: 21300000, guid: ca8381e7caae00e47a0cfe67335f1a82, type: 3}
   - {fileID: 21300000, guid: 6feec43889081f74ba0f259f05718bd0, type: 3}
   - {fileID: 21300000, guid: 10f8ac682a4865443b998638b2959aa9, type: 3}
@@ -163,6 +167,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6cf974cfd9be4c94db51f5aadaa4ad2f, type: 3}
   m_PackedSpriteNamesToIndex:
   - spr_enm_dummy_die11
+  - spr_pc_slide1
   - spr_pc_fall4
   - spr_enm_dummy_hurt4
   - spr_enm_dummy_attack6
@@ -171,6 +176,7 @@ SpriteAtlas:
   - spr_pc_run3
   - spr_pc_attack_standing11
   - spr_enm_dummy_die5
+  - spr_pc_slide2
   - spr_pc_throw8
   - spr_pc_fall5
   - spr_pc_throw5
@@ -208,6 +214,7 @@ SpriteAtlas:
   - spr_enm_dummy_attack5
   - spr_pc_attack_standing4
   - spr_pc_attack1_move_eff1
+  - spr_pc_slide3
   - spr_pc_run1
   - spr_pc_attack_hit2
   - spr_pc_throw1
@@ -215,6 +222,7 @@ SpriteAtlas:
   - spr_enm_dummy_move2
   - spr_pc_land3
   - spr_enm_dummy_idle9
+  - spr_pc_slide4
   - spr_enm_dummy_idle4
   - spr_enm_dummy_move8
   - spr_pc_attack_standing12

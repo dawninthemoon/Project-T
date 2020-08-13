@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerRenderer : MonoBehaviour
 {
-    private const string DirXName = "dirX";
-    private const string DirYName = "dirY";
-    private const string RequestJumpName = "requestJump";
-    private const string RequestedAttackCount = "requestedAttackCount";
+    private static readonly string DirXName = "dirX";
+    private static readonly string DirYName = "dirY";
+    private static readonly string RequestJumpName = "requestJump";
+    private static readonly string RequestedAttackCountName = "requestedAttackCount";
+    private static readonly string RequestedThrowCountName = "requestedThrowCount";
 
     private Animator _animator;
 
@@ -30,7 +31,11 @@ public class PlayerRenderer : MonoBehaviour
     }
 
     public void RequestAttack(int count){
-        _animator.SetInteger(RequestedAttackCount, count);
+        _animator.SetInteger(RequestedAttackCountName, count);
+    }
+
+    public void RequestThrow(int count) {
+        _animator.SetInteger(RequestedThrowCountName, count);
     }
 
     public void SetDirection(float dirX) {

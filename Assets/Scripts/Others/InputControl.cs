@@ -22,6 +22,7 @@ public class InputControl : MonoBehaviour
     private bool _isJumpPressed;
     private static readonly string JumpActionName = "Jump";
     private static readonly string AttackActionName = "Attack";
+    private static readonly string ThrowActionName = "Throw";
 
     public void Initalize(Player character)
     {
@@ -51,9 +52,13 @@ public class InputControl : MonoBehaviour
         _myActions.Attack.AddDefaultBinding(Key.X);
         _myActions.Attack.AddDefaultBinding(InputControlType.Action3);
 
+        _myActions.Throw.AddDefaultBinding(Key.A);
+        _myActions.Throw.AddDefaultBinding(InputControlType.Action2);
+
         _wasPressedAtLastFrame = new Dictionary<string, ActionBoolPair>();
         _wasPressedAtLastFrame.Add(JumpActionName, new ActionBoolPair(_myActions.Jump));
         _wasPressedAtLastFrame.Add(AttackActionName, new ActionBoolPair(_myActions.Attack));
+        _wasPressedAtLastFrame.Add(ThrowActionName, new ActionBoolPair(_myActions.Throw));
     }
 
     public bool GetKeyDown(string actionName) {
@@ -89,6 +94,7 @@ public class InputControl : MonoBehaviour
         _model.SetJump(GetKeyDown(JumpActionName));
         _model.SetJumpEnd(!_myActions.Jump.IsPressed, _isJumpPressed);
         _model.SetAttack(GetKeyDown(AttackActionName));
+        _model.SetThrow(GetKeyDown(ThrowActionName));
 
         _isJumpPressed = _myActions.Jump.IsPressed;
     }

@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
     private static readonly float InitalInputDelay = 0.15f;
     private static readonly float InputDelayAfterCombo = 0.05f;
     private float _inputDelay;
-    private static readonly int MaxAttackRequestCount = 1;
+    private static readonly int MaxRequestCount = 1;
     private int _requestedAttackCount;
     public int RequestedAttackCount 
     { 
@@ -21,6 +21,16 @@ public class PlayerAttack : MonoBehaviour
         { 
             _requestedAttackCount = value;
             _characterRenderer.RequestAttack(value);
+        }
+    }
+    private int _requestedThrowCount;
+    public int RequestedThrowCount 
+    {
+        get { return _requestedThrowCount; }
+        set 
+        { 
+            _requestedThrowCount = value;
+            _characterRenderer.RequestThrow(value);
         }
     }
     public bool IsInAttackProgress { get; private set; }
@@ -32,12 +42,17 @@ public class PlayerAttack : MonoBehaviour
         _characterRenderer = GetComponent<PlayerRenderer>();
     }
 
-    public void Progress(bool attackRequested) {
+    public void Progress(bool attackRequested, bool throwRequested) {
         _inputDelay -= Time.deltaTime;
         
         if (attackRequested && _inputDelay < 0f) {
             _inputDelay = InputDelayAfterCombo;
-            RequestedAttackCount = Mathf.Min(RequestedAttackCount + 1, MaxAttackRequestCount);
+            RequestedAttackCount = Mathf.Min(RequestedAttackCount + 1, MaxRequestCount);
+        }
+
+        if (throwRequested && _inputDelay < 0f) {
+            _inputDelay = InitalInputDelay;
+            RequestedThrowCount = Mathf.Min(RequestedThrowCount + 1, MaxRequestCount);
         }
     }
 
@@ -58,7 +73,6 @@ public class PlayerAttack : MonoBehaviour
     public void AttackEnd() {
         _inputDelay = InitalInputDelay;
         IsInAttackProgress = false;
-        RequestedAttackCount = 0;
     }
 
     public void EnterAttackProgress() {

@@ -23,6 +23,7 @@ public class DefaultJumpAttackState : StateMachineBehaviour<PlayerAttack>
         Context.AlreadyHitColliders.Clear();
         Context.EnterAttackProgress();
         Context.SpawnAttackEffect(AttackEffectName, true);
+        --Context.RequestedAttackCount;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

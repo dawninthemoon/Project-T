@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private PlayerRenderer _playerRenderer;
     private PlayerAttack _playerAttack;
     private bool _attackRequested;
+    private bool _throwRequested;
     private GroundMove _controller;
     public Vector2 Velocity { get { return _controller.Velocity;} }
 
@@ -22,7 +23,8 @@ public class Player : MonoBehaviour
     }
 
     public void Progress() {
-        _playerAttack.Progress(_attackRequested);
+        bool throwRequested = _throwRequested && (Mathf.Abs(Velocity.y) < Mathf.Epsilon); 
+        _playerAttack.Progress(_attackRequested, throwRequested);
     }
 
     public void FixedProgress() {
@@ -53,6 +55,8 @@ public class Player : MonoBehaviour
         if (!_playerAttack.IsInAttackProgress)
             _controller.SetJumpEnd(isNotPressed, pressedAtLastFrame);
     }
+
+    public void SetThrow(bool throwPressed) => _throwRequested = throwPressed; 
 
     public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;
 }

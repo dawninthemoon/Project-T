@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3955936100
+CRC: 3648530145
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 76dea528657f2399f49e17e5ba8b8619
+    Hash: 92182a075c7259b89b25a2234cbc59bb
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3837460036aad740c919b054a862c65c
@@ -83,6 +83,7 @@ Assets:
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack2.controller
 - Assets/ScriptableObjects/Rooms/Room 1.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
+- Assets/Animations/Effects/PlayerEffect/meleeAttack_hit.anim
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
 - Assets/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab

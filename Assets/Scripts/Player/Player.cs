@@ -30,9 +30,10 @@ public class Player : MonoBehaviour
     }
 
     public void FixedProgress() {
+        bool jumpRequested = _controller.JumpRequested;
         _controller.FixedProgress();
         _playerAttack.FixedProgress();
-        _playerRenderer.ApplyAnimation(_controller.InputX, Velocity.y, _controller.JumpRequested);
+        _playerRenderer.ApplyAnimation(_controller.InputX, Velocity.y, jumpRequested);
     }
 
     public void SetInputX(float horizontal)

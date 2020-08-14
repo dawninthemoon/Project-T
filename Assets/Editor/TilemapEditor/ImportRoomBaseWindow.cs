@@ -109,7 +109,6 @@ public class ImportRoomBaseWindow : EditorWindow
             }
             else if (e.type == EventType.MouseUp)
             {
-
                 if (e.button == 0)
                 {
                     if (_lastClickedScene == _nowRoomIndex && Time.realtimeSinceStartup - _lastClickTime <= DoubleClickDelay) {
@@ -143,7 +142,7 @@ public class ImportRoomBaseWindow : EditorWindow
 
     private int _lastClickedScene = -1;
     private float _lastClickTime = 0;
-    private const float DoubleClickDelay = 0.25f;
+    private const float DoubleClickDelay = 1f;
     private int _nowRoomIndex = -1;
     private int _selectedRoomIndex;
 

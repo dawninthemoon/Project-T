@@ -82,8 +82,8 @@ MonoBehaviour:
     targetRoomNumber: 2
     targetIndex: 1
     vertical: 0
-    size: {x: 0.8, y: 2.4}
-    offset: {x: 0, y: 1.5}
+    size: {x: 0.8, y: 1.6}
+    offset: {x: 0, y: 1}
     position: {x: 6.5, y: -2}
     playerMask: 512
   - index: 1
@@ -98,26 +98,6 @@ MonoBehaviour:
   - requestEnemy: 0
     position: {x: 4.5, y: -2, z: 0}
   waterPoints:
-  - position: {x: -2.085, y: -3.75, z: 0}
-    scale: {x: 16.092, y: 1.6948193, z: 1}
-  movingPlatformPoints:
-  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
-      type: 3}
-    position: {x: 1.5, y: 0.5, z: 0}
-    localWayPoints:
-    - {x: 0, y: 0, z: 0}
-    - {x: -2, y: 0, z: 0}
-    moveSpeed: 0
-    cyclic: 0
-    waitTime: 0
-    easeAmount: 0
-  - sprite: {fileID: -326054043102674125, guid: 7cc12db04bc36844683fd928adeb041a,
-      type: 3}
-    position: {x: 2.5, y: 0.5, z: 0}
-    localWayPoints:
-    - {x: 0, y: 0, z: 0}
-    - {x: -2, y: 0, z: 0}
-    moveSpeed: 0
-    cyclic: 0
-    waitTime: 0
-    easeAmount: 0
+  - position: {x: -2.003, y: -3.777, z: 0}
+    scale: {x: 15.978388, y: 1.5689123, z: 1}
+  movingPlatformPoints: []

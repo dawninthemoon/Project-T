@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3297168129
+CRC: 1750904093
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0707a0fb35043b016e45a30b075df3f3
+    Hash: eebee0785a2e965434c4d1c97ffc1f8d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 54b7ba588c845a0bcbf1cdbfe720479b
+    Hash: 3837460036aad740c919b054a862c65c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,8 +40,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 99067df16864f634b903ec9333daba6c, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: dedf8ba2974059a4683a5dbaafa949a8, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5e2a0c63ef281b44a823365c3d5bffcd, type: 3}
@@ -51,6 +49,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: c32d97f3f6f3ca94d93dd47bc6e11bf8, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 418bdcd5552cff34b9bf74b6bbdff272, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 21ece826f2a352e4e901a553c9dd8958, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 35c4cb17b9e33694c8d64480d2c75cd9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 01a5de77a9c524941b0334d261205b9a, type: 3}
 - Class: 114
@@ -67,10 +69,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 254efecd47332974dbc7213c399d33f1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 21ece826f2a352e4e901a553c9dd8958, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 35c4cb17b9e33694c8d64480d2c75cd9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -84,7 +82,6 @@ Assets:
 - Assets/ScriptableObjects/Rooms/Room 0.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack2.controller
 - Assets/ScriptableObjects/Rooms/Room 1.asset
-- Assets/ScriptableObjects/Rooms/Room 2.asset
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
 - Assets/Water/Water.prefab

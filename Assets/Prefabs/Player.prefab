@@ -78,9 +78,9 @@ MonoBehaviour:
   OnEntityChange:
     m_PersistentCalls:
       m_Calls: []
-  entityIdString: uTeJvqtCjUe8pmyS2AMypg
+  entityIdString: 
   metaIdString: 
-  initWithFirst: 0
+  initWithFirst: 1
 --- !u!114 &8968027397319763389
 MonoBehaviour:
   m_ObjectHideFlags: 0

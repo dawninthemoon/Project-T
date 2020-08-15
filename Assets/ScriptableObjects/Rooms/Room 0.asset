@@ -15,7 +15,6 @@ MonoBehaviour:
   roomNumber: 0
   collisionPair:
     positions:
-    - {x: -32, y: -3, z: 0}
     - {x: -31, y: -3, z: 0}
     - {x: -30, y: -3, z: 0}
     - {x: -29, y: -3, z: 0}
@@ -60,7 +59,6 @@ MonoBehaviour:
     - {x: 0, y: 3, z: 0}
     - {x: 3, y: 3, z: 0}
     tileBases:
-    - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
     - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
     - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}
     - {fileID: 11400000, guid: 8b6fe75de272d7247ba0746583dc7c01, type: 2}

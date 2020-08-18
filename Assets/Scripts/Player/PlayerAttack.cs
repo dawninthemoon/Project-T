@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
     private static readonly float InitalInputDelay = 0.15f;
+    private static readonly float TalismanInputDelay = 0.4f;
     private static readonly float InputDelayAfterCombo = 0.05f;
     private float _inputDelay;
     private static readonly int MaxRequestCount = 1;
@@ -24,16 +25,17 @@ public class PlayerAttack : MonoBehaviour
             _characterRenderer.RequestAttack(value);
         }
     }
-    private int _requestedThrowCount;
-    public int RequestedThrowCount 
+    private bool _requestThrow;
+    public bool RequestThrow 
     {
-        get { return _requestedThrowCount; }
+        get { return _requestThrow; }
         set 
         { 
-            _requestedThrowCount = value;
+            _requestThrow = value;
             _characterRenderer.RequestThrow(value);
         }
     }
+    public int TalismanCount { get; set; } = 5;
     public bool IsInAttackProgress { get; private set; }
     private Vector3 _throwPosition;
     #endregion
@@ -57,9 +59,9 @@ public class PlayerAttack : MonoBehaviour
             RequestedAttackCount = Mathf.Min(RequestedAttackCount + 1, MaxRequestCount);
         }
 
-        if (throwRequested && _inputDelay < 0f) {
-            _inputDelay = InitalInputDelay;
-            RequestedThrowCount = Mathf.Min(RequestedThrowCount + 1, MaxRequestCount);
+        if (throwRequested && _inputDelay < 0f && TalismanCount > 0) {
+            _inputDelay = TalismanInputDelay;
+            RequestThrow = true;
         }
     }
 

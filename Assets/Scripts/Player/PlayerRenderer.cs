@@ -8,7 +8,7 @@ public class PlayerRenderer : MonoBehaviour
     private static readonly string DirYName = "dirY";
     private static readonly string RequestJumpName = "requestJump";
     private static readonly string RequestedAttackCountName = "requestedAttackCount";
-    private static readonly string RequestedThrowCountName = "requestedThrowCount";
+    private static readonly string RequestedThrowName = "requestThrow";
 
     private Animator _animator;
 
@@ -25,7 +25,7 @@ public class PlayerRenderer : MonoBehaviour
         if (requestJump)
             _animator.SetTrigger(RequestJumpName);
 
-        if(dirX != 0f) {
+        if (dirX != 0f) {
             SetDirection(dirX);
         }
     }
@@ -34,8 +34,8 @@ public class PlayerRenderer : MonoBehaviour
         _animator.SetInteger(RequestedAttackCountName, count);
     }
 
-    public void RequestThrow(int count) {
-        _animator.SetInteger(RequestedThrowCountName, count);
+    public void RequestThrow(bool value) {
+        _animator.SetBool(RequestedThrowName, value);
     }
 
     public void SetDirection(float dirX) {

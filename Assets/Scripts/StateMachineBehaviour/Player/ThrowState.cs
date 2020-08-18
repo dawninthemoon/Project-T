@@ -6,8 +6,10 @@ public class ThrowState : StateMachineBehaviour<PlayerAttack>
 {
     override protected void OnStateEntered(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        --Context.TalismanCount;
+
         Context.EnterAttackProgress();
-        --Context.RequestedThrowCount;
+        Context.RequestThrow = false;
         
         Context.ThrowTalisman();
     }

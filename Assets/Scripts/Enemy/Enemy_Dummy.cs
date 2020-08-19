@@ -132,6 +132,7 @@ public class Enemy_Dummy : EnemyBase
         if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
             _fsm.ChangeState(States.Track);
         }
+
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
             States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabola : States.TackleStraight;
             _fsm.ChangeState(nextState);

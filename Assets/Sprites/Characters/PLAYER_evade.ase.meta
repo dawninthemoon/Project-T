@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 269a4bb6b0442544eb962cd35c481ad8
+guid: 449cd7d511057f24d84b5a5daaa1f606
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,12 +8,11 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: b1577cdc41d01fa4dbf68ad51122a765, type: 3}
-  pixelsPerUnit: 30
-  spriteAtlas: {fileID: 4343727234628468602, guid: cfc5499eabcf0ce47b115e8180727dbe,
-    type: 2}
+  pixelsPerUnit: 100
+  spriteAtlas: {instanceID: 0}
   frameRate: 60
   sortingLayerName: 
   sortingOrder: 0
   animatorCullingMode: 0
-  animatorController: {fileID: 9100000, guid: 1a6bb78b3f6d589429748643c02818f7, type: 2}
+  animatorController: {instanceID: 0}
   errors: []

@@ -967,7 +967,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 1891012111}
+  m_TargetTexture: {fileID: 2026875486}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
@@ -1307,7 +1307,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!84 &1891012111
+--- !u!84 &2026875486
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1320,8 +1320,8 @@ RenderTexture:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 3
-  m_Width: 960
-  m_Height: 540
+  m_Width: 1920
+  m_Height: 1080
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthFormat: 1

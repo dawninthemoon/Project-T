@@ -64,4 +64,8 @@ public class RoomInfo
         }
         return _roomBase.playerPoints[index].position;
     }
+
+    public Vector2[] GetColliderPath(int index) {
+        return _roomBase.colliderPoint.points;
+    }
 }

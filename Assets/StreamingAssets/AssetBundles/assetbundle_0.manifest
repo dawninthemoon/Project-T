@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1511854685
+CRC: 3727200089
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c9538a07e7ff10b8d18e8c4c096583aa
+    Hash: 79070f3a8b63f748ee368dfa7429a36c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3837460036aad740c919b054a862c65c
+    Hash: 4bc77dd95b7be5637ee148bbae65a44d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -56,6 +56,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 01a5de77a9c524941b0334d261205b9a, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 9736b687d3228a34c81f214dc6af31a8, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 422926b7ad3403d4996d9aa43b12baec, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b5b958d8c6676f54db238746f3537c3b, type: 3}
@@ -85,7 +87,7 @@ Assets:
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
 - Assets/Animations/Effects/PlayerEffect/meleeAttack_hit.anim
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
-- Assets/Water/Water.prefab
+- Assets/Prefabs/ForEditor/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
 - Assets/Prefabs/Talisman.prefab

@@ -14,5 +14,20 @@ public class BuildAsssetBundles {
         }
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
     }
+
+    public static void BuildNeedAssetBundle(string bundleName)
+    {
+        if (!Directory.Exists(Application.streamingAssetsPath + "/AssetBundles"))
+        {
+            Directory.CreateDirectory(Application.streamingAssetsPath + "/AssetBundles");
+        }
+
+        AssetBundleBuild[] buildBundles = new AssetBundleBuild[1];
+
+        buildBundles[0].assetBundleName = bundleName;
+        buildBundles[0].assetNames = AssetDatabase.GetAssetPathsFromAssetBundle(bundleName);
+
+        BuildPipeline.BuildAssetBundles(Application.streamingAssetsPath + "/AssetBundles", buildBundles, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
+    }
 }
 

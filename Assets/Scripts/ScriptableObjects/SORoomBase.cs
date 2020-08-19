@@ -23,5 +23,6 @@ public class SORoomBase : ScriptableObject
     public PlayerPoint[] playerPoints;
     public EnemyPoint[] enemyPoints;
     public WaterPoint[] waterPoints;
+    public PolygonColliderPoint colliderPoint;
     public MovingPlatformPoint[] movingPlatformPoints;
 }

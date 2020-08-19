@@ -124,8 +124,14 @@ MonoBehaviour:
     playerMask: 512
   enemyPoints:
   - requestEnemy: 0
-    position: {x: 4.5, y: -2, z: 0}
+    position: {x: 0, y: -2, z: 0}
   waterPoints:
-  - position: {x: -2.003, y: -3.777, z: 0}
-    scale: {x: 15.978388, y: 1.5689123, z: 1}
+  - position: {x: -12.481, y: -3.777, z: 0}
+    scale: {x: 36.94203, y: 1.5689123, z: 1}
+  colliderPoint:
+    points:
+    - {x: -31, y: 4.5}
+    - {x: -31, y: -4.5}
+    - {x: 6, y: -4.5}
+    - {x: 6, y: 4.5}
   movingPlatformPoints: []

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameMain : MonoBehaviour
 {
@@ -24,13 +25,18 @@ public class GameMain : MonoBehaviour
     }
 
     private void Start() {
+        var virtualCamera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+
         AssetLoader.GetInstance().Initalize();
         _objectManager.Initialize();
         _effectManager.Initialize();
         _roomManager.Initalize();
+        virtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = _roomManager.CameraClampCollider;
 
         _character = _objectManager.CreatePlayer(Vector2.zero);
         _character.Initialize();
+        virtualCamera.LookAt = _character.transform;
+        virtualCamera.Follow = _character.transform;
 
         _roomManager.MoveRoom(Vector2.zero, _startRoomNumber, _targetDoorIndex);
 

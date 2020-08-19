@@ -120,8 +120,9 @@ public class ImportRoomBaseWindow : EditorWindow
                             EnemySpawnPosition enemyPointPrefab = AssetDatabase.LoadAssetAtPath(pathBase + "EnemySpawnPosition.prefab", typeof(EnemySpawnPosition)) as EnemySpawnPosition;
                             PlayerSpawnPosition playerPointPrefab =  AssetDatabase.LoadAssetAtPath(pathBase + "PlayerSpawnPosition.prefab", typeof(PlayerSpawnPosition)) as PlayerSpawnPosition;
                             PlatformController movingPlatformPrefab =  AssetDatabase.LoadAssetAtPath(pathBase + "MovingPlatform.prefab", typeof(PlatformController)) as PlatformController;
-                            
-                            editor.Import(roomBase, enemyPointPrefab, playerPointPrefab, movingPlatformPrefab);
+                            Water waterPrefab = AssetDatabase.LoadAssetAtPath(pathBase + "Water/Water.prefab", typeof(Water)) as Water;
+
+                            editor.Import(roomBase, enemyPointPrefab, playerPointPrefab, movingPlatformPrefab, waterPrefab);
                             LevelEditor.TilemapInspectorEditor.RoomNumber = roomBase.roomNumber;
                         }	
                     }

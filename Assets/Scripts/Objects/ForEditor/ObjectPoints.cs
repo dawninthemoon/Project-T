@@ -80,3 +80,8 @@ public class WaterPoint {
     public Vector3 position;
     public Vector3 scale;
 }
+
+[System.Serializable]
+public class PolygonColliderPoint {
+    public Vector2[] points;
+}

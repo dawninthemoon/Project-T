@@ -43,6 +43,7 @@ namespace LevelEditor {
             var playerPoints =  objectTilemap.GetComponentsInChildren<PlayerSpawnPosition>(true);
             var movingPlatforms = objectTilemap.GetComponentsInChildren<PlatformController>(true);
             var water = objectTilemap.GetComponentsInChildren<Water>(true);
+            var collider = objectTilemap.GetComponentInChildren<PolygonCollider2D>(true);
 
             SORoomBase asset = ScriptableObject.CreateInstance<SORoomBase>();
 
@@ -52,6 +53,7 @@ namespace LevelEditor {
             asset.playerPoints = LoadPlayerPoints(playerPoints);
             asset.movingPlatformPoints = LoadMovingPlatformPoints(movingPlatforms);
             asset.waterPoints = LoadWaterPoints(water);
+            asset.colliderPoint = LoadColliderPoint(collider);
 
             return asset;
         }
@@ -68,6 +70,20 @@ namespace LevelEditor {
             }
 
             return new TilemapPair(positions.ToArray(), tileBases.ToArray());
+        }
+
+        private PolygonColliderPoint LoadColliderPoint(PolygonCollider2D info) {
+            int pointsCount = info.GetPath(0).Length;
+            Vector2[] pointsArr = new Vector2[pointsCount];
+            for (int i=0; i < pointsCount; ++i) {
+                pointsArr[i] = info.GetPath(0)[i];
+            }
+
+            var point = new PolygonColliderPoint {
+                points = pointsArr
+            };
+
+            return point;
         }
 
         public WaterPoint[] LoadWaterPoints(Water[] info) {
@@ -125,7 +141,7 @@ namespace LevelEditor {
             return points;
         }
 
-        public void Import(SORoomBase roomBase, EnemySpawnPosition enemyPointPrefab, PlayerSpawnPosition playerPointPrefab, PlatformController movingPlatformPrefab) {
+        public void Import(SORoomBase roomBase, EnemySpawnPosition enemyPointPrefab, PlayerSpawnPosition playerPointPrefab, PlatformController movingPlatformPrefab, Water waterPrefab) {
             ClearAll();
 
             Tilemap collisionTilemap = transform.Find("Collision").GetComponent<Tilemap>();
@@ -156,6 +172,13 @@ namespace LevelEditor {
                 obj.Initialize();
                 obj.Setup(point);
             }
+
+            foreach (var point in roomBase.waterPoints) {
+                var obj = Instantiate(waterPrefab, objectTilemap);
+            }
+
+            var collider = new GameObject().AddComponent<PolygonCollider2D>();
+            collider.SetPath(0, roomBase.colliderPoint.points);
         }
     }
 }

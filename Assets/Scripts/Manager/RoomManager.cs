@@ -8,8 +8,11 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
     private int _currentRoomNumber = 0;
     private RoomInfo[] _rooms;
     private Tilemap _currentTilemap;
+    public PolygonCollider2D CameraClampCollider { get; private set;}
     
     public void Initalize() {
+        CameraClampCollider = new GameObject().AddComponent<PolygonCollider2D>();
+
         _currentTilemap = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
         
         MakeAllRooms();
@@ -33,6 +36,8 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
             Vector3 playerPos = _rooms[targetRoomNumber].GetDoorPosition(targetIndex) + offset;
             bool vertical = _rooms[targetRoomNumber].IsDoorVertical(targetIndex);
             ObjectManager.GetInstance().SetPlayerPos(playerPos, vertical);
+
+            CameraClampCollider.SetPath(0, _rooms[targetRoomNumber].GetColliderPath(targetIndex));
         }
         else {
             Debug.LogError("Room does not exists");

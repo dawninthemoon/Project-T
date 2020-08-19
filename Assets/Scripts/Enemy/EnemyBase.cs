@@ -9,7 +9,6 @@ public abstract class EnemyBase : GroundMove, IPlaceable
 {
     [SerializeField] protected string _enemyName = null;
     [SerializeField] protected int _maxHp = 20;
-
     protected Animator _animator;
     protected SpriteRenderer _renderer;
     protected int _hp;
@@ -17,7 +16,8 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     protected float _knockbackTime = 0.5f;
 
     public virtual void Initialize() {
-        base.Initialize(0f, 0f, 0f);
+        var status = GetComponent<TBLEnemyStatus>();
+        base.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
         _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         Setup();

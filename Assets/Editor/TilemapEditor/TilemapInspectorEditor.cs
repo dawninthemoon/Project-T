@@ -85,6 +85,8 @@ namespace LevelEditor {
             
             AssetImporter assetImporter = AssetImporter.GetAtPath(path);
             assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
+
+            //BuildAsssetBundles.BuildNeedAssetBundle("assetbundle_0");
         }
 
         public static List<SORoomBase> GetAllRooms() {

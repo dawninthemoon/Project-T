@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2199656299581450299}
   - component: {fileID: 2199656299581450298}
+  - component: {fileID: 1986381715251828911}
   - component: {fileID: 1545813590934223750}
   - component: {fileID: 2199656299581450247}
   - component: {fileID: 2199656299581450296}
@@ -48,12 +49,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7576bc83665c4604499ad5822d1b929f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 2
-  _maxJumpHeight: 5
-  _minJumpHeight: 2
   _enemyName: Dummy
   _maxHp: 15
-  _jumpHeight: 5
+  MoveDetectRect:
+    serializedVersion: 2
+    x: 2
+    y: 2
+    width: 10
+    height: 10
+--- !u!114 &1986381715251828911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199656299581450297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9736b687d3228a34c81f214dc6af31a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEntityChange:
+    m_PersistentCalls:
+      m_Calls: []
+  entityIdString: Owa1CegdKkeac9maP6ex9A
+  metaIdString: xu2uO25ezE6y77SnOoj/dQ
+  initWithFirst: 0
 --- !u!114 &1545813590934223750
 MonoBehaviour:
   m_ObjectHideFlags: 0

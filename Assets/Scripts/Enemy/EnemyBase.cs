@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -33,12 +31,21 @@ public abstract class EnemyBase : GroundMove, IPlaceable
         _hp = _maxHp;
     }
 
+    protected bool EnableHitbox(Vector2[] points, int layerMask) {
+        Vector2 current = transform.position;
+        var player = Physics2D.OverlapArea(current + points[0], current + points[1], layerMask)?.GetComponent<Player>();
+        if (player != null) {
+            Debug.Log("received damage");
+        }
+        return player != null;
+    }
+
     public virtual bool ReceiveDamage(int damage, float dir) {
         _hp -= damage;
         
         StartKnockback(damage / 30f * dir);
         StartFlash();
-        _animator.Play("hurt", 0, 0f);
+        //_animator.Play("hurt", 0, 0f);
 
         return _hp > 0;
     }

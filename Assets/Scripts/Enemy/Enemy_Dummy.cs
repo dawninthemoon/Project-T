@@ -2,27 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
+using Aroma;
 
 [ExecuteInEditMode]
 public class Enemy_Dummy : EnemyBase
 {
-    private Vector2 MoveDetectStart, MoveDetectEnd;
-    private Vector2 AttackDetectStart, AttackDetectEnd;
-
-    public enum States { Patrol, Track, Attack, Hurt, Die }
+    private Vector2 _moveDetectStart, _moveDetectEnd;
+    private Vector2 _attackDetectStart, _attackDetectEnd;
+    private Vector2[] _bodyAttackHitboxPoints;
+    public enum States { Patrol, Track, Attack, TackleStraight, TackleParabola, Hurt, Die }
     private StateMachine<States> _fsm;
     private float _timeAgo;
     private Transform _playerTransform;
     private float _targetTackleX;
     private float _targetDirX;
+    private float _tackleFactor = 2f;
     private int _playerMask;
 
     public override void Initialize() {
         var status = GetComponent<TBLEnemyStatus>();
-        MoveDetectStart = status.MoveDetectStart;
-        MoveDetectEnd = status.MoveDetectEnd;
-        AttackDetectStart = status.AttackDetectStart;
-        AttackDetectEnd = status.AttackDetectEnd;
+        _moveDetectStart = status.MoveDetectStart;
+        _moveDetectEnd = status.MoveDetectEnd;
+        _attackDetectStart = status.AttackDetectStart;
+        _attackDetectEnd = status.AttackDetectEnd;
+
+        var collider = GetComponent<BoxCollider2D>();
+        _bodyAttackHitboxPoints = new Vector2[2] {
+            collider.offset - collider.size * 0.5f,
+            collider.offset + collider.size * 0.5f
+        };
 
         base.Initialize();
         _playerMask = 1 << LayerMask.NameToLayer("Player");
@@ -48,7 +56,6 @@ public class Enemy_Dummy : EnemyBase
 
     #region Patrol
     private void Patrol_Enter() {
-        _animator.Play("move");
         _timeAgo = 0f;
         InputX = (Random.Range(0, 2) == 0) ? -1f : 1f;
         ChangeDir(InputX);
@@ -57,7 +64,7 @@ public class Enemy_Dummy : EnemyBase
     private void Patrol_Update() {
         _timeAgo += Time.deltaTime;
 
-        _playerTransform = DetectPlayer(MoveDetectStart, MoveDetectEnd)?.transform;
+        _playerTransform = DetectPlayer(_moveDetectStart, _moveDetectEnd)?.transform;
         if (_playerTransform != null) {
             _fsm.ChangeState(States.Track);
         }
@@ -76,15 +83,14 @@ public class Enemy_Dummy : EnemyBase
 
     #region Track
     private void Track_Enter() {
-        _animator.Play("move");
-        _timeAgo = 0f;
+        _timeAgo = InputX = 0f;
 
         if (_playerTransform == null)
             _fsm.ChangeState(States.Patrol);
     }
 
     private void Track_Update() {
-        if (DetectPlayer(MoveDetectStart, MoveDetectEnd) == null) {
+        if (DetectPlayer(_moveDetectStart, _moveDetectEnd) == null) {
             _timeAgo += Time.deltaTime;
             if (_timeAgo > 2f)
                 _fsm.ChangeState(States.Patrol);
@@ -93,7 +99,7 @@ public class Enemy_Dummy : EnemyBase
             _timeAgo = 0f;
         }
 
-        if (DetectPlayer(AttackDetectStart, AttackDetectEnd) != null) {
+        if (DetectPlayer(_attackDetectStart, _attackDetectEnd) != null) {
             _fsm.ChangeState(States.Attack);
         }
         else {
@@ -109,28 +115,50 @@ public class Enemy_Dummy : EnemyBase
 
     #region Attack
     private void Attack_Enter() {
-        //_animator.Play("attack");
-
         _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
         ChangeDir(_targetDirX);
 
+        var player = _playerTransform.gameObject.GetComponentNoAlloc<Player>();
+        States nextState = (Mathf.Abs(player.Velocity.y) < Mathf.Epsilon) ? States.TackleStraight : States.TackleParabola;
+        _fsm.ChangeState(nextState);
+    }
+
+    private void TackleStraight_Enter() {
         float tackleDistance = 2f;
         _targetTackleX = transform.position.x + _targetDirX * tackleDistance;
     }
 
-    private void Attack_Update() {
-        /*if (IsAnimationEnd("attack")) {
-            _fsm.ChangeState(States.Idle);
-        }*/
-
+    private void TackleStraight_Update() {
         if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
             _fsm.ChangeState(States.Track);
         }
-        InputX = _targetDirX;
+        else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
+            States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabola : States.TackleStraight;
+            _fsm.ChangeState(nextState);
+        }
+        else { 
+            InputX = _targetDirX * _tackleFactor * _tackleFactor;
+        }
     }
 
-    private void Attack_Exit() {
-        InputX = _targetDirX = _targetTackleX = 0f;
+    private void TackleParabola_Enter() {
+        float tackleDistance = 1.5f;
+        _targetTackleX = transform.position.x + _targetDirX * tackleDistance;
+        SetJump(true);
+    }
+
+    private void TackleParabola_Update() {
+        if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
+            if (Mathf.Abs(Velocity.y) < Mathf.Epsilon)
+                _fsm.ChangeState(States.Track);
+        }
+        else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
+            States nextState = (Random.Range(0, 10) > 4) ? States.TackleStraight : States.TackleParabola;
+            _fsm.ChangeState(nextState);
+        }
+        else { 
+            InputX = _targetDirX * _tackleFactor;
+        }
     }
 
     #endregion
@@ -144,7 +172,7 @@ public class Enemy_Dummy : EnemyBase
     private void Hurt_Update() {
         _timeAgo += Time.deltaTime;
 
-        if (_timeAgo >= _knockbackTime && IsAnimationEnd("hurt")) {
+        if (_timeAgo >= _knockbackTime) { //&& IsAnimationEnd("hurt")) {
             _fsm.ChangeState(States.Patrol);
         }
     }
@@ -153,7 +181,6 @@ public class Enemy_Dummy : EnemyBase
     #region Die
     private void Die_Enter() {
         InputX = 0f; InputY = 0f;
-        _animator.Play("die");
     }
     #endregion
     

@@ -3,48 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class SpriteAtlasAnimator : MonoBehaviour
+public class SpriteAtlasAnimator
 {
-    [SerializeField] private SpriteAtlas _spriteAtlas;
-    private SpriteRenderer _renderer;
-    private static readonly string Sufix = ".Sprites._";
     private static readonly float _defaultSpeed = 0.06f;
     private string _prefix;
     private float _indexTimer = 0f;
-    private int _spriteIndex;
+    private int _spriteIndex = 1;
     private string _animationName;
     private bool _loop;
+    public delegate void OnAnimationEnd();
+    private OnAnimationEnd _animationEndCallback;
 
-    public virtual void Initalize(string prefix, string idleStateName, bool loop = false) {
+    public void Initalize(string prefix, string idleStateName, bool loop = false) {
         _prefix = prefix;
-        _renderer = GetComponent<SpriteRenderer>();
         ChangeAnimation(idleStateName, loop);
     }
 
-    public void ChangeAnimation(string name, bool loop = false) {
+    public void ChangeAnimation(string name, bool loop = false, OnAnimationEnd callback = null) {
         _animationName = name;
-        _loop = loop;   
+        _loop = loop;
+        _animationEndCallback = callback;
     }
 
-    public void Progress() {
+    public void Progress(SpriteRenderer renderer, SpriteAtlas atlas) {
         _indexTimer += Time.deltaTime;
         if (_indexTimer > _defaultSpeed) {
             _indexTimer = 0f;
 
             var currentFrame = GetSprite();
             if (currentFrame == null) {
-                _spriteIndex = 0;
-                currentFrame = GetSprite();
+                if (_loop) {
+                    _spriteIndex = 1;
+                    currentFrame = GetSprite();
+                }
+                else {
+                    _animationEndCallback?.Invoke();
+                }
             }
 
-            _renderer.sprite = currentFrame;
+            renderer.sprite = currentFrame;
             ++_spriteIndex;
         }
-    }
 
-    Sprite GetSprite() {
-        string spriteName = Aroma.StringUtils.MergeStrings(_prefix, _animationName, Sufix, _spriteIndex.ToString());
-        var currentFrame = _spriteAtlas.GetSprite(spriteName);
-        return currentFrame;
+        Sprite GetSprite() {
+            string spriteName = Aroma.StringUtils.MergeStrings(_prefix, _animationName, _spriteIndex.ToString());
+            var currentFrame = atlas.GetSprite(spriteName);
+            return currentFrame;
+        }
     }
 }

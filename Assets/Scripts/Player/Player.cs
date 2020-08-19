@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private SpriteAtlasAnimator _animator;
-    private PlayerRenderer _playerRenderer;
+    private PlayerAnimator _playerAnimator;
     private PlayerAttack _playerAttack;
     private bool _attackRequested;
     private bool _throwRequested;
@@ -14,31 +13,28 @@ public class Player : MonoBehaviour
 
     public void Initialize() {
         _controller = GetComponent<GroundMove>();
-        _playerRenderer = GetComponent<PlayerRenderer>();
         _playerAttack = GetComponent<PlayerAttack>();
-        _animator = GetComponent<SpriteAtlasAnimator>();
+        _playerAnimator = GetComponent<PlayerAnimator>();
 
         var status = GetComponent<TBLPlayerStatus>();
         _controller.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
 
         Vector3 throwPos = new Vector3(status.throwXPos, status.throwYPos);
         _playerAttack.Initialize(throwPos);
-        _playerRenderer.Initialize();
-
-        _animator.Initalize("PLAYER_", "idle", true);
+        _playerAnimator.Initalize();
     }
 
     public void Progress() {
         bool throwRequested = _throwRequested && (Mathf.Abs(Velocity.y) < Mathf.Epsilon); 
         _playerAttack.Progress(_attackRequested, throwRequested);
-        _animator.Progress();
+        _playerAnimator.Progress();
     }
 
     public void FixedProgress() {
         bool jumpRequested = _controller.JumpRequested;
         _controller.FixedProgress();
         _playerAttack.FixedProgress();
-        _playerRenderer.ApplyAnimation(_controller.InputX, Velocity.y, jumpRequested || _controller.JumpRequested);
+        _playerAnimator.ApplyAnimation(_controller.InputX, Velocity.y, jumpRequested || _controller.JumpRequested);
     }
 
     public void SetInputX(float horizontal)

@@ -22,7 +22,6 @@ public class PlayerAttack : MonoBehaviour
         set 
         { 
             _requestedAttackCount = value;
-            _characterRenderer.RequestAttack(value);
         }
     }
     private bool _requestThrow;
@@ -32,7 +31,6 @@ public class PlayerAttack : MonoBehaviour
         set 
         { 
             _requestThrow = value;
-            _characterRenderer.RequestThrow(value);
         }
     }
     public int TalismanCount { get; set; } = 5;
@@ -40,14 +38,12 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 _throwPosition;
     #endregion
     
-    private PlayerRenderer _characterRenderer;
     private List<Talisman> _activeTalismans;
     public List<Collider2D> AlreadyHitColliders { get; private set; }
 
     public void Initialize(Vector3 throwPos) {
         _activeTalismans = new List<Talisman>(5);
         AlreadyHitColliders = new List<Collider2D>();
-        _characterRenderer = GetComponent<PlayerRenderer>();
         _throwPosition = throwPos;
     }
 

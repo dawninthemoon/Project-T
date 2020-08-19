@@ -12,7 +12,7 @@ ScriptedImporter:
   spriteAtlas: {fileID: 4343727234628468602, guid: cfc5499eabcf0ce47b115e8180727dbe,
     type: 2}
   frameRate: 60
-  sortingLayerName: Object
+  sortingLayerName: 
   sortingOrder: 0
   animatorCullingMode: 0
   animatorController: {fileID: 9100000, guid: 1a6bb78b3f6d589429748643c02818f7, type: 2}

@@ -13,10 +13,11 @@ public class PlayerRenderer : MonoBehaviour
     private Animator _animator;
 
     public void Initialize() {
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
     public void ApplyAnimation(float dirX, float velocityY, bool requestJump) {
+        return;
         int dirY = (velocityY > 0f) ? 1 : ((velocityY < 0f) ? -1 : 0);
 
         _animator.SetInteger(DirXName, Mathf.RoundToInt(dirX));
@@ -31,10 +32,12 @@ public class PlayerRenderer : MonoBehaviour
     }
 
     public void RequestAttack(int count){
+        return;
         _animator.SetInteger(RequestedAttackCountName, count);
     }
 
     public void RequestThrow(bool value) {
+        return;
         _animator.SetBool(RequestedThrowName, value);
     }
 

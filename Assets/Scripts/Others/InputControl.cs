@@ -89,13 +89,15 @@ public class InputControl : MonoBehaviour
     private void InputKeys() {
         if (CheckCannotInput()) return;
 
+
+        float horizontal = 0f, vertical = 0f;
         if (!CheckCannotMove()) {
-            float horizontal = IgnoreSmallValue(_myActions.Horizontal.Value);
-            float vertical = IgnoreSmallValue(_myActions.Vertical.Value);
-            
-            _model.SetInputX(horizontal);
-            _model.SetInputY(vertical);
+            horizontal = IgnoreSmallValue(_myActions.Horizontal.Value);
+            vertical = IgnoreSmallValue(_myActions.Vertical.Value);
         }
+            
+        _model.SetInputX(horizontal);
+        _model.SetInputY(vertical);
 
         _model.SetJump(GetKeyDown(JumpActionName));
         _model.SetJumpEnd(!_myActions.Jump.IsPressed, _isJumpPressed);

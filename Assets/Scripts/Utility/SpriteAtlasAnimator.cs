@@ -20,6 +20,8 @@ public class SpriteAtlasAnimator
     }
 
     public void ChangeAnimation(string name, bool loop = false, OnAnimationEnd callback = null) {
+        _indexTimer = 0f;
+        _spriteIndex = 1;
         _animationName = name;
         _loop = loop;
         _animationEndCallback = callback;
@@ -41,8 +43,10 @@ public class SpriteAtlasAnimator
                 }
             }
 
-            renderer.sprite = currentFrame;
-            ++_spriteIndex;
+            if (currentFrame != null) {
+                renderer.sprite = currentFrame;
+                ++_spriteIndex;
+            }
         }
 
         Sprite GetSprite() {

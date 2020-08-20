@@ -9,10 +9,11 @@ public partial class PlayerAnimator : MonoBehaviour
     [SerializeField] private SpriteAtlas _spriteAtlas = null;
 
     public enum States { 
-        Idle, Attack_A, Attack_B, Attack_air, Attack_in, Attack_out, Dead, Evade, Explode, 
-        Fail, Hit, Jump, Land_hard, Land_idle, Land_run, Run, Slide, Throw, Throw_air 
+        Idle, AttackA, AttackB, AttackAir, AttackIn, AttackOut, Dead, Evade, Explode, 
+        Fall, Hit, Jump, LandHard, LandIdle, LandRun, Run, Slide, Throw, ThrowAir 
     };
 
+    public States State { get => _fsm.State; }
     private StateMachine<States> _fsm;
     private SpriteRenderer _renderer;
     private SpriteAtlasAnimator _animator;
@@ -34,10 +35,6 @@ public partial class PlayerAnimator : MonoBehaviour
 
         _animator.Initalize("PLAYER_", "idle", true);
         _fsm.ChangeState(States.Idle);
-    }
-
-    public void Progress() {
-        _animator.Progress(_renderer, _spriteAtlas);
     }
 
     public void ApplyAnimation(float dirX, float velocityY, bool requestJump) {

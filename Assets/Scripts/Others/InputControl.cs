@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using InControl;
+using System.Linq;
 
 public class InputControl : MonoBehaviour
 {
@@ -15,18 +16,19 @@ public class InputControl : MonoBehaviour
     }
 
     private Player _model;
-
+    private PlayerAnimator _animator;
     private MyPlayerActions _myActions;
-
     private Dictionary<string, ActionBoolPair> _wasPressedAtLastFrame;
     private bool _isJumpPressed;
     private static readonly string JumpActionName = "Jump";
     private static readonly string AttackActionName = "Attack";
     private static readonly string ThrowActionName = "Throw";
+    private PlayerAnimator.States[] _inputIgnoreStates, _moveIgnoreStates;
 
     public void Initalize(Player character)
     {
         _model = character;
+        _animator = _model.GetComponent<PlayerAnimator>();
 
         _myActions = new MyPlayerActions();
 
@@ -85,11 +87,15 @@ public class InputControl : MonoBehaviour
     }
 
     private void InputKeys() {
-        float horizontal = IgnoreSmallValue(_myActions.Horizontal.Value);
-        float vertical = IgnoreSmallValue(_myActions.Vertical.Value);
-        
-        _model.SetInputX(horizontal);
-        _model.SetInputY(vertical);
+        if (CheckCannotInput()) return;
+
+        if (!CheckCannotMove()) {
+            float horizontal = IgnoreSmallValue(_myActions.Horizontal.Value);
+            float vertical = IgnoreSmallValue(_myActions.Vertical.Value);
+            
+            _model.SetInputX(horizontal);
+            _model.SetInputY(vertical);
+        }
 
         _model.SetJump(GetKeyDown(JumpActionName));
         _model.SetJumpEnd(!_myActions.Jump.IsPressed, _isJumpPressed);
@@ -103,5 +109,37 @@ public class InputControl : MonoBehaviour
         value = (Mathf.Abs(value) > 0.5f) ? value : 0f;
         value = (value == 0f) ? value : Mathf.Sign(value);
         return value;
+    }
+
+    private bool CheckCannotInput() {
+        var state = _animator.State;
+
+        if (_inputIgnoreStates == null) {
+            _inputIgnoreStates = new PlayerAnimator.States[] {
+                PlayerAnimator.States.LandHard,
+                PlayerAnimator.States.LandIdle,
+                PlayerAnimator.States.LandRun
+            };
+        }
+
+        return _inputIgnoreStates.Contains(state);
+    }
+
+    private bool CheckCannotMove() {
+        var state = _animator.State;
+
+        if (_moveIgnoreStates == null) {
+            _moveIgnoreStates = new PlayerAnimator.States[] {
+                PlayerAnimator.States.AttackIn,
+                PlayerAnimator.States.AttackA,
+                PlayerAnimator.States.AttackB,
+                PlayerAnimator.States.AttackOut,
+                PlayerAnimator.States.AttackAir,
+                PlayerAnimator.States.Throw,
+                PlayerAnimator.States.ThrowAir,
+            };
+        }
+
+        return _moveIgnoreStates.Contains(state);
     }
 }

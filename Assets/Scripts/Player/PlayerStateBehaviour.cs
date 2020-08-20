@@ -54,6 +54,7 @@ public partial class PlayerAnimator : MonoBehaviour
 
     #region Attack
     private void AttackIn_Enter() {
+        _direction.x = 0f;
         _animator.ChangeAnimation(
             "attack_in", 
             false,
@@ -160,5 +161,8 @@ public partial class PlayerAnimator : MonoBehaviour
             () => { _fsm.ChangeState(States.Run); });
     }
 
+    private void LandRun_Update() {
+        Run_Update();
+    }
     #endregion
 }

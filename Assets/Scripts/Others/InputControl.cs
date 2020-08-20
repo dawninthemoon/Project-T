@@ -116,9 +116,7 @@ public class InputControl : MonoBehaviour
 
         if (_inputIgnoreStates == null) {
             _inputIgnoreStates = new PlayerAnimator.States[] {
-                PlayerAnimator.States.LandHard,
-                PlayerAnimator.States.LandIdle,
-                PlayerAnimator.States.LandRun
+                PlayerAnimator.States.LandHard
             };
         }
 

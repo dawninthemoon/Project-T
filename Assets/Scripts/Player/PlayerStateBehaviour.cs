@@ -60,19 +60,33 @@ public partial class PlayerAnimator : MonoBehaviour
             false,
             () => {
                 _fsm.ChangeState(States.AttackA);
-            });
+            }
+        );
     }
+
     private void AttackA_Enter() {
         --_playerAttack.RequestedAttackCount;
+        _playerAttack.AlreadyHitColliders.Clear();
         _animator.ChangeAnimation(
             "Attack_A", 
             false, 
             () => {
                 States nextState = (_playerAttack.RequestedAttackCount > 0) ? States.AttackB : States.AttackOut;
                 _fsm.ChangeState(nextState);
-            });
+            }
+        );
     }
+
+    private void AttackA_Update() {
+        _player.CanDrawGizmos = true;
+        if (_animator.SpriteIndex == 1) {
+            Vector2 position = transform.position;
+            _playerAttack.EnableMeleeAttack();
+        }
+    }
+
     private void AttackB_Enter() {
+        _playerAttack.AlreadyHitColliders.Clear();
         --_playerAttack.RequestedAttackCount;
         _animator.ChangeAnimation(
             "Attack_B", 
@@ -80,16 +94,38 @@ public partial class PlayerAnimator : MonoBehaviour
             () => {
                 States nextState = (_playerAttack.RequestedAttackCount > 0) ? States.AttackA : States.AttackOut;
                 _fsm.ChangeState(nextState);
-            });
+            }
+        );
     }
+
+    private void AttackB_Update() {
+        _player.CanDrawGizmos = true;
+        if (_animator.SpriteIndex == 1) {
+            Vector2 position = transform.position;
+            _playerAttack.EnableMeleeAttack();
+        }
+    }
+
     private void AttackOut_Enter() {
         _animator.ChangeAnimation(
             "attack_out", 
             false,
-            ()=> {
+            () => {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.Idle : States.Run;
                 _fsm.ChangeState(nextState);
-            });
+            }
+        );
+    }
+    private void AttackAir_Enter() {
+        --_playerAttack.RequestedAttackCount;
+        _playerAttack.AlreadyHitColliders.Clear();
+        _animator.ChangeAnimation(
+            "attack_air",
+            false,
+            () => {
+                _fsm.ChangeState(States.Fall);
+            }
+        );
     }
     #endregion
 
@@ -103,7 +139,8 @@ public partial class PlayerAnimator : MonoBehaviour
             () => {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.Idle : States.Run;
                 _fsm.ChangeState(nextState);
-            });
+            }
+        );
     }
 
     private void ThrowAir_Enter() {
@@ -115,7 +152,8 @@ public partial class PlayerAnimator : MonoBehaviour
             {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.Idle : States.Run;
                 _fsm.ChangeState(nextState);
-            });
+            }
+        );
     }
 
     #endregion
@@ -131,6 +169,12 @@ public partial class PlayerAnimator : MonoBehaviour
         if (_direction.y < 0f) {
             _fsm.ChangeState(States.Fall);
         }
+        else if (_playerAttack.RequestedAttackCount > 0) {
+            _fsm.ChangeState(States.AttackAir);
+        }
+        else if (_playerAttack.RequestThrow) {
+            _fsm.ChangeState(States.ThrowAir);
+        }
     }
 
     private void Fall_Enter() {
@@ -142,6 +186,12 @@ public partial class PlayerAnimator : MonoBehaviour
             States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.LandIdle : States.LandRun;
             _fsm.ChangeState(nextState);
         }
+         else if (_playerAttack.RequestedAttackCount > 0) {
+            _fsm.ChangeState(States.AttackAir);
+        }
+        else if (_playerAttack.RequestThrow) {
+            _fsm.ChangeState(States.ThrowAir);
+        }
     }
     #endregion
 
@@ -151,18 +201,36 @@ public partial class PlayerAnimator : MonoBehaviour
         _animator.ChangeAnimation(
             "land_idle", 
             false,
-            () => { _fsm.ChangeState(States.Idle); });
+            () => { _fsm.ChangeState(States.Idle); }
+        );
     }
 
     private void LandRun_Enter() {
         _animator.ChangeAnimation(
             "land_run", 
             false,
-            () => { _fsm.ChangeState(States.Run); });
+            () => { _fsm.ChangeState(States.Run); }
+        );
     }
 
     private void LandRun_Update() {
         Run_Update();
     }
+    #endregion
+
+    #region HIT
+
+    public void SetPlayerHit() => _fsm.ChangeState(States.Hit);
+
+    private void Hit_Enter() {
+        _animator.ChangeAnimation(
+            "hit",
+            false,
+            () => {
+                _fsm.ChangeState(States.Idle);
+            }
+        );
+    }
+    
     #endregion
 }

@@ -10,13 +10,14 @@ public class Enemy_Dummy : EnemyBase
     private Vector2 _moveDetectStart, _moveDetectEnd;
     private Vector2 _attackDetectStart, _attackDetectEnd;
     private Vector2[] _bodyAttackHitboxPoints;
-    public enum States { Patrol, Track, Attack, TackleStraight, TackleParabola, Hurt, Die }
+    public enum States { Patrol, Track, TrackWait, Attack, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hurt, Die }
     private StateMachine<States> _fsm;
     private float _timeAgo;
     private Transform _playerTransform;
     private float _targetTackleX;
     private float _targetDirX;
-    private float _tackleFactor = 2f;
+    [SerializeField] private float _straightTackleFactor = 1f;
+    [SerializeField] private float _parabolaTackleFactor = 1f;
     private int _playerMask;
 
     public override void Initialize() {
@@ -111,6 +112,14 @@ public class Enemy_Dummy : EnemyBase
     private void Track_Exit() {
         InputX = 0f;
     }
+
+    private void TrackWait_Update() {
+        _timeAgo += Time.deltaTime;
+        if (_timeAgo > 0.5f) {
+            _fsm.ChangeState(States.Track);
+        }
+    }
+
     #endregion
 
     #region Attack
@@ -124,22 +133,26 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void TackleStraight_Enter() {
-        float tackleDistance = 2f;
+        float tackleDistance = 5f;
         _targetTackleX = transform.position.x + _targetDirX * tackleDistance;
     }
 
     private void TackleStraight_Update() {
         if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
-            _fsm.ChangeState(States.Track);
+            _fsm.ChangeState(States.TrackWait);
         }
-
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
-            States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabola : States.TackleStraight;
+            States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabolaWait : States.TackleStraightWait;
             _fsm.ChangeState(nextState);
         }
         else { 
-            InputX = _targetDirX * _tackleFactor * _tackleFactor;
+            InputX = _targetDirX * _straightTackleFactor;
         }
+    }
+
+    private void TackleStraight_Exit() {
+        _timeAgo = 0f;
+        InputX = 0f;
     }
 
     private void TackleParabola_Enter() {
@@ -150,20 +163,43 @@ public class Enemy_Dummy : EnemyBase
 
     private void TackleParabola_Update() {
         if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
-            if (Mathf.Abs(Velocity.y) < Mathf.Epsilon)
-                _fsm.ChangeState(States.Track);
+            _fsm.ChangeState(States.TrackWait);
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
-            States nextState = (Random.Range(0, 10) > 4) ? States.TackleStraight : States.TackleParabola;
+            States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabolaWait : States.TackleStraightWait;
             _fsm.ChangeState(nextState);
         }
         else { 
-            InputX = _targetDirX * _tackleFactor;
+            InputX = _targetDirX * _parabolaTackleFactor;
         }
+    }
+
+    private void TackleParabola_Exit() {
+        _timeAgo = 0f;
+        InputX = 0f;
     }
 
     #endregion
     
+    #region AttackWait
+
+
+    private void TackleStraightWait_Update() {
+        _timeAgo += Time.deltaTime;
+        if (_timeAgo > 1f) {
+            _fsm.ChangeState(States.TackleStraight);
+        }
+    }
+
+    private void TackleParabolaWait_Update() {
+        _timeAgo += Time.deltaTime;
+        if (_timeAgo > 1f) {
+            _fsm.ChangeState(States.TackleParabola);
+        }
+    }
+
+    #endregion
+
     #region Hurt
     private void Hurt_Enter() {
         InputX = 0f; InputY = 0f;
@@ -208,27 +244,34 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void OnDrawGizmos() {
-        if (Application.isPlaying) return;
+        //if (Application.isPlaying) return;
 
         Vector2 position = transform.position;
         var status = GetComponent<TBLEnemyStatus>();
+        float dirX = transform.localScale.x;
 
         var movePoint2 = new Vector2(status.MoveDetectStart.x, status.MoveDetectEnd.y);
         var movePoint3 = new Vector2(status.MoveDetectEnd.x, status.MoveDetectStart.y);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(status.MoveDetectStart, movePoint2);
-        Gizmos.DrawLine(status.MoveDetectStart, movePoint3);
-        Gizmos.DrawLine(movePoint3, status.MoveDetectEnd);
-        Gizmos.DrawLine(movePoint2, status.MoveDetectEnd);
+        DrawLine(status.MoveDetectStart, movePoint2);
+        DrawLine(status.MoveDetectStart, movePoint3);
+        DrawLine(movePoint3, status.MoveDetectEnd);
+        DrawLine(movePoint2, status.MoveDetectEnd);
         
         var attackPoint2 = new Vector2(status.AttackDetectStart.x, status.AttackDetectEnd.y);
         var attackPoint3 = new Vector2(status.AttackDetectEnd.x, status.AttackDetectStart.y);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(status.AttackDetectStart, attackPoint2);
-        Gizmos.DrawLine(status.AttackDetectStart, attackPoint3);
-        Gizmos.DrawLine(attackPoint3, status.AttackDetectEnd);
-        Gizmos.DrawLine(attackPoint2, status.AttackDetectEnd);
+        DrawLine(status.AttackDetectStart, attackPoint2);
+        DrawLine(status.AttackDetectStart, attackPoint3);
+        DrawLine(attackPoint3, status.AttackDetectEnd);
+        DrawLine(attackPoint2, status.AttackDetectEnd);
+
+        void DrawLine(Vector2 point1, Vector2 point2) {
+            point1.x *= dirX; point2.x *= dirX;
+            point1 += position; point2 += position;
+            Gizmos.DrawLine(point1, point2);
+        }
     }
 }

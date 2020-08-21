@@ -34,9 +34,7 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     protected bool EnableHitbox(Vector2[] points, int layerMask) {
         Vector2 current = transform.position;
         var player = Physics2D.OverlapArea(current + points[0], current + points[1], layerMask)?.GetComponent<Player>();
-        if (player != null) {
-            Debug.Log("received damage");
-        }
+        player?.ReceiveDamage(10);
         return player != null;
     }
 

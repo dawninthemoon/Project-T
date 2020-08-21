@@ -15,36 +15,31 @@ public class PlayerAttack : MonoBehaviour
     private static readonly float InputDelayAfterCombo = 0.05f;
     private float _inputDelay;
     private static readonly int MaxRequestCount = 1;
-    private int _requestedAttackCount;
-    public int RequestedAttackCount 
-    { 
-        get { return _requestedAttackCount; }
-        set 
-        { 
-            _requestedAttackCount = value;
-        }
-    }
-    private bool _requestThrow;
-    public bool RequestThrow 
-    {
-        get { return _requestThrow; }
-        set 
-        { 
-            _requestThrow = value;
-        }
-    }
+    public int RequestedAttackCount { get; set; }
+    public bool RequestThrow { get; set; }
     public int TalismanCount { get; set; } = 5;
     public bool IsInAttackProgress { get; private set; }
     private Vector3 _throwPosition;
+
+    private Vector2 _meleeAttackOffset;
+    private Vector2 _meleeAttackSize;
+    private int _meleeAttackDamage;
+    private static readonly string HitEffectName = "meleeAttack_hit";
+
     #endregion
     
     private List<Talisman> _activeTalismans;
     public List<Collider2D> AlreadyHitColliders { get; private set; }
 
-    public void Initialize(Vector3 throwPos) {
+    public void Initialize() {
         _activeTalismans = new List<Talisman>(5);
         AlreadyHitColliders = new List<Collider2D>();
-        _throwPosition = throwPos;
+
+        var status = GetComponent<TBLPlayerStatus>();
+        _throwPosition = status.throwOffset;
+        _meleeAttackOffset = status.meleeAttackOffset;
+        _meleeAttackSize = status.meleeAttackSize;
+        _meleeAttackDamage = status.meleeAttackDamage;
     }
 
     public void Progress(bool attackRequested, bool throwRequested) {
@@ -67,7 +62,12 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void EnableHitbox(Vector2 position, Vector2 size, int damage, string hitEffectName) {
+    public void EnableMeleeAttack() {
+        Vector2 position = transform.position;
+        EnableHitbox(position + _meleeAttackOffset, _meleeAttackSize, _meleeAttackDamage, HitEffectName);
+    }
+
+    private void EnableHitbox(Vector2 position, Vector2 size, int damage, string hitEffectName) {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(position, size, 0f, _attackableLayers);
         bool enemyHit = false;
         for (int i = 0; i < colliders.Length; i++) {

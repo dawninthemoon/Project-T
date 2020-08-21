@@ -9,6 +9,7 @@ public class SpriteAtlasAnimator
     private string _prefix;
     private float _indexTimer = 0f;
     private int _spriteIndex = 1;
+    public int SpriteIndex { get { return _spriteIndex-1; } }
     private string _animationName;
     private bool _loop;
     public delegate void OnAnimationEnd();

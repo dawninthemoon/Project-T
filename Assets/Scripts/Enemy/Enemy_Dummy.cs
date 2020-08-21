@@ -104,17 +104,16 @@ public class Enemy_Dummy : EnemyBase
     private void Track_Update() {
         if (SetPatrolIfWillBeFall()) return;
 
+        _timeAgo += Time.deltaTime;
+
         if (DetectPlayer(_moveDetectStart, _moveDetectEnd) == null) {
-            _timeAgo += Time.deltaTime;
             if (_timeAgo > 2f)
                 _fsm.ChangeState(States.Patrol);
         }
-        else {
-            _timeAgo = 0f;
-        }
 
         if (DetectPlayer(_attackDetectStart, _attackDetectEnd) != null) {
-            _fsm.ChangeState(States.Attack);
+            if (_timeAgo > 0.5f)
+                _fsm.ChangeState(States.Attack);
         }
         else {
             InputX = Mathf.Sign((_playerTransform.position - transform.position).x);
@@ -128,7 +127,7 @@ public class Enemy_Dummy : EnemyBase
 
     private void TrackWait_Update() {
         _timeAgo += Time.deltaTime;
-        if (_timeAgo > 0.5f) {
+        if (_timeAgo > 1f) {
             _fsm.ChangeState(States.Track);
         }
     }
@@ -203,14 +202,14 @@ public class Enemy_Dummy : EnemyBase
 
     private void TackleStraightWait_Update() {
         _timeAgo += Time.deltaTime;
-        if (_timeAgo > 1f) {
+        if (_timeAgo > 2f) {
             _fsm.ChangeState(States.TackleStraight);
         }
     }
 
     private void TackleParabolaWait_Update() {
         _timeAgo += Time.deltaTime;
-        if (_timeAgo > 1f) {
+        if (_timeAgo > 2f) {
             _fsm.ChangeState(States.TackleParabola);
         }
     }

@@ -121,6 +121,17 @@ public partial class TBLEnemyStatus : BGEntityGo
 			_AttackDetectEnd[Entity.Index] = value;
 		}
 	}
+	public UnityEngine.Vector2 platformCheckPos
+	{
+		get
+		{
+			return _platformCheckPos[Entity.Index];
+		}
+		set
+		{
+			_platformCheckPos[Entity.Index] = value;
+		}
+	}
 	private static BansheeGz.BGDatabase.BGFieldEntityName __name;
 	public static BansheeGz.BGDatabase.BGFieldEntityName _name
 	{
@@ -191,6 +202,15 @@ public partial class TBLEnemyStatus : BGEntityGo
 		{
 			if(__AttackDetectEnd==null || __AttackDetectEnd.IsDeleted) __AttackDetectEnd=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5690934996591517823,6615302915134543521));
 			return __AttackDetectEnd;
+		}
+	}
+	private static BansheeGz.BGDatabase.BGFieldVector2 __platformCheckPos;
+	public static BansheeGz.BGDatabase.BGFieldVector2 _platformCheckPos
+	{
+		get
+		{
+			if(__platformCheckPos==null || __platformCheckPos.IsDeleted) __platformCheckPos=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5061778677936757359,16005822572342414979));
+			return __platformCheckPos;
 		}
 	}
 }

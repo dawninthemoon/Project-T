@@ -20,6 +20,10 @@ namespace Aroma
             Vector3 scale = new Vector3(dir, 1f, 1f);
             return scale;
         }
+        public static Vector2 ChangeXPos(this Vector2 vec, float x) {
+            Vector2 newVec = new Vector2(x, vec.y);
+            return newVec;
+        }
     }
 
     public static class GameObjectExtensions

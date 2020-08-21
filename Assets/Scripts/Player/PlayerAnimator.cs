@@ -4,6 +4,7 @@ using UnityEngine;
 using MonsterLove.StateMachine;
 using UnityEngine.U2D;
 
+[RequireComponent(typeof(StateMachineRunner))]
 public partial class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private SpriteAtlas _spriteAtlas = null;

@@ -175,6 +175,8 @@ namespace LevelEditor {
 
             foreach (var point in roomBase.waterPoints) {
                 var obj = Instantiate(waterPrefab, objectTilemap);
+                obj.transform.localScale = point.scale;
+                obj.transform.position = point.position;
             }
 
             var collider = new GameObject().AddComponent<PolygonCollider2D>();

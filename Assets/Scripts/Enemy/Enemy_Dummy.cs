@@ -9,6 +9,7 @@ public class Enemy_Dummy : EnemyBase
 {
     private Vector2 _moveDetectStart, _moveDetectEnd;
     private Vector2 _attackDetectStart, _attackDetectEnd;
+    private Vector2 _platformCheckPos;
     private Vector2[] _bodyAttackHitboxPoints;
     public enum States { Patrol, Track, TrackWait, Attack, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hurt, Die }
     private StateMachine<States> _fsm;
@@ -18,7 +19,8 @@ public class Enemy_Dummy : EnemyBase
     private float _targetDirX;
     [SerializeField] private float _straightTackleFactor = 1f;
     [SerializeField] private float _parabolaTackleFactor = 1f;
-    private int _playerMask;
+    [SerializeField] private float _straightDashTime = 0.8f;
+    private int _playerMask, _obstacleMask;
 
     public override void Initialize() {
         var status = GetComponent<TBLEnemyStatus>();
@@ -26,6 +28,7 @@ public class Enemy_Dummy : EnemyBase
         _moveDetectEnd = status.MoveDetectEnd;
         _attackDetectStart = status.AttackDetectStart;
         _attackDetectEnd = status.AttackDetectEnd;
+        _platformCheckPos = status.platformCheckPos;
 
         var collider = GetComponent<BoxCollider2D>();
         _bodyAttackHitboxPoints = new Vector2[2] {
@@ -35,6 +38,7 @@ public class Enemy_Dummy : EnemyBase
 
         base.Initialize();
         _playerMask = 1 << LayerMask.NameToLayer("Player");
+        _obstacleMask = 1 << LayerMask.NameToLayer("Obstacle");
         _fsm = GetComponent<StateMachineRunner>().Initialize<States>(this);
         _fsm.ChangeState(States.Patrol);
     }
@@ -63,6 +67,13 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void Patrol_Update() {
+        if (WillBeFall()) {
+            InputX = -InputX;
+            ChangeDir(InputX);
+            _timeAgo = 0f;
+            return;
+        }
+
         _timeAgo += Time.deltaTime;
 
         _playerTransform = DetectPlayer(_moveDetectStart, _moveDetectEnd)?.transform;
@@ -91,6 +102,8 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void Track_Update() {
+        if (SetPatrolIfWillBeFall()) return;
+
         if (DetectPlayer(_moveDetectStart, _moveDetectEnd) == null) {
             _timeAgo += Time.deltaTime;
             if (_timeAgo > 2f)
@@ -133,12 +146,14 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void TackleStraight_Enter() {
-        float tackleDistance = 5f;
-        _targetTackleX = transform.position.x + _targetDirX * tackleDistance;
+        _timeAgo = 0f;
     }
 
     private void TackleStraight_Update() {
-        if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
+        if (SetPatrolIfWillBeFall()) return;
+
+        _timeAgo += Time.deltaTime;
+        if (_timeAgo > _straightDashTime) {
             _fsm.ChangeState(States.TrackWait);
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
@@ -162,6 +177,8 @@ public class Enemy_Dummy : EnemyBase
     }
 
     private void TackleParabola_Update() {
+        if (SetPatrolIfWillBeFall()) return;
+
         if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
             _fsm.ChangeState(States.TrackWait);
         }
@@ -221,6 +238,29 @@ public class Enemy_Dummy : EnemyBase
     }
     #endregion
     
+    private bool SetPatrolIfWillBeFall() {
+        bool willBeFall = false;
+        if (WillBeFall()) {
+            InputX = 0;
+            _fsm.ChangeState(States.Patrol);
+        }
+        return willBeFall;
+    }
+
+
+    private bool WillBeFall() {
+        bool willBeFall = false;
+
+        float xpos = _platformCheckPos.x * (transform.localScale.x);
+        Vector2 position = (Vector2)transform.position + _platformCheckPos.ChangeXPos(xpos);
+        var platform = Physics2D.Raycast(position, Vector2.down, 0.2f, _obstacleMask).collider;
+
+        if ((Mathf.Abs(Velocity.y) < Mathf.Epsilon) && (platform == null)) {
+            willBeFall = true;
+        }
+        return willBeFall;
+    }
+
     private void ChangeDir(float dir) {
         Vector3 scaleVec = Aroma.VectorUtility.GetScaleVec(Mathf.Sign(dir));
         transform.localScale = scaleVec;
@@ -243,35 +283,7 @@ public class Enemy_Dummy : EnemyBase
         return collider;
     }
 
-    private void OnDrawGizmos() {
-        //if (Application.isPlaying) return;
-
-        Vector2 position = transform.position;
-        var status = GetComponent<TBLEnemyStatus>();
-        float dirX = transform.localScale.x;
-
-        var movePoint2 = new Vector2(status.MoveDetectStart.x, status.MoveDetectEnd.y);
-        var movePoint3 = new Vector2(status.MoveDetectEnd.x, status.MoveDetectStart.y);
-
-        Gizmos.color = Color.green;
-        DrawLine(status.MoveDetectStart, movePoint2);
-        DrawLine(status.MoveDetectStart, movePoint3);
-        DrawLine(movePoint3, status.MoveDetectEnd);
-        DrawLine(movePoint2, status.MoveDetectEnd);
-        
-        var attackPoint2 = new Vector2(status.AttackDetectStart.x, status.AttackDetectEnd.y);
-        var attackPoint3 = new Vector2(status.AttackDetectEnd.x, status.AttackDetectStart.y);
-
-        Gizmos.color = Color.red;
-        DrawLine(status.AttackDetectStart, attackPoint2);
-        DrawLine(status.AttackDetectStart, attackPoint3);
-        DrawLine(attackPoint3, status.AttackDetectEnd);
-        DrawLine(attackPoint2, status.AttackDetectEnd);
-
-        void DrawLine(Vector2 point1, Vector2 point2) {
-            point1.x *= dirX; point2.x *= dirX;
-            point1 += position; point2 += position;
-            Gizmos.DrawLine(point1, point2);
-        }
+    protected override void OnDrawGizmos() {
+        base.OnDrawGizmos();
     }
 }

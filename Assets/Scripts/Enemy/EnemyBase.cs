@@ -65,4 +65,36 @@ public abstract class EnemyBase : GroundMove, IPlaceable
             _flashSequence.Restart();
         }
     }
+
+    protected virtual void OnDrawGizmos() {
+        Vector2 position = transform.position;
+        var status = GetComponent<TBLEnemyStatus>();
+        float dirX = transform.localScale.x;
+
+        DrawLine(status.platformCheckPos, status.platformCheckPos + Vector2.down * 0.2f);
+
+        var movePoint2 = new Vector2(status.MoveDetectStart.x, status.MoveDetectEnd.y);
+        var movePoint3 = new Vector2(status.MoveDetectEnd.x, status.MoveDetectStart.y);
+
+        Gizmos.color = Color.green;
+        DrawLine(status.MoveDetectStart, movePoint2);
+        DrawLine(status.MoveDetectStart, movePoint3);
+        DrawLine(movePoint3, status.MoveDetectEnd);
+        DrawLine(movePoint2, status.MoveDetectEnd);
+        
+        var attackPoint2 = new Vector2(status.AttackDetectStart.x, status.AttackDetectEnd.y);
+        var attackPoint3 = new Vector2(status.AttackDetectEnd.x, status.AttackDetectStart.y);
+
+        Gizmos.color = Color.red;
+        DrawLine(status.AttackDetectStart, attackPoint2);
+        DrawLine(status.AttackDetectStart, attackPoint3);
+        DrawLine(attackPoint3, status.AttackDetectEnd);
+        DrawLine(attackPoint2, status.AttackDetectEnd);
+
+        void DrawLine(Vector2 point1, Vector2 point2) {
+            point1.x *= dirX; point2.x *= dirX;
+            point1 += position; point2 += position;
+            Gizmos.DrawLine(point1, point2);
+        }
+    }
 }

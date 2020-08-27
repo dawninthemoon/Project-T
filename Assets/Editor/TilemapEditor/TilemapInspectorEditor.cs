@@ -32,7 +32,7 @@ namespace LevelEditor {
 
             GUI.backgroundColor = Color.red;
             if (GUILayout.Button("Apply Changes", GUILayout.Height(50f))) {
-                BuildAsssetBundles.BuildAllAssetBundles();
+                BuildAsssetBundles.BuildRoomAssetBundles();
             }
 
             EditorGUILayout.Space(5f);

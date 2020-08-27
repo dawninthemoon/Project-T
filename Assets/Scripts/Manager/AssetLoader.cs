@@ -6,35 +6,37 @@ using Aroma;
 
 public class AssetLoader : Singleton<AssetLoader>
 {
-    private AssetBundle _assetBundle;
+    private AssetBundle _objectBundle;
+    private AssetBundle _roomBundle;
 
     private static readonly string AssetBundlePath = "/AssetBundles";
-    private static readonly string AssetBundleName = "assetbundle_0";
+    private static readonly string AssetBundleNameBase = "assetbundle_";
 
     public void Initalize() {
-        _assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath + AssetBundlePath, AssetBundleName));
+        _objectBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath + AssetBundlePath, AssetBundleNameBase + "object"));
+        _roomBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath + AssetBundlePath, AssetBundleNameBase + "room"));
 
-        if (_assetBundle == null) {
+        if (_objectBundle == null || _roomBundle == null) {
             Debug.LogError("Failed to load AssetBundle");
             return;
         }
     }
 
     public SORoomBase[] GetAllRoomBases() {
-        if (_assetBundle == null)
+        if (_roomBundle == null)
             Initalize();
 
-        SORoomBase[] wholeRooms = _assetBundle.LoadAllAssets<SORoomBase>();
+        SORoomBase[] wholeRooms = _roomBundle.LoadAllAssets<SORoomBase>();
         return wholeRooms;
     }
 
     public GameObject GetPrefab(string prefabName) {
-        GameObject prefab = _assetBundle.LoadAsset<GameObject>(prefabName);
+        GameObject prefab = _objectBundle.LoadAsset<GameObject>(prefabName);
         return prefab;
     }
 
     public EnemyBase[] GetAllEnemies() {
-        GameObject[] prefabs = _assetBundle.LoadAllAssets<GameObject>();
+        GameObject[] prefabs = _objectBundle.LoadAllAssets<GameObject>();
         List<EnemyBase> enemies = new List<EnemyBase>();
 
         for (int i = 0; i < prefabs.Length; i++) {
@@ -48,7 +50,7 @@ public class AssetLoader : Singleton<AssetLoader>
     }
 
     public RuntimeAnimatorController GetAnimatorController(string fileName) {
-        var controller = _assetBundle.LoadAsset<RuntimeAnimatorController>(fileName);
+        var controller = _objectBundle.LoadAsset<RuntimeAnimatorController>(fileName);
         return controller;
     }
 }

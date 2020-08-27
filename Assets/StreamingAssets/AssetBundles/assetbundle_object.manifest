@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3302668378
+CRC: 296371367
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4bfef165f20959a691318b3af1143f6a
+    Hash: 022cd201919791bd91bc7c6e70bfab4e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b3be871ef46ed3c58e120448c066f651
+    Hash: c021b8d87e072e64e75048020c809c74
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,11 +34,7 @@ ClassTypes:
 - Class: 91
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-- Class: 114
   Script: {fileID: 11500000, guid: 99067df16864f634b903ec9333daba6c, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5e2a0c63ef281b44a823365c3d5bffcd, type: 3}
 - Class: 114
@@ -60,8 +56,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 70951ee815fe28645bc314173ce18dac, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 254efecd47332974dbc7213c399d33f1, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
 - Class: 115
   Script: {instanceID: 0}
@@ -73,17 +67,9 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Player.prefab
-- Assets/ScriptableObjects/Rooms/Room 0.asset
-- Assets/AnimatorControllers/PlayerEffect/defaultAttack2.controller
-- Assets/ScriptableObjects/Rooms/Room 1.asset
-- Assets/AnimatorControllers/PlayerEffect/defaultAttack1.controller
-- Assets/Animations/Effects/PlayerEffect/meleeAttack_hit.anim
-- Assets/AnimatorControllers/PlayerEffect/defaultAttack1_move.controller
-- Assets/Prefabs/ForEditor/Water/Water.prefab
+- Assets/ForEditor/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
-- Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
 - Assets/Prefabs/Talisman.prefab
-- Assets/AnimatorControllers/PlayerEffect/defaultAttack3.controller
 - Assets/Prefabs/Enemy/EnemyCaveRat.prefab
 - Assets/AnimatorControllers/meleeAttack_hit.controller
 Dependencies: []

@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 
 public class BuildAsssetBundles { 
-    [MenuItem("Bundles/Build AssetBundles")] 
+    [MenuItem("Bundles/Build All AssetBundles")] 
     public static void BuildAllAssetBundles() { 
         string assetBundleDirectory = Application.streamingAssetsPath + "/AssetBundles";
         if (!Directory.Exists(assetBundleDirectory))
@@ -15,7 +15,16 @@ public class BuildAsssetBundles {
         BuildPipeline.BuildAssetBundles(assetBundleDirectory, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
     }
 
-    public static void BuildNeedAssetBundle(string bundleName)
+    [MenuItem("Bundles/Build Object AssetBundles")] 
+    public static void BuildObjectAssetBundles() { 
+        BuildNeedAssetBundle("assetbundle_object");
+    }
+
+    public static void BuildRoomAssetBundles() {
+        BuildNeedAssetBundle("assetbundle_room");
+    }
+
+    private static void BuildNeedAssetBundle(string bundleName)
     {
         if (!Directory.Exists(Application.streamingAssetsPath + "/AssetBundles"))
         {

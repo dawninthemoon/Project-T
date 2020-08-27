@@ -276,9 +276,9 @@ public class EnemyCaveRat : EnemyBase
 
         float xpos = _platformCheckPos.x * (transform.localScale.x);
         Vector2 position = (Vector2)transform.position + _platformCheckPos.ChangeXPos(xpos);
-        var platform = Physics2D.Raycast(position, Vector2.down, 0.2f, _obstacleMask).collider;
+        var platform = Physics2D.Raycast(position, Vector2.down, 0.1f, _obstacleMask);
 
-        if ((Mathf.Abs(Velocity.y) < Mathf.Epsilon) && (platform == null)) {
+        if ((Mathf.Abs(Velocity.y) < Mathf.Epsilon) && (platform.collider == null)) {
             willBeFall = true;
         }
         return willBeFall;

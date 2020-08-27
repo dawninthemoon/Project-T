@@ -81,7 +81,7 @@ public abstract class EnemyBase : GroundMove, IPlaceable
         var status = GetComponent<TBLEnemyStatus>();
         float dirX = transform.localScale.x;
 
-        DrawLine(status.platformCheckPos, status.platformCheckPos + Vector2.down * 0.2f);
+        DrawLine(status.platformCheckPos, status.platformCheckPos + Vector2.down * 0.1f);
 
         var movePoint2 = new Vector2(status.MoveDetectStart.x, status.MoveDetectEnd.y);
         var movePoint3 = new Vector2(status.MoveDetectEnd.x, status.MoveDetectStart.y);

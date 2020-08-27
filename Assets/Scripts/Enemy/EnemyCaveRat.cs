@@ -184,8 +184,6 @@ public class EnemyCaveRat : EnemyBase
     }
 
     private void TackleParabola_Enter() {
-        float tackleDistance = 1.5f;
-        _targetTackleX = transform.position.x + _targetDirX * tackleDistance;
         _animator.ChangeAnimation("Tackle");
         SetJump(true);
     }
@@ -193,7 +191,7 @@ public class EnemyCaveRat : EnemyBase
     private void TackleParabola_Update() {
         if (SetPatrolIfWillBeFall()) return;
 
-        if (_timeAgo > _straightDashTime) {
+        if ((_timeAgo > _straightDashTime) && (Mathf.Abs(Velocity.y) < Mathf.Epsilon)) {
             _fsm.ChangeState(States.TrackWait);
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
@@ -214,6 +212,8 @@ public class EnemyCaveRat : EnemyBase
     
     #region AttackWait
     private void TackleStraightWait_Enter() {
+        _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
+        ChangeDir(_targetDirX);
         _animator.ChangeAnimation("Ready");
     }
     private void TackleStraightWait_Update() {
@@ -223,6 +223,8 @@ public class EnemyCaveRat : EnemyBase
     }
 
     private void TackleParabolaWait_Enter() {
+        _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
+        ChangeDir(_targetDirX);
         _animator.ChangeAnimation("Ready");
     }
     private void TackleParabolaWait_Update() {

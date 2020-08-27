@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.U2D;
 
 public abstract class EnemyBase : GroundMove, IPlaceable
 {
     [SerializeField] protected string _enemyName = null;
     [SerializeField] protected int _maxHp = 20;
-    protected Animator _animator;
-    protected SpriteRenderer _renderer;
+    [SerializeField] private SpriteAtlas _atlas = null;
     protected int _hp;
     private Sequence _flashSequence;
     protected float _knockbackTime = 0.5f;
+    private SpriteRenderer _renderer;
+    protected SpriteAtlasAnimator _animator;
+    protected float _timeAgo;
 
     public virtual void Initialize() {
         var status = GetComponent<TBLEnemyStatus>();
         base.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
         _renderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
+        _animator = new SpriteAtlasAnimator();
         Setup();
     }
 
@@ -29,6 +32,13 @@ public abstract class EnemyBase : GroundMove, IPlaceable
         gameObject.SetActive(true);
         transform.position = initalPos;
         _hp = _maxHp;
+    }
+
+    public virtual void Progress() {
+        _timeAgo += Time.deltaTime;
+        if (_animator != null) {
+            _animator.Progress(_renderer, _atlas);
+        }
     }
 
     protected bool EnableHitbox(Vector2[] points, int layerMask) {

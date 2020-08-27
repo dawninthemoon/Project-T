@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2210008074
+CRC: 3302668378
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e7a6d0f31bc188f99d564ce67e6be162
+    Hash: 4bfef165f20959a691318b3af1143f6a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3538772282ac6d57e747071e0272036f
+    Hash: b3be871ef46ed3c58e120448c066f651
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -84,6 +84,6 @@ Assets:
 - Assets/AnimatorControllers/PlayerEffect/jumpAttack.controller
 - Assets/Prefabs/Talisman.prefab
 - Assets/AnimatorControllers/PlayerEffect/defaultAttack3.controller
-- Assets/Prefabs/Enemy/Enemy_Dummy.prefab
+- Assets/Prefabs/Enemy/EnemyCaveRat.prefab
 - Assets/AnimatorControllers/meleeAttack_hit.controller
 Dependencies: []

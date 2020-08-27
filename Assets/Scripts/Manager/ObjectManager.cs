@@ -31,6 +31,12 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         InitalizeObjectPool();
     }
 
+    public void Progress() {
+        for (int i = 0; i < _activeEnemies.Count; i++) {
+            _activeEnemies[i].Progress();
+        }
+    }
+
     public void FixedProgress() {
         for (int i = 0; i < _activeEnemies.Count; i++) {
             _activeEnemies[i].FixedProgress();

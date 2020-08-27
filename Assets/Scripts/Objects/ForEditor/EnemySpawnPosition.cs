@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class EnemySpawnPosition : MonoBehaviour
 {
-    public EnemyTypes requestEnemy = EnemyTypes.Enemy_Dummy;
+    public EnemyTypes requestEnemy = EnemyTypes.EnemyCaveRat;
 }

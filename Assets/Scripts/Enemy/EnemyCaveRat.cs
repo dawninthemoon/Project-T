@@ -5,15 +5,14 @@ using MonsterLove.StateMachine;
 using Aroma;
 
 [ExecuteInEditMode]
-public class Enemy_Dummy : EnemyBase
+public class EnemyCaveRat : EnemyBase
 {
     private Vector2 _moveDetectStart, _moveDetectEnd;
     private Vector2 _attackDetectStart, _attackDetectEnd;
     private Vector2 _platformCheckPos;
     private Vector2[] _bodyAttackHitboxPoints;
-    public enum States { Patrol, Track, TrackWait, Attack, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hurt, Die }
+    public enum States { Patrol, Track, TrackWait, AttackReady, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hit, Die }
     private StateMachine<States> _fsm;
-    private float _timeAgo;
     private Transform _playerTransform;
     private float _targetTackleX;
     private float _targetDirX;
@@ -37,8 +36,11 @@ public class Enemy_Dummy : EnemyBase
         };
 
         base.Initialize();
+
         _playerMask = 1 << LayerMask.NameToLayer("Player");
         _obstacleMask = 1 << LayerMask.NameToLayer("Obstacle");
+
+        _animator.Initalize("CAVERAT_", "Patrol", true);
         _fsm = GetComponent<StateMachineRunner>().Initialize<States>(this);
         _fsm.ChangeState(States.Patrol);
     }
@@ -47,7 +49,7 @@ public class Enemy_Dummy : EnemyBase
         if (_fsm.State == States.Die) return false;
 
         if (base.ReceiveDamage(amount, dir))
-            _fsm.ChangeState(States.Hurt);
+            _fsm.ChangeState(States.Hit);
         else
             _fsm.ChangeState(States.Die);
 
@@ -64,6 +66,7 @@ public class Enemy_Dummy : EnemyBase
         _timeAgo = 0f;
         InputX = (Random.Range(0, 2) == 0) ? -1f : 1f;
         ChangeDir(InputX);
+        _animator.ChangeAnimation("Patrol", true);
     }
 
     private void Patrol_Update() {
@@ -73,8 +76,6 @@ public class Enemy_Dummy : EnemyBase
             _timeAgo = 0f;
             return;
         }
-
-        _timeAgo += Time.deltaTime;
 
         _playerTransform = DetectPlayer(_moveDetectStart, _moveDetectEnd)?.transform;
         if (_playerTransform != null) {
@@ -96,15 +97,14 @@ public class Enemy_Dummy : EnemyBase
     #region Track
     private void Track_Enter() {
         _timeAgo = InputX = 0f;
-
+        _animator.ChangeAnimation("Chase", true);
+        
         if (_playerTransform == null)
             _fsm.ChangeState(States.Patrol);
     }
 
     private void Track_Update() {
         if (SetPatrolIfWillBeFall()) return;
-
-        _timeAgo += Time.deltaTime;
 
         if (DetectPlayer(_moveDetectStart, _moveDetectEnd) == null) {
             if (_timeAgo > 2f)
@@ -113,7 +113,7 @@ public class Enemy_Dummy : EnemyBase
 
         if (DetectPlayer(_attackDetectStart, _attackDetectEnd) != null) {
             if (_timeAgo > 0.5f)
-                _fsm.ChangeState(States.Attack);
+                _fsm.ChangeState(States.AttackReady);
         }
         else {
             InputX = Mathf.Sign((_playerTransform.position - transform.position).x);
@@ -125,8 +125,16 @@ public class Enemy_Dummy : EnemyBase
         InputX = 0f;
     }
 
+    private void TrackWait_Enter() {
+         if (DetectPlayer(_attackDetectStart, _attackDetectEnd) != null) {
+            _fsm.ChangeState(States.AttackReady);
+        }
+        else {
+            _animator.ChangeAnimation("Ready");
+        }
+    }
+
     private void TrackWait_Update() {
-        _timeAgo += Time.deltaTime;
         if (_timeAgo > 1f) {
             _fsm.ChangeState(States.Track);
         }
@@ -135,23 +143,29 @@ public class Enemy_Dummy : EnemyBase
     #endregion
 
     #region Attack
-    private void Attack_Enter() {
+    private void AttackReady_Enter() {
+        _timeAgo = 0f;
         _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
         ChangeDir(_targetDirX);
+        _animator.ChangeAnimation("Ready");
+    }
 
-        var player = _playerTransform.gameObject.GetComponentNoAlloc<Player>();
-        States nextState = (Mathf.Abs(player.Velocity.y) < Mathf.Epsilon) ? States.TackleStraight : States.TackleParabola;
-        _fsm.ChangeState(nextState);
+    private void AttackReady_Update() {
+        if (_timeAgo > 0.5f) {
+             var player = _playerTransform.gameObject.GetComponentNoAlloc<Player>();
+             States nextState = (Mathf.Abs(player.Velocity.y) < Mathf.Epsilon) ? States.TackleStraight : States.TackleParabola;
+             _fsm.ChangeState(nextState);
+        }
     }
 
     private void TackleStraight_Enter() {
         _timeAgo = 0f;
+        _animator.ChangeAnimation("Tackle");
     }
 
     private void TackleStraight_Update() {
         if (SetPatrolIfWillBeFall()) return;
 
-        _timeAgo += Time.deltaTime;
         if (_timeAgo > _straightDashTime) {
             _fsm.ChangeState(States.TrackWait);
         }
@@ -172,13 +186,14 @@ public class Enemy_Dummy : EnemyBase
     private void TackleParabola_Enter() {
         float tackleDistance = 1.5f;
         _targetTackleX = transform.position.x + _targetDirX * tackleDistance;
+        _animator.ChangeAnimation("Tackle");
         SetJump(true);
     }
 
     private void TackleParabola_Update() {
         if (SetPatrolIfWillBeFall()) return;
 
-        if ((_targetDirX > 0f && (transform.position.x > _targetTackleX)) || (_targetDirX < 0f && (transform.position.x < _targetTackleX))) {
+        if (_timeAgo > _straightDashTime) {
             _fsm.ChangeState(States.TrackWait);
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
@@ -198,34 +213,40 @@ public class Enemy_Dummy : EnemyBase
     #endregion
     
     #region AttackWait
-
-
+    private void TackleStraightWait_Enter() {
+        _animator.ChangeAnimation("Ready");
+    }
     private void TackleStraightWait_Update() {
-        _timeAgo += Time.deltaTime;
         if (_timeAgo > 2f) {
             _fsm.ChangeState(States.TackleStraight);
         }
     }
 
+    private void TackleParabolaWait_Enter() {
+        _animator.ChangeAnimation("Ready");
+    }
     private void TackleParabolaWait_Update() {
-        _timeAgo += Time.deltaTime;
         if (_timeAgo > 2f) {
             _fsm.ChangeState(States.TackleParabola);
         }
     }
-
     #endregion
 
-    #region Hurt
-    private void Hurt_Enter() {
+    #region Hit
+    private void Hit_Enter() {
         InputX = 0f; InputY = 0f;
         _timeAgo = 0f;
+        _animator.ChangeAnimation(
+            "Hit",
+            false,
+            () => {
+                _fsm.ChangeState(States.Patrol);
+            }
+        );
     }
 
-    private void Hurt_Update() {
-        _timeAgo += Time.deltaTime;
-
-        if (_timeAgo >= _knockbackTime) { //&& IsAnimationEnd("hurt")) {
+    private void Hit_Update() {
+        if (_timeAgo >= _knockbackTime) { 
             _fsm.ChangeState(States.Patrol);
         }
     }
@@ -234,6 +255,7 @@ public class Enemy_Dummy : EnemyBase
     #region Die
     private void Die_Enter() {
         InputX = 0f; InputY = 0f;
+        _animator.ChangeAnimation("Dead");
     }
     #endregion
     
@@ -263,11 +285,6 @@ public class Enemy_Dummy : EnemyBase
     private void ChangeDir(float dir) {
         Vector3 scaleVec = Aroma.VectorUtility.GetScaleVec(Mathf.Sign(dir));
         transform.localScale = scaleVec;
-    }
-
-    public bool IsAnimationEnd(string stateName) {
-        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-        return (stateInfo.IsName(stateName) && stateInfo.normalizedTime >= 1f);
     }
 
     private Collider2D DetectPlayer(Vector2 point1, Vector2 point2) {

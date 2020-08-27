@@ -52,6 +52,8 @@ MonoBehaviour:
     - {x: 3, y: -3, z: 0}
     - {x: 4, y: -3, z: 0}
     - {x: 5, y: -3, z: 0}
+    - {x: 6, y: -3, z: 0}
+    - {x: 7, y: -3, z: 0}
     - {x: -18, y: -2, z: 0}
     - {x: -17, y: -2, z: 0}
     - {x: -16, y: -2, z: 0}
@@ -62,6 +64,8 @@ MonoBehaviour:
     - {x: -11, y: -2, z: 0}
     - {x: -16, y: 0, z: 0}
     tileBases:
+    - {fileID: 11400000, guid: cbd7578d8803f374591bb3c599d05707, type: 2}
+    - {fileID: 11400000, guid: cbd7578d8803f374591bb3c599d05707, type: 2}
     - {fileID: 11400000, guid: cbd7578d8803f374591bb3c599d05707, type: 2}
     - {fileID: 11400000, guid: cbd7578d8803f374591bb3c599d05707, type: 2}
     - {fileID: 11400000, guid: cbd7578d8803f374591bb3c599d05707, type: 2}
@@ -116,9 +120,9 @@ MonoBehaviour:
     targetRoomNumber: 1
     targetIndex: 0
     vertical: 0
-    size: {x: 0.8, y: 5.6}
-    offset: {x: 0, y: 3.5}
-    position: {x: 6.5, y: -2}
+    size: {x: 0.8, y: 6.4}
+    offset: {x: 0, y: 4}
+    position: {x: 8.5, y: -2}
     playerMask: 512
   - index: 1
     targetRoomNumber: -1
@@ -132,12 +136,12 @@ MonoBehaviour:
   - requestEnemy: 0
     position: {x: 0, y: -2, z: 0}
   waterPoints:
-  - position: {x: -12.481, y: -3.777, z: 0}
-    scale: {x: 36.94203, y: 1.5689123, z: 1}
+  - position: {x: -11.356, y: -4.376, z: 0}
+    scale: {x: 39.195496, y: 2.7681544, z: 1}
   colliderPoint:
     points:
-    - {x: -31, y: 4.5}
-    - {x: -31, y: -4.5}
-    - {x: 6, y: -4.5}
-    - {x: 6, y: 4.5}
+    - {x: -31, y: 5.75}
+    - {x: -31, y: -5.75}
+    - {x: 8, y: -5.75}
+    - {x: 8, y: 5.75}
   movingPlatformPoints: []

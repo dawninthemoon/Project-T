@@ -11,11 +11,11 @@ public class EnemyCaveRat : EnemyBase
     private Vector2 _attackDetectStart, _attackDetectEnd;
     private Vector2 _platformCheckPos;
     private Vector2[] _bodyAttackHitboxPoints;
-    public enum States { Patrol, Track, TrackWait, AttackReady, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hit, Die }
+    public enum States { Patrol, Track, TrackWait, AttackReady, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hit, Dead }
     private StateMachine<States> _fsm;
     private Transform _playerTransform;
-    private float _targetTackleX;
     private float _targetDirX;
+    private bool _hasAttackSuccessed;
     [SerializeField] private float _straightTackleFactor = 1f;
     [SerializeField] private float _parabolaTackleFactor = 1f;
     [SerializeField] private float _straightDashTime = 0.8f;
@@ -46,12 +46,12 @@ public class EnemyCaveRat : EnemyBase
     }
 
     public override bool ReceiveDamage(int amount, float dir) {
-        if (_fsm.State == States.Die) return false;
+        if (_fsm.State == States.Dead) return false;
 
         if (base.ReceiveDamage(amount, dir))
             _fsm.ChangeState(States.Hit);
         else
-            _fsm.ChangeState(States.Die);
+            _fsm.ChangeState(States.Dead);
 
         return true;
     }
@@ -184,6 +184,7 @@ public class EnemyCaveRat : EnemyBase
     }
 
     private void TackleParabola_Enter() {
+        _hasAttackSuccessed = false;
         _animator.ChangeAnimation("Tackle");
         SetJump(true);
     }
@@ -192,11 +193,16 @@ public class EnemyCaveRat : EnemyBase
         if (SetPatrolIfWillBeFall()) return;
 
         if ((_timeAgo > _straightDashTime) && (Mathf.Abs(Velocity.y) < Mathf.Epsilon)) {
-            _fsm.ChangeState(States.TrackWait);
+            if (_hasAttackSuccessed) {
+                States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabolaWait : States.TackleStraightWait;
+                _fsm.ChangeState(nextState);
+            }
+            else {
+                _fsm.ChangeState(States.TrackWait);
+            }
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
-            States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabolaWait : States.TackleStraightWait;
-            _fsm.ChangeState(nextState);
+            _hasAttackSuccessed = true;
         }
         else { 
             InputX = _targetDirX * _parabolaTackleFactor;
@@ -221,7 +227,6 @@ public class EnemyCaveRat : EnemyBase
             _fsm.ChangeState(States.TackleStraight);
         }
     }
-
     private void TackleParabolaWait_Enter() {
         _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
         ChangeDir(_targetDirX);
@@ -254,8 +259,8 @@ public class EnemyCaveRat : EnemyBase
     }
     #endregion
 
-    #region Die
-    private void Die_Enter() {
+    #region Dead
+    private void Dead_Enter() {
         InputX = 0f; InputY = 0f;
         _animator.ChangeAnimation("Dead");
     }

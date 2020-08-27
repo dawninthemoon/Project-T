@@ -30,8 +30,7 @@ public class GameMain : MonoBehaviour
         AssetLoader.GetInstance().Initalize();
         _objectManager.Initialize();
         _effectManager.Initialize();
-        _roomManager.Initalize();
-        virtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = _roomManager.CameraClampCollider;
+        _roomManager.Initalize(virtualCamera.GetComponent<CinemachineConfiner>());
 
         _character = _objectManager.CreatePlayer(Vector2.zero);
         _character.Initialize();

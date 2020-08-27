@@ -82,11 +82,6 @@ namespace LevelEditor {
             asset.roomNumber = RoomNumber;
             string path = "Assets/ScriptableObjects/Rooms/Room " + RoomNumber + ".asset";
             AssetDatabase.CreateAsset(asset, path);
-            
-            AssetImporter assetImporter = AssetImporter.GetAtPath(path);
-            assetImporter.SetAssetBundleNameAndVariant("assetbundle_0", "");
-
-            //BuildAsssetBundles.BuildNeedAssetBundle("assetbundle_0");
         }
 
         public static List<SORoomBase> GetAllRooms() {

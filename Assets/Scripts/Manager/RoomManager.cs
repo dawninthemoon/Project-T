@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Cinemachine;
 
 public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
 {
@@ -9,9 +10,12 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
     private RoomInfo[] _rooms;
     private Tilemap _currentTilemap;
     public PolygonCollider2D CameraClampCollider { get; private set;}
+    private CinemachineConfiner _confiner;
     
-    public void Initalize() {
+    public void Initalize(CinemachineConfiner confiner) {
         CameraClampCollider = new GameObject().AddComponent<PolygonCollider2D>();
+        _confiner = confiner;
+        _confiner.m_BoundingShape2D = CameraClampCollider;
 
         _currentTilemap = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
         
@@ -38,6 +42,7 @@ public class RoomManager : SingletonWithMonoBehaviour<RoomManager>
             ObjectManager.GetInstance().SetPlayerPos(playerPos, vertical);
 
             CameraClampCollider.SetPath(0, _rooms[targetRoomNumber].GetColliderPath(targetIndex));
+            _confiner.InvalidatePathCache();
         }
         else {
             Debug.LogError("Room does not exists");

@@ -73,6 +73,10 @@ namespace LevelEditor {
         }
 
         private PolygonColliderPoint LoadColliderPoint(PolygonCollider2D info) {
+            if (info == null) {
+                Debug.LogError("Polygon Collider has not found.");
+            }
+
             int pointsCount = info.GetPath(0).Length;
             Vector2[] pointsArr = new Vector2[pointsCount];
             for (int i=0; i < pointsCount; ++i) {
@@ -181,6 +185,7 @@ namespace LevelEditor {
 
             var collider = new GameObject().AddComponent<PolygonCollider2D>();
             collider.SetPath(0, roomBase.colliderPoint.points);
+            collider.transform.SetParent(objectTilemap);
         }
     }
 }

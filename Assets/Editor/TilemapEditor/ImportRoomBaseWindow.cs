@@ -115,7 +115,7 @@ public class ImportRoomBaseWindow : EditorWindow
                         var editor = GameObject.Find("LevelEditor").GetComponent<LevelEditor.TilemapEditorScript>();
                         if (EditorUtility.DisplayDialog("Are you sure?", "Importing this room will overlap the current one without saving it.", "Okay", "Cancel"))
                         {
-                            string pathBase = "Assets/Prefabs/ForEditor/";
+                            string pathBase = "Assets/ForEditor/";
 
                             EnemySpawnPosition enemyPointPrefab = AssetDatabase.LoadAssetAtPath(pathBase + "EnemySpawnPosition.prefab", typeof(EnemySpawnPosition)) as EnemySpawnPosition;
                             PlayerSpawnPosition playerPointPrefab =  AssetDatabase.LoadAssetAtPath(pathBase + "PlayerSpawnPosition.prefab", typeof(PlayerSpawnPosition)) as PlayerSpawnPosition;

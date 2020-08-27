@@ -78,7 +78,7 @@ public partial class PlayerAnimator : MonoBehaviour
     }
 
     private void AttackA_Update() {
-        _player.CanDrawGizmos = true;
+        _player.CanDrawHitbox = true;
         if (_animator.SpriteIndex == 1) {
             Vector2 position = transform.position;
             _playerAttack.EnableMeleeAttack();
@@ -99,7 +99,7 @@ public partial class PlayerAnimator : MonoBehaviour
     }
 
     private void AttackB_Update() {
-        _player.CanDrawGizmos = true;
+        _player.CanDrawHitbox = true;
         if (_animator.SpriteIndex == 1) {
             Vector2 position = transform.position;
             _playerAttack.EnableMeleeAttack();

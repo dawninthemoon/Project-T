@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +8,7 @@ public class Player : MonoBehaviour
     private bool _throwRequested;
     private GroundMove _controller;
     public Vector2 Velocity { get { return _controller.Velocity;} }
-    public bool CanDrawGizmos { get; set; }
+    public bool CanDrawHitbox { get; set; }
 
     public void Initialize() {
         _controller = GetComponent<GroundMove>();
@@ -71,8 +69,8 @@ public class Player : MonoBehaviour
     }   
 
     private void OnDrawGizmos() {
-        if (Application.isPlaying && !CanDrawGizmos) return;
-        CanDrawGizmos = false;
+        if (Application.isPlaying && !CanDrawHitbox) return;
+        CanDrawHitbox = false;
 
         var status = GetComponent<TBLPlayerStatus>();
         float dirX = transform.localScale.x;

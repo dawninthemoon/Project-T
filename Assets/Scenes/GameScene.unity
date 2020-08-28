@@ -121,7 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &272663695
+--- !u!84 &15664596
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,8 +134,8 @@ RenderTexture:
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
   serializedVersion: 3
-  m_Width: 1280
-  m_Height: 720
+  m_Width: 960
+  m_Height: 540
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthFormat: 1
@@ -996,13 +996,13 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.5
+  orthographic size: 5.625
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 272663695}
+  m_TargetTexture: {fileID: 15664596}
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1

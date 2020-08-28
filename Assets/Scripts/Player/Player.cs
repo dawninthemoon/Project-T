@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
 
     public void ReceiveDamage(int damage) {
         // _hp -= damage;
+        EffectManager.GetInstance().ShakeCamera(0.2f);
         _playerAnimator.SetPlayerHit();
     }   
 

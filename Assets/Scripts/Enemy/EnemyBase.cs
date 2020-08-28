@@ -53,7 +53,6 @@ public abstract class EnemyBase : GroundMove, IPlaceable
         
         StartKnockback(damage / 30f * dir);
         StartFlash();
-        //_animator.Play("hurt", 0, 0f);
 
         return _hp > 0;
     }

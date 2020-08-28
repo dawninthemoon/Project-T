@@ -184,6 +184,7 @@ public class EnemyCaveRat : EnemyBase
     private void TackleParabola_Enter() {
         _hasAttackSuccessed = false;
         _animator.ChangeAnimation("Tackle");
+        _timeAgo = 0f;
         SetJump(true);
         InputX = _targetDirX * _parabolaTackleFactor;
     }

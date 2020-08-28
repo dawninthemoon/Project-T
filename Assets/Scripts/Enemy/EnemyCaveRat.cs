@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
@@ -161,6 +161,7 @@ public class EnemyCaveRat : EnemyBase
     private void TackleStraight_Enter() {
         _timeAgo = 0f;
         _animator.ChangeAnimation("Tackle");
+        InputX = _targetDirX * _straightTackleFactor;
     }
 
     private void TackleStraight_Update() {
@@ -173,9 +174,6 @@ public class EnemyCaveRat : EnemyBase
             States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabolaWait : States.TackleStraightWait;
             _fsm.ChangeState(nextState);
         }
-        else { 
-            InputX = _targetDirX * _straightTackleFactor;
-        }
     }
 
     private void TackleStraight_Exit() {
@@ -187,6 +185,7 @@ public class EnemyCaveRat : EnemyBase
         _hasAttackSuccessed = false;
         _animator.ChangeAnimation("Tackle");
         SetJump(true);
+        InputX = _targetDirX * _parabolaTackleFactor;
     }
 
     private void TackleParabola_Update() {
@@ -203,9 +202,6 @@ public class EnemyCaveRat : EnemyBase
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
             _hasAttackSuccessed = true;
-        }
-        else { 
-            InputX = _targetDirX * _parabolaTackleFactor;
         }
     }
 
@@ -247,6 +243,7 @@ public class EnemyCaveRat : EnemyBase
             "Hit",
             false,
             () => {
+                
                 _fsm.ChangeState(States.Patrol);
             }
         );

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4141262728
+CRC: 2096534725
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9df685f9b672514147be64b81fbc43cb
+    Hash: fd439155a85fd1266464fd16727995b0
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 50274e58c3016da7905ce99f82cb3896
+    Hash: f93df30cb11f367dc1cf72d87c4c2a92
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -57,6 +57,14 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 70951ee815fe28645bc314173ce18dac, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b836253659932924686ce608e2c4949b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1379b93b1a365e5469f22956b060cc6d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 03cad814e9a9d1b41b13b37d39bccf36, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b1183396a8d17aa49a7f853e444ef00c, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -66,7 +74,10 @@ ClassTypes:
 - Class: 687078895
   Script: {instanceID: 0}
 Assets:
+- Assets/Prefabs/Enemy/EnemyCaveRatShooterB.prefab
+- Assets/Prefabs/Projectiles/CaveRatShooterArrow.prefab
 - Assets/Prefabs/Player.prefab
+- Assets/Prefabs/Enemy/EnemyCaveRatShooterA.prefab
 - Assets/ForEditor/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/Prefabs/Talisman.prefab

@@ -133,8 +133,10 @@ MonoBehaviour:
     position: {x: -8.5, y: -2}
     playerMask: 512
   enemyPoints:
-  - requestEnemy: 0
+  - requestEnemy: 1
     position: {x: 0, y: -2, z: 0}
+  - requestEnemy: 2
+    position: {x: -22.5, y: -2, z: 0}
   waterPoints:
   - position: {x: -11.356, y: -4.376, z: 0}
     scale: {x: 39.195496, y: 2.7681544, z: 1}

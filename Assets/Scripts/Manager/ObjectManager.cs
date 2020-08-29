@@ -135,13 +135,12 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 5,
                 () => { 
                     EnemyBase enemy = Instantiate(enemyPrefabs[i]).GetComponent<EnemyBase>(); 
-                    enemy.name = enemyPrefabs[i].name;
                     enemy.Initialize();
                     return enemy;
                 }
             );
 
-            EnemyTypes type = EnemyUtility.ObjToEnemy(enemyPrefabs[i]);
+            EnemyTypes type = EnemyUtility.NameToEnemy(enemyPrefabs[i].GetComponent<TBLEnemyStatus>().name);
             _enemyObjectPoolOrder.Add(type, i);
         }
 

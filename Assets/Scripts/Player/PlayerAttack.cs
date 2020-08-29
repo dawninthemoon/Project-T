@@ -64,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void EnableMeleeAttack() {
         Vector2 position = transform.position;
-        Vector2 offset = _meleeAttackOffset * transform.localScale.x;
+        Vector2 offset = _meleeAttackOffset.ChangeXPos(_meleeAttackOffset.x * transform.localScale.x);
         EnableHitbox(position + offset, _meleeAttackSize, _meleeAttackDamage, HitEffectName);
     }
 

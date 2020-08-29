@@ -7,11 +7,8 @@ using Aroma;
 [ExecuteInEditMode]
 public class EnemyCaveRatMelee : EnemyBase
 {
-    private Vector2 _moveDetectStart, _moveDetectEnd;
-    private Vector2 _attackDetectStart, _attackDetectEnd;
-    private Vector2 _platformCheckPos;
     private Vector2[] _bodyAttackHitboxPoints;
-    public enum States { Patrol, Track, TrackWait, AttackReady, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hit, Dead }
+    public enum States { Patrol, Chase, ChaseWait, AttackReady, TackleStraight, TackleParabola, TackleStraightWait, TackleParabolaWait, Hit, Dead }
     private StateMachine<States> _fsm;
     private Transform _playerTransform;
     private float _targetDirX;
@@ -22,13 +19,6 @@ public class EnemyCaveRatMelee : EnemyBase
     private int _playerMask, _obstacleMask;
 
     public override void Initialize() {
-        var status = GetComponent<TBLEnemyStatus>();
-        _moveDetectStart = status.MoveDetectStart;
-        _moveDetectEnd = status.MoveDetectEnd;
-        _attackDetectStart = status.AttackDetectStart;
-        _attackDetectEnd = status.AttackDetectEnd;
-        _platformCheckPos = status.platformCheckPos;
-
         var collider = GetComponent<BoxCollider2D>();
         _bodyAttackHitboxPoints = new Vector2[2] {
             collider.offset - collider.size * 0.5f,
@@ -77,9 +67,9 @@ public class EnemyCaveRatMelee : EnemyBase
             return;
         }
 
-        _playerTransform = DetectPlayer(_moveDetectStart, _moveDetectEnd)?.transform;
+        _playerTransform = DetectPlayer(_moveDetectOffset, _moveDetectSize)?.transform;
         if (_playerTransform != null) {
-            _fsm.ChangeState(States.Track);
+            _fsm.ChangeState(States.Chase);
         }
         else if (_timeAgo > 2f) {
             InputX = -InputX;
@@ -88,30 +78,28 @@ public class EnemyCaveRatMelee : EnemyBase
         }
     }
 
-    private void Patrol_Exit() {
-        InputX = 0f;
-    }
-
     #endregion
 
-    #region Track
-    private void Track_Enter() {
+    #region Chase
+    private void Chase_Enter() {
         _timeAgo = InputX = 0f;
         _animator.ChangeAnimation("Chase", true);
-        
-        if (_playerTransform == null)
-            _fsm.ChangeState(States.Patrol);
+        _isPlayerOut = false;
     }
 
-    private void Track_Update() {
+    private void Chase_Update() {
         if (SetPatrolIfWillBeFall()) return;
 
-        if (DetectPlayer(_moveDetectStart, _moveDetectEnd) == null) {
+        bool isPlayerOut = (DetectPlayer(_moveDetectOffset, _moveDetectSize) == null);
+        if (isPlayerOut) {
+            if (!_isPlayerOut)
+                _timeAgo = 0f;
             if (_timeAgo > 2f)
                 _fsm.ChangeState(States.Patrol);
         }
+        _isPlayerOut = isPlayerOut;
 
-        if (DetectPlayer(_attackDetectStart, _attackDetectEnd) != null) {
+        if (DetectPlayer(_attackDetectOffset, _attackDetectSize) != null) {
             if (_timeAgo > 0.5f)
                 _fsm.ChangeState(States.AttackReady);
         }
@@ -121,12 +109,12 @@ public class EnemyCaveRatMelee : EnemyBase
         }
     }
 
-    private void Track_Exit() {
+    private void Chase_Exit() {
         InputX = 0f;
     }
 
-    private void TrackWait_Enter() {
-         if (DetectPlayer(_attackDetectStart, _attackDetectEnd) != null) {
+    private void ChaseWait_Enter() {
+         if (DetectPlayer(_attackDetectOffset, _attackDetectSize) != null) {
             _fsm.ChangeState(States.AttackReady);
         }
         else {
@@ -134,9 +122,9 @@ public class EnemyCaveRatMelee : EnemyBase
         }
     }
 
-    private void TrackWait_Update() {
+    private void ChaseWait_Update() {
         if (_timeAgo > 1f) {
-            _fsm.ChangeState(States.Track);
+            _fsm.ChangeState(States.Chase);
         }
     }
 
@@ -168,7 +156,7 @@ public class EnemyCaveRatMelee : EnemyBase
         if (SetPatrolIfWillBeFall()) return;
 
         if (_timeAgo > _straightDashTime) {
-            _fsm.ChangeState(States.TrackWait);
+            _fsm.ChangeState(States.ChaseWait);
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
             States nextState = (Random.Range(0, 10) > 4) ? States.TackleParabolaWait : States.TackleStraightWait;
@@ -198,7 +186,7 @@ public class EnemyCaveRatMelee : EnemyBase
                 _fsm.ChangeState(nextState);
             }
             else {
-                _fsm.ChangeState(States.TrackWait);
+                _fsm.ChangeState(States.ChaseWait);
             }
         }
         else if (EnableHitbox(_bodyAttackHitboxPoints, _playerMask)) {
@@ -292,15 +280,14 @@ public class EnemyCaveRatMelee : EnemyBase
         transform.localScale = scaleVec;
     }
 
-    private Collider2D DetectPlayer(Vector2 point1, Vector2 point2) {
+     private Collider2D DetectPlayer(Vector2 offset, Vector2 size) {
         Vector2 position = transform.position;
 
         float dirX = transform.localScale.x;
+        offset = offset.ChangeXPos(offset.x * dirX);
+        position += offset;
 
-        point1.x *= dirX; point2.x *= dirX;
-        point1 += position; point2 += position;
-
-        Collider2D collider = Physics2D.OverlapArea(point1, point2, _playerMask);
+        Collider2D collider = Physics2D.OverlapBox(position, size, 0f, _playerMask);
         return collider;
     }
 

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.U2D;
+using Aroma;
 
+[RequireComponent(typeof(TBLEnemyStatus))]
 public abstract class EnemyBase : GroundMove, IPlaceable
 {
     [SerializeField] private SpriteAtlas _atlas = null;
@@ -14,10 +16,21 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     private SpriteRenderer _renderer;
     protected SpriteAtlasAnimator _animator;
     protected float _timeAgo;
+    protected bool _isPlayerOut;
+    protected Vector2 _moveDetectOffset, _moveDetectSize;
+    protected Vector2 _attackDetectOffset, _attackDetectSize;
+    protected Vector2 _platformCheckPos;
     public string EnemyName { get; private set; }
 
     public virtual void Initialize() {
         var status = GetComponent<TBLEnemyStatus>();
+
+        _moveDetectOffset = status.moveDetectOffset;
+        _moveDetectSize = status.moveDetectSize;
+        _attackDetectOffset = status.attackDetectOffset;
+        _attackDetectSize = status.attackDetectSize;
+        _platformCheckPos = status.platformCheckPos;
+
         base.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
         _maxHP = status.maxHP;
         EnemyName = status.name;
@@ -81,32 +94,34 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     protected virtual void OnDrawGizmos() {
         Vector2 position = transform.position;
         var status = GetComponent<TBLEnemyStatus>();
-        float dirX = transform.localScale.x;
+        float direction = transform.localScale.x;
 
-        DrawLine(status.platformCheckPos, status.platformCheckPos + Vector2.down * 0.1f);
-
-        var movePoint2 = new Vector2(status.MoveDetectStart.x, status.MoveDetectEnd.y);
-        var movePoint3 = new Vector2(status.MoveDetectEnd.x, status.MoveDetectStart.y);
+        Vector2 platformRayOffset = status.platformCheckPos.ChangeXPos(status.platformCheckPos.x * direction);
+        Gizmos.DrawLine(position + platformRayOffset, position + platformRayOffset + Vector2.down * 0.1f);
 
         Gizmos.color = Color.green;
-        DrawLine(status.MoveDetectStart, movePoint2);
-        DrawLine(status.MoveDetectStart, movePoint3);
-        DrawLine(movePoint3, status.MoveDetectEnd);
-        DrawLine(movePoint2, status.MoveDetectEnd);
-        
-        var attackPoint2 = new Vector2(status.AttackDetectStart.x, status.AttackDetectEnd.y);
-        var attackPoint3 = new Vector2(status.AttackDetectEnd.x, status.AttackDetectStart.y);
+        DrawBox(status.moveDetectOffset, status.moveDetectSize);
 
         Gizmos.color = Color.red;
-        DrawLine(status.AttackDetectStart, attackPoint2);
-        DrawLine(status.AttackDetectStart, attackPoint3);
-        DrawLine(attackPoint3, status.AttackDetectEnd);
-        DrawLine(attackPoint2, status.AttackDetectEnd);
+        DrawBox(status.attackDetectOffset, status.attackDetectSize);
 
-        void DrawLine(Vector2 point1, Vector2 point2) {
-            point1.x *= dirX; point2.x *= dirX;
-            point1 += position; point2 += position;
-            Gizmos.DrawLine(point1, point2);
+        void DrawBox(Vector2 offset, Vector2 size) {
+            offset = offset.ChangeXPos(offset.x * direction);
+            Vector2 cur = (Vector2)transform.position + offset;
+            
+            Vector2 p1 = cur, p2 = cur;
+            p1.x -= size.x * 0.5f; p1.y += size.y * 0.5f; 
+            p2 += size * 0.5f;
+            Gizmos.DrawLine(p1, p2);
+
+            p2 = p1; p2.y -= size.y;
+            Gizmos.DrawLine(p1, p2);
+
+            p1 = p2; p2.x += size.x;
+            Gizmos.DrawLine(p1, p2);
+
+            p1 = p2; p2.y += size.y;
+            Gizmos.DrawLine(p1, p2);
         }
     }
 }

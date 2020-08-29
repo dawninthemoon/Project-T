@@ -77,48 +77,48 @@ public partial class TBLEnemyStatus : BGEntityGo
 			_maxJumpHeight[Entity.Index] = value;
 		}
 	}
-	public UnityEngine.Vector2 MoveDetectStart
+	public UnityEngine.Vector2 moveDetectOffset
 	{
 		get
 		{
-			return _MoveDetectStart[Entity.Index];
+			return _moveDetectOffset[Entity.Index];
 		}
 		set
 		{
-			_MoveDetectStart[Entity.Index] = value;
+			_moveDetectOffset[Entity.Index] = value;
 		}
 	}
-	public UnityEngine.Vector2 MoveDetectEnd
+	public UnityEngine.Vector2 moveDetectSize
 	{
 		get
 		{
-			return _MoveDetectEnd[Entity.Index];
+			return _moveDetectSize[Entity.Index];
 		}
 		set
 		{
-			_MoveDetectEnd[Entity.Index] = value;
+			_moveDetectSize[Entity.Index] = value;
 		}
 	}
-	public UnityEngine.Vector2 AttackDetectStart
+	public UnityEngine.Vector2 attackDetectOffset
 	{
 		get
 		{
-			return _AttackDetectStart[Entity.Index];
+			return _attackDetectOffset[Entity.Index];
 		}
 		set
 		{
-			_AttackDetectStart[Entity.Index] = value;
+			_attackDetectOffset[Entity.Index] = value;
 		}
 	}
-	public UnityEngine.Vector2 AttackDetectEnd
+	public UnityEngine.Vector2 attackDetectSize
 	{
 		get
 		{
-			return _AttackDetectEnd[Entity.Index];
+			return _attackDetectSize[Entity.Index];
 		}
 		set
 		{
-			_AttackDetectEnd[Entity.Index] = value;
+			_attackDetectSize[Entity.Index] = value;
 		}
 	}
 	public UnityEngine.Vector2 platformCheckPos
@@ -179,40 +179,40 @@ public partial class TBLEnemyStatus : BGEntityGo
 			return __maxJumpHeight;
 		}
 	}
-	private static BansheeGz.BGDatabase.BGFieldVector2 __MoveDetectStart;
-	public static BansheeGz.BGDatabase.BGFieldVector2 _MoveDetectStart
+	private static BansheeGz.BGDatabase.BGFieldVector2 __moveDetectOffset;
+	public static BansheeGz.BGDatabase.BGFieldVector2 _moveDetectOffset
 	{
 		get
 		{
-			if(__MoveDetectStart==null || __MoveDetectStart.IsDeleted) __MoveDetectStart=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5747331735756656086,3320746928093716134));
-			return __MoveDetectStart;
+			if(__moveDetectOffset==null || __moveDetectOffset.IsDeleted) __moveDetectOffset=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5747331735756656086,3320746928093716134));
+			return __moveDetectOffset;
 		}
 	}
-	private static BansheeGz.BGDatabase.BGFieldVector2 __MoveDetectEnd;
-	public static BansheeGz.BGDatabase.BGFieldVector2 _MoveDetectEnd
+	private static BansheeGz.BGDatabase.BGFieldVector2 __moveDetectSize;
+	public static BansheeGz.BGDatabase.BGFieldVector2 _moveDetectSize
 	{
 		get
 		{
-			if(__MoveDetectEnd==null || __MoveDetectEnd.IsDeleted) __MoveDetectEnd=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5075692337743546368,7559170699297928858));
-			return __MoveDetectEnd;
+			if(__moveDetectSize==null || __moveDetectSize.IsDeleted) __moveDetectSize=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5075692337743546368,7559170699297928858));
+			return __moveDetectSize;
 		}
 	}
-	private static BansheeGz.BGDatabase.BGFieldVector2 __AttackDetectStart;
-	public static BansheeGz.BGDatabase.BGFieldVector2 _AttackDetectStart
+	private static BansheeGz.BGDatabase.BGFieldVector2 __attackDetectOffset;
+	public static BansheeGz.BGDatabase.BGFieldVector2 _attackDetectOffset
 	{
 		get
 		{
-			if(__AttackDetectStart==null || __AttackDetectStart.IsDeleted) __AttackDetectStart=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(4858391092339630745,16522775585135925419));
-			return __AttackDetectStart;
+			if(__attackDetectOffset==null || __attackDetectOffset.IsDeleted) __attackDetectOffset=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(4858391092339630745,16522775585135925419));
+			return __attackDetectOffset;
 		}
 	}
-	private static BansheeGz.BGDatabase.BGFieldVector2 __AttackDetectEnd;
-	public static BansheeGz.BGDatabase.BGFieldVector2 _AttackDetectEnd
+	private static BansheeGz.BGDatabase.BGFieldVector2 __attackDetectSize;
+	public static BansheeGz.BGDatabase.BGFieldVector2 _attackDetectSize
 	{
 		get
 		{
-			if(__AttackDetectEnd==null || __AttackDetectEnd.IsDeleted) __AttackDetectEnd=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5690934996591517823,6615302915134543521));
-			return __AttackDetectEnd;
+			if(__attackDetectSize==null || __attackDetectSize.IsDeleted) __attackDetectSize=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5690934996591517823,6615302915134543521));
+			return __attackDetectSize;
 		}
 	}
 	private static BansheeGz.BGDatabase.BGFieldVector2 __platformCheckPos;

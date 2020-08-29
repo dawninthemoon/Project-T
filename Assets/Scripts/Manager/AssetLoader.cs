@@ -30,6 +30,11 @@ public class AssetLoader : Singleton<AssetLoader>
         return wholeRooms;
     }
 
+    public ScriptableObject GetScriptableObject(string name) {
+        ScriptableObject scriptableObj = _objectBundle.LoadAsset<ScriptableObject>(name);
+        return scriptableObj;
+    }  
+
     public GameObject GetPrefab(string prefabName) {
         GameObject prefab = _objectBundle.LoadAsset<GameObject>(prefabName);
         return prefab;

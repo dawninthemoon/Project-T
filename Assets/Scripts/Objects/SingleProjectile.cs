@@ -11,18 +11,27 @@ public class SingleProjectile : MonoBehaviour
     private float _speed;
     private Vector2 _offset;
     private Vector2 _size;
-    private int _collisionMask;
+    private int _playerMask;
+    private int _otherMask;
     private float _maxLifeTime;
     private float _remainLifeTime;
+    private IMoveBehaviour _projectileMoveCallback;
 
     public void Initalize() {
         var status = GetComponent<TBLProjectileStatus>();
         Damage = status.damage;
         _speed = status.speed;
-        _collisionMask = 1 << LayerMask.NameToLayer(status.collisionLayerName);
+        string[] layers = status.collisionLayerName.Split(':');
+        foreach (string layerName in layers) {
+            if (layerName.Equals("Player")) 
+                _playerMask = 1 << LayerMask.NameToLayer(layerName);
+            else
+                _otherMask |= (1 << LayerMask.NameToLayer(layerName));
+        }
         _offset = status.hitboxOffset;
         _size = status.hitboxSize;
         _remainLifeTime = _maxLifeTime = status.lifeTime;
+        _projectileMoveCallback = AssetLoader.GetInstance().GetScriptableObject(status.moveType) as SOProjectileMovementBase;
     }
 
     public void Reset(Vector3 position) {
@@ -32,14 +41,22 @@ public class SingleProjectile : MonoBehaviour
 
     public bool IsLifeTimeEnd() => _remainLifeTime < 0f;
 
-    public bool Progress() {
+    public void MoveSelf() {
         _remainLifeTime -= Time.deltaTime;
+        _projectileMoveCallback?.ExecuteMove(transform, _direction.ToString(), _speed.ToString(), (_maxLifeTime - _remainLifeTime).ToString());
+    }
 
-        transform.position += Vector3.right * _direction * _speed * Time.deltaTime;
+    public bool IsCollisionWithPlayer() {
+         Vector2 cur = transform.position;
+        Vector2 offset = _offset.ChangeXPos(_offset.x * _direction);
+        var collider = Physics2D.OverlapBox(cur + offset, _size, 0f, _playerMask);
+        return collider != null;
+    }
+
+    public bool IsCollisionWithOthers() {
         Vector2 cur = transform.position;
         Vector2 offset = _offset.ChangeXPos(_offset.x * _direction);
-        var collider = Physics2D.OverlapBox(cur + offset, _size, 0f, _collisionMask);
-
+        var collider = Physics2D.OverlapBox(cur + offset, _size, 0f, _otherMask);
         return collider != null;
     }
 

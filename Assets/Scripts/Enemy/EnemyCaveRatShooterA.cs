@@ -9,8 +9,9 @@ public class EnemyCaveRatShooterA : EnemyBase
     private enum States { Patrol, Chase, ChaseWait, Kite, KiteWait, Ready, Attack, Hit, Dead }
     private StateMachine<States> _fsm; 
     private Transform _playerTransform;
-    private ObjectPool<SingleProjectile> _arrowObjjectPool;
+    private ObjectPool<SingleProjectile> _arrowObjectPool;
     private List<SingleProjectile> _activeArrows = new List<SingleProjectile>(3);
+    [SerializeField] private Vector3 _shotOffset = Vector3.zero;
     private float _targetDirX;
     private int _playerMask;
     private int _obstacleMask;
@@ -19,7 +20,7 @@ public class EnemyCaveRatShooterA : EnemyBase
         base.Initialize();
 
         const string arrowName = "CaveRatShooterArrow";
-        _arrowObjjectPool = new ObjectPool<SingleProjectile>(
+        _arrowObjectPool = new ObjectPool<SingleProjectile>(
             10,
             () => {
                 GameObject prefab = AssetLoader.GetInstance().GetPrefab(arrowName);
@@ -41,12 +42,13 @@ public class EnemyCaveRatShooterA : EnemyBase
         base.Progress();
         for (int i = 0; i < _activeArrows.Count; ++i) {
             var arrow = _activeArrows[i];
-            bool hit = arrow.Progress();
-            if (hit) {
+            arrow.MoveSelf();
+            bool isCollisionWithPlayer = arrow.IsCollisionWithPlayer();
+            if (isCollisionWithPlayer) {
                 _playerTransform.gameObject.GetComponentNoAlloc<Player>().ReceiveDamage(arrow.Damage);
             }
-            if (hit || arrow.IsLifeTimeEnd()) {
-                _arrowObjjectPool.ReturnObject(arrow);
+            if (isCollisionWithPlayer || arrow.IsCollisionWithOthers() || arrow.IsLifeTimeEnd()) {
+                _arrowObjectPool.ReturnObject(arrow);
                 _activeArrows.RemoveAt(i--);
             }
         }
@@ -76,17 +78,19 @@ public class EnemyCaveRatShooterA : EnemyBase
         _animator.ChangeAnimation("Patrol", true);
     }
     private void Patrol_Update() {
-        if (WillBeFall()) {
+        if (WillBeFall(_platformCheckPos, _obstacleMask)) {
             InputX = -InputX;
             ChangeDir(InputX);
             _timeAgo = 0f;
             return;
         }
 
-       var playerTransform = DetectPlayer(_moveDetectOffset, _moveDetectSize)?.transform;
+       var playerTransform = DetectPlayer(_moveDetectOffset, _moveDetectSize, _playerMask)?.transform;
         if (playerTransform != null) {
             _playerTransform = playerTransform;
-            _fsm.ChangeState(States.Chase);
+            if (!WillBeFall(_platformCheckPos.ChangeXPos(-_platformCheckPos.x), _obstacleMask)) {
+                _fsm.ChangeState(States.Chase);
+            }
         }
         else if (_timeAgo > 2f) {
             InputX = -InputX;
@@ -104,15 +108,15 @@ public class EnemyCaveRatShooterA : EnemyBase
         _isPlayerOut = false;
     }
     private void Kite_Update() {
-        if (WillBeFall()) {
+        if (WillBeFall(_platformCheckPos, _obstacleMask)) {
             _fsm.ChangeState(States.Chase); 
             return;
         }
-        if (DetectPlayer(-_attackDetectOffset, _attackDetectSize) == null) {
+        if (DetectPlayer(_attackDetectOffset.ChangeXPos(-_attackDetectOffset.x), _attackDetectSize, _playerMask) == null) {
             _fsm.ChangeState(States.Ready);
         }
     }
-     private void KiteWait_Enter() => _timeAgo = 0f;
+    private void KiteWait_Enter() => _timeAgo = 0f;
     private void KiteWait_Update() {
         if (_timeAgo > 0.5f) 
             _fsm.ChangeState(States.Kite);
@@ -129,7 +133,7 @@ public class EnemyCaveRatShooterA : EnemyBase
     private void Chase_Update() {
         if (SetPatrolIfWillBeFall()) return;
 
-        bool isPlayerOut = (DetectPlayer(_moveDetectOffset, _moveDetectSize) == null);
+        bool isPlayerOut = (DetectPlayer(_moveDetectOffset, _moveDetectSize, _playerMask) == null);
         if (isPlayerOut) {
             if (!_isPlayerOut)
                 _timeAgo = 0f;
@@ -139,7 +143,7 @@ public class EnemyCaveRatShooterA : EnemyBase
         }
         _isPlayerOut = isPlayerOut;
 
-        if (DetectPlayer(_attackDetectOffset, _attackDetectSize) != null) {
+        if (DetectPlayer(_attackDetectOffset, _attackDetectSize, _playerMask) != null) {
             if (_timeAgo > 0.5f)
                 _fsm.ChangeState(States.Ready);
         }
@@ -163,30 +167,31 @@ public class EnemyCaveRatShooterA : EnemyBase
     
     #region Ready
     private void Ready_Enter() {
-        InputX = _timeAgo = 0f;
+        InputX = 0f;
         _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
         ChangeDir(_targetDirX);
-        _animator.ChangeAnimation("ReadyA");
-    }
-    private void Ready_Update() {
-        if (_timeAgo > 0.5f) {
-            _fsm.ChangeState(States.Attack);
-        }
+        _animator.ChangeAnimation(
+            "Ready",
+            false,
+            () => {
+             _fsm.ChangeState(States.Attack);
+            }
+        );
     }
     #endregion
 
     #region Attack
     private void Attack_Enter() {
-        var arrow = _arrowObjjectPool.GetObject();
+        var arrow = _arrowObjectPool.GetObject();
         _activeArrows.Add(arrow);
         arrow.SetDirection(_targetDirX);
-        arrow.Reset(transform.position);
+        arrow.Reset(transform.position + _shotOffset);
 
         _animator.ChangeAnimation(
             "AttackA",
             false,
             () => {
-                States nextState = (DetectPlayer(_moveDetectOffset, _moveDetectSize) == null) ? States.ChaseWait : States.KiteWait;
+                States nextState = (DetectPlayer(_attackDetectOffset, _attackDetectSize, _playerMask) == null) ? States.ChaseWait : States.KiteWait;
                 _fsm.ChangeState(nextState);
             }
         );
@@ -223,38 +228,11 @@ public class EnemyCaveRatShooterA : EnemyBase
 
     private bool SetPatrolIfWillBeFall() {
         bool willBeFall = false;
-        if (WillBeFall()) {
+        if (WillBeFall(_platformCheckPos, _obstacleMask)) {
             InputX = 0;
             _fsm.ChangeState(States.Patrol);
         }
         return willBeFall;
-    }
-
-    private bool WillBeFall() {
-        bool willBeFall = false;
-
-        float xpos = _platformCheckPos.x * (transform.localScale.x);
-        Vector2 position = (Vector2)transform.position + _platformCheckPos.ChangeXPos(xpos);
-        var platform = Physics2D.Raycast(position, Vector2.down, 0.1f, _obstacleMask);
-
-        if ((Mathf.Abs(Velocity.y) < Mathf.Epsilon) && (platform.collider == null)) {
-            willBeFall = true;
-        }
-        return willBeFall;
-    }
-
-    private void ChangeDir(float dir) {
-        Vector3 scaleVec = Aroma.VectorUtility.GetScaleVec(Mathf.Sign(dir));
-        transform.localScale = scaleVec;
-    }
-
-    private Collider2D DetectPlayer(Vector2 offset, Vector2 size) {
-        float dirX = transform.localScale.x;
-        offset = offset.ChangeXPos(offset.x * dirX);
-        Vector2 position = (Vector2)transform.position + offset;
-
-        Collider2D collider = Physics2D.OverlapBox(position, size, 0f, _playerMask);
-        return collider;
     }
 
     protected override void OnDrawGizmos() {

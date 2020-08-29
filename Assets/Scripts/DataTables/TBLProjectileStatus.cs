@@ -110,6 +110,17 @@ public partial class TBLProjectileStatus : BGEntityGo
 			_lifeTime[Entity.Index] = value;
 		}
 	}
+	public System.String moveType
+	{
+		get
+		{
+			return _moveType[Entity.Index];
+		}
+		set
+		{
+			_moveType[Entity.Index] = value;
+		}
+	}
 	private static BansheeGz.BGDatabase.BGFieldEntityName __name;
 	public static BansheeGz.BGDatabase.BGFieldEntityName _name
 	{
@@ -171,6 +182,15 @@ public partial class TBLProjectileStatus : BGEntityGo
 		{
 			if(__lifeTime==null || __lifeTime.IsDeleted) __lifeTime=(BansheeGz.BGDatabase.BGFieldFloat) MetaDefault.GetField(new BGId(5673530901536212325,8126910241556050820));
 			return __lifeTime;
+		}
+	}
+	private static BansheeGz.BGDatabase.BGFieldString __moveType;
+	public static BansheeGz.BGDatabase.BGFieldString _moveType
+	{
+		get
+		{
+			if(__moveType==null || __moveType.IsDeleted) __moveType=(BansheeGz.BGDatabase.BGFieldString) MetaDefault.GetField(new BGId(5278834531543241527,4928883701501858738));
+			return __moveType;
 		}
 	}
 }

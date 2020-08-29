@@ -91,6 +91,35 @@ public abstract class EnemyBase : GroundMove, IPlaceable
         }
     }
 
+    protected bool WillBeFall(Vector2 platformCheckPos, int obstacleMask) {
+        bool willBeFall = false;
+
+        float xpos = platformCheckPos.x * (transform.localScale.x);
+        Vector2 position = (Vector2)transform.position + platformCheckPos.ChangeXPos(xpos);
+        var platform = Physics2D.Raycast(position, Vector2.down, 0.1f, obstacleMask);
+
+        if ((Mathf.Abs(Velocity.y) < Mathf.Epsilon) && (platform.collider == null)) {
+            willBeFall = true;
+        }
+        return willBeFall;
+    }
+
+    protected void ChangeDir(float dir) {
+        Vector3 scaleVec = Aroma.VectorUtility.GetScaleVec(Mathf.Sign(dir));
+        transform.localScale = scaleVec;
+    }
+
+    protected Collider2D DetectPlayer(Vector2 offset, Vector2 size, int playerMask) {
+        Vector2 position = transform.position;
+
+        float dirX = transform.localScale.x;
+        offset = offset.ChangeXPos(offset.x * dirX);
+        position += offset;
+
+        Collider2D collider = Physics2D.OverlapBox(position, size, 0f, playerMask);
+        return collider;
+    }
+
     protected virtual void OnDrawGizmos() {
         Vector2 position = transform.position;
         var status = GetComponent<TBLEnemyStatus>();

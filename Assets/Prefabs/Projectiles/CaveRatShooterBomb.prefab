@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2240226637110647034}
   - component: {fileID: 5760522253983523969}
   m_Layer: 0
-  m_Name: CaveRatShooterArrow
+  m_Name: CaveRatShooterBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5760522253983523968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.05, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   OnEntityChange:
     m_PersistentCalls:
       m_Calls: []
-  entityIdString: dpM4sNB+okWgEf1QgCEUEA
+  entityIdString: Ge4qNLhrq02JUX8jpm3faQ
   metaIdString: 
   initWithFirst: 0
 --- !u!114 &2240226637110647034
@@ -63,7 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cad814e9a9d1b41b13b37d39bccf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileMove: {fileID: 11400000, guid: 7333289b5f83788438beda3d872cdfd1, type: 2}
 --- !u!212 &5760522253983523969
 SpriteRenderer:
   m_ObjectHideFlags: 0

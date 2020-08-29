@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _atlas: {fileID: 4343727234628468602, guid: cfc5499eabcf0ce47b115e8180727dbe, type: 2}
+  _shotOffset: {x: 0.28, y: 0.3, z: 0}
 --- !u!114 &1986381715251828911
 MonoBehaviour:
   m_ObjectHideFlags: 0

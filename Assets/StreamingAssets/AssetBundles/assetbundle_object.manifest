@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2096534725
+CRC: 700811039
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fd439155a85fd1266464fd16727995b0
+    Hash: 938a5e6936f8e4143cc3f5ce4334e45b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f93df30cb11f367dc1cf72d87c4c2a92
+    Hash: d43d65de79bda77d2292e5fd429e18ab
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -42,7 +42,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: c32d97f3f6f3ca94d93dd47bc6e11bf8, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 03cad814e9a9d1b41b13b37d39bccf36, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 418bdcd5552cff34b9bf74b6bbdff272, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b836253659932924686ce608e2c4949b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b1183396a8d17aa49a7f853e444ef00c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5d4c81d654878c9459b0a4c527d63aa8, type: 3}
 - Class: 114
@@ -56,15 +62,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 70951ee815fe28645bc314173ce18dac, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b836253659932924686ce608e2c4949b, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 1379b93b1a365e5469f22956b060cc6d, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 03cad814e9a9d1b41b13b37d39bccf36, type: 3}
+  Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: b1183396a8d17aa49a7f853e444ef00c, type: 3}
+  Script: {fileID: 11500000, guid: df579edaac77ce54998fce1a4893ee51, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 61239bd8f22ebd848b46e499a7625aca, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -74,6 +78,7 @@ ClassTypes:
 - Class: 687078895
   Script: {instanceID: 0}
 Assets:
+- Assets/Prefabs/Projectiles/CaveRatShooterBomb.prefab
 - Assets/Prefabs/Enemy/EnemyCaveRatShooterB.prefab
 - Assets/Prefabs/Projectiles/CaveRatShooterArrow.prefab
 - Assets/Prefabs/Player.prefab
@@ -81,6 +86,8 @@ Assets:
 - Assets/ForEditor/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/Prefabs/Talisman.prefab
+- Assets/ScriptableObjects/ProjectileMovements/Straight.asset
 - Assets/Prefabs/Enemy/EnemyCaveRatMelee.prefab
 - Assets/AnimatorControllers/meleeAttack_hit.controller
+- Assets/ScriptableObjects/ProjectileMovements/Parabola.asset
 Dependencies: []

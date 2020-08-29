@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class EnemyPoint {
-    public EnemyTypes requestEnemy = EnemyTypes.EnemyCaveRat;
+    public EnemyTypes requestEnemy = EnemyTypes.CAVERAT_MELEE;
     public Vector3 position;
 
     public EnemyPoint(Vector3 pos, EnemyTypes type) {

@@ -1,4 +1,5 @@
 public enum EnemyTypes {
-    EnemyCaveRat,
+    CAVERAT_MELEE,
+    CAVERAT_SHOOTER,
     Count,
 }

@@ -44,8 +44,8 @@ namespace Aroma
             return (EnemyTypes)System.Enum.Parse(typeof(EnemyTypes), name);
         }
 
-        public static EnemyTypes ObjToEnemy(GameObject obj) {
-            return NameToEnemy(obj.name);
+        public static EnemyTypes ObjToEnemy(EnemyBase enemy) {
+            return NameToEnemy(enemy.EnemyName);
         }
     }
 

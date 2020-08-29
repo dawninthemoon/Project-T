@@ -120,8 +120,8 @@ MonoBehaviour:
     targetRoomNumber: 1
     targetIndex: 0
     vertical: 0
-    size: {x: 0.8, y: 6.4}
-    offset: {x: 0, y: 4}
+    size: {x: 0.8, y: 4.8}
+    offset: {x: 0, y: 3}
     position: {x: 8.5, y: -2}
     playerMask: 512
   - index: 1

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2533747005
+CRC: 4141262728
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c6015150bb97055f00859be8ef7da949
+    Hash: 9df685f9b672514147be64b81fbc43cb
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c021b8d87e072e64e75048020c809c74
+    Hash: 50274e58c3016da7905ce99f82cb3896
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -70,6 +70,6 @@ Assets:
 - Assets/ForEditor/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
 - Assets/Prefabs/Talisman.prefab
-- Assets/Prefabs/Enemy/EnemyCaveRat.prefab
+- Assets/Prefabs/Enemy/EnemyCaveRatMelee.prefab
 - Assets/AnimatorControllers/meleeAttack_hit.controller
 Dependencies: []

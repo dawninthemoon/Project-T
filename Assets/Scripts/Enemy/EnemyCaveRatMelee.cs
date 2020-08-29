@@ -5,7 +5,7 @@ using MonsterLove.StateMachine;
 using Aroma;
 
 [ExecuteInEditMode]
-public class EnemyCaveRat : EnemyBase
+public class EnemyCaveRatMelee : EnemyBase
 {
     private Vector2 _moveDetectStart, _moveDetectEnd;
     private Vector2 _attackDetectStart, _attackDetectEnd;

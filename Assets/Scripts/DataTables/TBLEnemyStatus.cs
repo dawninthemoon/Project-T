@@ -132,6 +132,17 @@ public partial class TBLEnemyStatus : BGEntityGo
 			_platformCheckPos[Entity.Index] = value;
 		}
 	}
+	public System.Int32 maxHP
+	{
+		get
+		{
+			return _maxHP[Entity.Index];
+		}
+		set
+		{
+			_maxHP[Entity.Index] = value;
+		}
+	}
 	private static BansheeGz.BGDatabase.BGFieldEntityName __name;
 	public static BansheeGz.BGDatabase.BGFieldEntityName _name
 	{
@@ -211,6 +222,15 @@ public partial class TBLEnemyStatus : BGEntityGo
 		{
 			if(__platformCheckPos==null || __platformCheckPos.IsDeleted) __platformCheckPos=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5061778677936757359,16005822572342414979));
 			return __platformCheckPos;
+		}
+	}
+	private static BansheeGz.BGDatabase.BGFieldInt __maxHP;
+	public static BansheeGz.BGDatabase.BGFieldInt _maxHP
+	{
+		get
+		{
+			if(__maxHP==null || __maxHP.IsDeleted) __maxHP=(BansheeGz.BGDatabase.BGFieldInt) MetaDefault.GetField(new BGId(5630698612195057791,8772543766126285482));
+			return __maxHP;
 		}
 	}
 }

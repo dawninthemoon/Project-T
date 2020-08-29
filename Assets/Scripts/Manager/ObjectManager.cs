@@ -70,7 +70,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
 
     public void ReturnAllEnemies() {
         for (int i = 0; i < _activeEnemies.Count; i++) {
-            EnemyTypes type = EnemyUtility.ObjToEnemy(_activeEnemies[i].gameObject);
+            EnemyTypes type = EnemyUtility.ObjToEnemy(_activeEnemies[i]);
             int index = _enemyObjectPoolOrder[type];
 
             _enemyObjectPoolArr[index].ReturnObject(_activeEnemies[i]);
@@ -141,7 +141,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 }
             );
 
-            EnemyTypes type = EnemyUtility.ObjToEnemy(enemyPrefabs[i].gameObject);
+            EnemyTypes type = EnemyUtility.ObjToEnemy(enemyPrefabs[i]);
             _enemyObjectPoolOrder.Add(type, i);
         }
 

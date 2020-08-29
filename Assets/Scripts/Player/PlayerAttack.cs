@@ -108,10 +108,10 @@ public class PlayerAttack : MonoBehaviour
         float dirX = transform.localScale.x;
 
         talisman.transform.position = transform.position + _throwPosition;
-        var table = TBLTalisman.GetEntity(new BansheeGz.BGDatabase.BGId("44Zgd9sxt0eyEdxw8zsBJQ"));
+        //var table = TBLTalisman.GetEntity(new BansheeGz.BGDatabase.BGId("44Zgd9sxt0eyEdxw8zsBJQ"));
 
-        talisman.Initalize(dirX, table.moveSpeed);
-        _activeTalismans.Add(talisman);
+        //talisman.Initalize(dirX, table.moveSpeed);
+        //_activeTalismans.Add(talisman);
     }
 
     private bool OnEnemyHit(EnemyBase enemy, int damage, string hitEffectName) {

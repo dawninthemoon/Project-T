@@ -6,32 +6,35 @@ using UnityEngine.U2D;
 
 public abstract class EnemyBase : GroundMove, IPlaceable
 {
-    [SerializeField] protected string _enemyName = null;
-    [SerializeField] protected int _maxHp = 20;
     [SerializeField] private SpriteAtlas _atlas = null;
-    protected int _hp;
+    private int _maxHP;
+    protected int _currentHp;
     private Sequence _flashSequence;
     protected float _knockbackTime = 0.5f;
     private SpriteRenderer _renderer;
     protected SpriteAtlasAnimator _animator;
     protected float _timeAgo;
+    public string EnemyName { get; private set; }
 
     public virtual void Initialize() {
         var status = GetComponent<TBLEnemyStatus>();
         base.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
+        _maxHP = status.maxHP;
+        EnemyName = status.name;
+
         _renderer = GetComponent<SpriteRenderer>();
         _animator = new SpriteAtlasAnimator();
         Setup();
     }
 
     public virtual void Setup() {
-        _hp = _maxHp;
+        _currentHp = _maxHP;
     }
 
     public virtual void Reset(Vector3 initalPos) {
         gameObject.SetActive(true);
         transform.position = initalPos;
-        _hp = _maxHp;
+        _currentHp = _maxHP;
     }
 
     public virtual void Progress() {
@@ -49,12 +52,12 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     }
 
     public virtual bool ReceiveDamage(int damage, float dir) {
-        _hp -= damage;
+        _currentHp -= damage;
         
         StartKnockback(damage / 30f * dir);
         StartFlash();
 
-        return _hp > 0;
+        return _currentHp > 0;
     }
 
     private void StartKnockback(float localX) {

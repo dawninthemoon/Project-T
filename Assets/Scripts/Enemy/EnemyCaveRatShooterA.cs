@@ -43,11 +43,14 @@ public class EnemyCaveRatShooterA : EnemyBase
         for (int i = 0; i < _activeArrows.Count; ++i) {
             var arrow = _activeArrows[i];
             arrow.MoveSelf();
+            
             bool isCollisionWithPlayer = arrow.IsCollisionWithPlayer();
             if (isCollisionWithPlayer) {
                 _playerTransform.gameObject.GetComponentNoAlloc<Player>().ReceiveDamage(arrow.Damage);
             }
             if (isCollisionWithPlayer || arrow.IsCollisionWithOthers() || arrow.IsLifeTimeEnd()) {
+                if (!arrow.IsLifeTimeEnd())
+                    arrow.StartHitEffect();
                 _arrowObjectPool.ReturnObject(arrow);
                 _activeArrows.RemoveAt(i--);
             }

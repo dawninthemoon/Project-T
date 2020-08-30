@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03cad814e9a9d1b41b13b37d39bccf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitEffectName: EFFECT_Explode
 --- !u!212 &5760522253983523969
 SpriteRenderer:
   m_ObjectHideFlags: 0

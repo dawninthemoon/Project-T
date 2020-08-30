@@ -43,18 +43,34 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 1202d14ba7d37ce409ebc38a0e57ddaf, type: 3}
-    totalSpriteSurfaceArea: 16384
+    totalSpriteSurfaceArea: 49152
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 4ca9f9104d8ff08448b4194dc55cd9e8, type: 3}
+  - {fileID: 21300000, guid: 4adfe4528b3f3764ea86aebd863f9030, type: 3}
+  - {fileID: 21300000, guid: d376e1d26f474ad459faf6866d2b048e, type: 3}
   - {fileID: 21300000, guid: 918529b3552c4e44ab034fd6a47d5c39, type: 3}
   - {fileID: 21300000, guid: c1c990f459492d4409f36e43503db5af, type: 3}
+  - {fileID: 21300000, guid: 1952e9a54fb25454c9c5e3348a74ff11, type: 3}
+  - {fileID: 21300000, guid: a58d7dc5bcea27643ab30a1227ee00c3, type: 3}
+  - {fileID: 21300000, guid: 2522b89957a9a33428499f8f6b739796, type: 3}
   - {fileID: 21300000, guid: bd96fd3b5c1fb56408e311aec26fb6e3, type: 3}
+  - {fileID: 21300000, guid: b39e8f4da88451440873bbb327b49c69, type: 3}
+  - {fileID: 21300000, guid: f549674fffb28d541ad1fe4d18141a75, type: 3}
   - {fileID: 21300000, guid: bfed5c8f87b5e1746acd5c0624624a05, type: 3}
   m_PackedSpriteNamesToIndex:
+  - EFFECT_Explode7
+  - EFFECT_Explode1
+  - EFFECT_Explode4
   - EFFECT_Hit1
   - EFFECT_Hit3
+  - EFFECT_Explode6
+  - EFFECT_Explode8
+  - EFFECT_Explode5
   - EFFECT_Hit4
+  - EFFECT_Explode2
+  - EFFECT_Explode3
   - EFFECT_Hit2
   m_Tag: EffectAtlas
   m_IsVariant: 0

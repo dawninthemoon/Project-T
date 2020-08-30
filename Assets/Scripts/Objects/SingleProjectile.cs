@@ -6,6 +6,7 @@ using Aroma;
 [RequireComponent(typeof(TBLProjectileStatus))]
 public class SingleProjectile : MonoBehaviour
 {
+    [SerializeField] private string _hitEffectName = null;
     public int Damage { get; private set; }
     private float _direction = 1f;
     private float _speed;
@@ -16,6 +17,7 @@ public class SingleProjectile : MonoBehaviour
     private float _maxLifeTime;
     private float _remainLifeTime;
     private IMoveBehaviour _projectileMoveCallback;
+    private IAttackBehaviour _projectileAttackCallback;
 
     public void Initalize() {
         var status = GetComponent<TBLProjectileStatus>();
@@ -31,7 +33,9 @@ public class SingleProjectile : MonoBehaviour
         _offset = status.hitboxOffset;
         _size = status.hitboxSize;
         _remainLifeTime = _maxLifeTime = status.lifeTime;
+
         _projectileMoveCallback = AssetLoader.GetInstance().GetScriptableObject(status.moveType) as SOProjectileMovementBase;
+        _projectileAttackCallback = AssetLoader.GetInstance().GetScriptableObject(status.attackType) as SOProjectileAttackBase;
     }
 
     public void Reset(Vector3 position) {
@@ -39,17 +43,22 @@ public class SingleProjectile : MonoBehaviour
         _remainLifeTime = _maxLifeTime;
     }
 
-    public bool IsLifeTimeEnd() => _remainLifeTime < 0f;
+    public void StartHitEffect() {
+        EffectManager.GetInstance().SpawnAndRemove(transform.position, _hitEffectName, transform.localScale.x);
+    }
 
+    public bool IsLifeTimeEnd() => _remainLifeTime < 0f;
+    
     public void MoveSelf() {
         _remainLifeTime -= Time.deltaTime;
         _projectileMoveCallback?.ExecuteMove(transform, _direction.ToString(), _speed.ToString(), (_maxLifeTime - _remainLifeTime).ToString());
     }
 
     public bool IsCollisionWithPlayer() {
-         Vector2 cur = transform.position;
+        Vector2 cur = transform.position;
         Vector2 offset = _offset.ChangeXPos(_offset.x * _direction);
         var collider = Physics2D.OverlapBox(cur + offset, _size, 0f, _playerMask);
+
         return collider != null;
     }
 
@@ -58,6 +67,12 @@ public class SingleProjectile : MonoBehaviour
         Vector2 offset = _offset.ChangeXPos(_offset.x * _direction);
         var collider = Physics2D.OverlapBox(cur + offset, _size, 0f, _otherMask);
         return collider != null;
+    }
+
+    public bool ExecuteAttack(bool isCollisionWithPlayer) {
+        if (_projectileAttackCallback == null) return isCollisionWithPlayer;
+        bool isCollision = _projectileAttackCallback.ExecuteAttack(transform.position, _direction.ToString(), _playerMask.ToString());
+        return isCollision;
     }
 
     public void SetDirection(float dir) => _direction = dir;

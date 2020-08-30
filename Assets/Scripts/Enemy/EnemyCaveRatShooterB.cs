@@ -63,12 +63,14 @@ public class EnemyCaveRatShooterB : EnemyBase
             bool isCollisionWithPlayer = bomb.IsCollisionWithPlayer();
             bool isCollisionWithOthers = bomb.IsCollisionWithOthers();
 
-            if (isCollisionWithPlayer) {
-                _playerTransform.gameObject.GetComponentNoAlloc<Player>().ReceiveDamage(bomb.Damage);
-            }
-            else if (isCollisionWithOthers) {
+            if (isCollisionWithPlayer || isCollisionWithOthers) {
+                bomb.StartHitEffect();
                 EffectManager.GetInstance().ShakeCamera(0.2f);
+                if (bomb.ExecuteAttack(isCollisionWithPlayer)) {
+                    _playerTransform.gameObject.GetComponentNoAlloc<Player>().ReceiveDamage(bomb.Damage);
+                }
             }
+
             if (isCollisionWithPlayer || isCollisionWithOthers|| bomb.IsLifeTimeEnd()) {
                 _bombObjectPool.ReturnObject(bomb);
                 _activeBombs.RemoveAt(i--);

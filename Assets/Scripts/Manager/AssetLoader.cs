@@ -37,6 +37,7 @@ public class AssetLoader : Singleton<AssetLoader>
     }
 
     public ScriptableObject GetScriptableObject(string name) {
+        if (name.Equals("NULL")) return null;
         ScriptableObject scriptableObj = _objectBundle.LoadAsset<ScriptableObject>(name);
         return scriptableObj;
     }  

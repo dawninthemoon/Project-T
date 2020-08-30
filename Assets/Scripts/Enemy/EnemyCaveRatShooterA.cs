@@ -45,10 +45,14 @@ public class EnemyCaveRatShooterA : EnemyBase
             arrow.MoveSelf();
             
             bool isCollisionWithPlayer = arrow.IsCollisionWithPlayer();
+
             if (isCollisionWithPlayer) {
                 _playerTransform.gameObject.GetComponentNoAlloc<Player>().ReceiveDamage(arrow.Damage);
             }
-            if (isCollisionWithPlayer || arrow.IsCollisionWithOthers() || arrow.IsLifeTimeEnd()) {
+            if (arrow.IsCollisionWithOthers()) {
+                arrow.SetProjectileCantMove();
+            }
+            if (isCollisionWithPlayer || arrow.IsLifeTimeEnd()) {
                 if (!arrow.IsLifeTimeEnd())
                     arrow.StartHitEffect();
                 _arrowObjectPool.ReturnObject(arrow);

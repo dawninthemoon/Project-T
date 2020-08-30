@@ -17,6 +17,7 @@ public class SingleProjectile : MonoBehaviour
     private float _maxLifeTime;
     private float _remainLifeTime;
     private float _distance;
+    private bool _canMove;
     private IMoveBehaviour _projectileMoveCallback;
     private IAttackBehaviour _projectileAttackCallback;
 
@@ -43,6 +44,7 @@ public class SingleProjectile : MonoBehaviour
     public void Reset(Vector3 position) {
         transform.position = position;
         _remainLifeTime = _maxLifeTime;
+        _canMove = true;
     }
 
     public void StartHitEffect() {
@@ -53,7 +55,14 @@ public class SingleProjectile : MonoBehaviour
     
     public void MoveSelf() {
         _remainLifeTime -= Time.deltaTime;
-        _projectileMoveCallback?.ExecuteMove(transform, _direction.ToString(), _speed.ToString(), (_maxLifeTime - _remainLifeTime).ToString(), _distance.ToString());
+
+        if (_canMove) {
+            string direction = _direction.ToString();
+            string speed = _speed.ToString();
+            string timeAgo = (_maxLifeTime - _remainLifeTime).ToString();
+            string distance = _distance.ToString();
+            _projectileMoveCallback?.ExecuteMove(transform, direction, speed, timeAgo, distance);
+        }
     }
 
     public bool IsCollisionWithPlayer() {
@@ -80,6 +89,7 @@ public class SingleProjectile : MonoBehaviour
 
     public void SetDirection(float dir) => _direction = dir;
     public void SetDistance(float dist) => _distance = dist;
+    public void SetProjectileCantMove() => _canMove = false;
 
     private void OnDrawGizmos() {
         var status = GetComponent<TBLProjectileStatus>();

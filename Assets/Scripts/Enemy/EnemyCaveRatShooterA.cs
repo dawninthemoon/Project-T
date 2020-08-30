@@ -205,12 +205,14 @@ public class EnemyCaveRatShooterA : EnemyBase
     private void Hit_Enter() {
         InputX = 0f; InputY = 0f;
         _timeAgo = 0f;
+        float dir = transform.localScale.x;
         _animator.ChangeAnimation(
             "Hit",
             false,
             () => {
-                
                 _fsm.ChangeState(States.Patrol);
+                InputX = dir;
+                ChangeDir(dir);
             }
         );
     }

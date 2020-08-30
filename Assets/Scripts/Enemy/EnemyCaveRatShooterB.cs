@@ -171,8 +171,10 @@ public class EnemyCaveRatShooterB : EnemyBase
     private void Attack_Enter() {
         var bomb = _bombObjectPool.GetObject();
         _activeBombs.Add(bomb);
-        bomb.SetDirection(_targetDirX);
+        
         bomb.Reset(transform.position + _shotOffset);
+        bomb.SetDirection(_targetDirX);
+        bomb.SetDistance(Vector2.Distance(_playerTransform.position, transform.position));
 
         _animator.ChangeAnimation(
             "AttackB",
@@ -195,12 +197,14 @@ public class EnemyCaveRatShooterB : EnemyBase
     private void Hit_Enter() {
         InputX = 0f; InputY = 0f;
         _timeAgo = 0f;
+        float dir = transform.localScale.x;
         _animator.ChangeAnimation(
             "Hit",
             false,
             () => {
-                
                 _fsm.ChangeState(States.Patrol);
+                InputX = dir;
+                ChangeDir(dir);
             }
         );
     }

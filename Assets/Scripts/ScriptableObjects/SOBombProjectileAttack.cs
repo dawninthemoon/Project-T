@@ -14,7 +14,6 @@ public class SOBombProjectileAttack : SOProjectileAttackBase
         int collisionMask = int.Parse(parameters[1]);
 
         var hit = Physics2D.OverlapBox(cur + _offset.ChangeXPos(_offset.x * dir), _size, 0f, collisionMask);
-        Debug.Log(hit != null);
         return hit != null;
     }
 }

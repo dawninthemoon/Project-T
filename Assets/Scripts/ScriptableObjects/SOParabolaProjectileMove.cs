@@ -10,7 +10,9 @@ public class SOParabolaProjectileMove : SOProjectileMovementBase {
         float dir = float.Parse(parameters[0]);
         float speed = float.Parse(parameters[1]);
         float timeAgo = float.Parse(parameters[2]);
-        float power = defaultPower - _gravity * timeAgo;
+        float distance = float.Parse(parameters[3]) * 0.4f;
+
+        float power = defaultPower * distance - _gravity * timeAgo;
 
         Vector3 moveAmount = Vector3.right * dir * speed;
         moveAmount.y += power;

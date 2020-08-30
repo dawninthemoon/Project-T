@@ -16,11 +16,13 @@ public class SingleProjectile : MonoBehaviour
     private int _otherMask;
     private float _maxLifeTime;
     private float _remainLifeTime;
+    private float _distance;
     private IMoveBehaviour _projectileMoveCallback;
     private IAttackBehaviour _projectileAttackCallback;
 
     public void Initalize() {
         var status = GetComponent<TBLProjectileStatus>();
+        _distance = 0f;
         Damage = status.damage;
         _speed = status.speed;
         string[] layers = status.collisionLayerName.Split(':');
@@ -51,7 +53,7 @@ public class SingleProjectile : MonoBehaviour
     
     public void MoveSelf() {
         _remainLifeTime -= Time.deltaTime;
-        _projectileMoveCallback?.ExecuteMove(transform, _direction.ToString(), _speed.ToString(), (_maxLifeTime - _remainLifeTime).ToString());
+        _projectileMoveCallback?.ExecuteMove(transform, _direction.ToString(), _speed.ToString(), (_maxLifeTime - _remainLifeTime).ToString(), _distance.ToString());
     }
 
     public bool IsCollisionWithPlayer() {
@@ -71,11 +73,13 @@ public class SingleProjectile : MonoBehaviour
 
     public bool ExecuteAttack(bool isCollisionWithPlayer) {
         if (_projectileAttackCallback == null) return isCollisionWithPlayer;
+
         bool isCollision = _projectileAttackCallback.ExecuteAttack(transform.position, _direction.ToString(), _playerMask.ToString());
         return isCollision;
     }
 
     public void SetDirection(float dir) => _direction = dir;
+    public void SetDistance(float dist) => _distance = dist;
 
     private void OnDrawGizmos() {
         var status = GetComponent<TBLProjectileStatus>();

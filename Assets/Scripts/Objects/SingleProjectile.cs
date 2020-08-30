@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using Aroma;
 
 [RequireComponent(typeof(TBLProjectileStatus))]
@@ -20,9 +21,19 @@ public class SingleProjectile : MonoBehaviour
     private bool _canMove;
     private IMoveBehaviour _projectileMoveCallback;
     private IAttackBehaviour _projectileAttackCallback;
+    private SpriteAtlasAnimator _animator;
+    private SpriteAtlas _atlas;
+    private SpriteRenderer _renderer;
 
     public void Initalize() {
+        _renderer = GetComponent<SpriteRenderer>();
+        _atlas = Resources.Load<SpriteAtlas>("Atlas/ProjectileAtlas");
+ 
         var status = GetComponent<TBLProjectileStatus>();
+
+        _animator = new SpriteAtlasAnimator();
+        _animator.Initalize("PROJECTILE_" + status.name, "", true);
+
         _distance = 0f;
         Damage = status.damage;
         _speed = status.speed;
@@ -55,6 +66,7 @@ public class SingleProjectile : MonoBehaviour
     
     public void MoveSelf() {
         _remainLifeTime -= Time.deltaTime;
+        _animator.Progress(_renderer, _atlas);
 
         if (_canMove) {
             string direction = _direction.ToString();

@@ -8,7 +8,7 @@ using Aroma;
 [RequireComponent(typeof(TBLEnemyStatus))]
 public abstract class EnemyBase : GroundMove, IPlaceable
 {
-    [SerializeField] private SpriteAtlas _atlas = null;
+    private SpriteAtlas _atlas;
     private int _maxHP;
     protected int _currentHp;
     private Sequence _flashSequence;
@@ -23,6 +23,7 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     public string EnemyName { get; private set; }
 
     public virtual void Initialize() {
+        _atlas = Resources.Load<SpriteAtlas>("Atlas/CharacterAtlas1");
         var status = GetComponent<TBLEnemyStatus>();
 
         _moveDetectOffset = status.moveDetectOffset;

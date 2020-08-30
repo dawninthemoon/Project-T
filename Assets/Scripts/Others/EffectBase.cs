@@ -5,22 +5,22 @@ using UnityEngine.U2D;
 
 public class EffectBase : MonoBehaviour
 {
-    private SpriteAtlas _effectAtlas;
     private System.Action _onEffectUpdateCallback;
     private SpriteAtlasAnimator _animator;
     private SpriteRenderer _renderer;
     private bool _isAnimationEnd;
 
     public void Initalize() {
-        const string EffectAtlasName = "EffectAtlas";
-        _effectAtlas = AssetLoader.GetInstance().GetSpriteAtlas(EffectAtlasName);
         _renderer = gameObject.AddComponent<SpriteRenderer>();
         _animator = new SpriteAtlasAnimator();
         _renderer.sortingLayerName = "Effect";
     }
 
+    public void Progress(SpriteAtlas atlas) {
+        _animator.Progress(_renderer, atlas);
+    }
+
     public bool OnEffectUpdate() {
-        _animator.Progress(_renderer, _effectAtlas);
         _onEffectUpdateCallback?.Invoke();
         return _isAnimationEnd;
     }

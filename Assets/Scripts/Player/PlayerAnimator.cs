@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 [RequireComponent(typeof(StateMachineRunner))]
 public partial class PlayerAnimator : MonoBehaviour
 {
-    [SerializeField] private SpriteAtlas _spriteAtlas = null;
+    private SpriteAtlas _spriteAtlas;
 
     public enum States { 
         Idle, AttackA, AttackB, AttackAir, AttackIn, AttackOut, Dead, Evade, Explode, 
@@ -33,6 +33,7 @@ public partial class PlayerAnimator : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _player = GetComponent<Player>();
         _playerAttack = GetComponent<PlayerAttack>();
+        _spriteAtlas = Resources.Load<SpriteAtlas>("Atlas/CharacterAtlas1");
 
         _animator.Initalize("PLAYER_", "idle", true);
         _fsm.ChangeState(States.Idle);

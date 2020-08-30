@@ -31,11 +31,6 @@ public class AssetLoader : Singleton<AssetLoader>
         return wholeRooms;
     }
 
-    public SpriteAtlas GetSpriteAtlas(string name) {
-        SpriteAtlas atlas = _objectBundle.LoadAsset<SpriteAtlas>(name);
-        return atlas;
-    }
-
     public ScriptableObject GetScriptableObject(string name) {
         if (name.Equals("NULL")) return null;
         ScriptableObject scriptableObj = _objectBundle.LoadAsset<ScriptableObject>(name);

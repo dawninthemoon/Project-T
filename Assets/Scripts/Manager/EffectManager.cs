@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 {
+    private SpriteAtlas _effectAtlas;
     private ObjectPool<EffectBase> _effectPool;
     private AssetLoader _assetLoader;
     private List<EffectBase> _acitveEffects;
@@ -11,6 +13,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
     public void Initialize() {
         _assetLoader = AssetLoader.GetInstance();
+        _effectAtlas = Resources.Load<SpriteAtlas>("Atlas/EffectAtlas");
         _effectPool = new ObjectPool<EffectBase>(20, CreateEffect);
         _acitveEffects = new List<EffectBase>();
         _cameraShake = Camera.main.GetComponent<CameraShake>();
@@ -18,6 +21,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
     public void Progress() {
         for (int i = 0; i < _acitveEffects.Count; i++) {
+            _acitveEffects[i].Progress(_effectAtlas);
             if (_acitveEffects[i].OnEffectUpdate()) {
                 _acitveEffects.RemoveAt(i--);
             }

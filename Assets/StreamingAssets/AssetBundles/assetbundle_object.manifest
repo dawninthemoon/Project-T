@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2575049346
+CRC: 3555750548
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 16af2eb61071a3bf54b61dbfca34f8a0
+    Hash: 1f81ceb49621a6eda5e6491af4c61568
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b3ebae308099d39aae003de4499f6336
+    Hash: fe6fc4201fe3a00016ee8d87ad36c610
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -87,6 +87,5 @@ Assets:
 - Assets/Prefabs/Talisman.prefab
 - Assets/ScriptableObjects/ProjectileMovements/Straight.asset
 - Assets/Prefabs/Enemy/EnemyCaveRatMelee.prefab
-- Assets/Atlas/EffectAtlas.spriteatlas
 - Assets/ScriptableObjects/ProjectileMovements/Parabola.asset
 Dependencies: []

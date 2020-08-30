@@ -24,6 +24,11 @@ namespace Aroma
             Vector2 newVec = new Vector2(x, vec.y);
             return newVec;
         }
+
+        public static Vector3 ChangeXPos(this Vector3 vec, float x) {
+            Vector3 newVec = new Vector3(x, vec.y, vec.z);
+            return newVec;
+        }
     }
 
     public static class GameObjectExtensions

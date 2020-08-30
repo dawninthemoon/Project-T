@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2199656299581450297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.178, y: 0.112, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _atlas: {fileID: 4343727234628468602, guid: cfc5499eabcf0ce47b115e8180727dbe, type: 2}
-  _shotOffset: {x: 0.28, y: 0.3, z: 0}
+  _shotOffset: {x: -0.234, y: 0.314, z: 0}
 --- !u!114 &1986381715251828911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: -492553105
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2aea18bf2925d44cbfbe0e3fcdfd764, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3f4191e59b5fda74eaaac10df34b0e8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

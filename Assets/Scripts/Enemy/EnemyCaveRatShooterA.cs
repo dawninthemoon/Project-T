@@ -174,7 +174,7 @@ public class EnemyCaveRatShooterA : EnemyBase
         _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
         ChangeDir(_targetDirX);
         _animator.ChangeAnimation(
-            "Ready",
+            "ReadyA",
             false,
             () => {
              _fsm.ChangeState(States.Attack);
@@ -188,7 +188,7 @@ public class EnemyCaveRatShooterA : EnemyBase
         var arrow = _arrowObjectPool.GetObject();
         _activeArrows.Add(arrow);
         arrow.SetDirection(_targetDirX);
-        arrow.Reset(transform.position + _shotOffset);
+        arrow.Reset(transform.position + _shotOffset.ChangeXPos(_shotOffset.x * transform.localScale.x));
 
         _animator.ChangeAnimation(
             "AttackA",

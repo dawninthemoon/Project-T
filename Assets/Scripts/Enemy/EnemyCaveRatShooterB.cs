@@ -158,7 +158,7 @@ public class EnemyCaveRatShooterB : EnemyBase
         _targetDirX = Mathf.Sign((_playerTransform.position - transform.position).x);
         ChangeDir(_targetDirX);
         _animator.ChangeAnimation(
-            "Ready",
+            "ReadyB",
             false,
             () => {
                 _fsm.ChangeState(States.Attack);
@@ -172,7 +172,7 @@ public class EnemyCaveRatShooterB : EnemyBase
         var bomb = _bombObjectPool.GetObject();
         _activeBombs.Add(bomb);
         
-        bomb.Reset(transform.position + _shotOffset);
+        bomb.Reset(transform.position + _shotOffset.ChangeXPos(_shotOffset.x * transform.localScale.x));
         bomb.SetDirection(_targetDirX);
         bomb.SetDistance(Vector2.Distance(_playerTransform.position, transform.position));
 

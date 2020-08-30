@@ -19,7 +19,6 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     public void Progress() {
         for (int i = 0; i < _acitveEffects.Count; i++) {
             if (_acitveEffects[i].OnEffectUpdate()) {
-                _acitveEffects[i].OnEffectEnd();
                 _acitveEffects.RemoveAt(i--);
             }
         }
@@ -38,9 +37,8 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     public void SpawnAndRemove(Vector3 pos, string effectName, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();
 
-        System.Action callback = () => { _effectPool.ReturnObject(effect);};
-        RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
-        effect.SetEffectInfo(pos, controller, dir, callback);
+        SpriteAtlasAnimator.OnAnimationEnd callback = () => { _effectPool.ReturnObject(effect);};
+        effect.SetEffectInfo(pos, effectName, dir, callback);
 
         _acitveEffects.Add(effect);
     }
@@ -48,17 +46,16 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     public void SpawnTrackEffectAndRemove(Vector3 pos, string effectName, Transform target, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();
         System.Action onEffectUpdate = () => { effect.transform.position = target.position; };
-        System.Action callback = () => { _effectPool.ReturnObject(effect);};
-        RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
-        effect.SetEffectInfo(pos, controller, dir, callback, onEffectUpdate);
+        SpriteAtlasAnimator.OnAnimationEnd callback = () => { _effectPool.ReturnObject(effect);};
+        effect.SetEffectInfo(pos, effectName, dir, callback, onEffectUpdate);
     
         _acitveEffects.Add(effect);
     }
 
-    public void SpawnEffect(Vector3 pos, string effectName, System.Action onEffectEnd, float dir = 1f) {
+    public void SpawnEffect(Vector3 pos, string effectName, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();
         RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
-        effect.SetEffectInfo(pos, controller, dir, onEffectEnd);
+        effect.SetEffectInfo(pos, effectName, dir, onEffectEnd);
 
         _acitveEffects.Add(effect);
     }

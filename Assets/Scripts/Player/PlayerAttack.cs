@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
     private Vector2 _meleeAttackOffset;
     private Vector2 _meleeAttackSize;
     private int _meleeAttackDamage;
-    private static readonly string HitEffectName = "meleeAttack_hit";
+    private static readonly string HitEffectName = "EFFECT_Hit";
 
     #endregion
     

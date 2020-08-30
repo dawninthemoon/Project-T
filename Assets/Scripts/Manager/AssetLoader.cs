@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Aroma;
+using UnityEngine.U2D;
 
 public class AssetLoader : Singleton<AssetLoader>
 {
@@ -28,6 +29,11 @@ public class AssetLoader : Singleton<AssetLoader>
 
         SORoomBase[] wholeRooms = _roomBundle.LoadAllAssets<SORoomBase>();
         return wholeRooms;
+    }
+
+    public SpriteAtlas GetSpriteAtlas(string name) {
+        SpriteAtlas atlas = _objectBundle.LoadAsset<SpriteAtlas>(name);
+        return atlas;
     }
 
     public ScriptableObject GetScriptableObject(string name) {

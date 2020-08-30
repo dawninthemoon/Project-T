@@ -7,7 +7,7 @@ using Aroma;
 public class SingleProjectile : MonoBehaviour
 {
     public int Damage { get; private set; }
-    private float _direction;
+    private float _direction = 1f;
     private float _speed;
     private Vector2 _offset;
     private Vector2 _size;
@@ -67,6 +67,7 @@ public class SingleProjectile : MonoBehaviour
         
         Gizmos.color = Color.green;
         
+        _direction = (_direction == 0f) ? 1f : _direction;
         Vector2 offset = status.hitboxOffset.ChangeXPos(status.hitboxOffset.x * _direction);
         Vector2 cur = (Vector2)transform.position + offset;
         

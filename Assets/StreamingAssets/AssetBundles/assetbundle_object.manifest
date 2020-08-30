@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 700811039
+CRC: 2533171050
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 938a5e6936f8e4143cc3f5ce4334e45b
+    Hash: 53429c6e05b87c6cf77c5e542a99c6d2
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d43d65de79bda77d2292e5fd429e18ab
+    Hash: 22f3c13913853214af05320a1c203215
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,10 +28,6 @@ ClassTypes:
 - Class: 61
   Script: {instanceID: 0}
 - Class: 64
-  Script: {instanceID: 0}
-- Class: 74
-  Script: {instanceID: 0}
-- Class: 91
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 99067df16864f634b903ec9333daba6c, type: 3}
@@ -60,15 +56,15 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: b5b958d8c6676f54db238746f3537c3b, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 61239bd8f22ebd848b46e499a7625aca, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 70951ee815fe28645bc314173ce18dac, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: df579edaac77ce54998fce1a4893ee51, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1379b93b1a365e5469f22956b060cc6d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: df579edaac77ce54998fce1a4893ee51, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 61239bd8f22ebd848b46e499a7625aca, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -88,6 +84,6 @@ Assets:
 - Assets/Prefabs/Talisman.prefab
 - Assets/ScriptableObjects/ProjectileMovements/Straight.asset
 - Assets/Prefabs/Enemy/EnemyCaveRatMelee.prefab
-- Assets/AnimatorControllers/meleeAttack_hit.controller
+- Assets/Atlas/EffectAtlas.spriteatlas
 - Assets/ScriptableObjects/ProjectileMovements/Parabola.asset
 Dependencies: []

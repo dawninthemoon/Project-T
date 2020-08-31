@@ -13,6 +13,7 @@ public class EnemyCaveRatShooterA : EnemyBase
     private List<SingleProjectile> _activeArrows = new List<SingleProjectile>(3);
     [SerializeField] private Vector3 _shotOffset = Vector3.zero;
     private float _targetDirX;
+    private float _targetXPos;
     private int _playerMask;
     private int _obstacleMask;
 
@@ -132,8 +133,14 @@ public class EnemyCaveRatShooterA : EnemyBase
 
     #region Chase
     private void Chase_Enter() {
-        _timeAgo = InputX = 0f;
+        _timeAgo = 0f;
+        
+        _targetXPos = _playerTransform.position.x;
+        InputX = Mathf.Sign((_playerTransform.position - transform.position).x);
+        ChangeDir(InputX);
+
         _animator.ChangeAnimation("Chase", true);
+        
         _isPlayerOut = false;
     }
 
@@ -154,9 +161,8 @@ public class EnemyCaveRatShooterA : EnemyBase
             if (_timeAgo > 0.5f)
                 _fsm.ChangeState(States.Ready);
         }
-        else {
-            InputX = Mathf.Sign((_playerTransform.position - transform.position).x);
-            ChangeDir(InputX);
+        else if ((InputX > 0f && transform.position.x > _targetXPos) || (InputX < 0f && transform.position.x < _targetXPos)) {
+            _fsm.ChangeState(States.Patrol);
         }
     }
 

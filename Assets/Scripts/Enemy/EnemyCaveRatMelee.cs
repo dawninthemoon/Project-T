@@ -12,6 +12,7 @@ public class EnemyCaveRatMelee : EnemyBase
     private StateMachine<States> _fsm;
     private Transform _playerTransform;
     private float _targetDirX;
+    private float _targetXPos;
     private bool _hasAttackSuccessed;
     [SerializeField] private float _straightTackleFactor = 1f;
     [SerializeField] private float _parabolaTackleFactor = 1f;
@@ -83,7 +84,12 @@ public class EnemyCaveRatMelee : EnemyBase
 
     #region Chase
     private void Chase_Enter() {
-        _timeAgo = InputX = 0f;
+        _timeAgo = 0f;
+
+        _targetXPos = _playerTransform.position.x;
+        InputX = Mathf.Sign((_playerTransform.position - transform.position).x);
+        ChangeDir(InputX);
+
         _animator.ChangeAnimation("Chase", true);
         _isPlayerOut = false;
     }
@@ -104,14 +110,9 @@ public class EnemyCaveRatMelee : EnemyBase
             if (_timeAgo > 0.5f)
                 _fsm.ChangeState(States.AttackReady);
         }
-        else {
-            InputX = Mathf.Sign((_playerTransform.position - transform.position).x);
-            ChangeDir(InputX);
+        else if ((InputX > 0f && transform.position.x > _targetXPos) || (InputX < 0f && transform.position.x < _targetXPos)) {
+            _fsm.ChangeState(States.Patrol);
         }
-    }
-
-    private void Chase_Exit() {
-        InputX = 0f;
     }
 
     private void ChaseWait_Enter() {

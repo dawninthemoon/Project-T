@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IQuadTreeObject
 {
     private PlayerAnimator _playerAnimator;
     private PlayerAttack _playerAttack;
@@ -9,11 +9,16 @@ public class Player : MonoBehaviour
     private GroundMove _controller;
     public Vector2 Velocity { get { return _controller.Velocity;} }
     public bool CanDrawHitbox { get; set; }
+    private Rect _bounds;
+    private bool _alreadyChargeDown;
 
     public void Initialize() {
         _controller = GetComponent<GroundMove>();
         _playerAttack = GetComponent<PlayerAttack>();
         _playerAnimator = GetComponent<PlayerAnimator>();
+
+        var collider = GetComponent<BoxCollider2D>();
+        _bounds = new Rect(collider.offset, collider.size);
 
         var status = GetComponent<TBLPlayerStatus>();
         _controller.Initialize(status.moveSpeed, status.minJumpHeight, status.maxJumpHeight);
@@ -54,12 +59,34 @@ public class Player : MonoBehaviour
             _controller.SetJumpEnd(true, true);   
     }
 
+    public void AddCharge(bool pressed) {
+        if (pressed) {
+            _playerAttack.ChargeTime -= Time.deltaTime;
+            if (!_alreadyChargeDown && _playerAttack.ChargeTime < 0.8f) {
+                _alreadyChargeDown = true;
+                OnChargeStart();
+            }
+        }
+    }
+
+    private void OnChargeStart() {
+        Vector3 pos = transform.position;
+        string effectName = "EFFECT_Charge";
+
+        EffectManager.GetInstance().SpawnTrackEffectWithCondition(pos, effectName, () => _throwRequested, transform, null);
+    }
+
+    public void OnChargeEnd(bool throwPressed) {
+        if (throwPressed) {
+            _alreadyChargeDown = false;
+        }
+        _throwRequested = throwPressed;
+    }
+
     public void SetJumpEnd(bool isNotPressed, bool pressedAtLastFrame) {
         if (!_playerAttack.IsInAttackProgress)
             _controller.SetJumpEnd(isNotPressed, pressedAtLastFrame);
     }
-
-    public void SetThrow(bool throwPressed) => _throwRequested = throwPressed; 
 
     public void SetAttack(bool attackPressed) => _attackRequested = attackPressed;
 
@@ -67,7 +94,12 @@ public class Player : MonoBehaviour
         // _hp -= damage;
         EffectManager.GetInstance().ShakeCamera(0.2f);
         _playerAnimator.SetPlayerHit();
-    }   
+    }
+
+    public Rect GetBounds() {
+        Rect newBounds = new Rect((Vector2)transform.position + _bounds.position, _bounds.size);
+        return newBounds;
+    }
 
     private void OnDrawGizmos() {
         if (Application.isPlaying && !CanDrawHitbox) return;

@@ -62,11 +62,13 @@ public class EnemyCaveRatShooterA : EnemyBase
         }
     }
 
-    public override bool ReceiveDamage(int amount, float dir) {
+    public override bool ReceiveDamage(int amount, float dir, bool rigid = true) {
         if (_fsm.State == States.Dead) return false;
 
-        if (base.ReceiveDamage(amount, dir))
-            _fsm.ChangeState(States.Hit);
+        if (base.ReceiveDamage(amount, dir, rigid)) {
+            if (rigid)
+                _fsm.ChangeState(States.Hit);
+        }
         else
             _fsm.ChangeState(States.Dead);
 

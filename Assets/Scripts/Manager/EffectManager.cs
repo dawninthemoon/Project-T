@@ -10,6 +10,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     private AssetLoader _assetLoader;
     private List<EffectBase> _acitveEffects;
     private CameraShake _cameraShake;
+    public delegate bool IsEffectEnd();
 
     public void Initialize() {
         _assetLoader = AssetLoader.GetInstance();
@@ -56,10 +57,39 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         _acitveEffects.Add(effect);
     }
 
-    public void SpawnEffect(Vector3 pos, string effectName, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
+    public void SpawnEffect(Vector3 pos, string effectName, System.Action onEffectUpdate, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();
-        RuntimeAnimatorController controller = _assetLoader.GetAnimatorController(effectName);
         effect.SetEffectInfo(pos, effectName, dir, onEffectEnd);
+
+        _acitveEffects.Add(effect);
+    }
+
+    public void SpawnEffectWithCondition(Vector3 pos, string effectName, IsEffectEnd isEffectEnd, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
+        EffectBase effect = _effectPool.GetObject();
+
+        onEffectEnd += () => { _effectPool.ReturnObject(effect);};
+
+        effect.SetEffectInfoWithCondition(pos, effectName, dir, null, isEffectEnd, onEffectEnd);
+
+        _acitveEffects.Add(effect);
+    }
+
+    public void SpawnTrackEffectWithCondition(Vector3 pos, string effectName, IsEffectEnd isEffectEnd, Transform target, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
+        EffectBase effect = _effectPool.GetObject();
+
+        onEffectEnd += () => { _effectPool.ReturnObject(effect);};
+
+        System.Action onEffectUpdate = () => { effect.transform.position = target.position; };
+        effect.SetEffectInfoWithCondition(pos, effectName, dir, onEffectUpdate, isEffectEnd, onEffectEnd);
+
+        _acitveEffects.Add(effect);
+    }
+
+    public void SpawnEffectWithDuration(Vector3 pos, string effectName, float duration, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
+        EffectBase effect = _effectPool.GetObject();
+
+        onEffectEnd += () => { _effectPool.ReturnObject(effect);};
+        effect.SetEffectInfoWithDuration(pos, effectName, dir, duration, onEffectEnd);
 
         _acitveEffects.Add(effect);
     }

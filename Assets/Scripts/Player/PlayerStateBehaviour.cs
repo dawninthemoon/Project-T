@@ -80,7 +80,6 @@ public partial class PlayerAnimator : MonoBehaviour
     private void AttackA_Update() {
         _player.CanDrawHitbox = true;
         if (_animator.SpriteIndex == 1) {
-            Vector2 position = transform.position;
             _playerAttack.EnableMeleeAttack();
         }
     }
@@ -101,7 +100,6 @@ public partial class PlayerAnimator : MonoBehaviour
     private void AttackB_Update() {
         _player.CanDrawHitbox = true;
         if (_animator.SpriteIndex == 1) {
-            Vector2 position = transform.position;
             _playerAttack.EnableMeleeAttack();
         }
     }
@@ -133,6 +131,7 @@ public partial class PlayerAnimator : MonoBehaviour
 
     private void Throw_Enter() {
         _playerAttack.RequestThrow = false;
+
         _animator.ChangeAnimation(
             "Throw", 
             false,
@@ -141,6 +140,14 @@ public partial class PlayerAnimator : MonoBehaviour
                 _fsm.ChangeState(nextState);
             }
         );
+        _playerAttack.CanThrow = true;
+    }
+
+    private void Throw_Update() {
+        if (_playerAttack.CanThrow && _animator.SpriteIndex == 2) {
+            _playerAttack.CanThrow = false;
+            _playerAttack.ThrowTalisman();
+        }
     }
 
     private void ThrowAir_Enter() {

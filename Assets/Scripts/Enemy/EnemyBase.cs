@@ -6,12 +6,13 @@ using UnityEngine.U2D;
 using Aroma;
 
 [RequireComponent(typeof(TBLEnemyStatus))]
-public abstract class EnemyBase : GroundMove, IPlaceable
+public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
 {
     private SpriteAtlas _atlas;
     private int _maxHP;
     protected int _currentHp;
     private Sequence _flashSequence;
+    private Sequence _freezeSequence;
     protected float _knockbackTime = 0.5f;
     private SpriteRenderer _renderer;
     protected SpriteAtlasAnimator _animator;
@@ -21,10 +22,14 @@ public abstract class EnemyBase : GroundMove, IPlaceable
     protected Vector2 _attackDetectOffset, _attackDetectSize;
     protected Vector2 _platformCheckPos;
     public string EnemyName { get; private set; }
+    private Rect _bounds;
 
     public virtual void Initialize() {
         _atlas = Resources.Load<SpriteAtlas>("Atlas/CharacterAtlas1");
         var status = GetComponent<TBLEnemyStatus>();
+
+        var collider = GetComponent<BoxCollider2D>();
+        _bounds = new Rect(collider.offset, collider.size);
 
         _moveDetectOffset = status.moveDetectOffset;
         _moveDetectSize = status.moveDetectSize;
@@ -65,13 +70,36 @@ public abstract class EnemyBase : GroundMove, IPlaceable
         return player != null;
     }
 
-    public virtual bool ReceiveDamage(int damage, float dir) {
+    public virtual bool ReceiveDamage(int damage, float dir, bool rigid = true) {
         _currentHp -= damage;
         
-        StartKnockback(damage / 30f * dir);
+        if (rigid) {
+            StartKnockback(damage / 30f * dir);
+        }
         StartFlash();
 
         return _currentHp > 0;
+    }
+
+    public void StartFreeze(float duration) {
+        Color color = new Color(0.31f, 0.76f, 1f);
+        if (_freezeSequence == null) {
+            _freezeSequence = DOTween.Sequence();
+            _freezeSequence
+                .SetAutoKill(false)
+                .AppendCallback(() => { _renderer.color = color; })
+                .AppendInterval(duration)
+                .AppendCallback(() => { _renderer.color = Color.white; });
+        }
+        else {
+            _freezeSequence.Restart();
+        }
+    }
+
+    public Rect GetBounds() {
+        Rect newBounds = new Rect(10f, 10f, 1f, 1f);
+        //Rect newBounds = new Rect((Vector2)transform.position + _bounds.position, _bounds.size);
+        return newBounds;
     }
 
     private void StartKnockback(float localX) {

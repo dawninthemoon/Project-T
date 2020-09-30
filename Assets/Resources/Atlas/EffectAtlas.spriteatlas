@@ -43,34 +43,138 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 1202d14ba7d37ce409ebc38a0e57ddaf, type: 3}
-    totalSpriteSurfaceArea: 49152
+    totalSpriteSurfaceArea: 262144
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 4ca9f9104d8ff08448b4194dc55cd9e8, type: 3}
-  - {fileID: 21300000, guid: 4adfe4528b3f3764ea86aebd863f9030, type: 3}
-  - {fileID: 21300000, guid: d376e1d26f474ad459faf6866d2b048e, type: 3}
+  - {fileID: 21300000, guid: e3c560001b4bc5345ae8a8a3095f8107, type: 3}
+  - {fileID: 21300000, guid: 721872f003a94654dbab460bfc416821, type: 3}
+  - {fileID: 21300000, guid: 58cae24190cc5e34aba92319fd954eda, type: 3}
+  - {fileID: 21300000, guid: 4aaa80511110e0d418673cc31d45ff3c, type: 3}
+  - {fileID: 21300000, guid: c328f881ee66dcd44ba1617a61d59e9a, type: 3}
+  - {fileID: 21300000, guid: 4e03f06205a828845a9d302bf4fd5f7a, type: 3}
+  - {fileID: 21300000, guid: 400e25a2a78818a45a49345846761e94, type: 3}
+  - {fileID: 21300000, guid: fa6f71e2d35bb0b469a7fdcf67523408, type: 3}
+  - {fileID: 21300000, guid: 36bac323fffe6d44da6e6602e15c676d, type: 3}
   - {fileID: 21300000, guid: 918529b3552c4e44ab034fd6a47d5c39, type: 3}
+  - {fileID: 21300000, guid: 6bca03d33deb3d543b06a0885e78a6e5, type: 3}
+  - {fileID: 21300000, guid: d0a3e46486e8daa4a8e3e6a550ce1ce1, type: 3}
+  - {fileID: 21300000, guid: 2c9b4074dd238894982ea10aedd04396, type: 3}
+  - {fileID: 21300000, guid: 7516fa74dc34ca6429f6beba9dc55a5e, type: 3}
+  - {fileID: 21300000, guid: 4e935b84bfcb3894c96490ef08ab8363, type: 3}
   - {fileID: 21300000, guid: c1c990f459492d4409f36e43503db5af, type: 3}
-  - {fileID: 21300000, guid: 1952e9a54fb25454c9c5e3348a74ff11, type: 3}
-  - {fileID: 21300000, guid: a58d7dc5bcea27643ab30a1227ee00c3, type: 3}
-  - {fileID: 21300000, guid: 2522b89957a9a33428499f8f6b739796, type: 3}
+  - {fileID: 21300000, guid: dca821f406d83f845ab9a88988b995a7, type: 3}
+  - {fileID: 21300000, guid: bfc0800522691ee43960b2bd83a89595, type: 3}
+  - {fileID: 21300000, guid: 9f4cec05d4c38254b8e068bf4c6252d0, type: 3}
+  - {fileID: 21300000, guid: e7646b2542276434d93330b55143dee7, type: 3}
+  - {fileID: 21300000, guid: 4ac39735d25234b4d9bfe7754caa29e4, type: 3}
+  - {fileID: 21300000, guid: e2198475108e5474bb4e915f33ce69b4, type: 3}
+  - {fileID: 21300000, guid: 281fa50659fc00340b8d2d21a1ef49d4, type: 3}
+  - {fileID: 21300000, guid: 2363dc16eab7c3f4e994e9ae8bcad34d, type: 3}
+  - {fileID: 21300000, guid: ae551d167240d284fad6742239f1b249, type: 3}
+  - {fileID: 21300000, guid: b77e092672934544dae51dbbde83b77e, type: 3}
+  - {fileID: 21300000, guid: 9e69375653c93c645ac97839ce7bd6c8, type: 3}
+  - {fileID: 21300000, guid: 7c1e9e56f636d3849924560e94ef6874, type: 3}
+  - {fileID: 21300000, guid: 2c9847664f3242b4e8c81ea30d3df0d1, type: 3}
+  - {fileID: 21300000, guid: 862b1e66d3cae3a4caf5f70fc2a039d8, type: 3}
+  - {fileID: 21300000, guid: 6c096e665ba17a049b2ba27ab4b1ce29, type: 3}
+  - {fileID: 21300000, guid: d0aae7767c9bb3b4d8c0b21629034003, type: 3}
+  - {fileID: 21300000, guid: e509b0a66e4060e429c5a018e1b14d5a, type: 3}
+  - {fileID: 21300000, guid: 002b3cc65404c324488402581cb390b8, type: 3}
+  - {fileID: 21300000, guid: 40268f07b783f314593f08a3e4087a69, type: 3}
+  - {fileID: 21300000, guid: 83ad3567f4d893c41befb508bdd4989a, type: 3}
+  - {fileID: 21300000, guid: b0ad2cc71ded4354087fa1210aaf280e, type: 3}
+  - {fileID: 21300000, guid: eb4a5d38b15de51429728a44d9eef93f, type: 3}
+  - {fileID: 21300000, guid: c7cd0a48af71de748a35c94427d2faea, type: 3}
+  - {fileID: 21300000, guid: dde257d81df46a54cb21e2fcc639a5ca, type: 3}
+  - {fileID: 21300000, guid: ce94d4091beedb24380a5c7a3896686d, type: 3}
+  - {fileID: 21300000, guid: b66aab99a57437f4b9e1f553f2bd8843, type: 3}
+  - {fileID: 21300000, guid: 6628f13a218b7bb4bba2d0a7f42a0563, type: 3}
+  - {fileID: 21300000, guid: bc3145ca758907b48b9ae4b6176f8afe, type: 3}
+  - {fileID: 21300000, guid: 11a2b3ea25db3b541a7fdd40452fd539, type: 3}
   - {fileID: 21300000, guid: bd96fd3b5c1fb56408e311aec26fb6e3, type: 3}
-  - {fileID: 21300000, guid: b39e8f4da88451440873bbb327b49c69, type: 3}
-  - {fileID: 21300000, guid: f549674fffb28d541ad1fe4d18141a75, type: 3}
+  - {fileID: 21300000, guid: e010334b114e06c47bf4b920a1c3e4b0, type: 3}
+  - {fileID: 21300000, guid: 84f0346bab2695e4c885445c7480bdf8, type: 3}
+  - {fileID: 21300000, guid: 717d2e7bf110ff1438d82afe5a7cbb09, type: 3}
+  - {fileID: 21300000, guid: 59ac258bdef2129499d462da856039a3, type: 3}
+  - {fileID: 21300000, guid: f11ac1ab4859aa9409e92709a51ba288, type: 3}
+  - {fileID: 21300000, guid: 33aa6b0c7edc6134e9368a9583af1c39, type: 3}
+  - {fileID: 21300000, guid: b436981c798e5bf49add2dfcab2bb1ae, type: 3}
+  - {fileID: 21300000, guid: 13faaf4cc9a6b594d8b72d120d74fa11, type: 3}
+  - {fileID: 21300000, guid: 21eddf9c47c40284a9051d2c99390d44, type: 3}
+  - {fileID: 21300000, guid: 868b51ac71425134ca84f597d9319437, type: 3}
+  - {fileID: 21300000, guid: f875e4dc76a192b4aa7695eac12dd7fe, type: 3}
+  - {fileID: 21300000, guid: 235b60ec69a45dc47b9956fca652222f, type: 3}
+  - {fileID: 21300000, guid: cd52fb1dcdeb89d499134062ad8d9cf3, type: 3}
+  - {fileID: 21300000, guid: 13bcd42dce53f3d41b56955476c427d8, type: 3}
+  - {fileID: 21300000, guid: 2e51f55ef5b6bb443baadabd4a03a0b7, type: 3}
   - {fileID: 21300000, guid: bfed5c8f87b5e1746acd5c0624624a05, type: 3}
+  - {fileID: 21300000, guid: 5f22e7ef20a211140b8880a5771a0ce6, type: 3}
+  - {fileID: 21300000, guid: feb418ff6de61c1499c589b7da82b675, type: 3}
   m_PackedSpriteNamesToIndex:
-  - EFFECT_Explode7
-  - EFFECT_Explode1
-  - EFFECT_Explode4
+  - EFFECT_Twinkle6
+  - EFFECT_Sphere1
+  - EFFECT_Electric5
+  - EFFECT_Explode_Flame1
+  - EFFECT_Explode_Flame8
+  - EFFECT_Sphere6
+  - EFFECT_Charge4
+  - EFFECT_Electric1
+  - EFFECT_Snowflake3
   - EFFECT_Hit1
+  - EFFECT_Explode_Poison8
+  - EFFECT_Fire2
+  - EFFECT_Twinkle2
+  - EFFECT_Explode_Poison6
+  - EFFECT_Fire5
   - EFFECT_Hit3
-  - EFFECT_Explode6
-  - EFFECT_Explode8
-  - EFFECT_Explode5
+  - EFFECT_Explode_Poison3
+  - EFFECT_Explode_Poison4
+  - EFFECT_Snowflake2
+  - EFFECT_Fire3
+  - EFFECT_Explode_Poison7
+  - EFFECT_Charge6
+  - EFFECT_Charge2
+  - EFFECT_Sphere2
+  - EFFECT_Twinkle5
+  - EFFECT_Electric3
+  - SOLID_Iceblock2
+  - EFFECT_Field_Electric3
+  - EFFECT_Explode_Poison1
+  - EFFECT_Charge1
+  - EFFECT_Fire4
+  - EFFECT_Explode_Flame2
+  - EFFECT_Electric6
+  - EFFECT_Explode_Flame5
+  - EFFECT_Fire1
+  - SOLID_Iceblock1
+  - EFFECT_Explode_Poison2
+  - EFFECT_Particle2
+  - EFFECT_Explode_Flame7
+  - EFFECT_Charge3
+  - EFFECT_Particle1
+  - EFFECT_Sphere4
+  - EFFECT_Electric4
+  - EFFECT_Field_Electric4
+  - EFFECT_Sphere3
   - EFFECT_Hit4
-  - EFFECT_Explode2
-  - EFFECT_Explode3
+  - EFFECT_Explode_Flame4
+  - EFFECT_Fire6
+  - EFFECT_Twinkle1
+  - EFFECT_Field_Electric2
+  - EFFECT_Electric2
+  - EFFECT_Snowflake1
+  - EFFECT_Twinkle3
+  - EFFECT_Explode_Flame6
+  - EFFECT_Charge5
+  - EFFECT_Twinkle4
+  - EFFECT_Fire7
+  - EFFECT_Explode_Flame3
+  - EFFECT_Sphere5
+  - EFFECT_Fire8
+  - EFFECT_Explode_Poison5
   - EFFECT_Hit2
+  - EFFECT_Field_Electric1
+  - EFFECT_Snowflake4
   m_Tag: EffectAtlas
   m_IsVariant: 0

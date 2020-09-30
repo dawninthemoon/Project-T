@@ -8,7 +8,6 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private static readonly string EnemyPrefabDirectory = "Enemy/";
     private static readonly string MovingPlatformName = "MovingPlatform";
     private static readonly string WaterName = "Water";
-    private static readonly string TalismanName = "Talisman";
 
     private AssetLoader _assetLoader;
 
@@ -19,7 +18,6 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private ObjectPool<EnemyBase>[] _enemyObjectPoolArr;
     private ObjectPool<PlatformController> _movingPlatformPool;
     private ObjectPool<Water> _waterPool;
-    private ObjectPool<Talisman> _talismanPool;
     private Dictionary<EnemyTypes, int>  _enemyObjectPoolOrder;
 
     public void Initialize() {
@@ -28,6 +26,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         _activePlatforms = new List<PlatformController>(5);
         _activeWater = new List<Water>(3);
         _enemyObjectPoolOrder = new Dictionary<EnemyTypes, int>();
+
         InitalizeObjectPool();
     }
 
@@ -40,10 +39,6 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     public void FixedProgress() {
         for (int i = 0; i < _activeEnemies.Count; i++) {
             _activeEnemies[i].FixedProgress();
-        }
-
-        for (int i = 0; i < _activePlatforms.Count; i++) {
-            _activePlatforms[i].FixedProgress();
         }
     }
 
@@ -120,10 +115,6 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         _activePlatforms.Add(controller);
     }
 
-    public Talisman GetTalisman() => _talismanPool.GetObject();
-
-    public void ReturnTalisman(Talisman talisman) => _talismanPool.ReturnObject(talisman);
-
     private void InitalizeObjectPool() {
         EnemyBase[] enemyPrefabs = _assetLoader.GetAllEnemies();
 
@@ -160,15 +151,6 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 GameObject prefab = _assetLoader.GetPrefab(WaterName);
                 Water water = Instantiate(prefab).GetComponent<Water>();
                 return water;
-            }
-        );
-
-        _talismanPool = new ObjectPool<Talisman>(
-            5,
-            () => {
-                GameObject prefab = _assetLoader.GetPrefab(TalismanName);
-                Talisman talisman = Instantiate(prefab).GetComponent<Talisman>();
-                return talisman;
             }
         );
     }

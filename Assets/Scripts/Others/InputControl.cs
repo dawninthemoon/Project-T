@@ -82,6 +82,24 @@ public class InputControl : MonoBehaviour
         return false;
     }
 
+    public bool GetKeyUp(string actionName) {
+        ActionBoolPair pair;
+        if (_wasPressedAtLastFrame.TryGetValue(actionName, out pair)) {
+            if (!pair.WasReleased) {
+                pair.WasReleased = pair.Actions.WasReleased;
+            }
+
+            if (!pair.Actions.IsPressed) {
+                if (pair.WasReleased) {
+                    pair.WasReleased = false;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void Progress() {
         InputKeys();
     }
@@ -102,7 +120,9 @@ public class InputControl : MonoBehaviour
         _model.SetJump(GetKeyDown(JumpActionName));
         _model.SetJumpEnd(!_myActions.Jump.IsPressed, _isJumpPressed);
         _model.SetAttack(GetKeyDown(AttackActionName));
-        _model.SetThrow(GetKeyDown(ThrowActionName));
+        
+        _model.AddCharge(_myActions.Throw.IsPressed);
+        _model.OnChargeEnd(GetKeyUp(ThrowActionName));
 
         _isJumpPressed = _myActions.Jump.IsPressed;
     }

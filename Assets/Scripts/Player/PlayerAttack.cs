@@ -6,6 +6,7 @@ using Aroma;
 public class PlayerAttack : MonoBehaviour
 {
     #region non reference fields
+    public static readonly float DefaultChargeTime = 1f;
     [SerializeField] private int _defaultAttackDamage = 10;
     [SerializeField] private LayerMask _attackableLayers;
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
@@ -19,21 +20,30 @@ public class PlayerAttack : MonoBehaviour
     public bool RequestThrow { get; set; }
     public int TalismanCount { get; set; } = 5;
     public bool IsInAttackProgress { get; private set; }
+    public bool CanThrow { get; set; }
+    public float ChargeTime { get; set; }
     private Vector3 _throwPosition;
-
     private Vector2 _meleeAttackOffset;
     private Vector2 _meleeAttackSize;
     private int _meleeAttackDamage;
+    public bool Charged { get; set; }
     private static readonly string HitEffectName = "EFFECT_Hit";
+    private static readonly string[] FireEffectName = { "EFFECT_Fire", "EFFECT_Explode_Flame" };
+    private static readonly string[] ElectricEffectName = { "EFFECT_Electric", "EFFECT_Field_Electric" };
+    private static readonly string[] IceEffectName = { "EFFECT_Snowflake", "EFFECT_Snowflake" };
+    private string[] CurrentEffectName;
+
 
     #endregion
-    
+    [SerializeField] private Talisman _talismanPrefab = null;
     private List<Talisman> _activeTalismans;
+
     public List<Collider2D> AlreadyHitColliders { get; private set; }
 
     public void Initialize() {
         _activeTalismans = new List<Talisman>(5);
         AlreadyHitColliders = new List<Collider2D>();
+        ChargeTime = DefaultChargeTime;
 
         var status = GetComponent<TBLPlayerStatus>();
         _throwPosition = status.throwOffset;
@@ -57,10 +67,38 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void FixedProgress() {
-        foreach (var talisman in _activeTalismans) {
-            talisman.FixedProgress();
+        for (int i = 0; i < _activeTalismans.Count; ++i) {
+            var talisman = _activeTalismans[i];
+            if (!talisman.MoveSelf()) {
+                float dir = talisman.transform.localScale.x;
+                var enemy = talisman.GetHitEnemy();
+
+                var et = enemy.transform;
+                enemy.ReceiveDamage(1, dir, talisman.Charged);
+
+                if (CurrentEffectName != null) {
+                    int effectIndex = (talisman.Charged) ? 1 : 0;
+                    if (CurrentEffectName == IceEffectName) {
+                        enemy.StartFreeze(2f);
+                    }
+                    else if ((CurrentEffectName != ElectricEffectName) || !talisman.Charged) {
+                        EffectManager.GetInstance().SpawnTrackEffectAndRemove(et.position, CurrentEffectName[effectIndex], et, dir);
+                        Invoke("IncreaseTalisman", 0.5f);
+                    }
+                    else {
+                        SpriteAtlasAnimator.OnAnimationEnd onEnd = IncreaseTalisman;
+                        EffectManager.GetInstance().SpawnEffectWithDuration(et.position, CurrentEffectName[effectIndex], 3f, onEnd);
+                    }
+                }
+
+                _activeTalismans.RemoveAt(i--);
+                talisman.gameObject.SetActive(false);
+                Destroy(talisman);
+            }
         }
     }
+
+    private void IncreaseTalisman() => ++TalismanCount;
 
     public void EnableMeleeAttack() {
         Vector2 position = transform.position;
@@ -104,14 +142,17 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void ThrowTalisman() {
-        var talisman = ObjectManager.GetInstance().GetTalisman();
+        --TalismanCount;
+        Charged = ChargeTime < 0f;
+        ChargeTime = DefaultChargeTime;
+
+        var talisman = Instantiate(_talismanPrefab);
         float dirX = transform.localScale.x;
 
         talisman.transform.position = transform.position + _throwPosition;
-        //var table = TBLTalisman.GetEntity(new BansheeGz.BGDatabase.BGId("44Zgd9sxt0eyEdxw8zsBJQ"));
 
-        //talisman.Initalize(dirX, table.moveSpeed);
-        //_activeTalismans.Add(talisman);
+        talisman.Initalize(dirX, 10f, Charged);
+        _activeTalismans.Add(talisman);
     }
 
     private bool OnEnemyHit(EnemyBase enemy, int damage, string hitEffectName) {
@@ -133,5 +174,19 @@ public class PlayerAttack : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    private void OnGUI() {
+        if (GUI.Button(new Rect(20, 20, 200, 60), "Fire")) {
+            CurrentEffectName = FireEffectName;
+        }
+        if (GUI.Button(new Rect(230, 20, 200, 60), "Electric")) {
+            CurrentEffectName = ElectricEffectName;
+        }
+        if (GUI.Button(new Rect(440, 20, 200, 60), "Ice")) {
+            CurrentEffectName = IceEffectName;
+        }
+
+        GUI.Label(new Rect(10, 100, 200, 40), ("Remain: " + TalismanCount.ToString()));
     }
 }

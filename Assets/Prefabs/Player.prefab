@@ -51,8 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4c81d654878c9459b0a4c527d63aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteAtlas: {fileID: 4343727234628468602, guid: cfc5499eabcf0ce47b115e8180727dbe,
-    type: 2}
 --- !u!114 &8968027397319763384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +126,8 @@ MonoBehaviour:
   _attackableLayers:
     serializedVersion: 2
     m_Bits: 2048
+  _talismanPrefab: {fileID: 2034262997654227144, guid: 3ed9b5c950efbd340ad868de1ef87bc1,
+    type: 3}
 --- !u!61 &8968027397319763390
 BoxCollider2D:
   m_ObjectHideFlags: 0

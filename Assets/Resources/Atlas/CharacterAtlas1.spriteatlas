@@ -205,9 +205,9 @@ SpriteAtlas:
   - CAVERAT_SHOOTER_Chase3
   - PLAYER_land_run4
   - PLAYER_throw_air3
-  - PLAYER_throw4
+  - PLAYER_Throw4
   - PLAYER_attack_air1
-  - PLAYER_throw6
+  - PLAYER_Throw6
   - PLAYER_hit1
   - CAVERAT_Chase3
   - CAVERAT_Ready1
@@ -269,7 +269,7 @@ SpriteAtlas:
   - PLAYER_evade4
   - CAVERAT_SHOOTER_Chase1
   - CAVERAT_SHOOTER_AttackB1
-  - PLAYER_throw2
+  - PLAYER_Throw2
   - PLAYER_throw_air2
   - PLAYER_attack_air3
   - PLAYER_explode4
@@ -284,7 +284,7 @@ SpriteAtlas:
   - CAVERAT_SHOOTER_ReadyB2
   - PLAYER_run8
   - CAVERAT_SHOOTER_Patrol3
-  - PLAYER_throw5
+  - PLAYER_Throw5
   - PLAYER_dead1
   - CAVERAT_Patrol2
   - PLAYER_dead3
@@ -312,10 +312,10 @@ SpriteAtlas:
   - CAVERAT_Chase2
   - CAVERAT_SHOOTER_AttackB4
   - CAVERAT_SHOOTER_AttackB3
-  - PLAYER_throw3
+  - PLAYER_Throw3
   - CAVERAT_SHOOTER_AttackA4
   - CAVERAT_Hit1
-  - PLAYER_throw1
+  - PLAYER_Throw1
   - PLAYER_idle4
   - PLAYER_explode2
   - PLAYER_Attack_A4

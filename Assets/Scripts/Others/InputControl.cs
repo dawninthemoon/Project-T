@@ -138,7 +138,6 @@ public class InputControl : MonoBehaviour
 
         if (_inputIgnoreStates == null) {
             _inputIgnoreStates = new PlayerAnimator.States[] {
-                PlayerAnimator.States.LandHard,
                 PlayerAnimator.States.Hit,
                 PlayerAnimator.States.Dead,
             };
@@ -152,13 +151,9 @@ public class InputControl : MonoBehaviour
 
         if (_moveIgnoreStates == null) {
             _moveIgnoreStates = new PlayerAnimator.States[] {
-                PlayerAnimator.States.AttackIn,
                 PlayerAnimator.States.AttackA,
                 PlayerAnimator.States.AttackB,
-                PlayerAnimator.States.AttackOut,
-                PlayerAnimator.States.AttackAir,
                 PlayerAnimator.States.Throw,
-                PlayerAnimator.States.ThrowAir,
             };
         }
 

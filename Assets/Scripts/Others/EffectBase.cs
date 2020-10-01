@@ -69,4 +69,18 @@ public class EffectBase : MonoBehaviour
 
         SetEffectInfoWithCondition(pos, prefix, dir, null, isEndCallback, endCallback);
     }
+
+    public void SetEffectInfoWithDuration(Vector3 pos, string prefix, float dir, float duration, System.Action updateCallback, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
+        _lifeTime = duration;
+
+        EffectManager.IsEffectEnd isEndCallback = () => {
+            _lifeTime -= Time.deltaTime;
+            if (_lifeTime < 0f) {
+                return true;
+            }
+            return false;
+        };
+
+        SetEffectInfoWithCondition(pos, prefix, dir, updateCallback, isEndCallback, endCallback);
+    }
 }

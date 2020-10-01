@@ -11,6 +11,7 @@ public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
     private SpriteAtlas _atlas;
     private int _maxHP;
     protected int _currentHp;
+    private float _requestingDamage;
     private Sequence _flashSequence;
     private Sequence _freezeSequence;
     protected float _knockbackTime = 0.5f;
@@ -77,6 +78,22 @@ public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
             StartKnockback(damage / 30f * dir);
         }
         StartFlash();
+
+        return _currentHp > 0;
+    }
+
+    public virtual bool RequestReceiveDamage(float requestedDamage, float dir, bool rigid = true) {
+        _requestingDamage += requestedDamage;
+
+        if (1f - _requestingDamage < Mathf.Epsilon) {
+            _requestingDamage = 0f;
+            int damage = Mathf.FloorToInt(_requestingDamage);
+            _currentHp -= damage;
+            if (rigid) {
+                StartKnockback(Mathf.FloorToInt(damage) / 30f * dir);
+            }
+            StartFlash();
+        }
 
         return _currentHp > 0;
     }

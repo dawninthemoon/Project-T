@@ -72,28 +72,47 @@ public class PlayerAttack : MonoBehaviour
             if (!talisman.MoveSelf()) {
                 float dir = talisman.transform.localScale.x;
                 var enemy = talisman.GetHitEnemy();
+                if (enemy != null) {
+                    var et = enemy.transform;
 
-                var et = enemy.transform;
-                enemy.ReceiveDamage(1, dir, talisman.Charged);
-
-                if (CurrentEffectName != null) {
-                    int effectIndex = (talisman.Charged) ? 1 : 0;
-                    if (CurrentEffectName == IceEffectName) {
-                        enemy.StartFreeze(2f);
-                    }
-                    else if ((CurrentEffectName != ElectricEffectName) || !talisman.Charged) {
-                        EffectManager.GetInstance().SpawnTrackEffectAndRemove(et.position, CurrentEffectName[effectIndex], et, dir);
-                        Invoke("IncreaseTalisman", 0.5f);
+                    if (talisman.Charged && (talisman.Type == Talisman.TalismanType.Fire || talisman.Type == Talisman.TalismanType.Electric)) {
+                        if (talisman.Type == Talisman.TalismanType.Fire) {
+                            if (talisman.GetHitCollider(1.5f)) {
+                                enemy.ReceiveDamage(2, dir, true);
+                            }
+                        }
                     }
                     else {
-                        SpriteAtlasAnimator.OnAnimationEnd onEnd = IncreaseTalisman;
-                        EffectManager.GetInstance().SpawnEffectWithDuration(et.position, CurrentEffectName[effectIndex], 3f, onEnd);
+                        enemy.ReceiveDamage(1, dir, talisman.Charged);
+                    }
+
+                    if (talisman.Type != Talisman.TalismanType.Normal) {
+                        int effectIndex = (talisman.Charged) ? 1 : 0;
+                        if (talisman.Type == Talisman.TalismanType.Ice) {
+                            enemy.StartFreeze(2f);
+                        }
+                        else if ((talisman.Type != Talisman.TalismanType.Electric) || !talisman.Charged) {
+                            EffectManager.GetInstance().SpawnTrackEffectAndRemove(et.position, CurrentEffectName[effectIndex], et, dir);
+                            Invoke("IncreaseTalisman", 0.5f);
+                        }
+                        else {
+                            SpriteAtlasAnimator.OnAnimationEnd onEnd = IncreaseTalisman;
+                            onEnd += () => { Destroy(talisman); };
+                            System.Action action = () => {
+                                if (talisman.GetHitCollider(2.5f)) {
+                                    enemy.RequestReceiveDamage(1f / 60f, dir, true);
+                                }
+                            };
+                            EffectManager.GetInstance().SpawnEffectWithDuration(et.position, CurrentEffectName[effectIndex], 3f, action, onEnd);
+                        }
                     }
                 }
 
                 _activeTalismans.RemoveAt(i--);
                 talisman.gameObject.SetActive(false);
-                Destroy(talisman);
+
+                if (talisman.Type != Talisman.TalismanType.Electric && !talisman.Charged)
+                    Destroy(talisman);
             }
         }
     }
@@ -151,7 +170,9 @@ public class PlayerAttack : MonoBehaviour
 
         talisman.transform.position = transform.position + _throwPosition;
 
-        talisman.Initalize(dirX, 10f, Charged);
+        Talisman.TalismanType type = (CurrentEffectName == FireEffectName) ? Talisman.TalismanType.Fire : ((CurrentEffectName == IceEffectName) ? Talisman.TalismanType.Ice : Talisman.TalismanType.Electric);
+        type = (CurrentEffectName == null) ? Talisman.TalismanType.Normal : type;
+        talisman.Initalize(dirX, 10f, Charged, type);
         _activeTalismans.Add(talisman);
     }
 

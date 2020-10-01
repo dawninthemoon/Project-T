@@ -93,4 +93,13 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
         _acitveEffects.Add(effect);
     }
+
+    public void SpawnEffectWithDuration(Vector3 pos, string effectName, float duration, System.Action updateCallback, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
+        EffectBase effect = _effectPool.GetObject();
+
+        onEffectEnd += () => { _effectPool.ReturnObject(effect);};
+        effect.SetEffectInfoWithDuration(pos, effectName, dir, duration, updateCallback, onEffectEnd);
+
+        _acitveEffects.Add(effect);
+    }
 }

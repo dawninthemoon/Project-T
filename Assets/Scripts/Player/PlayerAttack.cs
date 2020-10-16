@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Aroma;
+using BansheeGz.BGDatabase;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public static readonly float DefaultChargeTime = 1f;
     [SerializeField] private int _defaultAttackDamage = 10;
     [SerializeField] private LayerMask _attackableLayers;
+    [SerializeField] private string[] _talismanTableID = null;
     public int DefaultAttackDamage { get { return _defaultAttackDamage; } }
     public LayerMask AttackableLayers { get { return _attackableLayers; } }
     private static readonly float InitalInputDelay = 0.15f;
@@ -27,12 +29,14 @@ public class PlayerAttack : MonoBehaviour
     private Vector2 _meleeAttackSize;
     private int _meleeAttackDamage;
     public bool Charged { get; set; }
+    private int _talismanType = 0;
     private static readonly string HitEffectName = "EFFECT_Hit";
     private static readonly string[] FireEffectName = { "EFFECT_Fire", "EFFECT_Explode_Flame" };
     private static readonly string[] ElectricEffectName = { "EFFECT_Electric", "EFFECT_Field_Electric" };
     private static readonly string[] IceEffectName = { "EFFECT_Snowflake", "EFFECT_Snowflake" };
+    private static readonly string[] TableName = { "TALISMAN_NORMAL", "TALISMAN_FIRE", "TALISMAN_ELECTRIC", "TALISMAN_ICE" };
+    private string _talismanTableName = TableName[0];
     private string[] CurrentEffectName;
-
 
     #endregion
     [SerializeField] private Talisman _talismanPrefab = null;
@@ -74,16 +78,18 @@ public class PlayerAttack : MonoBehaviour
                 var enemy = talisman.GetHitEnemy();
                 if (enemy != null) {
                     var et = enemy.transform;
+                    TBLTalisman entity = TBLTalisman.GetEntity(new BGId(_talismanTableID[_talismanType]));
 
                     if (talisman.Charged && (talisman.Type == Talisman.TalismanType.Fire || talisman.Type == Talisman.TalismanType.Electric)) {
                         if (talisman.Type == Talisman.TalismanType.Fire) {
                             if (talisman.GetHitCollider(1.5f)) {
-                                enemy.ReceiveDamage(2, dir, true);
+                                enemy.ReceiveDamage((int)entity.chargedDamage, dir, true);
                             }
                         }
                     }
                     else {
-                        enemy.ReceiveDamage(1, dir, talisman.Charged);
+                        int damage = (talisman.Charged) ? (int)entity.chargedDamage : (int)entity.normalDamage;
+                        enemy.ReceiveDamage(damage, dir, talisman.Charged);
                     }
 
                     if (talisman.Type != Talisman.TalismanType.Normal) {
@@ -100,7 +106,7 @@ public class PlayerAttack : MonoBehaviour
                             onEnd += () => { Destroy(talisman); };
                             System.Action action = () => {
                                 if (talisman.GetHitCollider(2.5f)) {
-                                    enemy.RequestReceiveDamage(1f / 60f, dir, true);
+                                    enemy.RequestReceiveDamage(entity.chargedDamage / 60f, dir, true);
                                 }
                             };
                             EffectManager.GetInstance().SpawnEffectWithDuration(et.position, CurrentEffectName[effectIndex], 3f, action, onEnd);
@@ -132,7 +138,14 @@ public class PlayerAttack : MonoBehaviour
             if (!IsAlreadyExists(colliders[i])) {
                 AlreadyHitColliders.Add(colliders[i]);
                 EnemyBase enemy = colliders[i].gameObject.GetComponentNoAlloc<EnemyBase>();
-                enemyHit = OnEnemyHit(enemy, damage, hitEffectName);
+                if (enemy != null) {
+                    enemyHit = OnEnemyHit(enemy, damage, hitEffectName);
+                }
+                else {
+                    var soul = colliders[i].gameObject.GetComponentNoAlloc<Soul>();
+                    if (soul.Simulated)
+                        soul.OnHit();
+                }
             }
         }
         
@@ -172,7 +185,11 @@ public class PlayerAttack : MonoBehaviour
 
         Talisman.TalismanType type = (CurrentEffectName == FireEffectName) ? Talisman.TalismanType.Fire : ((CurrentEffectName == IceEffectName) ? Talisman.TalismanType.Ice : Talisman.TalismanType.Electric);
         type = (CurrentEffectName == null) ? Talisman.TalismanType.Normal : type;
-        talisman.Initalize(dirX, 10f, Charged, type);
+        
+        TBLTalisman entity = TBLTalisman.GetEntity(new BGId(_talismanTableID[_talismanType]));
+        float speed = Charged ? entity.chargedSpeed : entity.normalSpeed;
+
+        talisman.Initalize(dirX, speed, Charged, type);
         _activeTalismans.Add(talisman);
     }
 
@@ -200,13 +217,17 @@ public class PlayerAttack : MonoBehaviour
     private void OnGUI() {
         if (GUI.Button(new Rect(20, 20, 200, 60), "Fire")) {
             CurrentEffectName = FireEffectName;
+            _talismanType = 1;
         }
         if (GUI.Button(new Rect(230, 20, 200, 60), "Electric")) {
             CurrentEffectName = ElectricEffectName;
+            _talismanType = 2;
         }
         if (GUI.Button(new Rect(440, 20, 200, 60), "Ice")) {
             CurrentEffectName = IceEffectName;
+            _talismanType = 3;
         }
+        _talismanTableName = TableName[_talismanType];
 
         GUI.Label(new Rect(10, 100, 200, 40), ("Remain: " + TalismanCount.ToString()));
     }

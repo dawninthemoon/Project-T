@@ -33,7 +33,7 @@ namespace Aroma
 
     public static class GameObjectExtensions
     {
-        static List<Component> _componentCache = new List<Component>();
+        private static List<Component> _componentCache = new List<Component>();
 
         public static T GetComponentNoAlloc<T>(this GameObject obj) where T : Component
         {

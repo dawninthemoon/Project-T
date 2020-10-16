@@ -1,7 +1,14 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 3059561514
+=======
+CRC: 417181717
+>>>>>>> 9b1c8b8144271bc3ba8201801575d63330113d6d
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: assetbundle_object
+      Dependencies: {}
+    Info_1:
+      Name: assetbundle_room
       Dependencies: {}

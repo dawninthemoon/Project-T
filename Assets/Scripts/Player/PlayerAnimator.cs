@@ -10,8 +10,8 @@ public partial class PlayerAnimator : MonoBehaviour
     private SpriteAtlas _spriteAtlas;
 
     public enum States { 
-        Idle, AttackA, AttackB, AttackAir, AttackIn, AttackOut, Dead, Evade, Explode, 
-        Fall, Hit, Jump, LandHard, LandIdle, LandRun, Run, Slide, Throw, ThrowAir 
+        IdleIn, Idle, AttackA, AttackAOut, AttackB, AttackAir, Dead, Evade, Explode, 
+        Hit, Jump, Run, RunIn, RunOut, Slide, Throw, ThrowAir 
     };
 
     public States State { get => _fsm.State; }

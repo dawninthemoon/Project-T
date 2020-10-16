@@ -28,7 +28,7 @@ public class Player : MonoBehaviour, IQuadTreeObject
     }
 
     public void Progress() {
-        bool throwRequested = _throwRequested && (Mathf.Abs(Velocity.y) < Mathf.Epsilon); 
+        bool throwRequested = _throwRequested; 
         _playerAttack.Progress(_attackRequested, throwRequested);
         _playerAnimator.Progress();
     }

@@ -8,6 +8,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private static readonly string EnemyPrefabDirectory = "Enemy/";
     private static readonly string MovingPlatformName = "MovingPlatform";
     private static readonly string WaterName = "Water";
+    private static readonly string SoulName = "Soul";
 
     private AssetLoader _assetLoader;
 
@@ -18,6 +19,7 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     private ObjectPool<EnemyBase>[] _enemyObjectPoolArr;
     private ObjectPool<PlatformController> _movingPlatformPool;
     private ObjectPool<Water> _waterPool;
+    private ObjectPool<Soul> _soulPool;
     private Dictionary<EnemyTypes, int>  _enemyObjectPoolOrder;
 
     public void Initialize() {
@@ -31,15 +33,13 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
     }
 
     public void Progress() {
-        for (int i = 0; i < _activeEnemies.Count; i++) {
-            _activeEnemies[i].Progress();
-        }
+        foreach (var enemy in _activeEnemies)
+            enemy.Progress();
     }
 
     public void FixedProgress() {
-        for (int i = 0; i < _activeEnemies.Count; i++) {
-            _activeEnemies[i].FixedProgress();
-        }
+        foreach (var enemy in _activeEnemies)
+            enemy.FixedProgress();
     }
 
     public Player CreatePlayer(Vector3 position) {
@@ -109,6 +109,13 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
         _activeWater.Add(water);
     }
 
+    public Soul CreateSoul(Vector3 pos) {
+        var soul = _soulPool.GetObject();
+        soul.transform.position = pos;
+        soul.Initalize(_soulPool, _player.transform, Random.Range(0, 3));
+        return soul;
+    }
+
     public void CreateMovingPlatform(MovingPlatformPoint info) {
         var controller = _movingPlatformPool.GetObject();
         controller.Setup(info);
@@ -151,6 +158,15 @@ public class ObjectManager : SingletonWithMonoBehaviour<ObjectManager>
                 GameObject prefab = _assetLoader.GetPrefab(WaterName);
                 Water water = Instantiate(prefab).GetComponent<Water>();
                 return water;
+            }
+        );
+
+        _soulPool = new ObjectPool<Soul>(
+            5,
+            () => {
+                GameObject prefab = _assetLoader.GetPrefab(SoulName);
+                Soul soul = Instantiate(prefab).GetComponent<Soul>();
+                return soul;
             }
         );
     }

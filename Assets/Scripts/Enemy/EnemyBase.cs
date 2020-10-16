@@ -79,7 +79,11 @@ public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
         }
         StartFlash();
 
-        return _currentHp > 0;
+        if (_currentHp < 0) {
+            OnDead(dir);
+            return false;
+        }
+        return true;
     }
 
     public virtual bool RequestReceiveDamage(float requestedDamage, float dir, bool rigid = true) {
@@ -95,7 +99,11 @@ public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
             StartFlash();
         }
 
-        return _currentHp > 0;
+        if (_currentHp < 0) {
+            OnDead(dir);
+            return false;
+        }
+        return true;
     }
 
     public void StartFreeze(float duration) {
@@ -114,8 +122,7 @@ public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
     }
 
     public Rect GetBounds() {
-        Rect newBounds = new Rect(10f, 10f, 1f, 1f);
-        //Rect newBounds = new Rect((Vector2)transform.position + _bounds.position, _bounds.size);
+        Rect newBounds = new Rect((Vector2)transform.position + _bounds.position, _bounds.size);
         return newBounds;
     }
 
@@ -164,6 +171,32 @@ public abstract class EnemyBase : GroundMove, IPlaceable, IQuadTreeObject
 
         Collider2D collider = Physics2D.OverlapBox(position, size, 0f, playerMask);
         return collider;
+    }
+
+    protected void OnDead(float dir) {
+        var soul = ObjectManager.GetInstance().CreateSoul(transform.position);
+
+        float radian = Random.Range(0f, Mathf.PI / 8f);
+        Vector3 direction = new Vector3(Mathf.Cos(radian) * dir, Mathf.Sin(radian)).normalized;
+        float power = 1.5f;
+
+        var st = soul.transform;
+
+        var localMove1 = st.DOLocalMove(direction * power, 0.5f).SetRelative();
+        var localMove2 = st.DOLocalMoveY(0.15f, 1f).SetRelative();
+
+        var loopSequence = DOTween.Sequence();
+        loopSequence
+            .Append(st.DOLocalMoveY(-0.3f, 1f).SetRelative())
+            .Append(st.DOLocalMoveY(0.3f, 1f).SetRelative())
+            .Loops();
+
+        var sequence = DOTween.Sequence();
+        sequence
+            .Append(localMove1)
+            .Append(localMove2)
+            .Append(loopSequence);
+        sequence.Play();
     }
 
     protected virtual void OnDrawGizmos() {

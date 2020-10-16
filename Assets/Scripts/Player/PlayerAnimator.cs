@@ -39,6 +39,10 @@ public partial class PlayerAnimator : MonoBehaviour
         _fsm.ChangeState(States.Idle);
     }
 
+    public void Progress() {
+        _animator.Progress(_renderer, _spriteAtlas);
+    }
+
     public void ApplyAnimation(float dirX, float velocityY, bool requestJump) {
         _direction.x = dirX;
         _direction.y = (velocityY > 0f) ? 1 : ((velocityY < 0f) ? -1 : 0);

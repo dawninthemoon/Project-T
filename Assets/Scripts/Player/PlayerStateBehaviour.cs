@@ -4,10 +4,6 @@ using UnityEngine;
 
 public partial class PlayerAnimator : MonoBehaviour
 {
-    public void Progress() {
-        _animator.Progress(_renderer, _spriteAtlas);
-    }
-
     #region IDLE
     private void Idle_Enter() {
         _animator.ChangeAnimation("idle", true);

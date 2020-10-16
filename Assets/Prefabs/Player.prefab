@@ -125,7 +125,12 @@ MonoBehaviour:
   _defaultAttackDamage: 5
   _attackableLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 6144
+  _talismanTableID:
+  - bfFVc5NaFESi+TJ0CVrSyg
+  - ajdJ1L+dvkmGL2j7h3GZEg
+  - FlZPcldDGUGp0qZNWBL9yA
+  - 8scxXyTc3ECMx/FWIYA8Tg
   _talismanPrefab: {fileID: 2034262997654227144, guid: 3ed9b5c950efbd340ad868de1ef87bc1,
     type: 3}
 --- !u!61 &8968027397319763390

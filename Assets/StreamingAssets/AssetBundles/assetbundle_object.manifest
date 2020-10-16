@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2312853260
+CRC: 1718123006
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 83caefd64d9d307a41ce87f51aefe2f2
+    Hash: 1a350e021f3b6f474c3cf9aea3890a80
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8603ae30ecf1468129756f7385849ce2
+    Hash: b84c95ac5c2b5b535d35df85b33cf0e3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -67,6 +67,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 1379b93b1a365e5469f22956b060cc6d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fa4f18fe734487047bbb4c5105a87714, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5379d1773cf510047a97b85ca3a08dcf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: be58ea3f34e1e1f489e409e24afca222, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -84,6 +88,8 @@ Assets:
 - Assets/Prefabs/Enemy/EnemyCaveRatShooterA.prefab
 - Assets/ForEditor/Water/Water.prefab
 - Assets/Prefabs/MovingPlatform.prefab
+- Assets/Prefabs/SoulFragment.prefab
+- Assets/Prefabs/Soul.prefab
 - Assets/Prefabs/Talisman.prefab
 - Assets/ScriptableObjects/ProjectileMovements/Straight.asset
 - Assets/Prefabs/Enemy/EnemyCaveRatMelee.prefab

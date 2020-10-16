@@ -161,7 +161,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 077e28af102f36f489f50303adfbdfe1, type: 3}
   - {fileID: 21300000, guid: 406b8dcff8d50864285410ae0bbe7631, type: 3}
   m_PackedSpriteNamesToIndex:
-  - PLAYER_Jump2
+  - PLAYER_jump2
   - CAVERAT_SHOOTER_Patrol6
   - CAVERAT_Tackle4
   - CAVERAT_Ready3
@@ -169,12 +169,12 @@ SpriteAtlas:
   - PLAYER_Dead6
   - CAVERAT_SHOOTER_Patrol4
   - CAVERAT_SHOOTER_Chase3
-  - PLAYER_Throw_air3
-  - PLAYER_Throw4
+  - PLAYER_throw_air3
+  - PLAYER_throw4
   - PLAYER_Idle_loop5
-  - PLAYER_Attack_air1
+  - PLAYER_attack_air1
   - PLAYER_Run_loop3
-  - PLAYER_Hit1
+  - PLAYER_hit1
   - PLAYER_Run_loop8
   - CAVERAT_Chase3
   - PLAYER_Idle_in3
@@ -182,10 +182,10 @@ SpriteAtlas:
   - PLAYER_AttackA_out2
   - PLAYER_Dead10
   - PLAYER_Idle_loop7
-  - PLAYER_Attack_air4
+  - PLAYER_attack_air4
   - CAVERAT_SHOOTER_Dead2
   - CAVERAT_SHOOTER_AttackA2
-  - PLAYER_Jump3
+  - PLAYER_jump3
   - PLAYER_AttackB3
   - CAVERAT_Patrol3
   - PLAYER_Dead7
@@ -212,25 +212,25 @@ SpriteAtlas:
   - PLAYER_AttackA1
   - CAVERAT_SHOOTER_AttackA1
   - PLAYER_AttackA4
-  - PLAYER_Jump1
+  - PLAYER_jump1
   - PLAYER_Dead5
   - PLAYER_Dead9
-  - PLAYER_Hit2
+  - PLAYER_hit2
   - CAVERAT_Ready2
   - CAVERAT_Tackle3
   - CAVERAT_Dead1
   - PLAYER_Run_loop6
-  - PLAYER_Throw_air4
+  - PLAYER_throw_air4
   - CAVERAT_Tackle1
   - CAVERAT_SHOOTER_Chase1
   - CAVERAT_SHOOTER_AttackB1
-  - PLAYER_Throw2
-  - PLAYER_Throw_air2
-  - PLAYER_Attack_air3
+  - PLAYER_throw2
+  - PLAYER_throw_air2
+  - PLAYER_attack_air3
   - PLAYER_AttackB2
   - PLAYER_AttackB1
   - PLAYER_Idle_loop6
-  - PLAYER_Dead4
+  - PLAYER_dead4
   - PLAYER_AttackA_out3
   - CAVERAT_SHOOTER_ReadyA3
   - PLAYER_Dead8
@@ -241,18 +241,18 @@ SpriteAtlas:
   - CAVERAT_SHOOTER_Patrol3
   - PLAYER_Idle_in2
   - PLAYER_Run_in2
-  - PLAYER_Dead1
+  - PLAYER_dead1
   - PLAYER_Idle_in1
   - CAVERAT_Patrol2
-  - PLAYER_Dead3
+  - PLAYER_dead3
   - CAVERAT_SHOOTER_Patrol1
   - CAVERAT_SHOOTER_ReadyA2
   - CAVERAT_Chase1
-  - PLAYER_Throw_air1
+  - PLAYER_throw_air1
   - CAVERAT_SHOOTER_ReadyB1
-  - PLAYER_Dead2
+  - PLAYER_dead2
   - CAVERAT_SHOOTER_ReadyA4
-  - PLAYER_Attack_air2
+  - PLAYER_attack_air2
   - CAVERAT_SHOOTER_ReadyB3
   - CAVERAT_Chase4
   - CAVERAT_Patrol6
@@ -265,10 +265,10 @@ SpriteAtlas:
   - PLAYER_Idle_loop3
   - CAVERAT_SHOOTER_AttackB4
   - CAVERAT_SHOOTER_AttackB3
-  - PLAYER_Throw3
+  - PLAYER_throw3
   - CAVERAT_SHOOTER_AttackA4
   - CAVERAT_Hit1
-  - PLAYER_Throw1
+  - PLAYER_throw1
   - PLAYER_Run_loop2
   - CAVERAT_SHOOTER_AttackB2
   - CAVERAT_SHOOTER_AttackA3

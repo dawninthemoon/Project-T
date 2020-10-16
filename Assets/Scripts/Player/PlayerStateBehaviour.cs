@@ -174,7 +174,7 @@ public partial class PlayerAnimator : MonoBehaviour
         _playerAttack.RequestThrow = false;
 
         _animator.ChangeAnimation(
-            "Throw", 
+            "throw", 
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.IdleIn : States.Run;

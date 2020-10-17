@@ -28,10 +28,10 @@ public class Soul : MonoBehaviour
         for (int i = 0; i < _fragmentCount[_soulIndex]; ++i) {
             var fragment = Instantiate(prefab).GetComponent<SoulFragment>();
 
-            float radian = Random.Range(-Mathf.PI / 4f, Mathf.PI / 4f);
+            float radian = Random.Range(-Mathf.PI / 3f, Mathf.PI / 3f);
             Vector3 direction = new Vector3(Mathf.Cos(radian) * dir, Mathf.Sin(radian)).normalized;
 
-            fragment.Spawn(transform.position, direction * Random.Range(1.5f, 1.8f), _playerTransform);
+            fragment.Spawn(transform.position, direction * Random.Range(2f, 2.3f), _playerTransform);
         }
         RemoveSelf();
     }

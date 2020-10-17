@@ -5,7 +5,7 @@ public class Player : MonoBehaviour, IQuadTreeObject
     private PlayerAnimator _playerAnimator;
     private PlayerAttack _playerAttack;
     private bool _attackRequested;
-    private bool _throwRequested;
+    private bool _throwRequested = false;
     private GroundMove _controller;
     public Vector2 Velocity { get { return _controller.Velocity;} }
     public bool CanDrawHitbox { get; set; }

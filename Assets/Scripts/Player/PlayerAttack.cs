@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     private float _inputDelay;
     private static readonly int MaxRequestCount = 1;
     public int RequestedAttackCount { get; set; }
-    public bool RequestThrow { get; set; }
+    public bool RequestThrow { get; set; } = false;
     public int TalismanCount { get; set; } = 5;
     public bool IsInAttackProgress { get; private set; }
     public bool CanThrow { get; set; }

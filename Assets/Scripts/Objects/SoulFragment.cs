@@ -12,7 +12,7 @@ public class SoulFragment : MonoBehaviour
     {
         _playerTransform = playerTransform;
         transform.position = startPos;
-        transform.DOLocalMove(endLocalPos, 0.5f);
+        transform.DOLocalMove(endLocalPos, 0.5f).SetRelative();
 
         StartCoroutine(MoveItemToPlayer(_playerTransform));
     }
@@ -21,28 +21,22 @@ public class SoulFragment : MonoBehaviour
     {
         yield return _waitTime;
 
-        float accelFactor = 1f;
-        float speed = 3f;
+        float sign = Random.Range(0, 2) == 0 ? 1 : -1;
+        Vector3 p1 = target.position;
+        p1.x += (transform.position.x - target.position.x);
+        p1.y += sign * Mathf.Abs(transform.position.y - target.position.y) * 1.5f;
 
-        while (!IsMoveEnd())
-        {
-            Vector3 dir = (target.position - transform.position).normalized;
-            transform.position += dir * speed * Time.deltaTime;
-            speed += accelFactor;
-
+        Vector3 start = transform.position;
+        
+        float timeAgo = 0f;
+        while (timeAgo < 1f) {
+            Vector3 next = Aroma.CustomMath.Bezier.GetPoint(start, p1, target.position, timeAgo);
+            transform.position = next;
+            timeAgo += Time.deltaTime * 2f;
             yield return null;
         }
 
         Destroy(gameObject);
         gameObject.SetActive(false);
-    }
-
-    private bool IsMoveEnd() {
-        Vector3 size = transform.localScale;
-        Vector3 offset = transform.localScale;
-        offset.y *= 0.5f;
-
-        var collider = Physics2D.OverlapBox(transform.position + offset, size, 0f, 1 << LayerMask.NameToLayer("Player"));
-        return collider != null;
     }
 }

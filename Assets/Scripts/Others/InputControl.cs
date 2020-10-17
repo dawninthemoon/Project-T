@@ -10,7 +10,7 @@ public class InputControl : MonoBehaviour
         public bool WasReleased;
         public PlayerAction Actions;
         public ActionBoolPair(PlayerAction action) {
-            WasReleased = true;
+            WasReleased = false;
             Actions = action;
         }
     }

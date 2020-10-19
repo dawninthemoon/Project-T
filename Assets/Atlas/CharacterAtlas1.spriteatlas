@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 0ede9b53dcf0951439860562cb027609, type: 3}
-    totalSpriteSurfaceArea: 462848
+    totalSpriteSurfaceArea: 495616
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -68,6 +68,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f8ee2c52a54761940abfbb8a65bc050f, type: 3}
   - {fileID: 21300000, guid: 0d7cf262ddc1e92408edf8378872cabb, type: 3}
   - {fileID: 21300000, guid: 82a768b26816d044ea4f6a0273692607, type: 3}
+  - {fileID: 21300000, guid: 5176efb29845bee4fbc0608ab7fab036, type: 3}
   - {fileID: 21300000, guid: a503b52329e5e0d4f80e887f801b13b3, type: 3}
   - {fileID: 21300000, guid: fec5c4439b620814cb911d01f7f6d288, type: 3}
   - {fileID: 21300000, guid: 26e965730c341bb49ab29e9eeb38aa19, type: 3}
@@ -83,9 +84,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 01531435122a7cb42a1f9df913a1f2bc, type: 3}
   - {fileID: 21300000, guid: 4720544548abf21409e2b2319bc2cefe, type: 3}
   - {fileID: 21300000, guid: 65a63b453f9e7d742b9d260d16b7c7e4, type: 3}
+  - {fileID: 21300000, guid: 46c86e55d71ab60479268dc506d8722e, type: 3}
+  - {fileID: 21300000, guid: 423267951368beb479a7e437262e120c, type: 3}
+  - {fileID: 21300000, guid: b07a64b5d742a524487f15e1f1e40210, type: 3}
   - {fileID: 21300000, guid: 3f4191e59b5fda74eaaac10df34b0e8c, type: 3}
   - {fileID: 21300000, guid: e919c7e5dbeece644afc7b31d14d5ed1, type: 3}
+  - {fileID: 21300000, guid: 273a5d4681e12654eaa90dfd0b196301, type: 3}
   - {fileID: 21300000, guid: e7b22856835ed6d439102c658671315f, type: 3}
+  - {fileID: 21300000, guid: 7c0bac6636110f0499059ce732f73395, type: 3}
   - {fileID: 21300000, guid: 5c1725a69ee84254db777ba046f39e8d, type: 3}
   - {fileID: 21300000, guid: 09fdf017348f2124087a9a262b5ce434, type: 3}
   - {fileID: 21300000, guid: 356311173a33199498a1a4bff5f9e824, type: 3}
@@ -106,6 +112,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 47ea8588a64394846adc142287d5a50d, type: 3}
   - {fileID: 21300000, guid: d2f0bb98e5c47864886b25a02c45a42a, type: 3}
   - {fileID: 21300000, guid: e2b96ba8b97d45f4ea81fcbff288e9f5, type: 3}
+  - {fileID: 21300000, guid: 0fa46ab8983b5f644803f31842eb3ecd, type: 3}
   - {fileID: 21300000, guid: 3bcec7c8568531145a78cbff0ccc6db5, type: 3}
   - {fileID: 21300000, guid: 7515aee861c412b40b6f4f55ea0f895b, type: 3}
   - {fileID: 21300000, guid: cfb12509a2545e54caa4adef866e9255, type: 3}
@@ -126,6 +133,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9092f7fa7b138ee48829a32289040ebd, type: 3}
   - {fileID: 21300000, guid: 6d20aa0b581d3f34a8c6efae78494228, type: 3}
   - {fileID: 21300000, guid: 9052af1b22612694ca85a58609e6a45e, type: 3}
+  - {fileID: 21300000, guid: a4245a2b7548e3b4297fa78acfb975db, type: 3}
   - {fileID: 21300000, guid: 31ccee3b1ccac5c4ca3b55fb5f6aba82, type: 3}
   - {fileID: 21300000, guid: 19a8b34be4e49c34e9558809f10eca89, type: 3}
   - {fileID: 21300000, guid: ed1a477b8593427468b5596f335be99c, type: 3}
@@ -161,7 +169,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 077e28af102f36f489f50303adfbdfe1, type: 3}
   - {fileID: 21300000, guid: 406b8dcff8d50864285410ae0bbe7631, type: 3}
   m_PackedSpriteNamesToIndex:
-  - PLAYER_jump2
+  - PLAYER_Jump2
   - CAVERAT_SHOOTER_Patrol6
   - CAVERAT_Tackle4
   - CAVERAT_Ready3
@@ -169,12 +177,12 @@ SpriteAtlas:
   - PLAYER_Dead6
   - CAVERAT_SHOOTER_Patrol4
   - CAVERAT_SHOOTER_Chase3
-  - PLAYER_throw_air3
-  - PLAYER_throw4
+  - PLAYER_Throw_air3
+  - PLAYER_Throw4
   - PLAYER_Idle_loop5
-  - PLAYER_attack_air1
+  - PLAYER_Attack_air1
   - PLAYER_Run_loop3
-  - PLAYER_hit1
+  - PLAYER_Hit1
   - PLAYER_Run_loop8
   - CAVERAT_Chase3
   - PLAYER_Idle_in3
@@ -182,10 +190,11 @@ SpriteAtlas:
   - PLAYER_AttackA_out2
   - PLAYER_Dead10
   - PLAYER_Idle_loop7
-  - PLAYER_attack_air4
+  - PLAYER_Idle_loop16
+  - PLAYER_Attack_air4
   - CAVERAT_SHOOTER_Dead2
   - CAVERAT_SHOOTER_AttackA2
-  - PLAYER_jump3
+  - PLAYER_Jump3
   - PLAYER_AttackB3
   - CAVERAT_Patrol3
   - PLAYER_Dead7
@@ -197,9 +206,14 @@ SpriteAtlas:
   - CAVERAT_SHOOTER_Dead1
   - PLAYER_AttackB4
   - PLAYER_Run_loop4
+  - PLAYER_Idle_loop13
+  - PLAYER_Idle_loop12
+  - PLAYER_Idle_loop14
   - CAVERAT_SHOOTER_ReadyB4
   - CAVERAT_Dead2
+  - PLAYER_Idle_loop11
   - CAVERAT_SHOOTER_Hit2
+  - PLAYER_Idle_loop9
   - CAVERAT_SHOOTER_Patrol5
   - CAVERAT_SHOOTER_ReadyA1
   - PLAYER_AttackA_out1
@@ -212,25 +226,26 @@ SpriteAtlas:
   - PLAYER_AttackA1
   - CAVERAT_SHOOTER_AttackA1
   - PLAYER_AttackA4
-  - PLAYER_jump1
+  - PLAYER_Jump1
   - PLAYER_Dead5
   - PLAYER_Dead9
-  - PLAYER_hit2
+  - PLAYER_Hit2
   - CAVERAT_Ready2
   - CAVERAT_Tackle3
   - CAVERAT_Dead1
   - PLAYER_Run_loop6
-  - PLAYER_throw_air4
+  - PLAYER_Idle_loop10
+  - PLAYER_Throw_air4
   - CAVERAT_Tackle1
   - CAVERAT_SHOOTER_Chase1
   - CAVERAT_SHOOTER_AttackB1
-  - PLAYER_throw2
-  - PLAYER_throw_air2
-  - PLAYER_attack_air3
+  - PLAYER_Throw2
+  - PLAYER_Throw_air2
+  - PLAYER_Attack_air3
   - PLAYER_AttackB2
   - PLAYER_AttackB1
   - PLAYER_Idle_loop6
-  - PLAYER_dead4
+  - PLAYER_Dead4
   - PLAYER_AttackA_out3
   - CAVERAT_SHOOTER_ReadyA3
   - PLAYER_Dead8
@@ -240,19 +255,20 @@ SpriteAtlas:
   - PLAYER_Run_loop1
   - CAVERAT_SHOOTER_Patrol3
   - PLAYER_Idle_in2
+  - PLAYER_Idle_loop15
   - PLAYER_Run_in2
-  - PLAYER_dead1
+  - PLAYER_Dead1
   - PLAYER_Idle_in1
   - CAVERAT_Patrol2
-  - PLAYER_dead3
+  - PLAYER_Dead3
   - CAVERAT_SHOOTER_Patrol1
   - CAVERAT_SHOOTER_ReadyA2
   - CAVERAT_Chase1
-  - PLAYER_throw_air1
+  - PLAYER_Throw_air1
   - CAVERAT_SHOOTER_ReadyB1
-  - PLAYER_dead2
+  - PLAYER_Dead2
   - CAVERAT_SHOOTER_ReadyA4
-  - PLAYER_attack_air2
+  - PLAYER_Attack_air2
   - CAVERAT_SHOOTER_ReadyB3
   - CAVERAT_Chase4
   - CAVERAT_Patrol6
@@ -265,10 +281,10 @@ SpriteAtlas:
   - PLAYER_Idle_loop3
   - CAVERAT_SHOOTER_AttackB4
   - CAVERAT_SHOOTER_AttackB3
-  - PLAYER_throw3
+  - PLAYER_Throw3
   - CAVERAT_SHOOTER_AttackA4
   - CAVERAT_Hit1
-  - PLAYER_throw1
+  - PLAYER_Throw1
   - PLAYER_Run_loop2
   - CAVERAT_SHOOTER_AttackB2
   - CAVERAT_SHOOTER_AttackA3

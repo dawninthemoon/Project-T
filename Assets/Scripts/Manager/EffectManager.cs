@@ -71,14 +71,14 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         effect.Speed = speed;
         System.Action onEffectUpdate = () => { 
             float currentFriction = (Mathf.Abs(speed) < Mathf.Epsilon) ? 0f : friction;
-            effect.Speed -= currentFriction * Time.deltaTime;
+            effect.Speed -= currentFriction * Time.deltaTime * 10f;
             if (effect.Speed < Mathf.Epsilon)
                 effect.Speed = 0f;
 
             et.position += direction * effect.Speed * Time.deltaTime;
             et.position += gravityVec * Time.deltaTime;
-            
-            float lastAngle = et.localRotation.z;
+
+            float lastAngle = et.localRotation.eulerAngles.z;
             et.localRotation = Aroma.RotationUtility.ChangeAngle(lastAngle + angleRate);
 
             Vector3 nextScale = et.localScale + scaleRateVec * Time.deltaTime;
@@ -103,7 +103,22 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     #region custom particle scripts
     public void SpawnParticleFire(Vector3 pos) {
         float r = Random.Range(0f, 360f);
-        SpawnParticle(pos, "EFFECT_Fire", r, 3, 90f+Random.Range(-30f,30f), Random.Range(0f, 3f), -1f, 4f, Random.Range(10f ,20f), 0.8f, -1f);
+        SpawnParticle(pos, "EFFECT_Fire", r, 3f, 90f+Random.Range(-30f,30f), Random.Range(0f, 3f), -1f, 4f, Random.Range(1f ,2f), 0.8f, -1f);
+    }
+    public void SpawnParticleSnowflake(Vector3 pos) {
+        float r = Random.Range(0f, 360f);
+        Vector3 newPos = GetRandomVector3(pos,0.8f);
+        SpawnParticleCircle(GetRandomVector3(newPos,0.4f));
+        SpawnParticle(newPos, "EFFECT_SnowFlake", r, 0.3f, 90f+Random.Range(-60f,60f), 0.8f, 0.5f, 0.6f, Random.Range(1.6f ,2.4f), Random.Range(0.8f,1f), -0.5f);
+    }
+    public void SpawnParticleCircle(Vector3 pos) {
+        float r = Random.Range(0f, 360f);
+        Vector3 newPos = GetRandomVector3(pos,0.8f);
+        SpawnParticle(newPos, "EFFECT_SnowSmoke", r, 0.3f, 90f+Random.Range(-60f,60f), 0.8f, 0.3f, 0.6f, Random.Range(2f ,3f), Random.Range(0.3f,0.4f), -0.5f);
+    }
+    private Vector3 GetRandomVector3(Vector3 vector, float range) {
+        Vector3 newVector = new Vector3(Random.Range(vector.x-range,vector.x+range),Random.Range(vector.y-range,vector.y+range),0);
+        return newVector;
     }
     #endregion
 

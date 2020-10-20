@@ -71,9 +71,14 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void FixedProgress() {
-
+        if(Random.Range(0f,1f) > 0.94f) {
             var em = EffectManager.GetInstance();
-            em.SpawnParticleFire(transform.position);
+            em.SpawnParticleSnowflake(transform.position);
+        }
+        if(Random.Range(0f,1f) > 0.88f) {
+            var em = EffectManager.GetInstance();
+            em.SpawnParticleCircle(transform.position);
+        }
         
         for (int i = 0; i < _activeTalismans.Count; ++i) {
             var talisman = _activeTalismans[i];
@@ -178,7 +183,6 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void ShootTalisman() {
-
         --TalismanCount;
         Charged = ChargeTime < 0f;
         ChargeTime = DefaultChargeTime;

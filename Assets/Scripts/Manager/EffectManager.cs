@@ -57,44 +57,53 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         _acitveEffects.Add(effect);
     }
 
-    public void SpawnParticle(Vector3 pos, string effectName, float angle, float angleRate, float dir, float speed, float gravity, float friction, float scale, float scaleChange, float lifeTime, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
+    public void SpawnParticle(Vector3 pos, string effectName, float angle, float angleRate, float dir, float speed, float gravity, float friction, float lifeTime, float scale = 1f, float scaleRate = 0f, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
         EffectBase effect = _effectPool.GetObject();
         Transform et = effect.transform;
         et.localScale = Vector3.one * scale;
-        Vector3 localScaleChange = Vector3.one * scaleChange;
+        Vector3 scaleRateVec = Vector3.one * scaleRate;
         et.localRotation = Aroma.RotationUtility.ChangeAngle(angle);
 
         Vector3 gravityVec = Vector3.down * gravity;
         float radian = dir * Mathf.Deg2Rad;
         Vector3 direction = new Vector3(Mathf.Cos(radian), Mathf.Sin(radian)).normalized;
 
+        effect.Speed = speed;
         System.Action onEffectUpdate = () => { 
             float currentFriction = (Mathf.Abs(speed) < Mathf.Epsilon) ? 0f : friction;
+            effect.Speed -= currentFriction * Time.deltaTime;
+            if (effect.Speed < Mathf.Epsilon)
+                effect.Speed = 0f;
 
-            et.position += direction * speed * Time.deltaTime;
-            et.position -= direction * currentFriction * Time.deltaTime;
+            et.position += direction * effect.Speed * Time.deltaTime;
             et.position -= gravityVec * Time.deltaTime;
             
             float lastAngle = et.localRotation.z;
             et.localRotation = Aroma.RotationUtility.ChangeAngle(lastAngle + angleRate);
-            et.localScale += localScaleChange;
+
+            Vector3 nextScale = et.localScale + scaleRateVec * Time.deltaTime;
+            if (nextScale.x < Mathf.Epsilon || nextScale.y < Mathf.Epsilon) {
+                et.localScale = Vector3.zero;
+                return;
+            }
+            et.localScale = nextScale;
         };
 
         SpriteAtlasAnimator.OnAnimationEnd endCallback = onEnd;
         endCallback += () => { 
-            effect.transform.localScale = Vector3.one;
+            et.localScale = Vector3.one;
            _effectPool.ReturnObject(effect);
         };
 
-        effect.SetEffectInfoWithDuration(pos, effectName, dir, lifeTime, onEffectUpdate, endCallback);
+        effect.SetEffectInfoWithDuration(pos, effectName, Mathf.Sign(direction.x), lifeTime, onEffectUpdate, endCallback);
 
         _acitveEffects.Add(effect);
     }
 
     #region custom particle scripts
     public void SpawnParticleFire(Vector3 pos) {
-        var _r = Random.Range(0f,360f);
-        SpawnParticle(pos,"EFFECT_Fire",_r,3,_r,Random.Range(26,32),-6,24,0.5f,0.08f,Random.Range(20,60));
+        float r = Random.Range(0f, 360f);
+        SpawnParticle(pos, "EFFECT_Fire", r, 3, r, Random.Range(10f, 15f), -6f, 24f, Random.Range(20f ,60f), 1f, -0.8f);
     }
     #endregion
 

@@ -10,6 +10,7 @@ public class EffectBase : MonoBehaviour
     private SpriteRenderer _renderer;
     private bool _isAnimationEnd;
     private float _lifeTime;
+    public float Speed { get; set; }
 
     public void Initalize() {
         _renderer = gameObject.AddComponent<SpriteRenderer>();
@@ -41,7 +42,6 @@ public class EffectBase : MonoBehaviour
     public void SetEffectInfoWithCondition(Vector3 pos, string prefix, float dir, System.Action updateCallback,  EffectManager.IsEffectEnd isEndCallback, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
         _isAnimationEnd = false;
         transform.position = pos;
-        transform.localScale = Aroma.VectorUtility.GetScaleVec(dir);
 
         _animator.Initalize(prefix, "", true);
 

@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
     private static readonly int MaxRequestCount = 1;
     public int RequestedAttackCount { get; set; }
     public bool RequestShoot { get; set; } = false;
-    public int TalismanCount { get; set; } = 5;
+    public int TalismanCount { get; set; } = 500;
     public bool IsInAttackProgress { get; private set; }
     public bool CanShoot { get; set; }
     public float ChargeTime { get; set; }

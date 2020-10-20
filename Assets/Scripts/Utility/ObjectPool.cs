@@ -20,6 +20,12 @@ public class ObjectPool<T> where T : Component
         Initalize();
     }
 
+    private T CreateObject() {
+        var pooledObject = _createObjectCallback.Invoke();
+        pooledObject.gameObject.SetActive(false);
+        return pooledObject;
+    }
+
     private void Initalize() {
         _freeList = new List<T>(_size);
         _usedList = new List<T>(_size);
@@ -27,19 +33,16 @@ public class ObjectPool<T> where T : Component
         // Instantiate the pooled objects and disable them.
         for (var i = 0; i < _size; i++)
         {
-            var pooledObject = _createObjectCallback.Invoke();
-            pooledObject.gameObject.SetActive(false);
-            _freeList.Add(pooledObject);
+            _freeList.Add(CreateObject());
         }
     }
 
     public T GetObject() {
-        var numFree = _freeList.Count;
-        if (numFree == 0)
-            return null;
+        if (_freeList.Count == 0)
+            _freeList.Add(CreateObject());
         
-        var pooledObject = _freeList[numFree - 1];
-        _freeList.RemoveAt(numFree - 1);
+        var pooledObject = _freeList[_freeList.Count - 1];
+        _freeList.RemoveAt(_freeList.Count - 1);
         _usedList.Add(pooledObject);
 
         pooledObject.gameObject.SetActive(true);

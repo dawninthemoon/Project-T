@@ -52,7 +52,7 @@ public class EffectBase : MonoBehaviour
             }
         };
 
-        _animator.ChangeAnimation("", true, null);
+        _animator.ChangeAnimation("", loop, null);
         _onEffectUpdateCallback = updateCallback;
     }
 

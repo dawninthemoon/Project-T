@@ -21,7 +21,7 @@ public class SpriteAtlasAnimator
     }
 
     public void ChangeAnimation(string name, bool loop = false, OnAnimationEnd callback = null) {
-        _indexTimer = 0f;
+        _indexTimer = _defaultSpeed;
         _spriteIndex = 1;
         _animationName = name;
         _loop = loop;

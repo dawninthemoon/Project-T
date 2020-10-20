@@ -57,6 +57,28 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         _acitveEffects.Add(effect);
     }
 
+    public void SpawnParticle(Vector3 pos, string effectName, float dir, Vector3 velocity, Vector3 gravity, float friction, float scale, float lifeTime, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
+        EffectBase effect = _effectPool.GetObject();
+        effect.transform.localScale = Vector3.one * scale;
+        Vector3 direction = velocity.normalized;
+
+        System.Action onEffectUpdate = () => { 
+            effect.transform.position += velocity;
+            effect.transform.position -= direction * friction;
+            effect.transform.position -= gravity * Time.deltaTime;
+        };
+
+        SpriteAtlasAnimator.OnAnimationEnd endCallback = onEnd;
+        endCallback += () => { 
+            effect.transform.localScale = Vector3.one;
+           _effectPool.ReturnObject(effect);
+        };
+
+        effect.SetEffectInfoWithDuration(pos, effectName, dir, lifeTime, onEffectUpdate, endCallback);
+
+        _acitveEffects.Add(effect);
+    }
+
     public void SpawnEffect(Vector3 pos, string effectName, System.Action onEffectUpdate, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();
         effect.SetEffectInfo(pos, effectName, dir, onEffectEnd);

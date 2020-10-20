@@ -61,7 +61,7 @@ public class EffectBase : MonoBehaviour
 
         EffectManager.IsEffectEnd isEndCallback = () => {
             _lifeTime -= Time.deltaTime;
-            if (_lifeTime < 0f) {
+            if (IsLifetimeEnd()) {
                 return true;
             }
             return false;
@@ -75,12 +75,16 @@ public class EffectBase : MonoBehaviour
 
         EffectManager.IsEffectEnd isEndCallback = () => {
             _lifeTime -= Time.deltaTime;
-            if (_lifeTime < 0f) {
+            if (IsLifetimeEnd()) {
                 return true;
             }
             return false;
         };
 
         SetEffectInfoWithCondition(pos, prefix, dir, updateCallback, isEndCallback, endCallback);
+    }
+
+    public bool IsLifetimeEnd() {
+        return _lifeTime < 0f;
     }
 }

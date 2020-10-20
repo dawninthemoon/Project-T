@@ -70,6 +70,8 @@ public class Player : MonoBehaviour, IQuadTreeObject
     }
 
     private void OnChargeStart() {
+        if (_playerAttack.TalismanCount <= 0) return;
+        
         Vector3 pos = transform.position;
         string effectName = "EFFECT_Charge";
 

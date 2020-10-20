@@ -57,17 +57,23 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         _acitveEffects.Add(effect);
     }
 
-    public void SpawnParticle(Vector3 pos, string effectName, float angle, float speed, float gravity, float friction, float scale, float lifeTime, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
+    public void SpawnParticle(Vector3 pos, string effectName, float angle, float angleRate, float dir, float speed, float gravity, float friction, float scale, float lifeTime, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
         EffectBase effect = _effectPool.GetObject();
-        effect.transform.localScale = Vector3.one * scale;
+        Transform et = effect.transform;
+        et.localScale = Vector3.one * scale;
+        et.localRotation = Aroma.RotationUtility.ChangeAngle(angle);
+
         Vector3 gravityVec = Vector3.down * gravity;
-        float radian = angle * Mathf.Deg2Rad;
+        float radian = dir * Mathf.Deg2Rad;
         Vector3 direction = new Vector3(Mathf.Cos(radian), Mathf.Sin(radian)).normalized;
 
         System.Action onEffectUpdate = () => { 
-            effect.transform.position += direction * speed;
-            effect.transform.position -= direction * friction;
-            effect.transform.position -= gravityVec * Time.deltaTime;
+            et.position += direction * speed;
+            et.position -= direction * friction;
+            et.position -= gravityVec * Time.deltaTime;
+            
+            float lastAngle = et.localRotation.z;
+            et.localRotation = Aroma.RotationUtility.ChangeAngle(lastAngle + angleRate);
         };
 
         SpriteAtlasAnimator.OnAnimationEnd endCallback = onEnd;

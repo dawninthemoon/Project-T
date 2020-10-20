@@ -26,6 +26,13 @@ namespace Aroma
         }
     }
 
+    public static class RotationUtility {
+        public static Quaternion ChangeAngle(float degree) {
+            Quaternion newAngle = Quaternion.Euler(0f, 0f, degree);
+            return newAngle;
+        }
+    }
+
     public static class VectorUtility {
         public static Vector3 GetScaleVec(float dir) {
             Vector3 scale = new Vector3(dir, 1f, 1f);

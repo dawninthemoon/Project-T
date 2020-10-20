@@ -71,6 +71,10 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void FixedProgress() {
+
+            var em = EffectManager.GetInstance();
+            em.SpawnParticleFire(transform.position);
+        
         for (int i = 0; i < _activeTalismans.Count; ++i) {
             var talisman = _activeTalismans[i];
             if (!talisman.MoveSelf()) {
@@ -174,8 +178,6 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void ShootTalisman() {
-            var em = EffectManager.GetInstance();
-            em.SpawnParticleFire(transform.position);
 
         --TalismanCount;
         Charged = ChargeTime < 0f;

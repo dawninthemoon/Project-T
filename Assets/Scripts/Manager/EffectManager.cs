@@ -76,7 +76,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
                 effect.Speed = 0f;
 
             et.position += direction * effect.Speed * Time.deltaTime;
-            et.position -= gravityVec * Time.deltaTime;
+            et.position += gravityVec * Time.deltaTime;
             
             float lastAngle = et.localRotation.z;
             et.localRotation = Aroma.RotationUtility.ChangeAngle(lastAngle + angleRate);
@@ -103,7 +103,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
     #region custom particle scripts
     public void SpawnParticleFire(Vector3 pos) {
         float r = Random.Range(0f, 360f);
-        SpawnParticle(pos, "EFFECT_Fire", r, 3, r, Random.Range(10f, 15f), -6f, 24f, Random.Range(20f ,60f), 1f, -0.8f);
+        SpawnParticle(pos, "EFFECT_Fire", r, 3, 90f+Random.Range(-30f,30f), Random.Range(0f, 3f), -1f, 4f, Random.Range(10f ,20f), 0.8f, -1f);
     }
     #endregion
 

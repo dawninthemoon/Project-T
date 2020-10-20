@@ -169,126 +169,126 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 149c48af65cf6a9468417e34e0d1ccd4, type: 3}
   - {fileID: 21300000, guid: 406b8dcff8d50864285410ae0bbe7631, type: 3}
   m_PackedSpriteNamesToIndex:
-  - PLAYER_Jump2
+  - PLAYER_jump2
   - CAVERAT_SHOOTER_Patrol6
   - CAVERAT_Tackle4
   - CAVERAT_Ready3
-  - PLAYER_Run_loop5
-  - PLAYER_Dead6
+  - PLAYER_run_loop5
+  - PLAYER_dead6
   - CAVERAT_SHOOTER_Patrol4
   - CAVERAT_SHOOTER_Chase3
-  - PLAYER_Idle_loop5
-  - PLAYER_Attack_air1
-  - PLAYER_Run_loop3
-  - PLAYER_Hit1
-  - PLAYER_Run_loop8
-  - PLAYER_Shoot4
-  - PLAYER_Shoot_air3
+  - PLAYER_idle_loop5
+  - PLAYER_attack_air1
+  - PLAYER_run_loop3
+  - PLAYER_hit1
+  - PLAYER_run_loop8
+  - PLAYER_shoot4
+  - PLAYER_shoot_air3
   - CAVERAT_Chase3
-  - PLAYER_Idle_in3
+  - PLAYER_idle_in3
   - CAVERAT_Ready1
-  - PLAYER_AttackA_out2
-  - PLAYER_Dead10
-  - PLAYER_Idle_loop7
-  - PLAYER_Idle_loop16
-  - PLAYER_Attack_air4
+  - PLAYER_attackA_out2
+  - PLAYER_dead10
+  - PLAYER_idle_loop7
+  - PLAYER_idle_loop16
+  - PLAYER_attack_air4
   - CAVERAT_SHOOTER_Dead2
-  - PLAYER_Shoot1
+  - PLAYER_shoot1
   - CAVERAT_SHOOTER_AttackA2
-  - PLAYER_Shoot2
-  - PLAYER_Jump3
-  - PLAYER_AttackB3
+  - PLAYER_shoot2
+  - PLAYER_jump3
+  - PLAYER_attackB3
   - CAVERAT_Patrol3
-  - PLAYER_Dead7
+  - PLAYER_dead7
   - CAVERAT_Ready4
   - CAVERAT_Patrol5
-  - PLAYER_AttackA3
+  - PLAYER_attackA3
   - CAVERAT_Patrol4
-  - PLAYER_Run_in1
+  - PLAYER_run_in1
   - CAVERAT_SHOOTER_Dead1
-  - PLAYER_AttackB4
-  - PLAYER_Run_loop4
-  - PLAYER_Idle_loop13
-  - PLAYER_Idle_loop12
-  - PLAYER_Idle_loop14
+  - PLAYER_attackB4
+  - PLAYER_run_loop4
+  - PLAYER_idle_loop13
+  - PLAYER_idle_loop12
+  - PLAYER_idle_loop14
   - CAVERAT_SHOOTER_ReadyB4
   - CAVERAT_Dead2
-  - PLAYER_Idle_loop11
+  - PLAYER_idle_loop11
   - CAVERAT_SHOOTER_Hit2
-  - PLAYER_Idle_loop9
+  - PLAYER_idle_loop9
   - CAVERAT_SHOOTER_Patrol5
   - CAVERAT_SHOOTER_ReadyA1
-  - PLAYER_AttackA_out1
+  - PLAYER_attackA_out1
   - CAVERAT_Tackle2
   - CAVERAT_SHOOTER_Hit1
   - CAVERAT_SHOOTER_Chase2
-  - PLAYER_Run_out1
-  - PLAYER_Shoot_air1
-  - PLAYER_AttackA2
-  - PLAYER_Idle_loop4
-  - PLAYER_AttackA1
+  - PLAYER_run_out1
+  - PLAYER_shoot_air1
+  - PLAYER_attackA2
+  - PLAYER_idle_loop4
+  - PLAYER_attackA1
   - CAVERAT_SHOOTER_AttackA1
-  - PLAYER_AttackA4
-  - PLAYER_Jump1
-  - PLAYER_Dead5
-  - PLAYER_Dead9
-  - PLAYER_Hit2
+  - PLAYER_attackA4
+  - PLAYER_jump1
+  - PLAYER_dead5
+  - PLAYER_dead9
+  - PLAYER_hit2
   - CAVERAT_Ready2
   - CAVERAT_Tackle3
   - CAVERAT_Dead1
-  - PLAYER_Run_loop6
-  - PLAYER_Idle_loop10
+  - PLAYER_run_loop6
+  - PLAYER_idle_loop10
   - CAVERAT_Tackle1
   - CAVERAT_SHOOTER_Chase1
   - CAVERAT_SHOOTER_AttackB1
-  - PLAYER_Shoot_air4
-  - PLAYER_Attack_air3
-  - PLAYER_AttackB2
-  - PLAYER_AttackB1
-  - PLAYER_Idle_loop6
-  - PLAYER_Dead4
-  - PLAYER_AttackA_out3
+  - PLAYER_shoot_air4
+  - PLAYER_attack_air3
+  - PLAYER_attackB2
+  - PLAYER_attackB1
+  - PLAYER_idle_loop6
+  - PLAYER_dead4
+  - PLAYER_attackA_out3
   - CAVERAT_SHOOTER_ReadyA3
-  - PLAYER_Dead8
+  - PLAYER_dead8
   - CAVERAT_SHOOTER_ReadyB2
-  - PLAYER_Idle_loop8
-  - PLAYER_Run_loop7
-  - PLAYER_Run_loop1
+  - PLAYER_idle_loop8
+  - PLAYER_run_loop7
+  - PLAYER_run_loop1
   - CAVERAT_SHOOTER_Patrol3
-  - PLAYER_Idle_in2
-  - PLAYER_Idle_loop15
-  - PLAYER_Run_in2
-  - PLAYER_Dead1
-  - PLAYER_Idle_in1
+  - PLAYER_idle_in2
+  - PLAYER_idle_loop15
+  - PLAYER_run_in2
+  - PLAYER_dead1
+  - PLAYER_idle_in1
   - CAVERAT_Patrol2
-  - PLAYER_Dead3
+  - PLAYER_dead3
   - CAVERAT_SHOOTER_Patrol1
   - CAVERAT_SHOOTER_ReadyA2
   - CAVERAT_Chase1
   - CAVERAT_SHOOTER_ReadyB1
-  - PLAYER_Dead2
-  - PLAYER_Shoot_air2
+  - PLAYER_dead2
+  - PLAYER_shoot_air2
   - CAVERAT_SHOOTER_ReadyA4
-  - PLAYER_Attack_air2
+  - PLAYER_attack_air2
   - CAVERAT_SHOOTER_ReadyB3
   - CAVERAT_Chase4
   - CAVERAT_Patrol6
   - CAVERAT_SHOOTER_Chase4
-  - PLAYER_Idle_loop2
-  - PLAYER_Run_out2
+  - PLAYER_idle_loop2
+  - PLAYER_run_out2
   - CAVERAT_Hit2
   - CAVERAT_Patrol1
   - CAVERAT_Chase2
-  - PLAYER_Idle_loop3
+  - PLAYER_idle_loop3
   - CAVERAT_SHOOTER_AttackB4
   - CAVERAT_SHOOTER_AttackB3
   - CAVERAT_SHOOTER_AttackA4
   - CAVERAT_Hit1
-  - PLAYER_Run_loop2
+  - PLAYER_run_loop2
   - CAVERAT_SHOOTER_AttackB2
   - CAVERAT_SHOOTER_AttackA3
-  - PLAYER_Idle_loop1
-  - PLAYER_Shoot3
+  - PLAYER_idle_loop1
+  - PLAYER_shoot3
   - CAVERAT_SHOOTER_Patrol2
   m_Tag: CharacterAtlas1
   m_IsVariant: 0

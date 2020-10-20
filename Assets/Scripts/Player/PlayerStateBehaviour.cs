@@ -7,7 +7,7 @@ public partial class PlayerAnimator : MonoBehaviour
     #region IDLE
     private void IdleIn_Enter() {
         _animator.ChangeAnimation(
-            "Idle_in",
+            "idle_in",
             false,
             () => {
                 _fsm.ChangeState(States.Idle);
@@ -15,7 +15,7 @@ public partial class PlayerAnimator : MonoBehaviour
         );
     }
     private void Idle_Enter() {
-        _animator.ChangeAnimation("Idle_loop", true);
+        _animator.ChangeAnimation("idle_loop", true);
     }
 
     private void Idle_Update() {
@@ -41,7 +41,7 @@ public partial class PlayerAnimator : MonoBehaviour
 
     private void RunIn_Enter() {
         _animator.ChangeAnimation(
-            "Run_in",
+            "run_in",
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.x) > Mathf.Epsilon) ? States.Run : States.RunOut;
@@ -51,7 +51,7 @@ public partial class PlayerAnimator : MonoBehaviour
     }
     private void RunOut_Enter() {
         _animator.ChangeAnimation(
-            "Run_out",
+            "run_out",
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.x) > Mathf.Epsilon) ? States.RunIn : States.Idle;
@@ -60,7 +60,7 @@ public partial class PlayerAnimator : MonoBehaviour
         );
     }
     private void Run_Enter() {
-        _animator.ChangeAnimation("Run_loop",true);
+        _animator.ChangeAnimation("run_loop",true);
     }
 
     private void Run_Update() {
@@ -103,7 +103,7 @@ public partial class PlayerAnimator : MonoBehaviour
         --_playerAttack.RequestedAttackCount;
         _playerAttack.AlreadyHitColliders.Clear();
         _animator.ChangeAnimation(
-            "AttackA", 
+            "attackA", 
             false, 
             () => {
                 States nextState = (_playerAttack.RequestedAttackCount > 0) ? States.AttackB : States.AttackAOut;
@@ -123,7 +123,7 @@ public partial class PlayerAnimator : MonoBehaviour
         _playerAttack.AlreadyHitColliders.Clear();
         --_playerAttack.RequestedAttackCount;
         _animator.ChangeAnimation(
-            "AttackB", 
+            "attackB", 
             false,
             () => {
                 States nextState = (_playerAttack.RequestedAttackCount > 0) ? States.AttackA : States.IdleIn;
@@ -141,7 +141,7 @@ public partial class PlayerAnimator : MonoBehaviour
 
     private void AttackAOut_Enter() {
         _animator.ChangeAnimation(
-            "AttackA_out", 
+            "attackA_out", 
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.Idle : States.Run;
@@ -153,7 +153,7 @@ public partial class PlayerAnimator : MonoBehaviour
         --_playerAttack.RequestedAttackCount;
         _playerAttack.AlreadyHitColliders.Clear();
         _animator.ChangeAnimation(
-            "Attack_air",
+            "attack_air",
             false,
             () => {
                 _fsm.ChangeState(States.Jump);
@@ -174,7 +174,7 @@ public partial class PlayerAnimator : MonoBehaviour
         _playerAttack.RequestShoot = false;
 
         _animator.ChangeAnimation(
-            "Shoot", 
+            "shoot", 
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.IdleIn : States.Run;
@@ -194,7 +194,7 @@ public partial class PlayerAnimator : MonoBehaviour
     private void ShootAir_Enter() {
         _playerAttack.RequestShoot = false;
         _animator.ChangeAnimation(
-            "Shoot_air",
+            "shoot_air",
             false,
             ()=> 
             {
@@ -211,7 +211,7 @@ public partial class PlayerAnimator : MonoBehaviour
     #region JUMP
     private void Jump_Enter() {
         _jumpRequested = false;
-        _animator.ChangeAnimation("Jump");
+        _animator.ChangeAnimation("jump");
     }
 
     private void Jump_Update() {
@@ -246,7 +246,7 @@ public partial class PlayerAnimator : MonoBehaviour
         _direction.x = -Mathf.Sign(_direction.x)*3f;
         _direction.y = 2f;
         _animator.ChangeAnimation(
-            "Hit",
+            "hit",
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.y) < Mathf.Epsilon) ? States.Idle : States.Jump;

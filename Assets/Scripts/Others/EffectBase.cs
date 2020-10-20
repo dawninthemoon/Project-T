@@ -39,11 +39,11 @@ public class EffectBase : MonoBehaviour
         _onEffectUpdateCallback = updateCallback;
     }
 
-    public void SetEffectInfoWithCondition(Vector3 pos, string prefix, float dir, System.Action updateCallback,  EffectManager.IsEffectEnd isEndCallback, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
+    public void SetEffectInfoWithCondition(Vector3 pos, string prefix, float dir, bool loop, System.Action updateCallback,  EffectManager.IsEffectEnd isEndCallback, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
         _isAnimationEnd = false;
         transform.position = pos;
 
-        _animator.Initalize(prefix, "", true);
+        _animator.Initalize(prefix, "", loop);
 
         updateCallback += () => {
             if (isEndCallback()) {
@@ -56,7 +56,7 @@ public class EffectBase : MonoBehaviour
         _onEffectUpdateCallback = updateCallback;
     }
 
-    public void SetEffectInfoWithDuration(Vector3 pos, string prefix, float dir, float duration, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
+    public void SetEffectInfoWithDuration(Vector3 pos, string prefix, float dir, float duration, bool loop, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
         _lifeTime = duration;
 
         EffectManager.IsEffectEnd isEndCallback = () => {
@@ -67,10 +67,10 @@ public class EffectBase : MonoBehaviour
             return false;
         };
 
-        SetEffectInfoWithCondition(pos, prefix, dir, null, isEndCallback, endCallback);
+        SetEffectInfoWithCondition(pos, prefix, dir, loop, null, isEndCallback, endCallback);
     }
 
-    public void SetEffectInfoWithDuration(Vector3 pos, string prefix, float dir, float duration, System.Action updateCallback, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
+    public void SetEffectInfoWithDuration(Vector3 pos, string prefix, float dir, float duration, bool loop, System.Action updateCallback, SpriteAtlasAnimator.OnAnimationEnd endCallback) {
         _lifeTime = duration;
 
         EffectManager.IsEffectEnd isEndCallback = () => {
@@ -81,7 +81,7 @@ public class EffectBase : MonoBehaviour
             return false;
         };
 
-        SetEffectInfoWithCondition(pos, prefix, dir, updateCallback, isEndCallback, endCallback);
+        SetEffectInfoWithCondition(pos, prefix, dir, loop, updateCallback, isEndCallback, endCallback);
     }
 
     public bool IsLifetimeEnd() {

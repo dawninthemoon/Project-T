@@ -95,7 +95,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
            _effectPool.ReturnObject(effect);
         };
 
-        effect.SetEffectInfoWithDuration(pos, effectName, Mathf.Sign(direction.x), lifeTime, onEffectUpdate, endCallback);
+        effect.SetEffectInfoWithDuration(pos, effectName, Mathf.Sign(direction.x), lifeTime, false, onEffectUpdate, endCallback);
 
         _acitveEffects.Add(effect);
     }
@@ -119,7 +119,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
         onEffectEnd += () => { _effectPool.ReturnObject(effect);};
 
-        effect.SetEffectInfoWithCondition(pos, effectName, dir, null, isEffectEnd, onEffectEnd);
+        effect.SetEffectInfoWithCondition(pos, effectName, dir, true, null, isEffectEnd, onEffectEnd);
 
         _acitveEffects.Add(effect);
     }
@@ -130,7 +130,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         onEffectEnd += () => { _effectPool.ReturnObject(effect);};
 
         System.Action onEffectUpdate = () => { effect.transform.position = target.position; };
-        effect.SetEffectInfoWithCondition(pos, effectName, dir, onEffectUpdate, isEffectEnd, onEffectEnd);
+        effect.SetEffectInfoWithCondition(pos, effectName, dir, true, onEffectUpdate, isEffectEnd, onEffectEnd);
 
         _acitveEffects.Add(effect);
     }
@@ -139,7 +139,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         EffectBase effect = _effectPool.GetObject();
 
         onEffectEnd += () => { _effectPool.ReturnObject(effect);};
-        effect.SetEffectInfoWithDuration(pos, effectName, dir, duration, onEffectEnd);
+        effect.SetEffectInfoWithDuration(pos, effectName, dir, duration, true, onEffectEnd);
 
         _acitveEffects.Add(effect);
     }
@@ -148,7 +148,7 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         EffectBase effect = _effectPool.GetObject();
 
         onEffectEnd += () => { _effectPool.ReturnObject(effect);};
-        effect.SetEffectInfoWithDuration(pos, effectName, dir, duration, updateCallback, onEffectEnd);
+        effect.SetEffectInfoWithDuration(pos, effectName, dir, duration, true, updateCallback, onEffectEnd);
 
         _acitveEffects.Add(effect);
     }

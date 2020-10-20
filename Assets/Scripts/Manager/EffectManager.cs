@@ -57,10 +57,11 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         _acitveEffects.Add(effect);
     }
 
-    public void SpawnParticle(Vector3 pos, string effectName, float angle, float angleRate, float dir, float speed, float gravity, float friction, float scale, float lifeTime, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
+    public void SpawnParticle(Vector3 pos, string effectName, float angle, float angleRate, float dir, float speed, float gravity, float friction, float scale, float scaleChange, float lifeTime, SpriteAtlasAnimator.OnAnimationEnd onEnd = null) {
         EffectBase effect = _effectPool.GetObject();
         Transform et = effect.transform;
         et.localScale = Vector3.one * scale;
+        Vector3 localScaleChange = Vector3.one * scaleChange;
         et.localRotation = Aroma.RotationUtility.ChangeAngle(angle);
 
         Vector3 gravityVec = Vector3.down * gravity;
@@ -68,12 +69,15 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
         Vector3 direction = new Vector3(Mathf.Cos(radian), Mathf.Sin(radian)).normalized;
 
         System.Action onEffectUpdate = () => { 
-            et.position += direction * speed;
-            et.position -= direction * friction;
+            float currentFriction = (Mathf.Abs(speed) < Mathf.Epsilon) ? 0f : friction;
+
+            et.position += direction * speed * Time.deltaTime;
+            et.position -= direction * currentFriction * Time.deltaTime;
             et.position -= gravityVec * Time.deltaTime;
             
             float lastAngle = et.localRotation.z;
             et.localRotation = Aroma.RotationUtility.ChangeAngle(lastAngle + angleRate);
+            et.localScale += localScaleChange;
         };
 
         SpriteAtlasAnimator.OnAnimationEnd endCallback = onEnd;
@@ -86,6 +90,13 @@ public class EffectManager : SingletonWithMonoBehaviour<EffectManager>
 
         _acitveEffects.Add(effect);
     }
+
+    #region custom particle scripts
+    public void SpawnParticleFire(Vector3 pos) {
+        var _r = Random.Range(0f,360f);
+        SpawnParticle(pos,"EFFECT_Fire",_r,3,_r,Random.Range(26,32),-6,24,0.5f,0.08f,Random.Range(20,60));
+    }
+    #endregion
 
     public void SpawnEffect(Vector3 pos, string effectName, System.Action onEffectUpdate, SpriteAtlasAnimator.OnAnimationEnd onEffectEnd, float dir = 1f) {
         EffectBase effect = _effectPool.GetObject();

@@ -88,15 +88,15 @@ public partial class TBLPlayerStatus : BGEntityGo
 			_meleeAttackOffset[Entity.Index] = value;
 		}
 	}
-	public UnityEngine.Vector2 throwOffset
+	public UnityEngine.Vector2 shootOffset
 	{
 		get
 		{
-			return _throwOffset[Entity.Index];
+			return _shootOffset[Entity.Index];
 		}
 		set
 		{
-			_throwOffset[Entity.Index] = value;
+			_shootOffset[Entity.Index] = value;
 		}
 	}
 	public UnityEngine.Vector2 meleeAttackSize
@@ -166,13 +166,13 @@ public partial class TBLPlayerStatus : BGEntityGo
 			return __meleeAttackOffset;
 		}
 	}
-	private static BansheeGz.BGDatabase.BGFieldVector2 __throwOffset;
-	public static BansheeGz.BGDatabase.BGFieldVector2 _throwOffset
+	private static BansheeGz.BGDatabase.BGFieldVector2 __shootOffset;
+	public static BansheeGz.BGDatabase.BGFieldVector2 _shootOffset
 	{
 		get
 		{
-			if(__throwOffset==null || __throwOffset.IsDeleted) __throwOffset=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5718047970036351789,8567812798406467996));
-			return __throwOffset;
+			if(__shootOffset==null || __shootOffset.IsDeleted) __shootOffset=(BansheeGz.BGDatabase.BGFieldVector2) MetaDefault.GetField(new BGId(5718047970036351789,8567812798406467996));
+			return __shootOffset;
 		}
 	}
 	private static BansheeGz.BGDatabase.BGFieldVector2 __meleeAttackSize;

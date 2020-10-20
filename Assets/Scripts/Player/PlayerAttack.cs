@@ -19,12 +19,12 @@ public class PlayerAttack : MonoBehaviour
     private float _inputDelay;
     private static readonly int MaxRequestCount = 1;
     public int RequestedAttackCount { get; set; }
-    public bool RequestThrow { get; set; } = false;
+    public bool RequestShoot { get; set; } = false;
     public int TalismanCount { get; set; } = 5;
     public bool IsInAttackProgress { get; private set; }
-    public bool CanThrow { get; set; }
+    public bool CanShoot { get; set; }
     public float ChargeTime { get; set; }
-    private Vector3 _throwPosition;
+    private Vector3 _shootPosition;
     private Vector2 _meleeAttackOffset;
     private Vector2 _meleeAttackSize;
     private int _meleeAttackDamage;
@@ -50,13 +50,13 @@ public class PlayerAttack : MonoBehaviour
         ChargeTime = DefaultChargeTime;
 
         var status = GetComponent<TBLPlayerStatus>();
-        _throwPosition = status.throwOffset;
+        _shootPosition = status.shootOffset;
         _meleeAttackOffset = status.meleeAttackOffset;
         _meleeAttackSize = status.meleeAttackSize;
         _meleeAttackDamage = status.meleeAttackDamage;
     }
 
-    public void Progress(bool attackRequested, bool throwRequested) {
+    public void Progress(bool attackRequested, bool shootRequested) {
         _inputDelay -= Time.deltaTime;
         
         if (attackRequested && _inputDelay < 0f) {
@@ -64,9 +64,9 @@ public class PlayerAttack : MonoBehaviour
             RequestedAttackCount = Mathf.Min(RequestedAttackCount + 1, MaxRequestCount);
         }
 
-        if (throwRequested && _inputDelay < 0f && TalismanCount > 0) {
+        if (shootRequested && _inputDelay < 0f && TalismanCount > 0) {
             _inputDelay = TalismanInputDelay;
-            RequestThrow = true;
+            RequestShoot = true;
         }
     }
 
@@ -173,7 +173,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void ThrowTalisman() {
+    public void ShootTalisman() {
+            var em = EffectManager.GetInstance();
+            em.SpawnParticleFire(transform.position);
+
         --TalismanCount;
         Charged = ChargeTime < 0f;
         ChargeTime = DefaultChargeTime;
@@ -181,7 +184,7 @@ public class PlayerAttack : MonoBehaviour
         var talisman = Instantiate(_talismanPrefab);
         float dirX = transform.localScale.x;
 
-        talisman.transform.position = transform.position + _throwPosition;
+        talisman.transform.position = transform.position + _shootPosition;
 
         Talisman.TalismanType type = (CurrentEffectName == FireEffectName) ? Talisman.TalismanType.Fire : ((CurrentEffectName == IceEffectName) ? Talisman.TalismanType.Ice : Talisman.TalismanType.Electric);
         type = (CurrentEffectName == null) ? Talisman.TalismanType.Normal : type;

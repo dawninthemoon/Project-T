@@ -11,7 +11,7 @@ public partial class PlayerAnimator : MonoBehaviour
 
     public enum States { 
         IdleIn, Idle, AttackA, AttackAOut, AttackB, AttackAir, Dead, Evade, Explode, 
-        Hit, Jump, Run, RunIn, RunOut, Slide, Throw, ThrowAir 
+        Hit, Jump, Run, RunIn, RunOut, Slide, Shoot, ShootAir 
     };
 
     public States State { get => _fsm.State; }

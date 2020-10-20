@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 1202d14ba7d37ce409ebc38a0e57ddaf, type: 3}
-    totalSpriteSurfaceArea: 262144
+    totalSpriteSurfaceArea: 249856
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -56,12 +56,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 400e25a2a78818a45a49345846761e94, type: 3}
   - {fileID: 21300000, guid: fa6f71e2d35bb0b469a7fdcf67523408, type: 3}
   - {fileID: 21300000, guid: 36bac323fffe6d44da6e6602e15c676d, type: 3}
+  - {fileID: 21300000, guid: f015df33e9e3ef0478c6be0e3076c3b6, type: 3}
   - {fileID: 21300000, guid: 918529b3552c4e44ab034fd6a47d5c39, type: 3}
   - {fileID: 21300000, guid: 6bca03d33deb3d543b06a0885e78a6e5, type: 3}
   - {fileID: 21300000, guid: d0a3e46486e8daa4a8e3e6a550ce1ce1, type: 3}
   - {fileID: 21300000, guid: 2c9b4074dd238894982ea10aedd04396, type: 3}
   - {fileID: 21300000, guid: 7516fa74dc34ca6429f6beba9dc55a5e, type: 3}
-  - {fileID: 21300000, guid: 4e935b84bfcb3894c96490ef08ab8363, type: 3}
   - {fileID: 21300000, guid: c1c990f459492d4409f36e43503db5af, type: 3}
   - {fileID: 21300000, guid: dca821f406d83f845ab9a88988b995a7, type: 3}
   - {fileID: 21300000, guid: bfc0800522691ee43960b2bd83a89595, type: 3}
@@ -69,6 +69,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e7646b2542276434d93330b55143dee7, type: 3}
   - {fileID: 21300000, guid: 4ac39735d25234b4d9bfe7754caa29e4, type: 3}
   - {fileID: 21300000, guid: e2198475108e5474bb4e915f33ce69b4, type: 3}
+  - {fileID: 21300000, guid: cf8fb9a5e5869b64389d8bf106eb31d9, type: 3}
   - {fileID: 21300000, guid: 281fa50659fc00340b8d2d21a1ef49d4, type: 3}
   - {fileID: 21300000, guid: 2363dc16eab7c3f4e994e9ae8bcad34d, type: 3}
   - {fileID: 21300000, guid: ae551d167240d284fad6742239f1b249, type: 3}
@@ -77,7 +78,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7c1e9e56f636d3849924560e94ef6874, type: 3}
   - {fileID: 21300000, guid: 2c9847664f3242b4e8c81ea30d3df0d1, type: 3}
   - {fileID: 21300000, guid: 862b1e66d3cae3a4caf5f70fc2a039d8, type: 3}
-  - {fileID: 21300000, guid: 6c096e665ba17a049b2ba27ab4b1ce29, type: 3}
   - {fileID: 21300000, guid: d0aae7767c9bb3b4d8c0b21629034003, type: 3}
   - {fileID: 21300000, guid: e509b0a66e4060e429c5a018e1b14d5a, type: 3}
   - {fileID: 21300000, guid: 002b3cc65404c324488402581cb390b8, type: 3}
@@ -94,7 +94,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 11a2b3ea25db3b541a7fdd40452fd539, type: 3}
   - {fileID: 21300000, guid: bd96fd3b5c1fb56408e311aec26fb6e3, type: 3}
   - {fileID: 21300000, guid: e010334b114e06c47bf4b920a1c3e4b0, type: 3}
-  - {fileID: 21300000, guid: 84f0346bab2695e4c885445c7480bdf8, type: 3}
   - {fileID: 21300000, guid: 717d2e7bf110ff1438d82afe5a7cbb09, type: 3}
   - {fileID: 21300000, guid: 59ac258bdef2129499d462da856039a3, type: 3}
   - {fileID: 21300000, guid: f11ac1ab4859aa9409e92709a51ba288, type: 3}
@@ -103,10 +102,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 13faaf4cc9a6b594d8b72d120d74fa11, type: 3}
   - {fileID: 21300000, guid: 21eddf9c47c40284a9051d2c99390d44, type: 3}
   - {fileID: 21300000, guid: 868b51ac71425134ca84f597d9319437, type: 3}
-  - {fileID: 21300000, guid: f875e4dc76a192b4aa7695eac12dd7fe, type: 3}
   - {fileID: 21300000, guid: 235b60ec69a45dc47b9956fca652222f, type: 3}
   - {fileID: 21300000, guid: cd52fb1dcdeb89d499134062ad8d9cf3, type: 3}
-  - {fileID: 21300000, guid: 13bcd42dce53f3d41b56955476c427d8, type: 3}
   - {fileID: 21300000, guid: 2e51f55ef5b6bb443baadabd4a03a0b7, type: 3}
   - {fileID: 21300000, guid: bfed5c8f87b5e1746acd5c0624624a05, type: 3}
   - {fileID: 21300000, guid: 5f22e7ef20a211140b8880a5771a0ce6, type: 3}
@@ -121,12 +118,12 @@ SpriteAtlas:
   - EFFECT_Charge4
   - EFFECT_Electric1
   - EFFECT_Snowflake3
+  - EFFECT_Iceblock2
   - EFFECT_Hit1
   - EFFECT_Explode_Poison8
   - EFFECT_Fire2
   - EFFECT_Twinkle2
   - EFFECT_Explode_Poison6
-  - EFFECT_Fire5
   - EFFECT_Hit3
   - EFFECT_Explode_Poison3
   - EFFECT_Explode_Poison4
@@ -134,6 +131,7 @@ SpriteAtlas:
   - EFFECT_Fire3
   - EFFECT_Explode_Poison7
   - EFFECT_Charge6
+  - EFFECT_Iceblock1
   - EFFECT_Charge2
   - EFFECT_Sphere2
   - EFFECT_Twinkle5
@@ -142,7 +140,6 @@ SpriteAtlas:
   - EFFECT_Field_Electric3
   - EFFECT_Explode_Poison1
   - EFFECT_Charge1
-  - EFFECT_Fire4
   - EFFECT_Explode_Flame2
   - EFFECT_Electric6
   - EFFECT_Explode_Flame5
@@ -159,7 +156,6 @@ SpriteAtlas:
   - EFFECT_Sphere3
   - EFFECT_Hit4
   - EFFECT_Explode_Flame4
-  - EFFECT_Fire6
   - EFFECT_Twinkle1
   - EFFECT_Field_Electric2
   - EFFECT_Electric2
@@ -168,10 +164,8 @@ SpriteAtlas:
   - EFFECT_Explode_Flame6
   - EFFECT_Charge5
   - EFFECT_Twinkle4
-  - EFFECT_Fire7
   - EFFECT_Explode_Flame3
   - EFFECT_Sphere5
-  - EFFECT_Fire8
   - EFFECT_Explode_Poison5
   - EFFECT_Hit2
   - EFFECT_Field_Electric1

@@ -22,8 +22,8 @@ public partial class PlayerAnimator : MonoBehaviour
         if (_jumpRequested) {
             _fsm.ChangeState(States.Jump);
         }
-        else if (_playerAttack.RequestThrow) {
-            _fsm.ChangeState(States.Throw);
+        else if (_playerAttack.RequestShoot) {
+            _fsm.ChangeState(States.Shoot);
         }
         else if (_playerAttack.RequestedAttackCount > 0) {
             _fsm.ChangeState(States.AttackA);
@@ -67,8 +67,8 @@ public partial class PlayerAnimator : MonoBehaviour
         if (_jumpRequested) {
             _fsm.ChangeState(States.Jump);
         }
-        else if (_playerAttack.RequestThrow) {
-            _fsm.ChangeState(States.Throw);
+        else if (_playerAttack.RequestShoot) {
+            _fsm.ChangeState(States.Shoot);
         }
         else if (_playerAttack.RequestedAttackCount > 0) {
             _fsm.ChangeState(States.AttackA);
@@ -81,8 +81,8 @@ public partial class PlayerAnimator : MonoBehaviour
         if (_jumpRequested) {
             _fsm.ChangeState(States.Jump);
         }
-        else if (_playerAttack.RequestThrow) {
-            _fsm.ChangeState(States.Throw);
+        else if (_playerAttack.RequestShoot) {
+            _fsm.ChangeState(States.Shoot);
         }
         else if (_playerAttack.RequestedAttackCount > 0) {
             _fsm.ChangeState(States.AttackA);
@@ -168,33 +168,33 @@ public partial class PlayerAnimator : MonoBehaviour
     }
     #endregion
 
-    #region THROW
+    #region Shoot
 
-    private void Throw_Enter() {
-        _playerAttack.RequestThrow = false;
+    private void Shoot_Enter() {
+        _playerAttack.RequestShoot = false;
 
         _animator.ChangeAnimation(
-            "throw", 
+            "Shoot", 
             false,
             () => {
                 States nextState = (Mathf.Abs(_direction.x) < Mathf.Epsilon) ? States.IdleIn : States.Run;
                 _fsm.ChangeState(nextState);
             }
         );
-        _playerAttack.CanThrow = true;
+        _playerAttack.CanShoot = true;
     }
 
-    private void Throw_Update() {
-        if (_playerAttack.CanThrow && _animator.SpriteIndex == 1) {
-            _playerAttack.CanThrow = false;
-            _playerAttack.ThrowTalisman();
+    private void Shoot_Update() {
+        if (_playerAttack.CanShoot && _animator.SpriteIndex == 1) {
+            _playerAttack.CanShoot = false;
+            _playerAttack.ShootTalisman();
         }
     }
 
-    private void ThrowAir_Enter() {
-        _playerAttack.RequestThrow = false;
+    private void ShootAir_Enter() {
+        _playerAttack.RequestShoot = false;
         _animator.ChangeAnimation(
-            "throw_air",
+            "Shoot_air",
             false,
             ()=> 
             {
@@ -202,8 +202,8 @@ public partial class PlayerAnimator : MonoBehaviour
             }
         );
     }
-    private void ThrowAir_Update() {
-        Throw_Update();
+    private void ShootAir_Update() {
+        Shoot_Update();
     }
 
     #endregion
@@ -215,8 +215,8 @@ public partial class PlayerAnimator : MonoBehaviour
     }
 
     private void Jump_Update() {
-        if (_playerAttack.RequestThrow) {
-            _fsm.ChangeState(States.ThrowAir);
+        if (_playerAttack.RequestShoot) {
+            _fsm.ChangeState(States.ShootAir);
         }
         else if (_playerAttack.RequestedAttackCount > 0) {
             _fsm.ChangeState(States.AttackAir);

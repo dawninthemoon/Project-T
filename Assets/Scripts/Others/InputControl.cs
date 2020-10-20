@@ -153,7 +153,7 @@ public class InputControl : MonoBehaviour
             _moveIgnoreStates = new PlayerAnimator.States[] {
                 PlayerAnimator.States.AttackA,
                 PlayerAnimator.States.AttackB,
-                PlayerAnimator.States.Throw,
+                PlayerAnimator.States.Shoot,
             };
         }
 

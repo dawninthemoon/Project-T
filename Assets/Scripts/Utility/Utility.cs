@@ -81,5 +81,8 @@ namespace Aroma
             }
             return _stringBuilder.ToString();
         }
+        public static string GetRandomString(params string[] stringList) {
+            return stringList[Random.Range(0, stringList.Length)];
+        }
     }
 }
